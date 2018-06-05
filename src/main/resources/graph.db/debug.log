@@ -1,0 +1,20 @@
+2018-06-01 13:13:22.244+0000 INFO  [o.n.u.b.i.BatchInserterImpl] Thread[main,5,main] Starting BatchInserter(EmbeddedBatchInserter[/home/anjali/Documents/delete/newintacthedb/neo4j.db])
+2018-06-01 13:13:22.442+0000 INFO  [o.n.k.a.i.l.LuceneLabelScanStore] No lucene scan store index found, this might just be first use. Preparing to rebuild.
+2018-06-01 13:13:22.447+0000 INFO  [o.n.k.a.i.l.LuceneLabelScanStore] Rebuilding lucene scan store, this may take a while
+2018-06-01 13:13:22.449+0000 INFO  [o.n.k.a.i.l.LuceneLabelScanStore] Lucene scan store rebuilt (roughly 0 nodes)
+2018-06-01 13:13:44.656+0000 WARN  [o.n.k.i.s.MetaDataStore] Missing counts store, rebuilding it.
+2018-06-01 13:13:45.088+0000 INFO  [o.n.k.i.s.c.CountsTracker] About to rotate counts store at transaction 1 to [/home/anjali/Documents/delete/newintacthedb/neo4j.db/neostore.counts.db.b], from [/home/anjali/Documents/delete/newintacthedb/neo4j.db/neostore.counts.db.a].
+2018-06-01 13:13:45.092+0000 INFO  [o.n.k.i.s.c.CountsTracker] Successfully rotated counts store at transaction 1 to [/home/anjali/Documents/delete/newintacthedb/neo4j.db/neostore.counts.db.b], from [/home/anjali/Documents/delete/newintacthedb/neo4j.db/neostore.counts.db.a].
+2018-06-01 13:13:47.001+0000 INFO  [o.n.u.b.i.BatchInserterImpl] Thread[main,5,main] Clean shutdown on BatchInserter(EmbeddedBatchInserter[/home/anjali/Documents/delete/newintacthedb/neo4j.db])
+2018-06-01 13:13:47.145+0000 INFO  [o.n.k.i.s.f.RecordFormatSelector] Selected RecordFormat:StandardV3_0[v0.A.7] record format from store /home/anjali/Documents/delete/newintacthedb/neo4j.db
+2018-06-01 13:13:47.146+0000 INFO  [o.n.k.i.s.f.RecordFormatSelector] Format not configured. Selected format from the store: RecordFormat:StandardV3_0[v0.A.7]
+2018-06-01 13:13:47.147+0000 INFO  [o.n.u.b.i.BatchInserterImpl] Thread[main,5,main] Starting BatchInserter(EmbeddedBatchInserter[/home/anjali/Documents/delete/newintacthedb/neo4j.db])
+2018-06-01 13:15:50.930+0000 INFO  [o.n.k.i.s.c.CountsTracker] About to rotate counts store at transaction 1 to [/home/anjali/Documents/delete/newintacthedb/neo4j.db/neostore.counts.db.a], from [/home/anjali/Documents/delete/newintacthedb/neo4j.db/neostore.counts.db.b].
+2018-06-01 13:15:50.936+0000 INFO  [o.n.k.i.s.c.CountsTracker] Successfully rotated counts store at transaction 1 to [/home/anjali/Documents/delete/newintacthedb/neo4j.db/neostore.counts.db.a], from [/home/anjali/Documents/delete/newintacthedb/neo4j.db/neostore.counts.db.b].
+2018-06-01 13:15:53.343+0000 INFO  [o.n.u.b.i.BatchInserterImpl] Thread[main,5,main] Clean shutdown on BatchInserter(EmbeddedBatchInserter[/home/anjali/Documents/delete/newintacthedb/neo4j.db])
+2018-06-01 13:18:23.518+0000 INFO  [o.n.k.i.s.f.RecordFormatSelector] Selected RecordFormat:StandardV3_0[v0.A.7] record format from store /home/anjali/Documents/delete/newintacthedb/neo4j.db
+2018-06-01 13:18:23.518+0000 INFO  [o.n.k.i.s.f.RecordFormatSelector] Format not configured. Selected format from the store: RecordFormat:StandardV3_0[v0.A.7]
+2018-06-01 13:18:23.519+0000 INFO  [o.n.u.b.i.BatchInserterImpl] Thread[main,5,main] Starting BatchInserter(EmbeddedBatchInserter[/home/anjali/Documents/delete/newintacthedb/neo4j.db])
+2018-06-01 13:18:26.386+0000 INFO  [o.n.k.i.s.c.CountsTracker] About to rotate counts store at transaction 1 to [/home/anjali/Documents/delete/newintacthedb/neo4j.db/neostore.counts.db.b], from [/home/anjali/Documents/delete/newintacthedb/neo4j.db/neostore.counts.db.a].
+2018-06-01 13:18:26.398+0000 INFO  [o.n.k.i.s.c.CountsTracker] Successfully rotated counts store at transaction 1 to [/home/anjali/Documents/delete/newintacthedb/neo4j.db/neostore.counts.db.b], from [/home/anjali/Documents/delete/newintacthedb/neo4j.db/neostore.counts.db.a].
+2018-06-01 13:18:28.988+0000 INFO  [o.n.u.b.i.BatchInserterImpl] Thread[main,5,main] Clean shutdown on BatchInserter(EmbeddedBatchInserter[/home/anjali/Documents/delete/newintacthedb/neo4j.db])
