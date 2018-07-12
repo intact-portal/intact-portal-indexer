@@ -23,11 +23,44 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <spring-boot-admin.version>2.0.0</spring-boot-admin.version>
-        <intact.graphdb.version>1.0.0-NOE-SNAPSHOT</intact.graphdb.version>
+        <intact.graphdb.version>1.0.0-ANJALI-SNAPSHOT</intact.graphdb.version>
         <intact.search.interactors.version>0.0.1-NOE-SNAPSHOT</intact.search.interactors.version>
-        <intact.search.interactions.version>0.0.1-SNAPSHOT</intact.search.interactions.version>
+        <intact.search.interactions.version>0.0.1-ANJALI-SNAPSHOT</intact.search.interactions.version>
         <intact.search.terms.version>0.0.1-SNAPSHOT</intact.search.terms.version>
     </properties>
+
+    <build>
+        <plugins>
+            <!--<plugin>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
+            <!--</plugin>-->
+            <plugin>
+                <groupId>external.atlassian.jgitflow</groupId>
+                <artifactId>jgitflow-maven-plugin</artifactId>
+                <version>1.0-m5.1</version>
+                <configuration>
+                    <flowInitContext>
+                        <masterBranchName>master</masterBranchName>
+                        <developBranchName>develop</developBranchName>
+                        <featureBranchPrefix>feature-</featureBranchPrefix>
+                        <releaseBranchPrefix>release-</releaseBranchPrefix>
+                        <hotfixBranchPrefix>hotfix-</hotfixBranchPrefix>
+                        <versionTagPrefix>${project.artifactId}-</versionTagPrefix>
+                    </flowInitContext>
+                    <username>${git.user}</username>
+                    <password>${git.password}</password>
+                    <!-- see goals wiki page for configuration options -->
+                    <allowUntracked>true</allowUntracked>
+                    <pullMaster>true</pullMaster>
+                    <pullDevelop>true</pullDevelop>
+                    <pushReleases>true</pushReleases>
+                    <pushHotfixes>true</pushHotfixes>
+                    <pushFeatures>true</pushFeatures>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <dependencies>
         <dependency>
@@ -74,11 +107,11 @@
             <version>${intact.search.interactors.version}</version>
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>uk.ac.ebi.intact.search</groupId>-->
-            <!--<artifactId>intact-search-interactions</artifactId>-->
-            <!--<version>${intact.search.interactions.version}</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>uk.ac.ebi.intact.search</groupId>
+            <artifactId>intact-search-interactions</artifactId>
+            <version>${intact.search.interactions.version}</version>
+        </dependency>
 
         <!--<dependency>-->
             <!--<groupId>uk.ac.ebi.intact.search</groupId>-->
