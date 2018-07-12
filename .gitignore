@@ -1,5 +1,4 @@
 /target/
-*/graph.db/*
 !.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###
