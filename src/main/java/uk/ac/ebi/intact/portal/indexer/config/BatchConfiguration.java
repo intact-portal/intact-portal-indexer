@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import uk.ac.ebi.intact.portal.indexer.IndexCleanerTasklet;
+import uk.ac.ebi.intact.portal.indexer.interaction.InteractionIndexerTasklet;
 import uk.ac.ebi.intact.portal.indexer.listeners.JobCompletionNotificationListener;
 import uk.ac.ebi.intact.portal.indexer.interactor.InteractorIndexerTasklet;
 
@@ -58,12 +59,13 @@ public class BatchConfiguration {
     @Bean
     public Job intactPortalIndexerJob(JobCompletionNotificationListener listener,
                                       Step indexCleanerStep,
-                                      Step interactorIndexingStep) {
+                                      Step interactorIndexingStep,Step interactionIndexingStep ) {
         return jobBuilderFactory.get("intactPortalIndexerJob")
                 .incrementer(new RunIdIncrementer())
                 .listener(listener)
                 .start(indexCleanerStep)
-                .next(interactorIndexingStep)
+  //              .next(interactorIndexingStep)
+                .next(interactionIndexingStep)
                 .build();
     }
 
@@ -77,6 +79,13 @@ public class BatchConfiguration {
     @Bean
     public Step interactorIndexingStep(InteractorIndexerTasklet tasklet) {
         return stepBuilderFactory.get("interactorIndexingStep")
+                .tasklet(tasklet)
+                .build();
+    }
+
+    @Bean
+    public Step interactionIndexingStep(InteractionIndexerTasklet tasklet) {
+        return stepBuilderFactory.get("interactionIndexingStep")
                 .tasklet(tasklet)
                 .build();
     }
