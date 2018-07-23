@@ -94,7 +94,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 if (!simulation) {
 //                    solrServerCheck();
 
-                    interactionIndexService.save(interactions.get(0));
+                    interactionIndexService.save(interactions);
                     log.info("\tIndex save took [ms] : " + (System.currentTimeMillis() - indexStart));
                 }
 
@@ -148,27 +148,30 @@ public class InteractionIndexerTasklet implements Tasklet {
             Optional<GraphInteractor> oGraphInteractorA=graphInteractorService.findWithDepth(graphBinaryInteractionEvidence.getInteractorA().getUniqueKey(),DEPTH);
             Interactor graphInteractorA=oGraphInteractorA.get();
             interaction.setIdA(SolrDocumentConverter.xrefToSolrDocument(graphInteractorA.getPreferredIdentifier()));
-            interaction.setAltIdsA(SolrDocumentConverter.xrefsToSolrDocument(graphInteractorA.getIdentifiers()));
-            interaction.setAliasesA(SolrDocumentConverter.aliasesToSolrDocument(graphInteractorA.getAliases()));
-            interaction.setAnnotationsA(SolrDocumentConverter.annotationsToSolrDocument(graphInteractorA.getAnnotations()));
-            interaction.setChecksumsA(SolrDocumentConverter.checksumsToSolrDocument(graphInteractorA.getChecksums()));
+            interaction.setAltIdsA((graphInteractorA.getIdentifiers()!=null&&graphInteractorA.getIdentifiers().size()>0)?SolrDocumentConverter.xrefsToSolrDocument(graphInteractorA.getIdentifiers()):null);
+            interaction.setAliasesA((graphInteractorA.getAliases()!=null&&graphInteractorA.getAliases().size()>0)?SolrDocumentConverter.aliasesToSolrDocument(graphInteractorA.getAliases()):null);
+            interaction.setAnnotationsA((graphInteractorA.getAnnotations()!=null&&graphInteractorA.getAnnotations().size()>0)?SolrDocumentConverter.annotationsToSolrDocument(graphInteractorA.getAnnotations()):null);
+            interaction.setChecksumsA((graphInteractorA.getChecksums()!=null&&graphInteractorA.getChecksums().size()>0)?SolrDocumentConverter.checksumsToSolrDocument(graphInteractorA.getChecksums()):null);
             interaction.setTaxIdA(graphInteractorA.getOrganism().getTaxId());
             interaction.setTypeA(graphInteractorA.getInteractorType().getShortName());
-            interaction.setXrefsA(SolrDocumentConverter.xrefsToSolrDocument(graphInteractorA.getXrefs()));
+            interaction.setXrefsA((graphInteractorA.getXrefs()!=null&&graphInteractorA.getXrefs().size()>0)?SolrDocumentConverter.xrefsToSolrDocument(graphInteractorA.getXrefs()):null);
             interaction.setSpeciesA(graphInteractorA.getOrganism().getScientificName());
 
-            Optional<GraphInteractor> oGraphInteractorB=graphInteractorService.findWithDepth(graphBinaryInteractionEvidence.getInteractorB().getUniqueKey(),DEPTH);
-            Interactor graphInteractorB=oGraphInteractorB.get();
+            if(graphBinaryInteractionEvidence.getInteractorB()!=null) {
+                Optional<GraphInteractor> oGraphInteractorB = graphInteractorService.findWithDepth(graphBinaryInteractionEvidence.getInteractorB().getUniqueKey(), DEPTH);
+                Interactor graphInteractorB = oGraphInteractorB.get();
 
-            interaction.setIdB(SolrDocumentConverter.xrefToSolrDocument(graphInteractorB.getPreferredIdentifier()));
-            interaction.setAltIdsB(SolrDocumentConverter.xrefsToSolrDocument(graphInteractorB.getIdentifiers()));
-            interaction.setAliasesB(SolrDocumentConverter.aliasesToSolrDocument(graphInteractorB.getAliases()));
-            interaction.setAnnotationsB(SolrDocumentConverter.annotationsToSolrDocument(graphInteractorB.getAnnotations()));
-            interaction.setChecksumsB(SolrDocumentConverter.checksumsToSolrDocument(graphInteractorB.getChecksums()));
-            interaction.setTaxIdB(graphInteractorB.getOrganism().getTaxId());
-            interaction.setTypeB(graphInteractorB.getInteractorType().getShortName());
-            interaction.setXrefsB(SolrDocumentConverter.xrefsToSolrDocument(graphInteractorB.getXrefs()));
-            interaction.setSpeciesB(graphInteractorB.getOrganism().getScientificName());
+                interaction.setIdB(SolrDocumentConverter.xrefToSolrDocument(graphInteractorB.getPreferredIdentifier()));
+                interaction.setAltIdsB((graphInteractorB.getIdentifiers() != null && graphInteractorB.getIdentifiers().size() > 0) ? SolrDocumentConverter.xrefsToSolrDocument(graphInteractorB.getIdentifiers()) : null);
+                interaction.setAliasesB((graphInteractorB.getAliases() != null && graphInteractorB.getAliases().size() > 0) ? SolrDocumentConverter.aliasesToSolrDocument(graphInteractorB.getAliases()) : null);
+                interaction.setAnnotationsB((graphInteractorB.getAnnotations() != null && graphInteractorB.getAnnotations().size() > 0) ? SolrDocumentConverter.annotationsToSolrDocument(graphInteractorB.getAnnotations()) : null);
+                interaction.setChecksumsB((graphInteractorB.getChecksums() != null && graphInteractorB.getChecksums().size() > 0) ? SolrDocumentConverter.checksumsToSolrDocument(graphInteractorB.getChecksums()) : null);
+                interaction.setTaxIdB(graphInteractorB.getOrganism().getTaxId());
+                interaction.setTypeB(graphInteractorB.getInteractorType().getShortName());
+                interaction.setXrefsB((graphInteractorB.getXrefs() != null && graphInteractorB.getXrefs().size() > 0) ? SolrDocumentConverter.xrefsToSolrDocument(graphInteractorB.getXrefs()) : null);
+                interaction.setSpeciesB(graphInteractorB.getOrganism().getScientificName());
+            }
+
         }
 
 
