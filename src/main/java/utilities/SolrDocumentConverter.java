@@ -2,8 +2,7 @@ package utilities;
 
 import org.apache.commons.lang.StringUtils;
 import psidev.psi.mi.jami.model.*;
-import uk.ac.ebi.intact.graphdb.model.nodes.GraphCvTerm;
-import uk.ac.ebi.intact.graphdb.model.nodes.GraphFeatureEvidence;
+import uk.ac.ebi.intact.graphdb.model.nodes.*;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -20,7 +19,7 @@ public class SolrDocumentConverter {
 
     }
 
-    public static Set<String> xrefsToSolrDocument(Collection<Xref> xrefs) {
+    public static Set<String> xrefsToSolrDocument(Collection<GraphXref> xrefs) {
 
         Set<String> searchInteractorXrefs = new HashSet<>();
         for (Xref xref : xrefs) {
@@ -41,7 +40,7 @@ public class SolrDocumentConverter {
 
     }
 
-    public static Set<String> annotationsToSolrDocument(Collection<Annotation> annotations) {
+    public static Set<String> annotationsToSolrDocument(Collection<GraphAnnotation> annotations) {
 
         Set<String> searchInteractorAliases = new HashSet<>();
         for (Annotation annotation : annotations) {
@@ -51,7 +50,7 @@ public class SolrDocumentConverter {
 
     }
 
-    public static Set<String> checksumsToSolrDocument(Collection<Checksum> checksums) {
+    public static Set<String> checksumsToSolrDocument(Collection<GraphChecksum> checksums) {
 
         Set<String> searchInteractorAliases = new HashSet<>();
         for (Checksum checksum : checksums) {
@@ -82,5 +81,26 @@ public class SolrDocumentConverter {
         return terms;
 
     }
+
+    public static Set<String> confidencesToSolrDocument(Collection<GraphConfidence> graphConfidences) {
+
+        Set<String> confidences = new HashSet<>();
+        for (GraphConfidence graphConfidence : graphConfidences) {
+            confidences.add(graphConfidence.getType().getShortName()+"("+graphConfidence.getValue()+")");
+        }
+        return confidences;
+
+    }
+
+    public static Set<String> parametersToSolrDocument(Collection<GraphParameter> graphParameters) {
+
+        Set<String> parameters = new HashSet<>();
+        for (GraphParameter graphParameter : graphParameters) {
+            parameters.add(graphParameter.getType().getShortName()+":"+graphParameter.getValue()+"("+graphParameter.getUnit().getShortName()+")");
+        }
+        return parameters;
+
+    }
+
 
 }
