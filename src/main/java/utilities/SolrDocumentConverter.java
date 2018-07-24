@@ -1,9 +1,9 @@
 package utilities;
 
-import psidev.psi.mi.jami.model.Alias;
-import psidev.psi.mi.jami.model.Annotation;
-import psidev.psi.mi.jami.model.Checksum;
-import psidev.psi.mi.jami.model.Xref;
+import org.apache.commons.lang.StringUtils;
+import psidev.psi.mi.jami.model.*;
+import uk.ac.ebi.intact.graphdb.model.nodes.GraphCvTerm;
+import uk.ac.ebi.intact.graphdb.model.nodes.GraphFeatureEvidence;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -58,6 +58,28 @@ public class SolrDocumentConverter {
             searchInteractorAliases.add(checksum.getMethod().getShortName() + " (" + checksum.getValue() + ")");
         }
         return searchInteractorAliases;
+
+    }
+
+    public static Set<String> featuresToSolrDocument(Collection<GraphFeatureEvidence> featureEvidences) {
+
+        Set<String> features = new HashSet<>();
+        for (FeatureEvidence featureEvidence : featureEvidences) {
+            String ranges = StringUtils.join(featureEvidence.getRanges(), ",");
+            features.add(featureEvidence.getType().getShortName()+ ":" +ranges+ (featureEvidence.getShortName()!=null?featureEvidence.getShortName():""));
+        }
+        return features;
+
+    }
+
+    public static Set<String> cvTermsToSolrDocument(Collection<GraphCvTerm> cvTerms) {
+
+        Set<String> terms = new HashSet<>();
+        for (CvTerm cvTerm : cvTerms) {
+
+            terms.add(cvTerm.getShortName());
+        }
+        return terms;
 
     }
 
