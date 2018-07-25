@@ -151,11 +151,9 @@ public class InteractionIndexerTasklet implements Tasklet {
             GraphBinaryInteractionEvidence graphBinaryInteractionEvidence = (GraphBinaryInteractionEvidence) interactionEvidence;
             interaction.setUniqueKey(graphBinaryInteractionEvidence.getUniqueKey());
 
-            Optional<GraphInteractor> oGraphInteractorA = graphInteractorService.findWithDepth(graphBinaryInteractionEvidence.getInteractorA().getUniqueKey(), DEPTH);
-
-
             // Interactor details
             if (graphBinaryInteractionEvidence.getInteractorA() != null) {
+                Optional<GraphInteractor> oGraphInteractorA = graphInteractorService.findWithDepth(graphBinaryInteractionEvidence.getInteractorA().getUniqueKey(), DEPTH);
                 Interactor graphInteractorA = oGraphInteractorA.get();
                 interaction.setIdA(SolrDocumentConverter.xrefToSolrDocument(graphInteractorA.getPreferredIdentifier()));
                 interaction.setAltIdsA((graphInteractorA.getIdentifiers() != null && graphInteractorA.getIdentifiers().size() > 0) ? SolrDocumentConverter.xrefsToSolrDocument(graphInteractorA.getIdentifiers()) : null);
@@ -225,6 +223,9 @@ public class InteractionIndexerTasklet implements Tasklet {
             interaction.setSourceDatabases((graphBinaryInteractionEvidence.getXrefs() != null && !graphBinaryInteractionEvidence.getXrefs().isEmpty()) ? SolrDocumentConverter.xrefsToSolrDocument(graphBinaryInteractionEvidence.getXrefs()) : null);
             interaction.setInteractionIdentifiers((graphBinaryInteractionEvidence.getIdentifiers() != null && !graphBinaryInteractionEvidence.getIdentifiers().isEmpty()) ? SolrDocumentConverter.xrefsToSolrDocument(graphBinaryInteractionEvidence.getIdentifiers()) : null);
             interaction.setConfidenceValues(!intactConfidence.isEmpty()?intactConfidence:null);
+            interaction.setInteractionType(graphBinaryInteractionEvidence.getInteractionType()!=null?graphBinaryInteractionEvidence.getInteractionType().getShortName():null);
+            interaction.setInteractionAc(graphBinaryInteractionEvidence.getAc());
+            interaction.setHostOrganism(experiment.getHostOrganism()!=null?experiment.getHostOrganism().getScientificName():null);
             if(graphBinaryInteractionEvidence.getConfidences()!=null) {
                 Set<String> confidences=SolrDocumentConverter.confidencesToSolrDocument(graphBinaryInteractionEvidence.getConfidences());
                 if(interaction.getConfidenceValues()!=null){
