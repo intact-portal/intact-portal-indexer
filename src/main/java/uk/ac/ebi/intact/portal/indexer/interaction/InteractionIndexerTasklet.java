@@ -214,14 +214,25 @@ public class InteractionIndexerTasklet implements Tasklet {
 
             GraphClusteredInteraction graphClusteredInteraction=graphInteractionService.findClusteredInteraction(graphBinaryInteractionEvidence.getUniqueKey());
             Set<String> intactConfidence= new HashSet<String>();
-            intactConfidence.add("intact-miscore:"+graphClusteredInteraction.getMiscore());
+            if(graphClusteredInteraction!=null) {
+                intactConfidence.add("intact-miscore:" + graphClusteredInteraction.getMiscore());
+            }
 
             interaction.setInteractionDetectionMethod((graphBinaryInteractionEvidence.getExperiment() != null && graphBinaryInteractionEvidence.getExperiment().getInteractionDetectionMethod() != null) ? graphBinaryInteractionEvidence.getExperiment().getInteractionDetectionMethod().getShortName() : null);
             interaction.setAuthors((experiment != null && experiment.getPublication() != null &&
                     experiment.getPublication().getAuthors() != null && !experiment.getPublication().getAuthors().isEmpty()) ? new HashSet(experiment.getPublication().getAuthors()) : null);
+            interaction.setPublicationId(experiment.getPublication().getPubmedId());
             interaction.setSourceDatabases((graphBinaryInteractionEvidence.getXrefs() != null && !graphBinaryInteractionEvidence.getXrefs().isEmpty()) ? SolrDocumentConverter.xrefsToSolrDocument(graphBinaryInteractionEvidence.getXrefs()) : null);
             interaction.setInteractionIdentifiers((graphBinaryInteractionEvidence.getIdentifiers() != null && !graphBinaryInteractionEvidence.getIdentifiers().isEmpty()) ? SolrDocumentConverter.xrefsToSolrDocument(graphBinaryInteractionEvidence.getIdentifiers()) : null);
-            interaction.getConfidenceValues().addAll( SolrDocumentConverter.confidencesToSolrDocument(graphBinaryInteractionEvidence.getConfidences()));
+            interaction.setConfidenceValues(!intactConfidence.isEmpty()?intactConfidence:null);
+            if(graphBinaryInteractionEvidence.getConfidences()!=null) {
+                Set<String> confidences=SolrDocumentConverter.confidencesToSolrDocument(graphBinaryInteractionEvidence.getConfidences());
+                if(interaction.getConfidenceValues()!=null){
+                    interaction.getConfidenceValues().addAll(confidences);
+                }else {
+                    interaction.setConfidenceValues(confidences);
+                }
+            }
             interaction.setExpansionMethod((graphBinaryInteractionEvidence.getComplexExpansion() != null) ? graphBinaryInteractionEvidence.getComplexExpansion().getShortName() : null);
             interaction.setInteractionXrefs((graphBinaryInteractionEvidence.getXrefs() != null && !graphBinaryInteractionEvidence.getXrefs().isEmpty()) ? SolrDocumentConverter.xrefsToSolrDocument(graphBinaryInteractionEvidence.getXrefs()) : null);
             interaction.setInteractionAnnotations((graphBinaryInteractionEvidence.getAnnotations() != null && !graphBinaryInteractionEvidence.getAnnotations().isEmpty()) ? SolrDocumentConverter.annotationsToSolrDocument(graphBinaryInteractionEvidence.getAnnotations()) : null);
