@@ -59,7 +59,7 @@ public class InteractionIndexerTasklet implements Tasklet {
     private GraphFeatureService graphFeatureService;
 
     @Resource
-    private SolrClient interactorsSolrServer;
+    private SolrClient interactionSolrServer;
 
     private boolean simulation = false;
 
@@ -127,7 +127,7 @@ public class InteractionIndexerTasklet implements Tasklet {
         if (attempts < MAX_ATTEMPTS) {
             try {
                 //TODO Ping method gives an error so solrServerCheck() is not call for now
-                SolrPingResponse response = interactorsSolrServer.ping();
+                SolrPingResponse response = interactionSolrServer.ping();
                 long elapsedTime = response.getElapsedTime();
                 if (elapsedTime > MAX_PING_TIME) {
                     log.debug("Solr response too slow: " + elapsedTime + ". Attempt: " + attempts + ". Waiting... ");
