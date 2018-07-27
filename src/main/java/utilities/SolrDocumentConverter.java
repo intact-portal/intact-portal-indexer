@@ -64,8 +64,13 @@ public class SolrDocumentConverter {
 
         Set<String> features = new HashSet<>();
         for (FeatureEvidence featureEvidence : featureEvidences) {
-            String ranges = StringUtils.join(featureEvidence.getRanges(), ",");
-            features.add(featureEvidence.getType().getShortName()+ ":" +ranges+ (featureEvidence.getShortName()!=null?featureEvidence.getShortName():""));
+            String ranges;
+            if (featureEvidence.getRanges()!=null) {
+                ranges = StringUtils.join(featureEvidence.getRanges(), ",");
+            }else {
+                ranges="";
+            }
+            features.add(featureEvidence.getType().getShortName()+ ":" +ranges+ "("+(featureEvidence.getShortName()!=null?featureEvidence.getShortName():"")+")");
         }
         return features;
 

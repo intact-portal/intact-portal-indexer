@@ -64,9 +64,9 @@ public class BatchConfiguration {
         return jobBuilderFactory.get("intactPortalIndexerJob")
                 .incrementer(new RunIdIncrementer())
                 .listener(listener)
-                .start(indexCleanerStep)
-  //              .next(interactorIndexingStep)
-                .next(interactionIndexCleanerStep)
+   //             .start(indexCleanerStep)
+   //             .next(interactorIndexingStep)
+                .start(interactionIndexCleanerStep)
                 .next(interactionIndexingStep)
                 .build();
     }
