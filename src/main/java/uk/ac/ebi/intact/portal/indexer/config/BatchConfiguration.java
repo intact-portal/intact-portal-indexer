@@ -58,22 +58,33 @@ public class BatchConfiguration {
 
     // tag::jobstep[]
     @Bean
-    public Job intactPortalIndexerJob(JobCompletionNotificationListener listener,
-                                      Step indexCleanerStep,
+    public Job interactorIndexerJob(JobCompletionNotificationListener listener,
+                                      Step interactorCleanerStep,
                                       Step interactorIndexingStep,Step interactionIndexCleanerStep,Step interactionIndexingStep ) {
-        return jobBuilderFactory.get("intactPortalIndexerJob")
+        return jobBuilderFactory.get("interactorIndexerJob")
                 .incrementer(new RunIdIncrementer())
                 .listener(listener)
-   //             .start(indexCleanerStep)
-   //             .next(interactorIndexingStep)
+                .start(interactorCleanerStep)
+                .next(interactorIndexingStep)
+                .build();
+    }
+
+    @Bean
+    public Job interactionIndexerJob(JobCompletionNotificationListener listener,
+                                      Step interactionIndexCleanerStep,Step interactionIndexingStep ) {
+        return jobBuilderFactory.get("interactionIndexerJob")
+                .incrementer(new RunIdIncrementer())
+                .listener(listener)
                 .start(interactionIndexCleanerStep)
                 .next(interactionIndexingStep)
                 .build();
     }
 
+
+
     @Bean
-    public Step indexCleanerStep(IndexCleanerTasklet tasklet) {
-        return stepBuilderFactory.get("indexCleanerStep")
+    public Step interactorCleanerStep(IndexCleanerTasklet tasklet) {
+        return stepBuilderFactory.get("interactorCleanerStep")
                 .tasklet(tasklet)
                 .build();
     }
