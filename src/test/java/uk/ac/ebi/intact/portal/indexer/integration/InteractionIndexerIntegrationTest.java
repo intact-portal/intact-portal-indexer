@@ -4,36 +4,17 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.batch.core.*;
-import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
-import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.JobLauncher;
-import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.scope.context.StepContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.test.JobLauncherTestUtils;
-import org.springframework.batch.test.StepScopeTestExecutionListener;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
-import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
-import org.springframework.transaction.annotation.Transactional;
-import uk.ac.ebi.intact.portal.indexer.config.BatchConfiguration;
-import uk.ac.ebi.intact.portal.indexer.interaction.InteractionCleanerTasklet;
 import uk.ac.ebi.intact.portal.indexer.interaction.InteractionIndexerTasklet;
-import uk.ac.ebi.intact.portal.indexer.listeners.JobCompletionNotificationListener;
 
 import javax.annotation.Resource;
 
@@ -49,26 +30,84 @@ import static org.springframework.batch.test.MetaDataInstanceFactory.createStepE
 //TODO Review the configuration of the test to be sure that used the localhost, in memory resources
 public class InteractionIndexerIntegrationTest {
 
+    private JobLauncherTestUtils jobLauncherTestUtils;
+
+    @Resource
+    private Tasklet interactionCleanerTasklet;
+
+    @Resource
+    private Tasklet interactionIndexerTasklet;
 
     @Autowired
     private JobLauncher jobLauncher;
 
     @Autowired
-    private Job interactionIndexerJob;
+    private JobRepository jobRepository;
 
+    @Autowired
+    private Job  interactionIndexerJob;
 
+    private void initializeJobLauncherTestUtils(){
+        this.jobLauncherTestUtils = new JobLauncherTestUtils();
+        this.jobLauncherTestUtils.setJobLauncher(jobLauncher);
+        this.jobLauncherTestUtils.setJobRepository(jobRepository);
+        this.jobLauncherTestUtils.setJob(interactionIndexerJob);
+    }
 
     @Test
-    public void simulation() throws Exception {
+    public void jobSimulation() throws Exception {
 
-        JobParametersBuilder jobParametersBuilder =
-                new JobParametersBuilder();
-
-        jobParametersBuilder.addLong("time",System.currentTimeMillis()).toJobParameters();
-            jobParametersBuilder.addString("interactionIndexerJob","interactionIndexerJob");
-        JobParameters jobParameters =jobParametersBuilder.toJobParameters();
-        JobExecution jobExecution = jobLauncher.run(interactionIndexerJob, jobParameters);
+        if(jobLauncherTestUtils==null){
+            initializeJobLauncherTestUtils();
+        }
+        JobExecution jobExecution = jobLauncherTestUtils.launchJob();
         Assert.assertEquals(jobExecution.getStatus(), BatchStatus.COMPLETED);
+
+    }
+
+    @Test
+    public void cleanerStepSimulation() throws Exception {
+
+        if(jobLauncherTestUtils==null){
+            initializeJobLauncherTestUtils();
+        }
+        JobExecution jobExecution = jobLauncherTestUtils.launchStep("interactionIndexCleanerStep");
+        Assert.assertEquals(jobExecution.getStatus(), BatchStatus.COMPLETED);
+
+    }
+
+    @Test
+    public void indexingStepSimulation() throws Exception {
+
+        if(jobLauncherTestUtils==null){
+            initializeJobLauncherTestUtils();
+        }
+        JobExecution jobExecution = jobLauncherTestUtils.launchStep("interactionIndexingStep");
+        Assert.assertEquals(jobExecution.getStatus(), BatchStatus.COMPLETED);
+
+    }
+
+    @Test
+    public void testCleanerTasklet() throws Exception {
+
+        StepExecution execution = createStepExecution();
+
+        ChunkContext chunkContext = new ChunkContext(new StepContext(execution));
+        StepContribution stepContribution = new StepContribution(execution);
+
+        interactionCleanerTasklet.execute(stepContribution, chunkContext);
+
+    }
+
+    @Test
+    public void testIndexingTasklet() throws Exception {
+
+        StepExecution execution = createStepExecution();
+
+        ChunkContext chunkContext = new ChunkContext(new StepContext(execution));
+        StepContribution stepContribution = new StepContribution(execution);
+
+        interactionIndexerTasklet.execute(stepContribution, chunkContext);
 
     }
 
