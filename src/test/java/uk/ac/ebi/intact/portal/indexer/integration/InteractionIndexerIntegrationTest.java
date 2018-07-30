@@ -88,7 +88,7 @@ public class InteractionIndexerIntegrationTest {
     }
 
     @Test
-    public void testCleanerTasklet() throws Exception {
+    public void cleanerTaskletSimulation() throws Exception {
 
         StepExecution execution = createStepExecution();
 
@@ -100,7 +100,7 @@ public class InteractionIndexerIntegrationTest {
     }
 
     @Test
-    public void testIndexingTasklet() throws Exception {
+    public void indexerTaskletSimulation() throws Exception {
 
         StepExecution execution = createStepExecution();
 
