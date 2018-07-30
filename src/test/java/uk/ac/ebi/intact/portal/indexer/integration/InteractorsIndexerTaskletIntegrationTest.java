@@ -10,18 +10,9 @@ import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.scope.context.StepContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.test.JobLauncherTestUtils;
-import org.springframework.batch.test.StepScopeTestExecutionListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
-import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
-import org.springframework.transaction.annotation.Transactional;
-import uk.ac.ebi.intact.portal.indexer.config.BatchConfiguration;
 
 import javax.annotation.Resource;
 
@@ -54,7 +45,7 @@ public class InteractorsIndexerTaskletIntegrationTest {
     @Autowired
     private Job interactorIndexerJob;
 
-    private void initializeJobLauncherTestUtils(){
+    private void initializeJobLauncherTestUtils() {
         this.jobLauncherTestUtils = new JobLauncherTestUtils();
         this.jobLauncherTestUtils.setJobLauncher(jobLauncher);
         this.jobLauncherTestUtils.setJobRepository(jobRepository);
@@ -64,7 +55,7 @@ public class InteractorsIndexerTaskletIntegrationTest {
     @Test
     public void jobSimulation() throws Exception {
 
-        if(jobLauncherTestUtils==null){
+        if (jobLauncherTestUtils == null) {
             initializeJobLauncherTestUtils();
         }
         JobExecution jobExecution = jobLauncherTestUtils.launchJob();
@@ -75,7 +66,7 @@ public class InteractorsIndexerTaskletIntegrationTest {
     @Test
     public void cleanerStepSimulation() throws Exception {
 
-        if(jobLauncherTestUtils==null){
+        if (jobLauncherTestUtils == null) {
             initializeJobLauncherTestUtils();
         }
         JobExecution jobExecution = jobLauncherTestUtils.launchStep("interactorCleanerStep");
@@ -86,7 +77,7 @@ public class InteractorsIndexerTaskletIntegrationTest {
     @Test
     public void indexingStepSimulation() throws Exception {
 
-        if(jobLauncherTestUtils==null){
+        if (jobLauncherTestUtils == null) {
             initializeJobLauncherTestUtils();
         }
         JobExecution jobExecution = jobLauncherTestUtils.launchStep("interactorIndexingStep");
