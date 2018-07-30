@@ -67,7 +67,7 @@ public class InteractionIndexerTasklet implements Tasklet {
     public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
 
         try {
-            log.info("Start indexing Interactors data");
+            log.info("Start indexing Interaction data");
 
             int page = 0;
             PageRequest request;
