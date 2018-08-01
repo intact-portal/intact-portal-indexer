@@ -221,6 +221,7 @@ public class InteractionIndexerTasklet implements Tasklet {
             Set<String> intactConfidence= new HashSet<String>();
             if(graphClusteredInteraction!=null) {
                 intactConfidence.add("intact-miscore:" + graphClusteredInteraction.getMiscore());
+                interaction.setIntactMiscore(graphClusteredInteraction.getMiscore());
             }
 
             interaction.setInteractionDetectionMethod((graphBinaryInteractionEvidence.getExperiment() != null && graphBinaryInteractionEvidence.getExperiment().getInteractionDetectionMethod() != null) ? graphBinaryInteractionEvidence.getExperiment().getInteractionDetectionMethod().getShortName() : null);
