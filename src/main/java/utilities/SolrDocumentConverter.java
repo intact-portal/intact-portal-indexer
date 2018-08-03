@@ -30,7 +30,7 @@ public class SolrDocumentConverter {
 
     }
 
-    public static Set<String> aliasesToSolrDocument(Collection<Alias> aliases) {
+    public static Set<String> aliasesToSolrDocument(Collection<GraphAlias> aliases) {
 
         Set<String> searchInteractorAliases = new HashSet<>();
         for (Alias alias : aliases) {
@@ -71,6 +71,16 @@ public class SolrDocumentConverter {
                 ranges="";
             }
             features.add(featureEvidence.getType().getShortName()+ ":" +ranges+ "("+(featureEvidence.getShortName()!=null?featureEvidence.getShortName():"")+")");
+        }
+        return features;
+
+    }
+
+    public static Set<String> featuresShortlabelToSolrDocument(Collection<GraphFeatureEvidence> featureEvidences) {
+
+        Set<String> features = new HashSet<>();
+        for (FeatureEvidence featureEvidence : featureEvidences) {
+            features.add(featureEvidence.getShortName());
         }
         return features;
 
