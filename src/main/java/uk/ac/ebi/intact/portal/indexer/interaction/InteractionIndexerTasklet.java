@@ -257,8 +257,9 @@ public class InteractionIndexerTasklet implements Tasklet {
 
             interaction.setInteractionDetectionMethod((graphBinaryInteractionEvidence.getExperiment() != null && graphBinaryInteractionEvidence.getExperiment().getInteractionDetectionMethod() != null) ? graphBinaryInteractionEvidence.getExperiment().getInteractionDetectionMethod().getShortName() : null);
             interaction.setAuthors((experiment != null && experiment.getPublication() != null &&
-                    experiment.getPublication().getAuthors() != null && !experiment.getPublication().getAuthors().isEmpty()) ? new HashSet(experiment.getPublication().getAuthors()) : null);
-            interaction.setFirstAuthor((interaction.getAuthors()!=null&&!interaction.getAuthors().isEmpty())?interaction.getAuthors().iterator().next():"");
+                    experiment.getPublication().getAuthors() != null && !experiment.getPublication().getAuthors().isEmpty()) ? new LinkedHashSet(experiment.getPublication().getAuthors()) : null);
+            interaction.setFirstAuthor((interaction.getAuthors()!=null&&!interaction.getAuthors().isEmpty())?interaction.getAuthors().iterator().next()+" et al. ("+CommonUtility.getYearOutOfDate(experiment.getPublication().getPublicationDate())+")" +
+                    "\t\n":"");
             interaction.setPublicationId((experiment != null && experiment.getPublication() != null &&
                     experiment.getPublication().getAuthors() != null)? experiment.getPublication().getPubmedId():"");
             interaction.setSourceDatabase((experiment != null && experiment.getPublication() != null &&

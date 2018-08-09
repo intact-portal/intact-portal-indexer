@@ -1,9 +1,7 @@
 package utilities;
 
 import java.lang.reflect.Method;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by anjali on 27/07/18.
@@ -24,5 +22,11 @@ public class CommonUtility {
             }
         }
          return uniqueKeys;
+    }
+
+    public static int getYearOutOfDate(Date date){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar.get(Calendar.YEAR);
     }
 }
