@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import psidev.psi.mi.jami.binary.BinaryInteractionEvidence;
 import psidev.psi.mi.jami.model.Experiment;
 import psidev.psi.mi.jami.model.Interactor;
+import psidev.psi.mi.jami.model.Publication;
 import uk.ac.ebi.intact.graphdb.model.nodes.*;
 import uk.ac.ebi.intact.graphdb.services.*;
 import uk.ac.ebi.intact.search.interactions.model.Interaction;
@@ -256,16 +257,6 @@ public class InteractionIndexerTasklet implements Tasklet {
             }
 
             interaction.setInteractionDetectionMethod((graphBinaryInteractionEvidence.getExperiment() != null && graphBinaryInteractionEvidence.getExperiment().getInteractionDetectionMethod() != null) ? graphBinaryInteractionEvidence.getExperiment().getInteractionDetectionMethod().getShortName() : null);
-            interaction.setAuthors((experiment != null && experiment.getPublication() != null &&
-                    experiment.getPublication().getAuthors() != null && !experiment.getPublication().getAuthors().isEmpty()) ? new LinkedHashSet(experiment.getPublication().getAuthors()) : null);
-            interaction.setFirstAuthor((interaction.getAuthors()!=null&&!interaction.getAuthors().isEmpty())?interaction.getAuthors().iterator().next()+" et al. ("+CommonUtility.getYearOutOfDate(experiment.getPublication().getPublicationDate())+")" +
-                    "\t\n":"");
-            interaction.setPublicationId((experiment != null && experiment.getPublication() != null &&
-                    experiment.getPublication().getAuthors() != null)? experiment.getPublication().getPubmedId():"");
-            interaction.setSourceDatabase((experiment != null && experiment.getPublication() != null &&
-                    experiment.getPublication().getSource()!=null)?experiment.getPublication().getSource().getShortName():"");
-            interaction.setReleaseDate((experiment != null && experiment.getPublication() != null &&
-                    experiment.getPublication().getReleasedDate()!=null)?experiment.getPublication().getReleasedDate():null);
             interaction.setInteractionIdentifiers((graphBinaryInteractionEvidence.getIdentifiers() != null && !graphBinaryInteractionEvidence.getIdentifiers().isEmpty()) ? SolrDocumentConverter.xrefsToSolrDocument(graphBinaryInteractionEvidence.getIdentifiers()) : null);
             interaction.setConfidenceValues(!intactConfidence.isEmpty()?intactConfidence:null);
             interaction.setInteractionType(graphBinaryInteractionEvidence.getInteractionType()!=null?graphBinaryInteractionEvidence.getInteractionType().getShortName():null);
@@ -287,6 +278,22 @@ public class InteractionIndexerTasklet implements Tasklet {
             interaction.setUpdationDate(graphBinaryInteractionEvidence.getUpdatedDate());
             interaction.setInteractionChecksums((graphBinaryInteractionEvidence.getChecksums() != null && !graphBinaryInteractionEvidence.getChecksums().isEmpty()) ? SolrDocumentConverter.checksumsToSolrDocument(graphBinaryInteractionEvidence.getChecksums()) : null);
             interaction.setNegative(graphBinaryInteractionEvidence.isNegative());
+
+            // publications details
+
+            if(experiment!=null) {
+                Publication publication = experiment.getPublication();
+                if (publication != null) {
+                    interaction.setAuthors((publication.getAuthors() != null && !publication.getAuthors().isEmpty()) ? new LinkedHashSet(publication.getAuthors()) : null);
+                    interaction.setFirstAuthor((interaction.getAuthors() != null && !interaction.getAuthors().isEmpty()) ? interaction.getAuthors().iterator().next() + " et al. (" + CommonUtility.getYearOutOfDate(publication.getPublicationDate()) + ")" +
+                            "\t\n" : "");
+                    interaction.setPublicationId((publication.getAuthors() != null) ? publication.getPubmedId() : "");
+                    interaction.setSourceDatabase((publication.getSource() != null) ? publication.getSource().getShortName() : "");
+                    interaction.setReleaseDate((publication.getReleasedDate() != null) ? publication.getReleasedDate() : null);
+                    interaction.setPublicationIdentifiers((publication.getIdentifiers() != null) ? SolrDocumentConverter.xrefsToSolrDocument(publication.getIdentifiers()) : null);
+                }
+            }
+
         }
 
 
