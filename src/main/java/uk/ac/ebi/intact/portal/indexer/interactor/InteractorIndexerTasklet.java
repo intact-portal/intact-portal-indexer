@@ -14,13 +14,16 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import psidev.psi.mi.jami.model.Alias;
 import psidev.psi.mi.jami.model.Interactor;
+import psidev.psi.mi.jami.model.ParticipantEvidence;
 import psidev.psi.mi.jami.model.Xref;
 import psidev.psi.mi.jami.utils.XrefUtils;
 import uk.ac.ebi.intact.graphdb.model.nodes.GraphBinaryInteractionEvidence;
+import uk.ac.ebi.intact.graphdb.model.nodes.GraphFeatureEvidence;
 import uk.ac.ebi.intact.graphdb.model.nodes.GraphInteractor;
 import uk.ac.ebi.intact.graphdb.services.GraphInteractorService;
 import uk.ac.ebi.intact.search.interactor.model.SearchInteractor;
 import uk.ac.ebi.intact.search.interactor.service.InteractorIndexService;
+import utilities.SolrDocumentConverter;
 
 import javax.annotation.Resource;
 import java.io.IOException;
@@ -81,12 +84,11 @@ public class InteractorIndexerTasklet implements Tasklet {
                 for (GraphInteractor graphInteractor : interactorList) {
                     Set<String> interactionsIds = new HashSet<>();
                     long interactionCount = graphInteractor.getInteractions().size();
-                    if(interactionCount > 0){
+                    if (interactionCount > 0) {
                         for (GraphBinaryInteractionEvidence graphBinaryInteractionEvidence : graphInteractor.getInteractions()) {
                             interactionsIds.add(graphBinaryInteractionEvidence.getIdentifiers().iterator().next().getId());
                         }
-                    }
-                    else {
+                    } else {
                         log.warn("Interactor without interactions: " + graphInteractor.getAc());
                     }
                     searchInteractors.add(toSolrDocument(graphInteractor, interactionsIds, interactionCount));
@@ -144,8 +146,18 @@ public class InteractorIndexerTasklet implements Tasklet {
     private static SearchInteractor toSolrDocument(Interactor interactor, Set<String> interactionIds, long interactionCount) {
         SearchInteractor searchInteractor = new SearchInteractor();
 
-        if (interactor instanceof GraphInteractor ) { //|| interactor instanceof IntactInteractor if we add intact-jami
+        if (interactor instanceof GraphInteractor) { //|| interactor instanceof IntactInteractor if we add intact-jami
             searchInteractor.setInteractorId(XrefUtils.collectFirstIdentifierWithDatabase(interactor.getIdentifiers(), "MI:0469", "intact").getId());
+            GraphInteractor graphInteractor = (GraphInteractor) interactor;
+            Collection<GraphFeatureEvidence> featureEvidences = new ArrayList<GraphFeatureEvidence>();
+            if (graphInteractor.getParticipantEvidences() != null) {
+                for (ParticipantEvidence participantEvidence : graphInteractor.getParticipantEvidences()) {
+                    if (participantEvidence.getFeatures() != null) {
+                        featureEvidences.addAll(participantEvidence.getFeatures());
+                    }
+                }
+            }
+            searchInteractor.setFeatureShortLabels(!featureEvidences.isEmpty() ? SolrDocumentConverter.featuresShortlabelToSolrDocument(featureEvidences) : null);
         }
 
         //TODO Deal with complexes and sets
@@ -161,6 +173,7 @@ public class InteractorIndexerTasklet implements Tasklet {
         searchInteractor.setInteractorXrefs(xrefToSolrDocument(interactor.getXrefs()));
         searchInteractor.setInteractionCount(interactionIds.size());
         searchInteractor.setInteractionIds(interactionIds);
+
 
         return searchInteractor;
     }

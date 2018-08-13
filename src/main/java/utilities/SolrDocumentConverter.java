@@ -22,8 +22,12 @@ public class SolrDocumentConverter {
     public static Set<String> xrefsToSolrDocument(Collection<GraphXref> xrefs) {
 
         Set<String> searchInteractorXrefs = new HashSet<>();
-        for (Xref xref : xrefs) {
-            searchInteractorXrefs.add(xref.getId() + " (" + xref.getDatabase().getShortName() + ")");
+        try {
+            for (Xref xref : xrefs) {
+                searchInteractorXrefs.add(xref.getId() + " (" + xref.getDatabase().getShortName() + ")");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
 
         return searchInteractorXrefs;
