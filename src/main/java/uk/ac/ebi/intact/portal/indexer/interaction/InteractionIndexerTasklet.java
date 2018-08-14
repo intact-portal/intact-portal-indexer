@@ -177,6 +177,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 interaction.setUniqueIdA((graphInteractorA.getInteractorType()!=null
                         &&graphInteractorA.getInteractorType().getShortName()!=null
                         &&graphInteractorA.getInteractorType().getShortName().equals(Constants.MOLECULE_SET))?graphInteractorA.getAc():graphInteractorA.getPreferredIdentifier()!=null?graphInteractorA.getPreferredIdentifier().getId():"");
+                interaction.setMoleculeA(graphInteractorA.getPreferredName());
 
             }
 
@@ -198,6 +199,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                         &&graphInteractorB.getInteractorType().getShortName()!=null
                         &&graphInteractorB.getInteractorType().getShortName().equals(Constants.MOLECULE_SET))?graphInteractorB.getAc()
                         :graphInteractorB.getPreferredIdentifier()!=null?graphInteractorB.getPreferredIdentifier().getId():"");
+                interaction.setMoleculeB(graphInteractorB.getPreferredName());
             }
 
             //participant details
