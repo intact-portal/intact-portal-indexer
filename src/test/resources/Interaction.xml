@@ -1,0 +1,5190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_66" class="java.beans.XMLDecoder">
+ <object class="java.util.ArrayList">
+  <void method="add">
+   <object class="uk.ac.ebi.intact.search.interactions.model.Interaction" id="Interaction0">
+    <void property="aliasesA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>Cell division cycle-associated protein 1 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>NUF2 (MI:0301 (gene name))</string>
+      </void>
+      <void method="add">
+       <string>CDCA1 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>NUF2R (MI:0302 (gene name synonym))</string>
+      </void>
+     </object>
+    </void>
+    <void property="aliasesB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>NDC80 (MI:0301 (gene name))</string>
+      </void>
+      <void method="add">
+       <string>Kinetochore protein Hec1 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>HEC1 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>Kinetochore-associated protein 2 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>HEC (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>KNTC2 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>Highly expressed in cancer protein (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>Retinoblastoma-associated protein HEC (MI:0302 (gene name synonym))</string>
+      </void>
+     </object>
+    </void>
+    <void property="altIdsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>Q96Q78 (uniprotkb)</string>
+      </void>
+      <void method="add">
+       <string>Q8WU69 (uniprotkb)</string>
+      </void>
+      <void method="add">
+       <string>EBI-724102 (intact)</string>
+      </void>
+      <void method="add">
+       <string>Q9BZD4 (uniprotkb)</string>
+      </void>
+      <void method="add">
+       <string>Q96HJ4 (uniprotkb)</string>
+      </void>
+     </object>
+    </void>
+    <void property="altIdsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>Q6PJX2 (uniprotkb)</string>
+      </void>
+      <void method="add">
+       <string>EBI-715849 (intact)</string>
+      </void>
+      <void method="add">
+       <string>O14777 (uniprotkb)</string>
+      </void>
+     </object>
+    </void>
+    <void property="annotationsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>comment (DIP protein Q9BZD4 original sequence version: 119)</string>
+      </void>
+      <void method="add">
+       <string>comment (DIP protein Q9BZD4 original sequence version: 113)</string>
+      </void>
+     </object>
+    </void>
+    <void property="annotationsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>comment (DIP protein O14777 original sequence version: 132)</string>
+      </void>
+      <void method="add">
+       <string>comment (DIP protein O14777 original sequence version: 126)</string>
+      </void>
+     </object>
+    </void>
+    <void property="authors">
+     <object class="java.util.LinkedHashSet">
+      <void method="add">
+       <string>Ciferri C.</string>
+      </void>
+      <void method="add">
+       <string>De Luca J.</string>
+      </void>
+      <void method="add">
+       <string>Monzani S.</string>
+      </void>
+      <void method="add">
+       <string>Ferrari KJ.</string>
+      </void>
+      <void method="add">
+       <string>Ristic D.</string>
+      </void>
+      <void method="add">
+       <string>Wyman C.</string>
+      </void>
+      <void method="add">
+       <string>Stark H.</string>
+      </void>
+      <void method="add">
+       <string>Kilmartin J.</string>
+      </void>
+      <void method="add">
+       <string>Salmon ED.</string>
+      </void>
+      <void method="add">
+       <string>Musacchio A.</string>
+      </void>
+     </object>
+    </void>
+    <void property="biologicalRoleA">
+     <string>unspecified role</string>
+    </void>
+    <void property="biologicalRoleB">
+     <string>unspecified role</string>
+    </void>
+    <void property="checksumsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>crc64 (250BFED5AD87153B)</string>
+      </void>
+     </object>
+    </void>
+    <void property="checksumsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>crc64 (6A82DA4D8B77ECDC)</string>
+      </void>
+     </object>
+    </void>
+    <void property="confidenceValues">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>intact-miscore:0.4</string>
+      </void>
+     </object>
+    </void>
+    <void property="creationDate">
+     <object class="java.util.Date">
+      <long>1156765259000</long>
+     </object>
+    </void>
+    <void property="experimentalRoleA">
+     <string>neutral component</string>
+    </void>
+    <void property="experimentalRoleB">
+     <string>neutral component</string>
+    </void>
+    <void property="featureA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>gst tag::0..0:0..0(c-terminal)</string>
+      </void>
+      <void method="add">
+       <string>sufficient to bind::386..386:464..464(region)</string>
+      </void>
+     </object>
+    </void>
+    <void property="featureB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>his tag::0..0:0..0(c-terminal)</string>
+      </void>
+      <void method="add">
+       <string>sufficient to bind::446..446:642..642(region)</string>
+      </void>
+     </object>
+    </void>
+    <void property="featureShortLabelA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>c-terminal</string>
+      </void>
+      <void method="add">
+       <string>region</string>
+      </void>
+     </object>
+    </void>
+    <void property="featureShortLabelB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>c-terminal</string>
+      </void>
+      <void method="add">
+       <string>region</string>
+      </void>
+     </object>
+    </void>
+    <void property="firstAuthor">
+     <string>Ciferri C. et al. (2005)	
+</string>
+    </void>
+    <void property="hostOrganism">
+     <string>In vitro</string>
+    </void>
+    <void property="idA">
+     <string>Q9BZD4 (uniprotkb)</string>
+    </void>
+    <void property="idB">
+     <string>O14777 (uniprotkb)</string>
+    </void>
+    <void property="identificationMethodA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>predetermined</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>predetermined</string>
+      </void>
+     </object>
+    </void>
+    <void property="intactMiscore">
+     <double>0.4</double>
+    </void>
+    <void property="interactionAc">
+     <string>EBI-1000008</string>
+    </void>
+    <void property="interactionAnnotations">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>contact-email (andrea.musacchi@ifomieo-campus.it)</string>
+      </void>
+      <void method="add">
+       <string>accepted (Accepted 2006-OCT-9 by DAVET.)</string>
+      </void>
+      <void method="add">
+       <string>publication year (2005)</string>
+      </void>
+      <void method="add">
+       <string>author-list (Ciferri C., De Luca J., Monzani S., Ferrari KJ., Ristic D., Wyman C., Stark H., Kilmartin J., Salmon ED., Musacchio A.)</string>
+      </void>
+      <void method="add">
+       <string>figure legend (Fig. 2D)</string>
+      </void>
+      <void method="add">
+       <string>journal (J. Biol. Chem. (0021-9258))</string>
+      </void>
+     </object>
+    </void>
+    <void property="interactionDetectionMethod">
+     <string>molecular sieving</string>
+    </void>
+    <void property="interactionIdentifiers">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>EBI-1000008 (intact)</string>
+      </void>
+     </object>
+    </void>
+    <void property="interactionType">
+     <string>physical association</string>
+    </void>
+    <void property="interactorAAc">
+     <string>EBI-724102</string>
+    </void>
+    <void property="interactorBAc">
+     <string>EBI-715849</string>
+    </void>
+    <void property="moleculeA">
+     <string>NUF2</string>
+    </void>
+    <void property="moleculeB">
+     <string>NDC80</string>
+    </void>
+    <void property="publicationId">
+     <string>15961401</string>
+    </void>
+    <void property="publicationIdentifiers">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>EBI-1989501 (intact)</string>
+      </void>
+      <void method="add">
+       <string>15961401 (pubmed)</string>
+      </void>
+     </object>
+    </void>
+    <void property="releaseDate">
+     <object class="java.util.Date" id="Date0">
+      <long>1160694000000</long>
+     </object>
+    </void>
+    <void property="sourceDatabase">
+     <string>UniProt</string>
+    </void>
+    <void property="speciesA">
+     <string>Homo sapiens</string>
+    </void>
+    <void property="speciesAB">
+     <void method="clear"/>
+     <void method="add">
+      <string>Homo sapiens</string>
+     </void>
+    </void>
+    <void property="speciesB">
+     <string>Homo sapiens</string>
+    </void>
+    <void property="taxIdA">
+     <int>9606</int>
+    </void>
+    <void property="taxIdB">
+     <int>9606</int>
+    </void>
+    <void property="typeA">
+     <string>protein</string>
+    </void>
+    <void property="typeB">
+     <string>protein</string>
+    </void>
+    <void property="uniqueIdA">
+     <string>Q9BZD4</string>
+    </void>
+    <void property="uniqueIdB">
+     <string>O14777</string>
+    </void>
+    <void property="uniqueKey">
+     <string>-1801643833</string>
+    </void>
+    <void property="updationDate">
+     <object class="java.util.Date">
+      <long>1423749180000</long>
+     </object>
+    </void>
+    <void property="xrefsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>Q9BZD4 (mint)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005829 (go)</string>
+      </void>
+      <void method="add">
+       <string>NP_663735.2 (refseq)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-2500257 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>ENSG00000143228 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>GO:0051301 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-68877 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>2VE7 (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-5663220 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-141444 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005634 (go)</string>
+      </void>
+      <void method="add">
+       <string>ENSP00000271452 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>3IZ0 (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>DIP-36119N (dip)</string>
+      </void>
+      <void method="add">
+       <string>IPR038275 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000777 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0016020 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0007059 (go)</string>
+      </void>
+      <void method="add">
+       <string>ENST00000367900 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>IPR005549 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>ENSP00000356875 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>GO:0031262 (go)</string>
+      </void>
+      <void method="add">
+       <string>NP_113611.2 (refseq)</string>
+      </void>
+      <void method="add">
+       <string>ENST00000271452 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-2467813 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0007062 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000775 (go)</string>
+      </void>
+     </object>
+    </void>
+    <void property="xrefsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>O14777 (mint)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005829 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005654 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0042802 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000278 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-2500257 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0051301 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:1905342 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-68877 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>IPR005550 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>2VE7 (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>ENST00000261597 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-5663220 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-141444 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005634 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0007052 (go)</string>
+      </void>
+      <void method="add">
+       <string>NP_006092.1 (refseq)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000070 (go)</string>
+      </void>
+      <void method="add">
+       <string>3IZ0 (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>GO:0090267 (go)</string>
+      </void>
+      <void method="add">
+       <string>ENSG00000080986 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000777 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0016020 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0007059 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000132 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0051315 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005200 (go)</string>
+      </void>
+      <void method="add">
+       <string>IPR038273 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000942 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0031262 (go)</string>
+      </void>
+      <void method="add">
+       <string>2IGP (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>DIP-35100N (dip)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-2467813 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0051383 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0008608 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000776 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0051310 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0007062 (go)</string>
+      </void>
+      <void method="add">
+       <string>ENSP00000261597 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000775 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005813 (go)</string>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="uk.ac.ebi.intact.search.interactions.model.Interaction" id="Interaction1">
+    <void property="aliasesA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>SPBC24 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>SPC24 (MI:0301 (gene name))</string>
+      </void>
+     </object>
+    </void>
+    <void property="aliasesB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>SPC25 (MI:0301 (gene name))</string>
+      </void>
+      <void method="add">
+       <string>SPBC25 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>AD024 (MI:0306 (orf name))</string>
+      </void>
+     </object>
+    </void>
+    <void property="altIdsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>B4DZZ7 (uniprotkb)</string>
+      </void>
+      <void method="add">
+       <string>C9JGC4 (uniprotkb)</string>
+      </void>
+      <void method="add">
+       <string>Q8NBT2 (uniprotkb)</string>
+      </void>
+      <void method="add">
+       <string>EBI-999900 (intact)</string>
+      </void>
+     </object>
+    </void>
+    <void property="altIdsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>A8K4X8 (uniprotkb)</string>
+      </void>
+      <void method="add">
+       <string>DIP-35753N (dip)</string>
+      </void>
+      <void method="add">
+       <string>D3DPC0 (uniprotkb)</string>
+      </void>
+      <void method="add">
+       <string>EBI-999909 (intact)</string>
+      </void>
+      <void method="add">
+       <string>Q9HBM1 (uniprotkb)</string>
+      </void>
+     </object>
+    </void>
+    <void property="annotationsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>comment (DIP protein Q8NBT2 original sequence version: 102)</string>
+      </void>
+     </object>
+    </void>
+    <void property="annotationsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>comment (DIP protein Q9HBM1 original sequence version: 110)</string>
+      </void>
+      <void method="add">
+       <string>comment (DIP protein Q9HBM1 original sequence version: 126)</string>
+      </void>
+     </object>
+    </void>
+    <void property="authors">
+     <object class="java.util.LinkedHashSet">
+      <void method="add">
+       <string>Ciferri C.</string>
+      </void>
+      <void method="add">
+       <string>De Luca J.</string>
+      </void>
+      <void method="add">
+       <string>Monzani S.</string>
+      </void>
+      <void method="add">
+       <string>Ferrari KJ.</string>
+      </void>
+      <void method="add">
+       <string>Ristic D.</string>
+      </void>
+      <void method="add">
+       <string>Wyman C.</string>
+      </void>
+      <void method="add">
+       <string>Stark H.</string>
+      </void>
+      <void method="add">
+       <string>Kilmartin J.</string>
+      </void>
+      <void method="add">
+       <string>Salmon ED.</string>
+      </void>
+      <void method="add">
+       <string>Musacchio A.</string>
+      </void>
+     </object>
+    </void>
+    <void property="biologicalRoleA">
+     <string>unspecified role</string>
+    </void>
+    <void property="biologicalRoleB">
+     <string>unspecified role</string>
+    </void>
+    <void property="checksumsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>crc64 (C5D99CE1F1A8F355)</string>
+      </void>
+     </object>
+    </void>
+    <void property="checksumsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>crc64 (6DED3216794F4512)</string>
+      </void>
+     </object>
+    </void>
+    <void property="confidenceValues">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>intact-miscore:0.53</string>
+      </void>
+     </object>
+    </void>
+    <void property="creationDate">
+     <object class="java.util.Date">
+      <long>1156766041000</long>
+     </object>
+    </void>
+    <void property="experimentalRoleA">
+     <string>bait</string>
+    </void>
+    <void property="experimentalRoleB">
+     <string>prey</string>
+    </void>
+    <void property="featureA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>his tag::0..0:0..0(c-terminal)</string>
+      </void>
+     </object>
+    </void>
+    <void property="featureShortLabelA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>c-terminal</string>
+      </void>
+     </object>
+    </void>
+    <void property="firstAuthor">
+     <string>Ciferri C. et al. (2005)	
+</string>
+    </void>
+    <void property="hostOrganism">
+     <string>In vitro</string>
+    </void>
+    <void property="idA">
+     <string>Q8NBT2 (uniprotkb)</string>
+    </void>
+    <void property="idB">
+     <string>Q9HBM1 (uniprotkb)</string>
+    </void>
+    <void property="identificationMethodA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>predetermined</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>predetermined</string>
+      </void>
+     </object>
+    </void>
+    <void property="intactMiscore">
+     <double>0.53</double>
+    </void>
+    <void property="interactionAc">
+     <string>EBI-1000026</string>
+    </void>
+    <void property="interactionAnnotations">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>contact-email (andrea.musacchi@ifomieo-campus.it)</string>
+      </void>
+      <void method="add">
+       <string>figure legend (Fig. 3A)</string>
+      </void>
+      <void method="add">
+       <string>publication year (2005)</string>
+      </void>
+      <void method="add">
+       <string>accepted (Accepted 2006-SEP-20 by DAVET.)</string>
+      </void>
+      <void method="add">
+       <string>author-list (Ciferri C., De Luca J., Monzani S., Ferrari KJ., Ristic D., Wyman C., Stark H., Kilmartin J., Salmon ED., Musacchio A.)</string>
+      </void>
+      <void method="add">
+       <string>journal (J. Biol. Chem. (0021-9258))</string>
+      </void>
+     </object>
+    </void>
+    <void property="interactionDetectionMethod">
+     <string>affinity chrom</string>
+    </void>
+    <void property="interactionIdentifiers">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>EBI-1000026 (intact)</string>
+      </void>
+     </object>
+    </void>
+    <void property="interactionType">
+     <string>physical association</string>
+    </void>
+    <void property="interactorAAc">
+     <string>EBI-999900</string>
+    </void>
+    <void property="interactorBAc">
+     <string>EBI-999909</string>
+    </void>
+    <void property="moleculeA">
+     <string>SPC24</string>
+    </void>
+    <void property="moleculeB">
+     <string>SPC25</string>
+    </void>
+    <void property="publicationId">
+     <string>15961401</string>
+    </void>
+    <void property="publicationIdentifiers">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>EBI-1989501 (intact)</string>
+      </void>
+      <void method="add">
+       <string>15961401 (pubmed)</string>
+      </void>
+     </object>
+    </void>
+    <void property="releaseDate">
+     <object idref="Date0"/>
+    </void>
+    <void property="sourceDatabase">
+     <string>UniProt</string>
+    </void>
+    <void property="speciesA">
+     <string>Homo sapiens</string>
+    </void>
+    <void property="speciesAB">
+     <void method="clear"/>
+     <void method="add">
+      <string>Homo sapiens</string>
+     </void>
+    </void>
+    <void property="speciesB">
+     <string>Homo sapiens</string>
+    </void>
+    <void property="taxIdA">
+     <int>9606</int>
+    </void>
+    <void property="taxIdB">
+     <int>9606</int>
+    </void>
+    <void property="typeA">
+     <string>protein</string>
+    </void>
+    <void property="typeB">
+     <string>protein</string>
+    </void>
+    <void property="uniqueIdA">
+     <string>Q8NBT2</string>
+    </void>
+    <void property="uniqueIdB">
+     <string>Q9HBM1</string>
+    </void>
+    <void property="uniqueKey">
+     <string>2126506180</string>
+    </void>
+    <void property="updationDate">
+     <object class="java.util.Date">
+      <long>1413450365000</long>
+     </object>
+    </void>
+    <void property="xrefsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>IPR013252 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005829 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0031262 (go)</string>
+      </void>
+      <void method="add">
+       <string>ENST00000592540 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005730 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-2500257 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0051301 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-68877 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-2467813 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>NP_001303962.1 (refseq)</string>
+      </void>
+      <void method="add">
+       <string>2VE7 (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>ENSP00000465075 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-5663220 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0007062 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-141444 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>XP_005259810.1 (refseq)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005634 (go)</string>
+      </void>
+      <void method="add">
+       <string>NP_001303960.1 (refseq)</string>
+      </void>
+      <void method="add">
+       <string>DIP-35754N (dip)</string>
+      </void>
+      <void method="add">
+       <string>3IZ0 (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>ENSG00000161888 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000777 (go)</string>
+      </void>
+      <void method="add">
+       <string>Q8NBT2 (mint)</string>
+      </void>
+      <void method="add">
+       <string>NP_872319.1 (refseq)</string>
+      </void>
+     </object>
+    </void>
+    <void property="xrefsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>GO:0005829 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-2500257 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0051301 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-68877 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>2VE7 (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>ENSP00000282074 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>ENSP00000483050 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-5663220 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>ENST00000611144 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-141444 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005634 (go)</string>
+      </void>
+      <void method="add">
+       <string>ENSP00000481354 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>Q9HBM1 (mint)</string>
+      </void>
+      <void method="add">
+       <string>GO:0007052 (go)</string>
+      </void>
+      <void method="add">
+       <string>3IZ0 (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>IPR013255 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000777 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0007059 (go)</string>
+      </void>
+      <void method="add">
+       <string>ENST00000282074 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>NP_065726.1 (refseq)</string>
+      </void>
+      <void method="add">
+       <string>GO:0031262 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-2467813 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0007062 (go)</string>
+      </void>
+      <void method="add">
+       <string>ENSG00000277909 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>ENST00000616584 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>DIP-35753N (dip)</string>
+      </void>
+      <void method="add">
+       <string>ENSG00000152253 (ensembl)</string>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="uk.ac.ebi.intact.search.interactions.model.Interaction" id="Interaction2">
+    <void property="aliasesA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>NDC80 (MI:0301 (gene name))</string>
+      </void>
+      <void method="add">
+       <string>Kinetochore protein Hec1 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>HEC1 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>Kinetochore-associated protein 2 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>HEC (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>KNTC2 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>Highly expressed in cancer protein (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>Retinoblastoma-associated protein HEC (MI:0302 (gene name synonym))</string>
+      </void>
+     </object>
+    </void>
+    <void property="aliasesB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>SPC25 (MI:0301 (gene name))</string>
+      </void>
+      <void method="add">
+       <string>SPBC25 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>AD024 (MI:0306 (orf name))</string>
+      </void>
+     </object>
+    </void>
+    <void property="altIdsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>Q6PJX2 (uniprotkb)</string>
+      </void>
+      <void method="add">
+       <string>EBI-715849 (intact)</string>
+      </void>
+      <void method="add">
+       <string>O14777 (uniprotkb)</string>
+      </void>
+     </object>
+    </void>
+    <void property="altIdsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>A8K4X8 (uniprotkb)</string>
+      </void>
+      <void method="add">
+       <string>DIP-35753N (dip)</string>
+      </void>
+      <void method="add">
+       <string>D3DPC0 (uniprotkb)</string>
+      </void>
+      <void method="add">
+       <string>EBI-999909 (intact)</string>
+      </void>
+      <void method="add">
+       <string>Q9HBM1 (uniprotkb)</string>
+      </void>
+     </object>
+    </void>
+    <void property="annotationsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>comment (DIP protein O14777 original sequence version: 132)</string>
+      </void>
+      <void method="add">
+       <string>comment (DIP protein O14777 original sequence version: 126)</string>
+      </void>
+     </object>
+    </void>
+    <void property="annotationsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>comment (DIP protein Q9HBM1 original sequence version: 110)</string>
+      </void>
+      <void method="add">
+       <string>comment (DIP protein Q9HBM1 original sequence version: 126)</string>
+      </void>
+     </object>
+    </void>
+    <void property="authors">
+     <object class="java.util.LinkedHashSet">
+      <void method="add">
+       <string>Ciferri C.</string>
+      </void>
+      <void method="add">
+       <string>De Luca J.</string>
+      </void>
+      <void method="add">
+       <string>Monzani S.</string>
+      </void>
+      <void method="add">
+       <string>Ferrari KJ.</string>
+      </void>
+      <void method="add">
+       <string>Ristic D.</string>
+      </void>
+      <void method="add">
+       <string>Wyman C.</string>
+      </void>
+      <void method="add">
+       <string>Stark H.</string>
+      </void>
+      <void method="add">
+       <string>Kilmartin J.</string>
+      </void>
+      <void method="add">
+       <string>Salmon ED.</string>
+      </void>
+      <void method="add">
+       <string>Musacchio A.</string>
+      </void>
+     </object>
+    </void>
+    <void property="biologicalRoleA">
+     <string>unspecified role</string>
+    </void>
+    <void property="biologicalRoleB">
+     <string>unspecified role</string>
+    </void>
+    <void property="checksumsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>crc64 (6A82DA4D8B77ECDC)</string>
+      </void>
+     </object>
+    </void>
+    <void property="checksumsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>crc64 (6DED3216794F4512)</string>
+      </void>
+     </object>
+    </void>
+    <void property="confidenceValues">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>intact-miscore:0.56</string>
+      </void>
+     </object>
+    </void>
+    <void property="creationDate">
+     <object class="java.util.Date">
+      <long>1156766573000</long>
+     </object>
+    </void>
+    <void property="expansionMethod">
+     <string>spoke expansion</string>
+    </void>
+    <void property="experimentalRoleA">
+     <string>neutral component</string>
+    </void>
+    <void property="experimentalRoleB">
+     <string>neutral component</string>
+    </void>
+    <void property="featureA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>his tag::0..0:0..0(c-terminal)</string>
+      </void>
+     </object>
+    </void>
+    <void property="featureB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>his tag::0..0:0..0(c-terminal)</string>
+      </void>
+     </object>
+    </void>
+    <void property="featureShortLabelA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>c-terminal</string>
+      </void>
+     </object>
+    </void>
+    <void property="featureShortLabelB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>c-terminal</string>
+      </void>
+     </object>
+    </void>
+    <void property="firstAuthor">
+     <string>Ciferri C. et al. (2005)	
+</string>
+    </void>
+    <void property="hostOrganism">
+     <string>In vitro</string>
+    </void>
+    <void property="idA">
+     <string>O14777 (uniprotkb)</string>
+    </void>
+    <void property="idB">
+     <string>Q9HBM1 (uniprotkb)</string>
+    </void>
+    <void property="identificationMethodA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>predetermined</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>predetermined</string>
+      </void>
+     </object>
+    </void>
+    <void property="intactMiscore">
+     <double>0.56</double>
+    </void>
+    <void property="interactionAc">
+     <string>EBI-1000048</string>
+    </void>
+    <void property="interactionAnnotations">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>contact-email (andrea.musacchi@ifomieo-campus.it)</string>
+      </void>
+      <void method="add">
+       <string>publication year (2005)</string>
+      </void>
+      <void method="add">
+       <string>accepted (Accepted 2006-SEP-20 by DAVET.)</string>
+      </void>
+      <void method="add">
+       <string>author-list (Ciferri C., De Luca J., Monzani S., Ferrari KJ., Ristic D., Wyman C., Stark H., Kilmartin J., Salmon ED., Musacchio A.)</string>
+      </void>
+      <void method="add">
+       <string>figure legend (Fig. 3E)</string>
+      </void>
+      <void method="add">
+       <string>journal (J. Biol. Chem. (0021-9258))</string>
+      </void>
+     </object>
+    </void>
+    <void property="interactionDetectionMethod">
+     <string>density sedimentatio</string>
+    </void>
+    <void property="interactionIdentifiers">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>EBI-1000048 (intact)</string>
+      </void>
+     </object>
+    </void>
+    <void property="interactionType">
+     <string>physical association</string>
+    </void>
+    <void property="interactionXrefs">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>GO:0031262 (go)</string>
+      </void>
+     </object>
+    </void>
+    <void property="interactorAAc">
+     <string>EBI-715849</string>
+    </void>
+    <void property="interactorBAc">
+     <string>EBI-999909</string>
+    </void>
+    <void property="moleculeA">
+     <string>NDC80</string>
+    </void>
+    <void property="moleculeB">
+     <string>SPC25</string>
+    </void>
+    <void property="publicationId">
+     <string>15961401</string>
+    </void>
+    <void property="publicationIdentifiers">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>EBI-1989501 (intact)</string>
+      </void>
+      <void method="add">
+       <string>15961401 (pubmed)</string>
+      </void>
+     </object>
+    </void>
+    <void property="releaseDate">
+     <object idref="Date0"/>
+    </void>
+    <void property="sourceDatabase">
+     <string>UniProt</string>
+    </void>
+    <void property="speciesA">
+     <string>Homo sapiens</string>
+    </void>
+    <void property="speciesAB">
+     <void method="clear"/>
+     <void method="add">
+      <string>Homo sapiens</string>
+     </void>
+    </void>
+    <void property="speciesB">
+     <string>Homo sapiens</string>
+    </void>
+    <void property="taxIdA">
+     <int>9606</int>
+    </void>
+    <void property="taxIdB">
+     <int>9606</int>
+    </void>
+    <void property="typeA">
+     <string>protein</string>
+    </void>
+    <void property="typeB">
+     <string>protein</string>
+    </void>
+    <void property="uniqueIdA">
+     <string>O14777</string>
+    </void>
+    <void property="uniqueIdB">
+     <string>Q9HBM1</string>
+    </void>
+    <void property="uniqueKey">
+     <string>8342537</string>
+    </void>
+    <void property="updationDate">
+     <object class="java.util.Date">
+      <long>1423749180000</long>
+     </object>
+    </void>
+    <void property="xrefsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>O14777 (mint)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005829 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005654 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0042802 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000278 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-2500257 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0051301 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:1905342 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-68877 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>IPR005550 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>2VE7 (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>ENST00000261597 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-5663220 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-141444 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005634 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0007052 (go)</string>
+      </void>
+      <void method="add">
+       <string>NP_006092.1 (refseq)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000070 (go)</string>
+      </void>
+      <void method="add">
+       <string>3IZ0 (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>GO:0090267 (go)</string>
+      </void>
+      <void method="add">
+       <string>ENSG00000080986 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000777 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0016020 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0007059 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000132 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0051315 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005200 (go)</string>
+      </void>
+      <void method="add">
+       <string>IPR038273 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000942 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0031262 (go)</string>
+      </void>
+      <void method="add">
+       <string>2IGP (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>DIP-35100N (dip)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-2467813 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0051383 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0008608 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000776 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0051310 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0007062 (go)</string>
+      </void>
+      <void method="add">
+       <string>ENSP00000261597 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000775 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005813 (go)</string>
+      </void>
+     </object>
+    </void>
+    <void property="xrefsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>GO:0005829 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-2500257 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0051301 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-68877 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>2VE7 (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>ENSP00000282074 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>ENSP00000483050 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-5663220 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>ENST00000611144 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-141444 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005634 (go)</string>
+      </void>
+      <void method="add">
+       <string>ENSP00000481354 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>Q9HBM1 (mint)</string>
+      </void>
+      <void method="add">
+       <string>GO:0007052 (go)</string>
+      </void>
+      <void method="add">
+       <string>3IZ0 (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>IPR013255 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000777 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0007059 (go)</string>
+      </void>
+      <void method="add">
+       <string>ENST00000282074 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>NP_065726.1 (refseq)</string>
+      </void>
+      <void method="add">
+       <string>GO:0031262 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-2467813 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0007062 (go)</string>
+      </void>
+      <void method="add">
+       <string>ENSG00000277909 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>ENST00000616584 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>DIP-35753N (dip)</string>
+      </void>
+      <void method="add">
+       <string>ENSG00000152253 (ensembl)</string>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="uk.ac.ebi.intact.search.interactions.model.Interaction" id="Interaction3">
+    <void property="aliasesA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>NDC80 (MI:0301 (gene name))</string>
+      </void>
+      <void method="add">
+       <string>Kinetochore protein Hec1 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>HEC1 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>Kinetochore-associated protein 2 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>HEC (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>KNTC2 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>Highly expressed in cancer protein (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>Retinoblastoma-associated protein HEC (MI:0302 (gene name synonym))</string>
+      </void>
+     </object>
+    </void>
+    <void property="aliasesB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>SPBC24 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>SPC24 (MI:0301 (gene name))</string>
+      </void>
+     </object>
+    </void>
+    <void property="altIdsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>Q6PJX2 (uniprotkb)</string>
+      </void>
+      <void method="add">
+       <string>EBI-715849 (intact)</string>
+      </void>
+      <void method="add">
+       <string>O14777 (uniprotkb)</string>
+      </void>
+     </object>
+    </void>
+    <void property="altIdsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>B4DZZ7 (uniprotkb)</string>
+      </void>
+      <void method="add">
+       <string>C9JGC4 (uniprotkb)</string>
+      </void>
+      <void method="add">
+       <string>Q8NBT2 (uniprotkb)</string>
+      </void>
+      <void method="add">
+       <string>EBI-999900 (intact)</string>
+      </void>
+     </object>
+    </void>
+    <void property="annotationsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>comment (DIP protein O14777 original sequence version: 132)</string>
+      </void>
+      <void method="add">
+       <string>comment (DIP protein O14777 original sequence version: 126)</string>
+      </void>
+     </object>
+    </void>
+    <void property="annotationsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>comment (DIP protein Q8NBT2 original sequence version: 102)</string>
+      </void>
+     </object>
+    </void>
+    <void property="authors">
+     <object class="java.util.LinkedHashSet">
+      <void method="add">
+       <string>Ciferri C.</string>
+      </void>
+      <void method="add">
+       <string>De Luca J.</string>
+      </void>
+      <void method="add">
+       <string>Monzani S.</string>
+      </void>
+      <void method="add">
+       <string>Ferrari KJ.</string>
+      </void>
+      <void method="add">
+       <string>Ristic D.</string>
+      </void>
+      <void method="add">
+       <string>Wyman C.</string>
+      </void>
+      <void method="add">
+       <string>Stark H.</string>
+      </void>
+      <void method="add">
+       <string>Kilmartin J.</string>
+      </void>
+      <void method="add">
+       <string>Salmon ED.</string>
+      </void>
+      <void method="add">
+       <string>Musacchio A.</string>
+      </void>
+     </object>
+    </void>
+    <void property="biologicalRoleA">
+     <string>unspecified role</string>
+    </void>
+    <void property="biologicalRoleB">
+     <string>unspecified role</string>
+    </void>
+    <void property="checksumsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>crc64 (6A82DA4D8B77ECDC)</string>
+      </void>
+     </object>
+    </void>
+    <void property="checksumsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>crc64 (C5D99CE1F1A8F355)</string>
+      </void>
+     </object>
+    </void>
+    <void property="confidenceValues">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>intact-miscore:0.56</string>
+      </void>
+     </object>
+    </void>
+    <void property="creationDate">
+     <object class="java.util.Date">
+      <long>1156766573000</long>
+     </object>
+    </void>
+    <void property="expansionMethod">
+     <string>spoke expansion</string>
+    </void>
+    <void property="experimentalRoleA">
+     <string>neutral component</string>
+    </void>
+    <void property="experimentalRoleB">
+     <string>neutral component</string>
+    </void>
+    <void property="featureA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>his tag::0..0:0..0(c-terminal)</string>
+      </void>
+     </object>
+    </void>
+    <void property="featureB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>gst tag::0..0:0..0(c-terminal)</string>
+      </void>
+     </object>
+    </void>
+    <void property="featureShortLabelA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>c-terminal</string>
+      </void>
+     </object>
+    </void>
+    <void property="featureShortLabelB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>c-terminal</string>
+      </void>
+     </object>
+    </void>
+    <void property="firstAuthor">
+     <string>Ciferri C. et al. (2005)	
+</string>
+    </void>
+    <void property="hostOrganism">
+     <string>In vitro</string>
+    </void>
+    <void property="idA">
+     <string>O14777 (uniprotkb)</string>
+    </void>
+    <void property="idB">
+     <string>Q8NBT2 (uniprotkb)</string>
+    </void>
+    <void property="identificationMethodA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>predetermined</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>predetermined</string>
+      </void>
+     </object>
+    </void>
+    <void property="intactMiscore">
+     <double>0.56</double>
+    </void>
+    <void property="interactionAc">
+     <string>EBI-1000048</string>
+    </void>
+    <void property="interactionAnnotations">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>contact-email (andrea.musacchi@ifomieo-campus.it)</string>
+      </void>
+      <void method="add">
+       <string>publication year (2005)</string>
+      </void>
+      <void method="add">
+       <string>accepted (Accepted 2006-SEP-20 by DAVET.)</string>
+      </void>
+      <void method="add">
+       <string>author-list (Ciferri C., De Luca J., Monzani S., Ferrari KJ., Ristic D., Wyman C., Stark H., Kilmartin J., Salmon ED., Musacchio A.)</string>
+      </void>
+      <void method="add">
+       <string>figure legend (Fig. 3E)</string>
+      </void>
+      <void method="add">
+       <string>journal (J. Biol. Chem. (0021-9258))</string>
+      </void>
+     </object>
+    </void>
+    <void property="interactionDetectionMethod">
+     <string>density sedimentatio</string>
+    </void>
+    <void property="interactionIdentifiers">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>EBI-1000048 (intact)</string>
+      </void>
+     </object>
+    </void>
+    <void property="interactionType">
+     <string>physical association</string>
+    </void>
+    <void property="interactionXrefs">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>GO:0031262 (go)</string>
+      </void>
+     </object>
+    </void>
+    <void property="interactorAAc">
+     <string>EBI-715849</string>
+    </void>
+    <void property="interactorBAc">
+     <string>EBI-999900</string>
+    </void>
+    <void property="moleculeA">
+     <string>NDC80</string>
+    </void>
+    <void property="moleculeB">
+     <string>SPC24</string>
+    </void>
+    <void property="publicationId">
+     <string>15961401</string>
+    </void>
+    <void property="publicationIdentifiers">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>EBI-1989501 (intact)</string>
+      </void>
+      <void method="add">
+       <string>15961401 (pubmed)</string>
+      </void>
+     </object>
+    </void>
+    <void property="releaseDate">
+     <object idref="Date0"/>
+    </void>
+    <void property="sourceDatabase">
+     <string>UniProt</string>
+    </void>
+    <void property="speciesA">
+     <string>Homo sapiens</string>
+    </void>
+    <void property="speciesAB">
+     <void method="clear"/>
+     <void method="add">
+      <string>Homo sapiens</string>
+     </void>
+    </void>
+    <void property="speciesB">
+     <string>Homo sapiens</string>
+    </void>
+    <void property="taxIdA">
+     <int>9606</int>
+    </void>
+    <void property="taxIdB">
+     <int>9606</int>
+    </void>
+    <void property="typeA">
+     <string>protein</string>
+    </void>
+    <void property="typeB">
+     <string>protein</string>
+    </void>
+    <void property="uniqueIdA">
+     <string>O14777</string>
+    </void>
+    <void property="uniqueIdB">
+     <string>Q8NBT2</string>
+    </void>
+    <void property="uniqueKey">
+     <string>-1225197583</string>
+    </void>
+    <void property="updationDate">
+     <object class="java.util.Date">
+      <long>1423749180000</long>
+     </object>
+    </void>
+    <void property="xrefsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>O14777 (mint)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005829 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005654 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0042802 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000278 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-2500257 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0051301 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:1905342 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-68877 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>IPR005550 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>2VE7 (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>ENST00000261597 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-5663220 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-141444 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005634 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0007052 (go)</string>
+      </void>
+      <void method="add">
+       <string>NP_006092.1 (refseq)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000070 (go)</string>
+      </void>
+      <void method="add">
+       <string>3IZ0 (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>GO:0090267 (go)</string>
+      </void>
+      <void method="add">
+       <string>ENSG00000080986 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000777 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0016020 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0007059 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000132 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0051315 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005200 (go)</string>
+      </void>
+      <void method="add">
+       <string>IPR038273 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000942 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0031262 (go)</string>
+      </void>
+      <void method="add">
+       <string>2IGP (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>DIP-35100N (dip)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-2467813 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0051383 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0008608 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000776 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0051310 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0007062 (go)</string>
+      </void>
+      <void method="add">
+       <string>ENSP00000261597 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000775 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005813 (go)</string>
+      </void>
+     </object>
+    </void>
+    <void property="xrefsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>IPR013252 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005829 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0031262 (go)</string>
+      </void>
+      <void method="add">
+       <string>ENST00000592540 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005730 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-2500257 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0051301 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-68877 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-2467813 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>NP_001303962.1 (refseq)</string>
+      </void>
+      <void method="add">
+       <string>2VE7 (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>ENSP00000465075 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-5663220 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0007062 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-141444 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>XP_005259810.1 (refseq)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005634 (go)</string>
+      </void>
+      <void method="add">
+       <string>NP_001303960.1 (refseq)</string>
+      </void>
+      <void method="add">
+       <string>DIP-35754N (dip)</string>
+      </void>
+      <void method="add">
+       <string>3IZ0 (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>ENSG00000161888 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000777 (go)</string>
+      </void>
+      <void method="add">
+       <string>Q8NBT2 (mint)</string>
+      </void>
+      <void method="add">
+       <string>NP_872319.1 (refseq)</string>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="uk.ac.ebi.intact.search.interactions.model.Interaction" id="Interaction4">
+    <void property="aliasesA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>NDC80 (MI:0301 (gene name))</string>
+      </void>
+      <void method="add">
+       <string>Kinetochore protein Hec1 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>HEC1 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>Kinetochore-associated protein 2 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>HEC (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>KNTC2 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>Highly expressed in cancer protein (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>Retinoblastoma-associated protein HEC (MI:0302 (gene name synonym))</string>
+      </void>
+     </object>
+    </void>
+    <void property="aliasesB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>Cell division cycle-associated protein 1 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>NUF2 (MI:0301 (gene name))</string>
+      </void>
+      <void method="add">
+       <string>CDCA1 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>NUF2R (MI:0302 (gene name synonym))</string>
+      </void>
+     </object>
+    </void>
+    <void property="altIdsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>Q6PJX2 (uniprotkb)</string>
+      </void>
+      <void method="add">
+       <string>EBI-715849 (intact)</string>
+      </void>
+      <void method="add">
+       <string>O14777 (uniprotkb)</string>
+      </void>
+     </object>
+    </void>
+    <void property="altIdsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>Q96Q78 (uniprotkb)</string>
+      </void>
+      <void method="add">
+       <string>Q8WU69 (uniprotkb)</string>
+      </void>
+      <void method="add">
+       <string>EBI-724102 (intact)</string>
+      </void>
+      <void method="add">
+       <string>Q9BZD4 (uniprotkb)</string>
+      </void>
+      <void method="add">
+       <string>Q96HJ4 (uniprotkb)</string>
+      </void>
+     </object>
+    </void>
+    <void property="annotationsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>comment (DIP protein O14777 original sequence version: 132)</string>
+      </void>
+      <void method="add">
+       <string>comment (DIP protein O14777 original sequence version: 126)</string>
+      </void>
+     </object>
+    </void>
+    <void property="annotationsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>comment (DIP protein Q9BZD4 original sequence version: 119)</string>
+      </void>
+      <void method="add">
+       <string>comment (DIP protein Q9BZD4 original sequence version: 113)</string>
+      </void>
+     </object>
+    </void>
+    <void property="authors">
+     <object class="java.util.LinkedHashSet">
+      <void method="add">
+       <string>Ciferri C.</string>
+      </void>
+      <void method="add">
+       <string>De Luca J.</string>
+      </void>
+      <void method="add">
+       <string>Monzani S.</string>
+      </void>
+      <void method="add">
+       <string>Ferrari KJ.</string>
+      </void>
+      <void method="add">
+       <string>Ristic D.</string>
+      </void>
+      <void method="add">
+       <string>Wyman C.</string>
+      </void>
+      <void method="add">
+       <string>Stark H.</string>
+      </void>
+      <void method="add">
+       <string>Kilmartin J.</string>
+      </void>
+      <void method="add">
+       <string>Salmon ED.</string>
+      </void>
+      <void method="add">
+       <string>Musacchio A.</string>
+      </void>
+     </object>
+    </void>
+    <void property="biologicalRoleA">
+     <string>unspecified role</string>
+    </void>
+    <void property="biologicalRoleB">
+     <string>unspecified role</string>
+    </void>
+    <void property="checksumsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>crc64 (6A82DA4D8B77ECDC)</string>
+      </void>
+     </object>
+    </void>
+    <void property="checksumsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>crc64 (250BFED5AD87153B)</string>
+      </void>
+     </object>
+    </void>
+    <void property="confidenceValues">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>intact-miscore:0.56</string>
+      </void>
+     </object>
+    </void>
+    <void property="creationDate">
+     <object class="java.util.Date">
+      <long>1156766573000</long>
+     </object>
+    </void>
+    <void property="expansionMethod">
+     <string>spoke expansion</string>
+    </void>
+    <void property="experimentalRoleA">
+     <string>neutral component</string>
+    </void>
+    <void property="experimentalRoleB">
+     <string>neutral component</string>
+    </void>
+    <void property="featureA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>his tag::0..0:0..0(c-terminal)</string>
+      </void>
+     </object>
+    </void>
+    <void property="featureB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>gst tag::0..0:0..0(c-terminal)</string>
+      </void>
+     </object>
+    </void>
+    <void property="featureShortLabelA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>c-terminal</string>
+      </void>
+     </object>
+    </void>
+    <void property="featureShortLabelB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>c-terminal</string>
+      </void>
+     </object>
+    </void>
+    <void property="firstAuthor">
+     <string>Ciferri C. et al. (2005)	
+</string>
+    </void>
+    <void property="hostOrganism">
+     <string>In vitro</string>
+    </void>
+    <void property="idA">
+     <string>O14777 (uniprotkb)</string>
+    </void>
+    <void property="idB">
+     <string>Q9BZD4 (uniprotkb)</string>
+    </void>
+    <void property="identificationMethodA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>predetermined</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>predetermined</string>
+      </void>
+     </object>
+    </void>
+    <void property="intactMiscore">
+     <double>0.56</double>
+    </void>
+    <void property="interactionAc">
+     <string>EBI-1000048</string>
+    </void>
+    <void property="interactionAnnotations">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>contact-email (andrea.musacchi@ifomieo-campus.it)</string>
+      </void>
+      <void method="add">
+       <string>publication year (2005)</string>
+      </void>
+      <void method="add">
+       <string>accepted (Accepted 2006-SEP-20 by DAVET.)</string>
+      </void>
+      <void method="add">
+       <string>author-list (Ciferri C., De Luca J., Monzani S., Ferrari KJ., Ristic D., Wyman C., Stark H., Kilmartin J., Salmon ED., Musacchio A.)</string>
+      </void>
+      <void method="add">
+       <string>figure legend (Fig. 3E)</string>
+      </void>
+      <void method="add">
+       <string>journal (J. Biol. Chem. (0021-9258))</string>
+      </void>
+     </object>
+    </void>
+    <void property="interactionDetectionMethod">
+     <string>density sedimentatio</string>
+    </void>
+    <void property="interactionIdentifiers">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>EBI-1000048 (intact)</string>
+      </void>
+     </object>
+    </void>
+    <void property="interactionType">
+     <string>physical association</string>
+    </void>
+    <void property="interactionXrefs">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>GO:0031262 (go)</string>
+      </void>
+     </object>
+    </void>
+    <void property="interactorAAc">
+     <string>EBI-715849</string>
+    </void>
+    <void property="interactorBAc">
+     <string>EBI-724102</string>
+    </void>
+    <void property="moleculeA">
+     <string>NDC80</string>
+    </void>
+    <void property="moleculeB">
+     <string>NUF2</string>
+    </void>
+    <void property="publicationId">
+     <string>15961401</string>
+    </void>
+    <void property="publicationIdentifiers">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>EBI-1989501 (intact)</string>
+      </void>
+      <void method="add">
+       <string>15961401 (pubmed)</string>
+      </void>
+     </object>
+    </void>
+    <void property="releaseDate">
+     <object idref="Date0"/>
+    </void>
+    <void property="sourceDatabase">
+     <string>UniProt</string>
+    </void>
+    <void property="speciesA">
+     <string>Homo sapiens</string>
+    </void>
+    <void property="speciesAB">
+     <void method="clear"/>
+     <void method="add">
+      <string>Homo sapiens</string>
+     </void>
+    </void>
+    <void property="speciesB">
+     <string>Homo sapiens</string>
+    </void>
+    <void property="taxIdA">
+     <int>9606</int>
+    </void>
+    <void property="taxIdB">
+     <int>9606</int>
+    </void>
+    <void property="typeA">
+     <string>protein</string>
+    </void>
+    <void property="typeB">
+     <string>protein</string>
+    </void>
+    <void property="uniqueIdA">
+     <string>O14777</string>
+    </void>
+    <void property="uniqueIdB">
+     <string>Q9BZD4</string>
+    </void>
+    <void property="uniqueKey">
+     <string>674434491</string>
+    </void>
+    <void property="updationDate">
+     <object class="java.util.Date">
+      <long>1423749180000</long>
+     </object>
+    </void>
+    <void property="xrefsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>O14777 (mint)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005829 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005654 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0042802 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000278 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-2500257 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0051301 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:1905342 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-68877 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>IPR005550 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>2VE7 (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>ENST00000261597 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-5663220 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-141444 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005634 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0007052 (go)</string>
+      </void>
+      <void method="add">
+       <string>NP_006092.1 (refseq)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000070 (go)</string>
+      </void>
+      <void method="add">
+       <string>3IZ0 (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>GO:0090267 (go)</string>
+      </void>
+      <void method="add">
+       <string>ENSG00000080986 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000777 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0016020 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0007059 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000132 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0051315 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005200 (go)</string>
+      </void>
+      <void method="add">
+       <string>IPR038273 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000942 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0031262 (go)</string>
+      </void>
+      <void method="add">
+       <string>2IGP (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>DIP-35100N (dip)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-2467813 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0051383 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0008608 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000776 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0051310 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0007062 (go)</string>
+      </void>
+      <void method="add">
+       <string>ENSP00000261597 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000775 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005813 (go)</string>
+      </void>
+     </object>
+    </void>
+    <void property="xrefsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>Q9BZD4 (mint)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005829 (go)</string>
+      </void>
+      <void method="add">
+       <string>NP_663735.2 (refseq)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-2500257 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>ENSG00000143228 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>GO:0051301 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-68877 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>2VE7 (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-5663220 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-141444 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005634 (go)</string>
+      </void>
+      <void method="add">
+       <string>ENSP00000271452 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>3IZ0 (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>DIP-36119N (dip)</string>
+      </void>
+      <void method="add">
+       <string>IPR038275 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000777 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0016020 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0007059 (go)</string>
+      </void>
+      <void method="add">
+       <string>ENST00000367900 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>IPR005549 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>ENSP00000356875 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>GO:0031262 (go)</string>
+      </void>
+      <void method="add">
+       <string>NP_113611.2 (refseq)</string>
+      </void>
+      <void method="add">
+       <string>ENST00000271452 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-2467813 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0007062 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000775 (go)</string>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="uk.ac.ebi.intact.search.interactions.model.Interaction" id="Interaction5">
+    <void property="aliasesA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>Bet1l (MI:0301 (gene name))</string>
+      </void>
+      <void method="add">
+       <string>Gs15 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>Vesicle transport protein GOS15 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>Golgi SNARE with a size of 15 kDa (MI:0302 (gene name synonym))</string>
+      </void>
+     </object>
+    </void>
+    <void property="aliasesB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>Gosr1 (MI:0301 (gene name))</string>
+      </void>
+      <void method="add">
+       <string>28 kDa Golgi SNARE protein (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>Gs28 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>28 kDa cis-Golgi SNARE p28 (MI:0302 (gene name synonym))</string>
+      </void>
+     </object>
+    </void>
+    <void property="altIdsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>EBI-9997695 (intact)</string>
+      </void>
+      <void method="add">
+       <string>O35152 (uniprotkb)</string>
+      </void>
+      <void method="add">
+       <string>Q6PCU6 (uniprotkb)</string>
+      </void>
+     </object>
+    </void>
+    <void property="altIdsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>MINT-4569995 (intact)</string>
+      </void>
+      <void method="add">
+       <string>A0JN01 (uniprotkb)</string>
+      </void>
+      <void method="add">
+       <string>EBI-7837133 (intact)</string>
+      </void>
+      <void method="add">
+       <string>Q62931 (uniprotkb)</string>
+      </void>
+     </object>
+    </void>
+    <void property="annotationsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>function (Involved in transport from the ER to the Golgi apparatus as well as in intra-Golgi transport)</string>
+      </void>
+      <void method="add">
+       <string>comment (mint)</string>
+      </void>
+     </object>
+    </void>
+    <void property="authors">
+     <object class="java.util.LinkedHashSet">
+      <void method="add">
+       <string>Shorter J.</string>
+      </void>
+      <void method="add">
+       <string>Beard M.B.</string>
+      </void>
+      <void method="add">
+       <string>Seemann J.</string>
+      </void>
+      <void method="add">
+       <string>Dirac-Svejstrup A.B.</string>
+      </void>
+      <void method="add">
+       <string>Warren G.</string>
+      </void>
+     </object>
+    </void>
+    <void property="biologicalRoleA">
+     <string>unspecified role</string>
+    </void>
+    <void property="biologicalRoleB">
+     <string>unspecified role</string>
+    </void>
+    <void property="checksumsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>crc64 (905EDA73F6AEB4B4)</string>
+      </void>
+     </object>
+    </void>
+    <void property="checksumsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>crc64 (0F85EDCE7ADA32E2)</string>
+      </void>
+     </object>
+    </void>
+    <void property="confidenceValues">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>intact-miscore:0.59</string>
+      </void>
+     </object>
+    </void>
+    <void property="creationDate">
+     <object class="java.util.Date">
+      <long>1417774879000</long>
+     </object>
+    </void>
+    <void property="expansionMethod">
+     <string>spoke expansion</string>
+    </void>
+    <void property="experimentalRoleA">
+     <string>bait</string>
+    </void>
+    <void property="experimentalRoleB">
+     <string>prey</string>
+    </void>
+    <void property="firstAuthor">
+     <string>Shorter J. et al. (2002)	
+</string>
+    </void>
+    <void property="hostOrganism">
+     <string>rattus norvegicus liver</string>
+    </void>
+    <void property="idA">
+     <string>O35152 (uniprotkb)</string>
+    </void>
+    <void property="idB">
+     <string>Q62931 (uniprotkb)</string>
+    </void>
+    <void property="identificationMethodA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>western blot</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>western blot</string>
+      </void>
+     </object>
+    </void>
+    <void property="intactMiscore">
+     <double>0.59</double>
+    </void>
+    <void property="interactionAc">
+     <string>EBI-10000796</string>
+    </void>
+    <void property="interactionAnnotations">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>author-announcement (22-Jan-2015: Contacted by IntAct-Help.)</string>
+      </void>
+      <void method="add">
+       <string>author-list (Shorter J., Beard M.B., Seemann J., Dirac-Svejstrup A.B., Warren G.)</string>
+      </void>
+      <void method="add">
+       <string>accepted (Accepted 2015-JAN-05 by ORCHARD)</string>
+      </void>
+      <void method="add">
+       <string>journal (J. Cell Biol. (0021-9525))</string>
+      </void>
+      <void method="add">
+       <string>publication year (2002)</string>
+      </void>
+      <void method="add">
+       <string>curation depth (imex curation)</string>
+      </void>
+      <void method="add">
+       <string>figure legend (Fig. 3a (lanes 4-6, 10-11, 13))</string>
+      </void>
+      <void method="add">
+       <string>comment (Addition of p115 CC2 domain peptide (lanes 10 &amp; 13) had no effect on the interaction.)</string>
+      </void>
+      <void method="add">
+       <string>exp-modification (Golgi membranes were disassembled with NSF, a vesicle-fusing ATPase, and solubilized with Triton X-100 buffer. SNARE complexes were subsequently allowed to reassemble in the presence of tether proteins.)</string>
+      </void>
+      <void method="add">
+       <string>contact-email (graham.warren@yale.edu)</string>
+      </void>
+      <void method="add">
+       <string>full coverage (Only protein-protein interactions)</string>
+      </void>
+      <void method="add">
+       <string>imex curation (null)</string>
+      </void>
+     </object>
+    </void>
+    <void property="interactionDetectionMethod">
+     <string>anti bait coip</string>
+    </void>
+    <void property="interactionIdentifiers">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>EBI-10000796 (intact)</string>
+      </void>
+     </object>
+    </void>
+    <void property="interactionType">
+     <string>physical association</string>
+    </void>
+    <void property="interactionXrefs">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>IM-23550-1 (imex)</string>
+      </void>
+     </object>
+    </void>
+    <void property="interactorAAc">
+     <string>EBI-9997695</string>
+    </void>
+    <void property="interactorBAc">
+     <string>EBI-7837133</string>
+    </void>
+    <void property="moleculeA">
+     <string>Bet1l</string>
+    </void>
+    <void property="moleculeB">
+     <string>Gosr1</string>
+    </void>
+    <void property="publicationId">
+     <string>11927603</string>
+    </void>
+    <void property="publicationIdentifiers">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>EBI-9997499 (intact)</string>
+      </void>
+      <void method="add">
+       <string>11927603 (pubmed)</string>
+      </void>
+     </object>
+    </void>
+    <void property="releaseDate">
+     <object class="java.util.Date" id="Date1">
+      <long>1421924490820</long>
+     </object>
+    </void>
+    <void property="sourceDatabase">
+     <string>IntAct</string>
+    </void>
+    <void property="speciesA">
+     <string>Rattus norvegicus (Rat)</string>
+    </void>
+    <void property="speciesAB">
+     <void method="clear"/>
+     <void method="add">
+      <string>Rattus norvegicus (Rat)</string>
+     </void>
+    </void>
+    <void property="speciesB">
+     <string>Rattus norvegicus (Rat)</string>
+    </void>
+    <void property="taxIdA">
+     <int>10116</int>
+    </void>
+    <void property="taxIdB">
+     <int>10116</int>
+    </void>
+    <void property="typeA">
+     <string>protein</string>
+    </void>
+    <void property="typeB">
+     <string>protein</string>
+    </void>
+    <void property="uniqueIdA">
+     <string>O35152</string>
+    </void>
+    <void property="uniqueIdB">
+     <string>Q62931</string>
+    </void>
+    <void property="uniqueKey">
+     <string>218191332</string>
+    </void>
+    <void property="updationDate">
+     <object class="java.util.Date">
+      <long>1418130222000</long>
+     </object>
+    </void>
+    <void property="xrefsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>GO:0005829 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005768 (go)</string>
+      </void>
+      <void method="add">
+       <string>XP_006230636.1 (refseq)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005484 (go)</string>
+      </void>
+      <void method="add">
+       <string>NP_062241.2 (refseq)</string>
+      </void>
+      <void method="add">
+       <string>GO:0030173 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000139 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005794 (go)</string>
+      </void>
+      <void method="add">
+       <string>71051 (rgd)</string>
+      </void>
+      <void method="add">
+       <string>GO:0015031 (go)</string>
+      </void>
+      <void method="add">
+       <string>IPR000727 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>GO:0042147 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005795 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0016020 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:2000156 (go)</string>
+      </void>
+     </object>
+    </void>
+    <void property="xrefsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>GO:0005829 (go)</string>
+      </void>
+      <void method="add">
+       <string>NP_446036.1 (refseq)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005801 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000139 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0015031 (go)</string>
+      </void>
+      <void method="add">
+       <string>IPR023601 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>GO:0042147 (go)</string>
+      </void>
+      <void method="add">
+       <string>ENSRNOG00000003971 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>GO:0031201 (go)</string>
+      </void>
+      <void method="add">
+       <string>ENSRNOP00000068434 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>GO:0006891 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0006906 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0016020 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005484 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000149 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005797 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005794 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0016021 (go)</string>
+      </void>
+      <void method="add">
+       <string>71093 (rgd)</string>
+      </void>
+      <void method="add">
+       <string>ENSRNOT00000077063 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>GO:0048209 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-RNO-6811438 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>R-RNO-6807878 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0006888 (go)</string>
+      </void>
+      <void method="add">
+       <string>Q62931 (mint)</string>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="uk.ac.ebi.intact.search.interactions.model.Interaction" id="Interaction6">
+    <void property="aliasesA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>Bet1l (MI:0301 (gene name))</string>
+      </void>
+      <void method="add">
+       <string>Gs15 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>Vesicle transport protein GOS15 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>Golgi SNARE with a size of 15 kDa (MI:0302 (gene name synonym))</string>
+      </void>
+     </object>
+    </void>
+    <void property="aliasesB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>Ykt6 (MI:0301 (gene name))</string>
+      </void>
+     </object>
+    </void>
+    <void property="altIdsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>EBI-9997695 (intact)</string>
+      </void>
+      <void method="add">
+       <string>O35152 (uniprotkb)</string>
+      </void>
+      <void method="add">
+       <string>Q6PCU6 (uniprotkb)</string>
+      </void>
+     </object>
+    </void>
+    <void property="altIdsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>O35487 (uniprotkb)</string>
+      </void>
+      <void method="add">
+       <string>EBI-915507 (intact)</string>
+      </void>
+      <void method="add">
+       <string>Q5EGY4 (uniprotkb)</string>
+      </void>
+     </object>
+    </void>
+    <void property="authors">
+     <object class="java.util.LinkedHashSet">
+      <void method="add">
+       <string>Shorter J.</string>
+      </void>
+      <void method="add">
+       <string>Beard M.B.</string>
+      </void>
+      <void method="add">
+       <string>Seemann J.</string>
+      </void>
+      <void method="add">
+       <string>Dirac-Svejstrup A.B.</string>
+      </void>
+      <void method="add">
+       <string>Warren G.</string>
+      </void>
+     </object>
+    </void>
+    <void property="biologicalRoleA">
+     <string>unspecified role</string>
+    </void>
+    <void property="biologicalRoleB">
+     <string>unspecified role</string>
+    </void>
+    <void property="checksumsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>crc64 (905EDA73F6AEB4B4)</string>
+      </void>
+     </object>
+    </void>
+    <void property="checksumsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>crc64 (384F4EDBC8295407)</string>
+      </void>
+     </object>
+    </void>
+    <void property="confidenceValues">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>intact-miscore:0.59</string>
+      </void>
+     </object>
+    </void>
+    <void property="creationDate">
+     <object class="java.util.Date">
+      <long>1417774879000</long>
+     </object>
+    </void>
+    <void property="expansionMethod">
+     <string>spoke expansion</string>
+    </void>
+    <void property="experimentalRoleA">
+     <string>bait</string>
+    </void>
+    <void property="experimentalRoleB">
+     <string>prey</string>
+    </void>
+    <void property="firstAuthor">
+     <string>Shorter J. et al. (2002)	
+</string>
+    </void>
+    <void property="hostOrganism">
+     <string>rattus norvegicus liver</string>
+    </void>
+    <void property="idA">
+     <string>O35152 (uniprotkb)</string>
+    </void>
+    <void property="idB">
+     <string>Q5EGY4 (uniprotkb)</string>
+    </void>
+    <void property="identificationMethodA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>western blot</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>western blot</string>
+      </void>
+     </object>
+    </void>
+    <void property="intactMiscore">
+     <double>0.59</double>
+    </void>
+    <void property="interactionAc">
+     <string>EBI-10000796</string>
+    </void>
+    <void property="interactionAnnotations">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>author-announcement (22-Jan-2015: Contacted by IntAct-Help.)</string>
+      </void>
+      <void method="add">
+       <string>author-list (Shorter J., Beard M.B., Seemann J., Dirac-Svejstrup A.B., Warren G.)</string>
+      </void>
+      <void method="add">
+       <string>accepted (Accepted 2015-JAN-05 by ORCHARD)</string>
+      </void>
+      <void method="add">
+       <string>journal (J. Cell Biol. (0021-9525))</string>
+      </void>
+      <void method="add">
+       <string>publication year (2002)</string>
+      </void>
+      <void method="add">
+       <string>curation depth (imex curation)</string>
+      </void>
+      <void method="add">
+       <string>figure legend (Fig. 3a (lanes 4-6, 10-11, 13))</string>
+      </void>
+      <void method="add">
+       <string>comment (Addition of p115 CC2 domain peptide (lanes 10 &amp; 13) had no effect on the interaction.)</string>
+      </void>
+      <void method="add">
+       <string>exp-modification (Golgi membranes were disassembled with NSF, a vesicle-fusing ATPase, and solubilized with Triton X-100 buffer. SNARE complexes were subsequently allowed to reassemble in the presence of tether proteins.)</string>
+      </void>
+      <void method="add">
+       <string>contact-email (graham.warren@yale.edu)</string>
+      </void>
+      <void method="add">
+       <string>full coverage (Only protein-protein interactions)</string>
+      </void>
+      <void method="add">
+       <string>imex curation (null)</string>
+      </void>
+     </object>
+    </void>
+    <void property="interactionDetectionMethod">
+     <string>anti bait coip</string>
+    </void>
+    <void property="interactionIdentifiers">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>EBI-10000796 (intact)</string>
+      </void>
+     </object>
+    </void>
+    <void property="interactionType">
+     <string>physical association</string>
+    </void>
+    <void property="interactionXrefs">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>IM-23550-1 (imex)</string>
+      </void>
+     </object>
+    </void>
+    <void property="interactorAAc">
+     <string>EBI-9997695</string>
+    </void>
+    <void property="interactorBAc">
+     <string>EBI-915507</string>
+    </void>
+    <void property="moleculeA">
+     <string>Bet1l</string>
+    </void>
+    <void property="moleculeB">
+     <string>Ykt6</string>
+    </void>
+    <void property="publicationId">
+     <string>11927603</string>
+    </void>
+    <void property="publicationIdentifiers">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>EBI-9997499 (intact)</string>
+      </void>
+      <void method="add">
+       <string>11927603 (pubmed)</string>
+      </void>
+     </object>
+    </void>
+    <void property="releaseDate">
+     <object idref="Date1"/>
+    </void>
+    <void property="sourceDatabase">
+     <string>IntAct</string>
+    </void>
+    <void property="speciesA">
+     <string>Rattus norvegicus (Rat)</string>
+    </void>
+    <void property="speciesAB">
+     <void method="clear"/>
+     <void method="add">
+      <string>Rattus norvegicus (Rat)</string>
+     </void>
+    </void>
+    <void property="speciesB">
+     <string>Rattus norvegicus (Rat)</string>
+    </void>
+    <void property="taxIdA">
+     <int>10116</int>
+    </void>
+    <void property="taxIdB">
+     <int>10116</int>
+    </void>
+    <void property="typeA">
+     <string>protein</string>
+    </void>
+    <void property="typeB">
+     <string>protein</string>
+    </void>
+    <void property="uniqueIdA">
+     <string>O35152</string>
+    </void>
+    <void property="uniqueIdB">
+     <string>Q5EGY4</string>
+    </void>
+    <void property="uniqueKey">
+     <string>1954076241</string>
+    </void>
+    <void property="updationDate">
+     <object class="java.util.Date">
+      <long>1418130222000</long>
+     </object>
+    </void>
+    <void property="xrefsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>GO:0005829 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005768 (go)</string>
+      </void>
+      <void method="add">
+       <string>XP_006230636.1 (refseq)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005484 (go)</string>
+      </void>
+      <void method="add">
+       <string>NP_062241.2 (refseq)</string>
+      </void>
+      <void method="add">
+       <string>GO:0030173 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000139 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005794 (go)</string>
+      </void>
+      <void method="add">
+       <string>71051 (rgd)</string>
+      </void>
+      <void method="add">
+       <string>GO:0015031 (go)</string>
+      </void>
+      <void method="add">
+       <string>IPR000727 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>GO:0042147 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005795 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0016020 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:2000156 (go)</string>
+      </void>
+     </object>
+    </void>
+    <void property="xrefsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>ENSRNOG00000014785 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005829 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0070062 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0097440 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005768 (go)</string>
+      </void>
+      <void method="add">
+       <string>ENSRNOP00000020693 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>GO:0043025 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0006887 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000139 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0015031 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005887 (go)</string>
+      </void>
+      <void method="add">
+       <string>IPR010908 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>GO:0042147 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0031201 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0006906 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0006903 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0016020 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005737 (go)</string>
+      </void>
+      <void method="add">
+       <string>ENSRNOT00000020693 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>70897 (rgd)</string>
+      </void>
+      <void method="add">
+       <string>NP_113880.2 (refseq)</string>
+      </void>
+      <void method="add">
+       <string>GO:0045296 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005739 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0030659 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005484 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005783 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0019706 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000149 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005794 (go)</string>
+      </void>
+      <void method="add">
+       <string>3KYQ (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>IPR011012 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>R-RNO-204005 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>IPR001388 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>GO:0006904 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0097441 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-RNO-6811438 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>R-RNO-6807878 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0006888 (go)</string>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="uk.ac.ebi.intact.search.interactions.model.Interaction" id="Interaction7">
+    <void property="aliasesA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>Bet1l (MI:0301 (gene name))</string>
+      </void>
+      <void method="add">
+       <string>Gs15 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>Vesicle transport protein GOS15 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>Golgi SNARE with a size of 15 kDa (MI:0302 (gene name synonym))</string>
+      </void>
+     </object>
+    </void>
+    <void property="aliasesB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>Stx5a (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>Stx5 (MI:0301 (gene name))</string>
+      </void>
+     </object>
+    </void>
+    <void property="altIdsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>EBI-9997695 (intact)</string>
+      </void>
+      <void method="add">
+       <string>O35152 (uniprotkb)</string>
+      </void>
+      <void method="add">
+       <string>Q6PCU6 (uniprotkb)</string>
+      </void>
+     </object>
+    </void>
+    <void property="altIdsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>O55200 (uniprotkb)</string>
+      </void>
+      <void method="add">
+       <string>Q08851 (uniprotkb)</string>
+      </void>
+      <void method="add">
+       <string>A0JPL4 (uniprotkb)</string>
+      </void>
+      <void method="add">
+       <string>EBI-2028244 (intact)</string>
+      </void>
+     </object>
+    </void>
+    <void property="authors">
+     <object class="java.util.LinkedHashSet">
+      <void method="add">
+       <string>Shorter J.</string>
+      </void>
+      <void method="add">
+       <string>Beard M.B.</string>
+      </void>
+      <void method="add">
+       <string>Seemann J.</string>
+      </void>
+      <void method="add">
+       <string>Dirac-Svejstrup A.B.</string>
+      </void>
+      <void method="add">
+       <string>Warren G.</string>
+      </void>
+     </object>
+    </void>
+    <void property="biologicalRoleA">
+     <string>unspecified role</string>
+    </void>
+    <void property="biologicalRoleB">
+     <string>unspecified role</string>
+    </void>
+    <void property="checksumsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>crc64 (905EDA73F6AEB4B4)</string>
+      </void>
+     </object>
+    </void>
+    <void property="checksumsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>crc64 (0B0D0B2C261A39B4)</string>
+      </void>
+     </object>
+    </void>
+    <void property="confidenceValues">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>intact-miscore:0.59</string>
+      </void>
+     </object>
+    </void>
+    <void property="creationDate">
+     <object class="java.util.Date">
+      <long>1417774879000</long>
+     </object>
+    </void>
+    <void property="expansionMethod">
+     <string>spoke expansion</string>
+    </void>
+    <void property="experimentalRoleA">
+     <string>bait</string>
+    </void>
+    <void property="experimentalRoleB">
+     <string>prey</string>
+    </void>
+    <void property="firstAuthor">
+     <string>Shorter J. et al. (2002)	
+</string>
+    </void>
+    <void property="hostOrganism">
+     <string>rattus norvegicus liver</string>
+    </void>
+    <void property="idA">
+     <string>O35152 (uniprotkb)</string>
+    </void>
+    <void property="idB">
+     <string>Q08851 (uniprotkb)</string>
+    </void>
+    <void property="identificationMethodA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>western blot</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>western blot</string>
+      </void>
+     </object>
+    </void>
+    <void property="intactMiscore">
+     <double>0.59</double>
+    </void>
+    <void property="interactionAc">
+     <string>EBI-10000796</string>
+    </void>
+    <void property="interactionAnnotations">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>author-announcement (22-Jan-2015: Contacted by IntAct-Help.)</string>
+      </void>
+      <void method="add">
+       <string>author-list (Shorter J., Beard M.B., Seemann J., Dirac-Svejstrup A.B., Warren G.)</string>
+      </void>
+      <void method="add">
+       <string>accepted (Accepted 2015-JAN-05 by ORCHARD)</string>
+      </void>
+      <void method="add">
+       <string>journal (J. Cell Biol. (0021-9525))</string>
+      </void>
+      <void method="add">
+       <string>publication year (2002)</string>
+      </void>
+      <void method="add">
+       <string>curation depth (imex curation)</string>
+      </void>
+      <void method="add">
+       <string>figure legend (Fig. 3a (lanes 4-6, 10-11, 13))</string>
+      </void>
+      <void method="add">
+       <string>comment (Addition of p115 CC2 domain peptide (lanes 10 &amp; 13) had no effect on the interaction.)</string>
+      </void>
+      <void method="add">
+       <string>exp-modification (Golgi membranes were disassembled with NSF, a vesicle-fusing ATPase, and solubilized with Triton X-100 buffer. SNARE complexes were subsequently allowed to reassemble in the presence of tether proteins.)</string>
+      </void>
+      <void method="add">
+       <string>contact-email (graham.warren@yale.edu)</string>
+      </void>
+      <void method="add">
+       <string>full coverage (Only protein-protein interactions)</string>
+      </void>
+      <void method="add">
+       <string>imex curation (null)</string>
+      </void>
+     </object>
+    </void>
+    <void property="interactionDetectionMethod">
+     <string>anti bait coip</string>
+    </void>
+    <void property="interactionIdentifiers">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>EBI-10000796 (intact)</string>
+      </void>
+     </object>
+    </void>
+    <void property="interactionType">
+     <string>physical association</string>
+    </void>
+    <void property="interactionXrefs">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>IM-23550-1 (imex)</string>
+      </void>
+     </object>
+    </void>
+    <void property="interactorAAc">
+     <string>EBI-9997695</string>
+    </void>
+    <void property="interactorBAc">
+     <string>EBI-2028244</string>
+    </void>
+    <void property="moleculeA">
+     <string>Bet1l</string>
+    </void>
+    <void property="moleculeB">
+     <string>Stx5</string>
+    </void>
+    <void property="publicationId">
+     <string>11927603</string>
+    </void>
+    <void property="publicationIdentifiers">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>EBI-9997499 (intact)</string>
+      </void>
+      <void method="add">
+       <string>11927603 (pubmed)</string>
+      </void>
+     </object>
+    </void>
+    <void property="releaseDate">
+     <object idref="Date1"/>
+    </void>
+    <void property="sourceDatabase">
+     <string>IntAct</string>
+    </void>
+    <void property="speciesA">
+     <string>Rattus norvegicus (Rat)</string>
+    </void>
+    <void property="speciesAB">
+     <void method="clear"/>
+     <void method="add">
+      <string>Rattus norvegicus (Rat)</string>
+     </void>
+    </void>
+    <void property="speciesB">
+     <string>Rattus norvegicus (Rat)</string>
+    </void>
+    <void property="taxIdA">
+     <int>10116</int>
+    </void>
+    <void property="taxIdB">
+     <int>10116</int>
+    </void>
+    <void property="typeA">
+     <string>protein</string>
+    </void>
+    <void property="typeB">
+     <string>protein</string>
+    </void>
+    <void property="uniqueIdA">
+     <string>O35152</string>
+    </void>
+    <void property="uniqueIdB">
+     <string>Q08851</string>
+    </void>
+    <void property="uniqueKey">
+     <string>958080513</string>
+    </void>
+    <void property="updationDate">
+     <object class="java.util.Date">
+      <long>1418130222000</long>
+     </object>
+    </void>
+    <void property="xrefsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>GO:0005829 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005768 (go)</string>
+      </void>
+      <void method="add">
+       <string>XP_006230636.1 (refseq)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005484 (go)</string>
+      </void>
+      <void method="add">
+       <string>NP_062241.2 (refseq)</string>
+      </void>
+      <void method="add">
+       <string>GO:0030173 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000139 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005794 (go)</string>
+      </void>
+      <void method="add">
+       <string>71051 (rgd)</string>
+      </void>
+      <void method="add">
+       <string>GO:0015031 (go)</string>
+      </void>
+      <void method="add">
+       <string>IPR000727 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>GO:0042147 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005795 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0016020 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:2000156 (go)</string>
+      </void>
+     </object>
+    </void>
+    <void property="xrefsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>GO:0048280 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005829 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0033116 (go)</string>
+      </void>
+      <void method="add">
+       <string>IPR006012 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000139 (go)</string>
+      </void>
+      <void method="add">
+       <string>NP_113892.2 (refseq)</string>
+      </void>
+      <void method="add">
+       <string>ENSRNOG00000018847 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>GO:0090166 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0047485 (go)</string>
+      </void>
+      <void method="add">
+       <string>IPR000727 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>ENSRNOP00000025664 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>GO:0042147 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0031201 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0031982 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:1903358 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0045732 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0006886 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-RNO-5694530 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0034498 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0045296 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005484 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005783 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000149 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005794 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0016021 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-RNO-204005 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>IPR010989 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>ENSRNOT00000025664 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>IPR021538 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>GO:0048278 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-RNO-6811438 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>68426 (rgd)</string>
+      </void>
+      <void method="add">
+       <string>R-RNO-6807878 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0006888 (go)</string>
+      </void>
+      <void method="add">
+       <string>XP_006231059.1 (refseq)</string>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="uk.ac.ebi.intact.search.interactions.model.Interaction" id="Interaction8">
+    <void property="aliasesA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>Bet1l (MI:0301 (gene name))</string>
+      </void>
+      <void method="add">
+       <string>Gs15 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>Vesicle transport protein GOS15 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>Golgi SNARE with a size of 15 kDa (MI:0302 (gene name synonym))</string>
+      </void>
+     </object>
+    </void>
+    <void property="aliasesB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>Transcytosis-associated protein (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>Vdp (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>Vesicle-docking protein (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>Protein USO1 homolog (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>Uso1 (MI:0301 (gene name))</string>
+      </void>
+     </object>
+    </void>
+    <void property="altIdsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>EBI-9997695 (intact)</string>
+      </void>
+      <void method="add">
+       <string>O35152 (uniprotkb)</string>
+      </void>
+      <void method="add">
+       <string>Q6PCU6 (uniprotkb)</string>
+      </void>
+     </object>
+    </void>
+    <void property="altIdsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>P41542 (uniprotkb)</string>
+      </void>
+      <void method="add">
+       <string>EBI-4423297 (intact)</string>
+      </void>
+     </object>
+    </void>
+    <void property="authors">
+     <object class="java.util.LinkedHashSet">
+      <void method="add">
+       <string>Shorter J.</string>
+      </void>
+      <void method="add">
+       <string>Beard M.B.</string>
+      </void>
+      <void method="add">
+       <string>Seemann J.</string>
+      </void>
+      <void method="add">
+       <string>Dirac-Svejstrup A.B.</string>
+      </void>
+      <void method="add">
+       <string>Warren G.</string>
+      </void>
+     </object>
+    </void>
+    <void property="biologicalRoleA">
+     <string>unspecified role</string>
+    </void>
+    <void property="biologicalRoleB">
+     <string>unspecified role</string>
+    </void>
+    <void property="checksumsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>crc64 (905EDA73F6AEB4B4)</string>
+      </void>
+     </object>
+    </void>
+    <void property="checksumsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>crc64 (356394B48C7E003B)</string>
+      </void>
+     </object>
+    </void>
+    <void property="confidenceValues">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>intact-miscore:0.4</string>
+      </void>
+     </object>
+    </void>
+    <void property="creationDate">
+     <object class="java.util.Date">
+      <long>1417774879000</long>
+     </object>
+    </void>
+    <void property="expansionMethod">
+     <string>spoke expansion</string>
+    </void>
+    <void property="experimentalRoleA">
+     <string>bait</string>
+    </void>
+    <void property="experimentalRoleB">
+     <string>prey</string>
+    </void>
+    <void property="firstAuthor">
+     <string>Shorter J. et al. (2002)	
+</string>
+    </void>
+    <void property="hostOrganism">
+     <string>rattus norvegicus liver</string>
+    </void>
+    <void property="idA">
+     <string>O35152 (uniprotkb)</string>
+    </void>
+    <void property="idB">
+     <string>P41542 (uniprotkb)</string>
+    </void>
+    <void property="identificationMethodA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>western blot</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>western blot</string>
+      </void>
+     </object>
+    </void>
+    <void property="intactMiscore">
+     <double>0.4</double>
+    </void>
+    <void property="interactionAc">
+     <string>EBI-10000796</string>
+    </void>
+    <void property="interactionAnnotations">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>author-announcement (22-Jan-2015: Contacted by IntAct-Help.)</string>
+      </void>
+      <void method="add">
+       <string>author-list (Shorter J., Beard M.B., Seemann J., Dirac-Svejstrup A.B., Warren G.)</string>
+      </void>
+      <void method="add">
+       <string>accepted (Accepted 2015-JAN-05 by ORCHARD)</string>
+      </void>
+      <void method="add">
+       <string>journal (J. Cell Biol. (0021-9525))</string>
+      </void>
+      <void method="add">
+       <string>publication year (2002)</string>
+      </void>
+      <void method="add">
+       <string>curation depth (imex curation)</string>
+      </void>
+      <void method="add">
+       <string>figure legend (Fig. 3a (lanes 4-6, 10-11, 13))</string>
+      </void>
+      <void method="add">
+       <string>comment (Addition of p115 CC2 domain peptide (lanes 10 &amp; 13) had no effect on the interaction.)</string>
+      </void>
+      <void method="add">
+       <string>exp-modification (Golgi membranes were disassembled with NSF, a vesicle-fusing ATPase, and solubilized with Triton X-100 buffer. SNARE complexes were subsequently allowed to reassemble in the presence of tether proteins.)</string>
+      </void>
+      <void method="add">
+       <string>contact-email (graham.warren@yale.edu)</string>
+      </void>
+      <void method="add">
+       <string>full coverage (Only protein-protein interactions)</string>
+      </void>
+      <void method="add">
+       <string>imex curation (null)</string>
+      </void>
+     </object>
+    </void>
+    <void property="interactionDetectionMethod">
+     <string>anti bait coip</string>
+    </void>
+    <void property="interactionIdentifiers">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>EBI-10000796 (intact)</string>
+      </void>
+     </object>
+    </void>
+    <void property="interactionType">
+     <string>physical association</string>
+    </void>
+    <void property="interactionXrefs">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>IM-23550-1 (imex)</string>
+      </void>
+     </object>
+    </void>
+    <void property="interactorAAc">
+     <string>EBI-9997695</string>
+    </void>
+    <void property="interactorBAc">
+     <string>EBI-4423297</string>
+    </void>
+    <void property="moleculeA">
+     <string>Bet1l</string>
+    </void>
+    <void property="moleculeB">
+     <string>Uso1</string>
+    </void>
+    <void property="publicationId">
+     <string>11927603</string>
+    </void>
+    <void property="publicationIdentifiers">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>EBI-9997499 (intact)</string>
+      </void>
+      <void method="add">
+       <string>11927603 (pubmed)</string>
+      </void>
+     </object>
+    </void>
+    <void property="releaseDate">
+     <object idref="Date1"/>
+    </void>
+    <void property="sourceDatabase">
+     <string>IntAct</string>
+    </void>
+    <void property="speciesA">
+     <string>Rattus norvegicus (Rat)</string>
+    </void>
+    <void property="speciesAB">
+     <void method="clear"/>
+     <void method="add">
+      <string>Rattus norvegicus (Rat)</string>
+     </void>
+    </void>
+    <void property="speciesB">
+     <string>Rattus norvegicus (Rat)</string>
+    </void>
+    <void property="taxIdA">
+     <int>10116</int>
+    </void>
+    <void property="taxIdB">
+     <int>10116</int>
+    </void>
+    <void property="typeA">
+     <string>protein</string>
+    </void>
+    <void property="typeB">
+     <string>protein</string>
+    </void>
+    <void property="uniqueIdA">
+     <string>O35152</string>
+    </void>
+    <void property="uniqueIdB">
+     <string>P41542</string>
+    </void>
+    <void property="uniqueKey">
+     <string>2072787644</string>
+    </void>
+    <void property="updationDate">
+     <object class="java.util.Date">
+      <long>1418130222000</long>
+     </object>
+    </void>
+    <void property="xrefsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>GO:0005829 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005768 (go)</string>
+      </void>
+      <void method="add">
+       <string>XP_006230636.1 (refseq)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005484 (go)</string>
+      </void>
+      <void method="add">
+       <string>NP_062241.2 (refseq)</string>
+      </void>
+      <void method="add">
+       <string>GO:0030173 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000139 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005794 (go)</string>
+      </void>
+      <void method="add">
+       <string>71051 (rgd)</string>
+      </void>
+      <void method="add">
+       <string>GO:0015031 (go)</string>
+      </void>
+      <void method="add">
+       <string>IPR000727 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>GO:0042147 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005795 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0016020 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:2000156 (go)</string>
+      </void>
+     </object>
+    </void>
+    <void property="xrefsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>GO:0048280 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0008565 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005829 (go)</string>
+      </void>
+      <void method="add">
+       <string>621604 (rgd)</string>
+      </void>
+      <void method="add">
+       <string>GO:0061025 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000139 (go)</string>
+      </void>
+      <void method="add">
+       <string>ENSRNOG00000002301 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>IPR006953 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>IPR000225 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>IPR016024 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>ENSRNOP00000003277 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>GO:0006891 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005795 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0016020 (go)</string>
+      </void>
+      <void method="add">
+       <string>IPR011989 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>GO:0007030 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0003723 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0006886 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0012507 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0045296 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0001650 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005783 (go)</string>
+      </void>
+      <void method="add">
+       <string>IPR006955 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>R-RNO-204005 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0048211 (go)</string>
+      </void>
+      <void method="add">
+       <string>NP_062252.1 (refseq)</string>
+      </void>
+      <void method="add">
+       <string>GO:0048471 (go)</string>
+      </void>
+      <void method="add">
+       <string>ENSRNOT00000003277 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>GO:0045056 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-RNO-6807878 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0006888 (go)</string>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="uk.ac.ebi.intact.search.interactions.model.Interaction" id="Interaction9">
+    <void property="aliasesB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>Nuclear factor NF-kappa-B p65 subunit (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>NFKB3 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>Nuclear factor of kappa light polypeptide gene enhancer in B-cells 3 (MI:0302 (gene name synonym))</string>
+      </void>
+      <void method="add">
+       <string>RELA (MI:0301 (gene name))</string>
+      </void>
+     </object>
+    </void>
+    <void property="altIdsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>EBI-10000824 (intact)</string>
+      </void>
+     </object>
+    </void>
+    <void property="altIdsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>Q6GTV1 (uniprotkb)</string>
+      </void>
+      <void method="add">
+       <string>Q6SLK1 (uniprotkb)</string>
+      </void>
+      <void method="add">
+       <string>Q04206 (uniprotkb)</string>
+      </void>
+      <void method="add">
+       <string>DIP-24238N (dip)</string>
+      </void>
+      <void method="add">
+       <string>EBI-73886 (intact)</string>
+      </void>
+     </object>
+    </void>
+    <void property="annotationsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>comment (DIP protein Q04206 original sequence version: 168)</string>
+      </void>
+      <void method="add">
+       <string>comment (DIP protein Q04206 original sequence version: 99)</string>
+      </void>
+      <void method="add">
+       <string>comment (DIP protein Q04206 original sequence version: 128)</string>
+      </void>
+      <void method="add">
+       <string>comment (DIP protein Q04206 original sequence version: 185)</string>
+      </void>
+      <void method="add">
+       <string>comment (DIP protein Q04206 original sequence version: 173)</string>
+      </void>
+      <void method="add">
+       <string>comment (DIP protein Q04206 original sequence version: 183)</string>
+      </void>
+      <void method="add">
+       <string>comment (DIP protein Q04206 original sequence version: 181)</string>
+      </void>
+      <void method="add">
+       <string>comment (DIP protein Q04206 original sequence version: 170)</string>
+      </void>
+      <void method="add">
+       <string>comment (DIP protein Q04206 original sequence version: 131)</string>
+      </void>
+      <void method="add">
+       <string>comment (DIP protein Q04206 original sequence version: 153)</string>
+      </void>
+      <void method="add">
+       <string>comment (DIP protein Q04206-1 original sequence version: 99)</string>
+      </void>
+     </object>
+    </void>
+    <void property="authors">
+     <object class="java.util.LinkedHashSet">
+      <void method="add">
+       <string>Ye D.</string>
+      </void>
+      <void method="add">
+       <string>Ma T.Y.</string>
+      </void>
+     </object>
+    </void>
+    <void property="biologicalRoleA">
+     <string>unspecified role</string>
+    </void>
+    <void property="biologicalRoleB">
+     <string>unspecified role</string>
+    </void>
+    <void property="checksumsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>crc64 (8147A6AF9F2445C6)</string>
+      </void>
+     </object>
+    </void>
+    <void property="confidenceValues">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>intact-miscore:0.4</string>
+      </void>
+     </object>
+    </void>
+    <void property="creationDate">
+     <object class="java.util.Date">
+      <long>1418043662000</long>
+     </object>
+    </void>
+    <void property="experimentalRoleA">
+     <string>bait</string>
+    </void>
+    <void property="experimentalRoleB">
+     <string>prey</string>
+    </void>
+    <void property="featureA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>biotin tag::0..0:0..0(region)</string>
+      </void>
+     </object>
+    </void>
+    <void property="featureShortLabelA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>region</string>
+      </void>
+     </object>
+    </void>
+    <void property="firstAuthor">
+     <string>Ye D. et al. (2008)	
+</string>
+    </void>
+    <void property="hostOrganism">
+     <string>In vitro</string>
+    </void>
+    <void property="idA">
+     <string>EBI-10000824 (intact)</string>
+    </void>
+    <void property="idB">
+     <string>Q04206 (uniprotkb)</string>
+    </void>
+    <void property="identificationMethodA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>tag perox activity</string>
+      </void>
+     </object>
+    </void>
+    <void property="identificationMethodB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>tag perox activity</string>
+      </void>
+     </object>
+    </void>
+    <void property="intactMiscore">
+     <double>0.4</double>
+    </void>
+    <void property="interactionAc">
+     <string>EBI-10000862</string>
+    </void>
+    <void property="interactionAnnotations">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>author-list (Ye D., Ma T.Y.)</string>
+      </void>
+      <void method="add">
+       <string>contact-email (tma@salud.unm.edu)</string>
+      </void>
+      <void method="add">
+       <string>causality statement (Q04206 increases expression at RNA level of ENSG00000065534)</string>
+      </void>
+      <void method="add">
+       <string>causality statement (Q04206 increases expression at protein level of ENSG00000065534)</string>
+      </void>
+      <void method="add">
+       <string>author-announcement (05-Jan-2015: Contacted by IntAct-Help.)</string>
+      </void>
+      <void method="add">
+       <string>imex curation (null)</string>
+      </void>
+      <void method="add">
+       <string>figure legend (Fig. 9b)</string>
+      </void>
+      <void method="add">
+       <string>publication year (2008)</string>
+      </void>
+      <void method="add">
+       <string>dataset (IBD - Inflammatory bowel disease)</string>
+      </void>
+      <void method="add">
+       <string>agonist (tumor necrosis factor alpha (TNF-alpha))</string>
+      </void>
+      <void method="add">
+       <string>accepted (Accepted 2014-DEC-16 by ORCHARD)</string>
+      </void>
+      <void method="add">
+       <string>curation depth (imex curation)</string>
+      </void>
+      <void method="add">
+       <string>journal (J. Cell. Mol. Med. (1582-1838))</string>
+      </void>
+      <void method="add">
+       <string>full coverage (Only protein-protein interactions)</string>
+      </void>
+     </object>
+    </void>
+    <void property="interactionDetectionMethod">
+     <string>elisa</string>
+    </void>
+    <void property="interactionIdentifiers">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>EBI-10000862 (intact)</string>
+      </void>
+     </object>
+    </void>
+    <void property="interactionType">
+     <string>physical association</string>
+    </void>
+    <void property="interactorAAc">
+     <string>EBI-10000824</string>
+    </void>
+    <void property="interactorBAc">
+     <string>EBI-73886</string>
+    </void>
+    <void property="moleculeA">
+     <string>mylk_human_nfkb-site1_dna-probe</string>
+    </void>
+    <void property="moleculeB">
+     <string>RELA</string>
+    </void>
+    <void property="publicationId">
+     <string>18363837</string>
+    </void>
+    <void property="publicationIdentifiers">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>18363837 (pubmed)</string>
+      </void>
+      <void method="add">
+       <string>EBI-9999090 (intact)</string>
+      </void>
+     </object>
+    </void>
+    <void property="releaseDate">
+     <object class="java.util.Date">
+      <long>1419265380683</long>
+     </object>
+    </void>
+    <void property="sourceDatabase">
+     <string>IntAct</string>
+    </void>
+    <void property="speciesA">
+     <string>Homo sapiens</string>
+    </void>
+    <void property="speciesAB">
+     <void method="clear"/>
+     <void method="add">
+      <string>Homo sapiens</string>
+     </void>
+    </void>
+    <void property="speciesB">
+     <string>Homo sapiens</string>
+    </void>
+    <void property="taxIdA">
+     <int>9606</int>
+    </void>
+    <void property="taxIdB">
+     <int>9606</int>
+    </void>
+    <void property="typeA">
+     <string>dna</string>
+    </void>
+    <void property="typeB">
+     <string>protein</string>
+    </void>
+    <void property="uniqueIdA">
+     <string>EBI-10000824</string>
+    </void>
+    <void property="uniqueIdB">
+     <string>Q04206</string>
+    </void>
+    <void property="uniqueKey">
+     <string>541720369</string>
+    </void>
+    <void property="updationDate">
+     <object class="java.util.Date">
+      <long>1418044340000</long>
+     </object>
+    </void>
+    <void property="xrefsA">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>ENSG00000065534 (ensembl)</string>
+      </void>
+     </object>
+    </void>
+    <void property="xrefsB">
+     <object class="java.util.HashSet">
+      <void method="add">
+       <string>GO:0005829 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0007568 (go)</string>
+      </void>
+      <void method="add">
+       <string>Q04206 (mint)</string>
+      </void>
+      <void method="add">
+       <string>GO:2001237 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0001078 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0042802 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0043200 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000122 (go)</string>
+      </void>
+      <void method="add">
+       <string>IPR008967 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>GO:0045084 (go)</string>
+      </void>
+      <void method="add">
+       <string>ENST00000406246 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>IPR000451 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>GO:1901224 (go)</string>
+      </void>
+      <void method="add">
+       <string>IPR002909 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>IPR032397 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>GO:0042803 (go)</string>
+      </void>
+      <void method="add">
+       <string>ENST00000308639 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>GO:0001077 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0010033 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:1901522 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0071532 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0032570 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0044212 (go)</string>
+      </void>
+      <void method="add">
+       <string>ENSP00000311508 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>GO:0001889 (go)</string>
+      </void>
+      <void method="add">
+       <string>5URN (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>GO:0070301 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000978 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000983 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0031625 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:1902895 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:1901223 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0050852 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0071316 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0006954 (go)</string>
+      </void>
+      <void method="add">
+       <string>IPR013783 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000980 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-5607764 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>IPR033926 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>GO:0001205 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000977 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0003682 (go)</string>
+      </void>
+      <void method="add">
+       <string>ENSG00000173039 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-5607761 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>NP_001138610.1 (refseq)</string>
+      </void>
+      <void method="add">
+       <string>GO:0033590 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0047485 (go)</string>
+      </void>
+      <void method="add">
+       <string>NP_068810.3 (refseq)</string>
+      </void>
+      <void method="add">
+       <string>GO:0032868 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:2000630 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:1904385 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-1810476 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0032332 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-2559582 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>1NFI (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-209560 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0046627 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-5660668 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0014040 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0045893 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0051607 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0071356 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0071224 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0035525 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000981 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0033234 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0051092 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0032481 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0043066 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0002223 (go)</string>
+      </void>
+      <void method="add">
+       <string>ENSP00000384273 (ensembl)</string>
+      </void>
+      <void method="add">
+       <string>GO:0033256 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0016032 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0042177 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0001942 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0006355 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0071347 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0008284 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0043620 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0050862 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0003677 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005654 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-3134963 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>IPR030492 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>GO:0035729 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0045944 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-202424 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0071223 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0071222 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0000790 (go)</string>
+      </void>
+      <void method="add">
+       <string>3QXY (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-448706 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005737 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-9020702 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0031293 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0033209 (go)</string>
+      </void>
+      <void method="add">
+       <string>3GUT (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>GO:0010224 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005667 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0070491 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0051059 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0042826 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0035994 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0003700 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0038095 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0045892 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0071354 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0070555 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0019221 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0043123 (go)</string>
+      </void>
+      <void method="add">
+       <string>NP_001230913.1 (refseq)</string>
+      </void>
+      <void method="add">
+       <string>GO:0009887 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0019901 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0070431 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0042805 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0043278 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0033613 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0006968 (go)</string>
+      </void>
+      <void method="add">
+       <string>3RC0 (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>GO:0005634 (go)</string>
+      </void>
+      <void method="add">
+       <string>2LSP (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>GO:0050727 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-5603029 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0046982 (go)</string>
+      </void>
+      <void method="add">
+       <string>2O61 (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-445989 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0031490 (go)</string>
+      </void>
+      <void method="add">
+       <string>IPR011539 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>4KV4 (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>GO:0070498 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:1901222 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-381340 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0006117 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0032495 (go)</string>
+      </void>
+      <void method="add">
+       <string>5U4K (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-193692 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0061614 (go)</string>
+      </void>
+      <void method="add">
+       <string>DIP-24238N (dip)</string>
+      </void>
+      <void method="add">
+       <string>4KV1 (rcsb pdb)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-1169091 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-3214841 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-5621575 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-2871837 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0008134 (go)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-933542 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>R-HSA-5603027 (reactome)</string>
+      </void>
+      <void method="add">
+       <string>GO:0003705 (go)</string>
+      </void>
+      <void method="add">
+       <string>GO:0051591 (go)</string>
+      </void>
+      <void method="add">
+       <string>IPR030495 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>GO:0042301 (go)</string>
+      </void>
+      <void method="add">
+       <string>IPR037059 (interpro)</string>
+      </void>
+      <void method="add">
+       <string>IPR014756 (interpro)</string>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>
