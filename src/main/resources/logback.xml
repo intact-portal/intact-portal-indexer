@@ -30,7 +30,7 @@
     <logger name="org.hibernate.cfg" level="DEBUG,INFO" />-->
     <logger name="org.springframework.data.neo4j" level="ERROR" />
     <logger name="org.apache.tomcat" level="ERROR" />
-    <logger name="org.neo4j" level="ERROR,DEBUG,INFO"/>
+    <logger name="org.neo4j" level="ERROR,INFO"/>
     <logger name="org.springframework" level="ERROR"/>
     <logger name="javax.activation" level="ERROR"/>
     <logger name="org.apache.http" level="ERROR"/>
