@@ -52,6 +52,10 @@ public class InteractorsIndexerTaskletIntegrationTest {
         this.jobLauncherTestUtils.setJob(interactorIndexerJob);
     }
 
+    /**
+     * Tests if interactor index cleaning and creation (interactorIndexerJob) Job runs completely
+     * @throws Exception
+     */
     @Test
     public void jobSimulation() throws Exception {
 
@@ -63,6 +67,10 @@ public class InteractorsIndexerTaskletIntegrationTest {
 
     }
 
+    /**
+     * Tests if interactor index cleaning (interactorCleanerStep) Step runs completely
+     * @throws Exception
+     */
     @Test
     public void cleanerStepSimulation() throws Exception {
 
@@ -74,6 +82,10 @@ public class InteractorsIndexerTaskletIntegrationTest {
 
     }
 
+    /**
+     * Tests if interactor indexing (interactorIndexingStep) Step runs completely
+     * @throws Exception
+     */
     @Test
     public void indexingStepSimulation() throws Exception {
 
@@ -85,6 +97,11 @@ public class InteractorsIndexerTaskletIntegrationTest {
 
     }
 
+    /**
+     * Tests if interactor index cleaning (indexCleanerTasklet) Tasklet runs completely
+     * @throws Exception
+     */
+    // TODO check for completion
     @Test
     public void cleanerTaskletSimulation() throws Exception {
 
@@ -97,6 +114,10 @@ public class InteractorsIndexerTaskletIntegrationTest {
 
     }
 
+    /**
+     * Tests if interactor indexing (interactorIndexerTasklet) Tasklet runs completely
+     * @throws Exception
+     */
     @Test
     public void indexerTaskletSimulation() throws Exception {
 
