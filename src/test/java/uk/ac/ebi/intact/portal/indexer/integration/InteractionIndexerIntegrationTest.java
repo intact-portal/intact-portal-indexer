@@ -54,6 +54,10 @@ public class InteractionIndexerIntegrationTest {
         this.jobLauncherTestUtils.setJob(interactionIndexerJob);
     }
 
+    /**
+     * Tests if interaction index cleaning and creation 'interactionIndexerJob' Job runs completely
+     * @throws Exception
+     */
     @Test
     public void jobSimulation() throws Exception {
 
@@ -65,6 +69,10 @@ public class InteractionIndexerIntegrationTest {
 
     }
 
+    /**
+     * Tests if interaction index cleaning (interactionIndexCleanerStep) Step runs completely
+     * @throws Exception
+     */
     @Test
     public void cleanerStepSimulation() throws Exception {
 
@@ -76,6 +84,10 @@ public class InteractionIndexerIntegrationTest {
 
     }
 
+    /**
+     * Tests if interaction indexing (interactionIndexingStep) Step runs completely
+     * @throws Exception
+     */
     @Test
     public void indexingStepSimulation() throws Exception {
 
@@ -87,6 +99,11 @@ public class InteractionIndexerIntegrationTest {
 
     }
 
+    /**
+     * Tests if interaction index cleaning (interactionCleanerTasklet) Tasklet runs completely
+     * @throws Exception
+     */
+    // TODO check for completion
     @Test
     public void cleanerTaskletSimulation() throws Exception {
 
@@ -99,6 +116,11 @@ public class InteractionIndexerIntegrationTest {
 
     }
 
+    /**
+     * Tests if interaction indexing (interactionIndexingStep) Tasklet runs completely
+     * @throws Exception
+     */
+    // TODO check for completion
     @Test
     public void indexerTaskletSimulation() throws Exception {
 

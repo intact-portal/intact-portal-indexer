@@ -13,9 +13,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import psidev.psi.mi.jami.binary.BinaryInteractionEvidence;
-import psidev.psi.mi.jami.model.Experiment;
-import psidev.psi.mi.jami.model.Interactor;
-import psidev.psi.mi.jami.model.Publication;
 import uk.ac.ebi.intact.graphdb.model.nodes.*;
 import uk.ac.ebi.intact.graphdb.services.*;
 import uk.ac.ebi.intact.search.interactions.model.Interaction;
@@ -68,6 +65,14 @@ public class InteractionIndexerTasklet implements Tasklet {
 
     private boolean simulation = false;
 
+    /**
+     * It reads interactions from graph db and create interaction index in solr
+     *
+     * @param stepContribution
+     * @param chunkContext
+     * @return
+     * @throws Exception
+     */
     @Override
     public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
 
@@ -150,11 +155,18 @@ public class InteractionIndexerTasklet implements Tasklet {
         }
     }
 
+    /**
+     * Converts Graph interaction to Solr interaction and extract more depth details from graph db if needed.
+     *
+     * @param interactionEvidence
+     * @return
+     */
+    // TODO try to split this method into methods for specific(eg. Interactor/publication/participant etc.) details
     private Interaction toSolrDocument(BinaryInteractionEvidence interactionEvidence) {
         Interaction interaction = new Interaction();
-        List<GraphAnnotation>  graphAnnotations=new ArrayList<GraphAnnotation>();
-        List<GraphAlias>  graphAliasesA=new ArrayList<GraphAlias>();
-        List<GraphAlias>  graphAliasesB=new ArrayList<GraphAlias>();
+        List<GraphAnnotation> graphAnnotations = new ArrayList<GraphAnnotation>();
+        List<GraphAlias> graphAliasesA = new ArrayList<GraphAlias>();
+        List<GraphAlias> graphAliasesB = new ArrayList<GraphAlias>();
 
         if (interactionEvidence instanceof GraphBinaryInteractionEvidence) {
             GraphBinaryInteractionEvidence graphBinaryInteractionEvidence = (GraphBinaryInteractionEvidence) interactionEvidence;
@@ -174,9 +186,9 @@ public class InteractionIndexerTasklet implements Tasklet {
                 interaction.setXrefsA((graphInteractorA.getXrefs() != null && graphInteractorA.getXrefs().size() > 0) ? SolrDocumentConverter.xrefsToSolrDocument(graphInteractorA.getXrefs()) : null);
                 interaction.setSpeciesA(graphInteractorA.getOrganism().getScientificName());
                 interaction.setInteractorAAc(graphInteractorA.getAc());
-                interaction.setUniqueIdA((graphInteractorA.getInteractorType()!=null
-                        &&graphInteractorA.getInteractorType().getShortName()!=null
-                        &&graphInteractorA.getInteractorType().getShortName().equals(Constants.MOLECULE_SET))?graphInteractorA.getAc():graphInteractorA.getPreferredIdentifier()!=null?graphInteractorA.getPreferredIdentifier().getId():"");
+                interaction.setUniqueIdA((graphInteractorA.getInteractorType() != null
+                        && graphInteractorA.getInteractorType().getShortName() != null
+                        && graphInteractorA.getInteractorType().getShortName().equals(Constants.MOLECULE_SET)) ? graphInteractorA.getAc() : graphInteractorA.getPreferredIdentifier() != null ? graphInteractorA.getPreferredIdentifier().getId() : "");
                 interaction.setMoleculeA(graphInteractorA.getPreferredName());
 
             }
@@ -195,10 +207,10 @@ public class InteractionIndexerTasklet implements Tasklet {
                 interaction.setXrefsB((graphInteractorB.getXrefs() != null && graphInteractorB.getXrefs().size() > 0) ? SolrDocumentConverter.xrefsToSolrDocument(graphInteractorB.getXrefs()) : null);
                 interaction.setSpeciesB(graphInteractorB.getOrganism().getScientificName());
                 interaction.setInteractorBAc(graphInteractorB.getAc());
-                interaction.setUniqueIdB((graphInteractorB.getInteractorType()!=null
-                        &&graphInteractorB.getInteractorType().getShortName()!=null
-                        &&graphInteractorB.getInteractorType().getShortName().equals(Constants.MOLECULE_SET))?graphInteractorB.getAc()
-                        :graphInteractorB.getPreferredIdentifier()!=null?graphInteractorB.getPreferredIdentifier().getId():"");
+                interaction.setUniqueIdB((graphInteractorB.getInteractorType() != null
+                        && graphInteractorB.getInteractorType().getShortName() != null
+                        && graphInteractorB.getInteractorType().getShortName().equals(Constants.MOLECULE_SET)) ? graphInteractorB.getAc()
+                        : graphInteractorB.getPreferredIdentifier() != null ? graphInteractorB.getPreferredIdentifier().getId() : "");
                 interaction.setMoleculeB(graphInteractorB.getPreferredName());
             }
 
@@ -215,7 +227,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 graphAliasesA.addAll(graphParticipantEvidenceA.getAliases());
 
                 // featureDetails
-                List<GraphFeatureEvidence> ographFeaturesA = graphFeatureService.findByUniqueKeyIn(CommonUtility.getGraphObjectsUniqueKeys(graphParticipantEvidenceA.getFeatures()),DEPTH);
+                List<GraphFeatureEvidence> ographFeaturesA = graphFeatureService.findByUniqueKeyIn(CommonUtility.getGraphObjectsUniqueKeys(graphParticipantEvidenceA.getFeatures()), DEPTH);
                 interaction.setFeatureA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? SolrDocumentConverter.featuresToSolrDocument(ographFeaturesA) : null);
                 interaction.setFeatureShortLabelA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? SolrDocumentConverter.featuresShortlabelToSolrDocument(ographFeaturesA) : null);
             }
@@ -232,7 +244,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 graphAliasesB.addAll(graphParticipantEvidenceB.getAliases());
 
                 // featureDetails
-                List<GraphFeatureEvidence> ographFeaturesB = graphFeatureService.findByUniqueKeyIn(CommonUtility.getGraphObjectsUniqueKeys(graphParticipantEvidenceB.getFeatures()),DEPTH);
+                List<GraphFeatureEvidence> ographFeaturesB = graphFeatureService.findByUniqueKeyIn(CommonUtility.getGraphObjectsUniqueKeys(graphParticipantEvidenceB.getFeatures()), DEPTH);
                 interaction.setFeatureB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? SolrDocumentConverter.featuresToSolrDocument(ographFeaturesB) : null);
                 interaction.setFeatureShortLabelB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? SolrDocumentConverter.featuresShortlabelToSolrDocument(ographFeaturesB) : null);
             }
@@ -241,32 +253,32 @@ public class InteractionIndexerTasklet implements Tasklet {
             interaction.setAliasesB(!graphAliasesB.isEmpty() ? SolrDocumentConverter.aliasesToSolrDocument(graphAliasesB) : null);
 
             //experiment details
-            Optional<GraphExperiment> oGraphExperiment = graphExprimentService.findWithDepth(((GraphExperiment)graphBinaryInteractionEvidence.getExperiment()).getUniqueKey(), DEPTH);
+            Optional<GraphExperiment> oGraphExperiment = graphExprimentService.findWithDepth(((GraphExperiment) graphBinaryInteractionEvidence.getExperiment()).getUniqueKey(), DEPTH);
             GraphExperiment experiment = oGraphExperiment.get();
 
             graphAnnotations.addAll(experiment.getAnnotations());
             interaction.setInteractionDetectionMethod((graphBinaryInteractionEvidence.getExperiment() != null && graphBinaryInteractionEvidence.getExperiment().getInteractionDetectionMethod() != null) ? graphBinaryInteractionEvidence.getExperiment().getInteractionDetectionMethod().getShortName() : null);
-            interaction.setHostOrganism(experiment.getHostOrganism()!=null?experiment.getHostOrganism().getScientificName():null);
+            interaction.setHostOrganism(experiment.getHostOrganism() != null ? experiment.getHostOrganism().getScientificName() : null);
 
 
             //interaction details
 
-            GraphClusteredInteraction graphClusteredInteraction=graphInteractionService.findClusteredInteraction(graphBinaryInteractionEvidence.getUniqueKey());
-            Set<String> intactConfidence= new HashSet<String>();
-            if(graphClusteredInteraction!=null) {
+            GraphClusteredInteraction graphClusteredInteraction = graphInteractionService.findClusteredInteraction(graphBinaryInteractionEvidence.getUniqueKey());
+            Set<String> intactConfidence = new HashSet<String>();
+            if (graphClusteredInteraction != null) {
                 intactConfidence.add("intact-miscore:" + graphClusteredInteraction.getMiscore());
                 interaction.setIntactMiscore(graphClusteredInteraction.getMiscore());
             }
             interaction.setInteractionIdentifiers((graphBinaryInteractionEvidence.getIdentifiers() != null && !graphBinaryInteractionEvidence.getIdentifiers().isEmpty()) ? SolrDocumentConverter.xrefsToSolrDocument(graphBinaryInteractionEvidence.getIdentifiers()) : null);
-            interaction.setConfidenceValues(!intactConfidence.isEmpty()?intactConfidence:null);
-            interaction.setInteractionType(graphBinaryInteractionEvidence.getInteractionType()!=null?graphBinaryInteractionEvidence.getInteractionType().getShortName():null);
+            interaction.setConfidenceValues(!intactConfidence.isEmpty() ? intactConfidence : null);
+            interaction.setInteractionType(graphBinaryInteractionEvidence.getInteractionType() != null ? graphBinaryInteractionEvidence.getInteractionType().getShortName() : null);
             interaction.setInteractionAc(graphBinaryInteractionEvidence.getAc());
 
-            if(graphBinaryInteractionEvidence.getConfidences()!=null) {
-                Set<String> confidences=SolrDocumentConverter.confidencesToSolrDocument(graphBinaryInteractionEvidence.getConfidences());
-                if(interaction.getConfidenceValues()!=null){
+            if (graphBinaryInteractionEvidence.getConfidences() != null) {
+                Set<String> confidences = SolrDocumentConverter.confidencesToSolrDocument(graphBinaryInteractionEvidence.getConfidences());
+                if (interaction.getConfidenceValues() != null) {
                     interaction.getConfidenceValues().addAll(confidences);
-                }else {
+                } else {
                     interaction.setConfidenceValues(confidences);
                 }
             }
@@ -282,8 +294,8 @@ public class InteractionIndexerTasklet implements Tasklet {
 
             // publications details
 
-            if(experiment!=null) {
-                Optional<GraphPublication> oGraphPublication = graphPublicationService.findWithDepth(((GraphPublication)experiment.getPublication()).getUniqueKey(), DEPTH);
+            if (experiment != null) {
+                Optional<GraphPublication> oGraphPublication = graphPublicationService.findWithDepth(((GraphPublication) experiment.getPublication()).getUniqueKey(), DEPTH);
                 GraphPublication publication = oGraphPublication.get();
                 graphAnnotations.addAll(publication.getAnnotations());
                 if (publication != null) {

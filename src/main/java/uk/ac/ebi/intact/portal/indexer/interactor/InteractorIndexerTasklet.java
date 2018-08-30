@@ -53,6 +53,14 @@ public class InteractorIndexerTasklet implements Tasklet {
 
     private boolean simulation = false;
 
+
+    /**
+     * It reads interactors from graph db and create interactor index in solr
+     * @param stepContribution
+     * @param chunkContext
+     * @return
+     * @throws Exception
+     */
     @Override
     public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
 
@@ -143,6 +151,13 @@ public class InteractorIndexerTasklet implements Tasklet {
         }
     }
 
+    /**
+     * Converts Graph interactor to Solr interactor
+     * @param interactor
+     * @param interactionIds
+     * @param interactionCount
+     * @return
+     */
     private static SearchInteractor toSolrDocument(Interactor interactor, Set<String> interactionIds, long interactionCount) {
         SearchInteractor searchInteractor = new SearchInteractor();
 

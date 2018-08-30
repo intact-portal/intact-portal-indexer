@@ -33,6 +33,14 @@ public class InteractionCleanerTasklet implements Tasklet {
 //    @Resource
 //    private ClusteredInteractionIndexService clusteredInteractionIndexService;
 
+
+    /**
+     * It cleans the interaction index in solr
+     * @param stepContribution
+     * @param chunkContext
+     * @return
+     * @throws Exception
+     */
     @Override
     public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
 
