@@ -17,21 +17,21 @@ Creates Following indexes:
 ```
 1. Download solr 7.3.1(http://archive.apache.org/dist/lucene/solr/7.3.1/)
 2. Uncompress the solr-7.3.1 zip or tar
-3.Through command line go to root directory i.e solr-7.3.1
-4.Create a solr home directory in your machine for eg. at /home/user/solr/solr-home
-5.Execute : bin/solr start -s /home/user/solr/solr-home
-6.Create Cores interactions and interactors as follows:-
-  a.Execute : bin/solr create_core -c interactions
-  b.Execute : bin/solr create_core -c interactors
-7.Add following enteries to your /home/user/solr/solr-home/interactions/conf/managed-schema and /home/user/solr/solr-home/interactors/conf/managed-schema
+3. Through command line go to root directory i.e solr-7.3.1
+4. Create a solr home directory in your machine for eg. at /home/user/solr/solr-home
+5. Execute : bin/solr start -s /home/user/solr/solr-home
+6. Create Cores interactions and interactors as follows:-
+  a. Execute : bin/solr create_core -c interactions
+  b. Execute : bin/solr create_core -c interactors
+7. Add following enteries to your /home/user/solr/solr-home/interactions/conf/managed-schema and /home/user/solr/solr-home/interactors/conf/managed-schema
   a. <field name="text" type="text_en_splitting" multiValued="true" indexed="true" required="true" stored="false"/>
   b. only if not present already : <field name="default" type="text_general" multiValued="true" indexed="true" stored="true"/>
   c. <copyField source="*" dest="text"/>
   d. Configure this as per your needs <copyField source="*" dest="default"/>
-8.Restart solr
+8. Restart solr
   a. Execute: bin/solr stop
   b. Execute: bin/solr start -s /home/user/solr/solr-home
-9.Solr should be up and running at http://localhost:8983/solr
+9. Solr should be up and running at http://localhost:8983/solr
 ```
 
 ### Step for pointing the application to an already running instance of solr for eg. [http://example/solr]:
