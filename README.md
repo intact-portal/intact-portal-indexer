@@ -48,7 +48,7 @@ Creates Following indexes:
    a. Uncomment line and specify the jobs you want to run : spring.batch.job.names=interactorIndexerJob,interactionIndexerJob
    b. Set spring.batch.job.enabled=true
 4. Run intact-portal-indexer/src/main/java/uk/ac/ebi/intact/portal/indexer/IntactPortalIndexerApplication.java 
-5. Check logs, When you see message like 'Indexing complete.'. Check in your solr intance if index is created
+5. Check logs, When you see message like 'Indexing complete.'. Check in your solr instance if index is created
 ```
  
 ## Running the tests
