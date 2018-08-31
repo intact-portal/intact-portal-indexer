@@ -10,7 +10,7 @@ Creates Following indexes:
 
 1. You would need running solr 7.3.1 with 'interactions'  and 'interactors' cores created (Details below)
 2. [jdk 1.8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
-3. Embedded Graph db : Have your own at 'intact-portal-indexer/src/main/resources' or use the one that comes along with git       pull in which case ignore the step 
+3. Embedded Graph db(neo4j) : Have your own at 'intact-portal-indexer/src/main/resources' or use the one that comes along with git       pull in which case ignore the step 
 
 
 ### Steps for running solr at your local: ###
