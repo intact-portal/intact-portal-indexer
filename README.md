@@ -9,7 +9,7 @@ Creates Following indexes:
 ##Prerequisites
 
 1. You would need running solr 7.3.1 with cores created (Details below)
-2. .http://www.oracle.com/technetwork/java/javase/downloads/index.html[jdk 1.8]
+2. [jdk 1.8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 3. Embedded Graph db : Right now embedded at intact-portal-indexer/src/main/resources and comes along with git pull 
 
 
