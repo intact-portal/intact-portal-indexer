@@ -34,7 +34,7 @@ Creates Following indexes:
 9.Solr should be up and running at http://localhost:8983/solr
 ```
 
-### Step for pointing the application to an already running instance of solr for eg. [http://example/solr]
+### Step for pointing the application to an already running instance of solr for eg. [http://example/solr]:
 ```
 1. Open intact-portal-indexer/src/main/resources/application.properties
    a. Update 'spring.data.solr.host' property with your running instance of solr 'http://example/solr'
