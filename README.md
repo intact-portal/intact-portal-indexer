@@ -34,29 +34,53 @@ Creates Following indexes:
 9. Solr should be up and running at http://localhost:8983/solr
 ```
 
-### Step for pointing the application to an already running instance of solr for eg. [http://example/solr]:
+### Have following maven profiles in your mvn settings.xml:
 ```
-1. Open intact-portal-indexer/src/main/resources/application.properties
-   a. Update 'spring.data.solr.host' property with your running instance of solr 'http://example/solr'
+1.
+   <!-- ================================================================ -->
+   <!--                        Solr Indexer Profile Local Unit Test                     -->
+   <!-- ================================================================ -->
+           <profile>
+               <id>ip-solr-indexing-local-unittest</id>
+               <properties>
+                   <graphdb.source>file:@project.basedir@/src/main/resources/graph.db</graphdb.source>
+                   <solr.server>http://localhost:8983/solr</solr.server>
+                   <bj.enabled>false</bj.enabled>
+               </properties>
+           </profile>
+           
+ 2.
+    <!-- ================================================================ -->
+    <!--                        Solr Indexer Profile Local                     -->
+    <!-- ================================================================ -->
+            <profile>
+                <id>ip-solr-indexing-local</id>
+                <properties>
+                    <graphdb.source>file:@project.basedir@/src/main/resources/graph.db</graphdb.source>
+                    <solr.server>http://localhost:8983/solr</solr.server>
+                    <bj.enabled>true</bj.enabled>
+                </properties>
+            </profile>
+
+3. For internal developers there is one more profile called "ip-solr-indexing-hx", please ask a intact developer for the same
+
+    
 ```
+
 ## Quickstart
 
 ```
 1. cd intact-portal-indexer
 2. mvn clean compile
-3. Open intact-portal-indexer/src/main/resources/application.properties
-   a. Uncomment line and specify the jobs you want to run : spring.batch.job.names=interactorIndexerJob,interactionIndexerJob
-   b. Set spring.batch.job.enabled=true
-4. Run intact-portal-indexer/src/main/java/uk/ac/ebi/intact/portal/indexer/IntactPortalIndexerApplication.java 
-5. Check logs, When you see message like 'Indexing complete.'. Check in your solr instance if index is created
+3. Run intact-portal-indexer/src/main/java/uk/ac/ebi/intact/portal/indexer/IntactPortalIndexerApplication.java with maven profile 
+   ip-solr-indexing-local (given above)
+4. Check logs, When you see message like 'Indexing complete.'. Check in your solr instance if index is created
 ```
  
 ## Running the tests
 
 ```
-1. Open intact-portal-indexer/src/main/resources/application.properties
-   a. Set spring.batch.job.enabled=false  
-2. Execute : mvn test
+1. Execute : mvn -Pip-solr-indexing-local-unittest test
 
 ```
 

@@ -18813,3 +18813,858 @@ Storage files: (filename : modification date - size)
 2018-11-22 14:04:33.694+0000 INFO  [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Log pruning complete.
 2018-11-22 14:04:33.757+0000 INFO  [o.n.k.i.DiagnosticsManager] --- STOPPING diagnostics START ---
 2018-11-22 14:04:33.757+0000 INFO  [o.n.k.i.DiagnosticsManager] --- STOPPING diagnostics END ---
+2018-11-22 14:23:00.211+0000 WARN  [o.n.i.p.PageCache] The dbms.memory.pagecache.size setting has not been configured. It is recommended that this setting is always explicitly configured, to ensure the system has a balanced configuration. Until then, a computed heuristic value of 6503884800 bytes will be used instead. 
+2018-11-22 14:23:00.280+0000 INFO  [o.n.k.i.f.CommunityEditionModule] No locking implementation specified, defaulting to 'community'
+2018-11-22 14:23:00.359+0000 INFO  [o.n.k.AvailabilityGuard] Requirement makes database unavailable: Database available
+2018-11-22 14:23:00.381+0000 INFO  [o.n.k.i.DiagnosticsManager] --- INITIALIZED diagnostics START ---
+2018-11-22 14:23:00.381+0000 INFO  [o.n.k.i.DiagnosticsManager] Neo4j Kernel properties:
+2018-11-22 14:23:00.381+0000 INFO  [o.n.k.i.DiagnosticsManager] unsupported.dbms.edition=community
+2018-11-22 14:23:00.381+0000 INFO  [o.n.k.i.DiagnosticsManager] unsupported.dbms.directories.neo4j_home=/home/anjali/intellij_projects/intact-portal-indexer/src/main/resources/graph.db
+2018-11-22 14:23:00.381+0000 INFO  [o.n.k.i.DiagnosticsManager] unsupported.dbms.ephemeral=false
+2018-11-22 14:23:00.382+0000 INFO  [o.n.k.i.DiagnosticsManager] Diagnostics providers:
+2018-11-22 14:23:00.382+0000 INFO  [o.n.k.i.DiagnosticsManager] org.neo4j.kernel.configuration.Config
+2018-11-22 14:23:00.382+0000 INFO  [o.n.k.i.DiagnosticsManager] org.neo4j.kernel.info.DiagnosticsManager
+2018-11-22 14:23:00.382+0000 INFO  [o.n.k.i.DiagnosticsManager] SYSTEM_MEMORY
+2018-11-22 14:23:00.382+0000 INFO  [o.n.k.i.DiagnosticsManager] JAVA_MEMORY
+2018-11-22 14:23:00.382+0000 INFO  [o.n.k.i.DiagnosticsManager] OPERATING_SYSTEM
+2018-11-22 14:23:00.382+0000 INFO  [o.n.k.i.DiagnosticsManager] JAVA_VIRTUAL_MACHINE
+2018-11-22 14:23:00.382+0000 INFO  [o.n.k.i.DiagnosticsManager] CLASSPATH
+2018-11-22 14:23:00.382+0000 INFO  [o.n.k.i.DiagnosticsManager] LIBRARY_PATH
+2018-11-22 14:23:00.382+0000 INFO  [o.n.k.i.DiagnosticsManager] SYSTEM_PROPERTIES
+2018-11-22 14:23:00.382+0000 INFO  [o.n.k.i.DiagnosticsManager] LINUX_SCHEDULERS
+2018-11-22 14:23:00.382+0000 INFO  [o.n.k.i.DiagnosticsManager] NETWORK
+2018-11-22 14:23:00.382+0000 INFO  [o.n.k.i.DiagnosticsManager] System memory information:
+2018-11-22 14:23:00.384+0000 INFO  [o.n.k.i.DiagnosticsManager] Total Physical memory: 15.58 GB
+2018-11-22 14:23:00.384+0000 INFO  [o.n.k.i.DiagnosticsManager] Free Physical memory: 2.29 GB
+2018-11-22 14:23:00.384+0000 INFO  [o.n.k.i.DiagnosticsManager] Committed virtual memory: 7.18 GB
+2018-11-22 14:23:00.384+0000 INFO  [o.n.k.i.DiagnosticsManager] Total swap space: 15.80 GB
+2018-11-22 14:23:00.384+0000 INFO  [o.n.k.i.DiagnosticsManager] Free swap space: 9.72 GB
+2018-11-22 14:23:00.384+0000 INFO  [o.n.k.i.DiagnosticsManager] JVM memory information:
+2018-11-22 14:23:00.385+0000 INFO  [o.n.k.i.DiagnosticsManager] Free  memory: 186.55 MB
+2018-11-22 14:23:00.385+0000 INFO  [o.n.k.i.DiagnosticsManager] Total memory: 438.00 MB
+2018-11-22 14:23:00.385+0000 INFO  [o.n.k.i.DiagnosticsManager] Max   memory: 3.46 GB
+2018-11-22 14:23:00.385+0000 INFO  [o.n.k.i.DiagnosticsManager] Garbage Collector: PS Scavenge: [PS Eden Space, PS Survivor Space]
+2018-11-22 14:23:00.385+0000 INFO  [o.n.k.i.DiagnosticsManager] Garbage Collector: PS MarkSweep: [PS Eden Space, PS Survivor Space, PS Old Gen]
+2018-11-22 14:23:00.385+0000 INFO  [o.n.k.i.DiagnosticsManager] Memory Pool: Code Cache (Non-heap memory): committed=13.81 MB, used=13.76 MB, max=240.00 MB, threshold=0.00 B
+2018-11-22 14:23:00.386+0000 INFO  [o.n.k.i.DiagnosticsManager] Memory Pool: Metaspace (Non-heap memory): committed=40.00 MB, used=38.35 MB, max=-1.00 B, threshold=0.00 B
+2018-11-22 14:23:00.386+0000 INFO  [o.n.k.i.DiagnosticsManager] Memory Pool: Compressed Class Space (Non-heap memory): committed=5.50 MB, used=5.16 MB, max=1.00 GB, threshold=0.00 B
+2018-11-22 14:23:00.386+0000 INFO  [o.n.k.i.DiagnosticsManager] Memory Pool: PS Eden Space (Heap memory): committed=266.50 MB, used=234.06 MB, max=1.26 GB, threshold=?
+2018-11-22 14:23:00.386+0000 INFO  [o.n.k.i.DiagnosticsManager] Memory Pool: PS Survivor Space (Heap memory): committed=18.50 MB, used=0.00 B, max=18.50 MB, threshold=?
+2018-11-22 14:23:00.386+0000 INFO  [o.n.k.i.DiagnosticsManager] Memory Pool: PS Old Gen (Heap memory): committed=153.00 MB, used=17.40 MB, max=2.60 GB, threshold=0.00 B
+2018-11-22 14:23:00.386+0000 INFO  [o.n.k.i.DiagnosticsManager] Operating system information:
+2018-11-22 14:23:00.387+0000 INFO  [o.n.k.i.DiagnosticsManager] Operating System: Linux; version: 3.13.0-46-generic; arch: amd64; cpus: 8
+2018-11-22 14:23:00.387+0000 INFO  [o.n.k.i.DiagnosticsManager] Max number of file descriptors: 4096
+2018-11-22 14:23:00.387+0000 INFO  [o.n.k.i.DiagnosticsManager] Number of open file descriptors: 221
+2018-11-22 14:23:00.387+0000 INFO  [o.n.k.i.DiagnosticsManager] Process id: 12134@choupette
+2018-11-22 14:23:00.387+0000 INFO  [o.n.k.i.DiagnosticsManager] Byte order: LITTLE_ENDIAN
+2018-11-22 14:23:00.387+0000 INFO  [o.n.k.i.DiagnosticsManager] Local timezone: Europe/London
+2018-11-22 14:23:00.387+0000 INFO  [o.n.k.i.DiagnosticsManager] JVM information:
+2018-11-22 14:23:00.387+0000 INFO  [o.n.k.i.DiagnosticsManager] VM Name: Java HotSpot(TM) 64-Bit Server VM
+2018-11-22 14:23:00.387+0000 INFO  [o.n.k.i.DiagnosticsManager] VM Vendor: Oracle Corporation
+2018-11-22 14:23:00.387+0000 INFO  [o.n.k.i.DiagnosticsManager] VM Version: 25.66-b17
+2018-11-22 14:23:00.387+0000 INFO  [o.n.k.i.DiagnosticsManager] JIT compiler: HotSpot 64-Bit Tiered Compilers
+2018-11-22 14:23:00.387+0000 INFO  [o.n.k.i.DiagnosticsManager] VM Arguments: []
+2018-11-22 14:23:00.387+0000 INFO  [o.n.k.i.DiagnosticsManager] Java classpath:
+2018-11-22 14:23:00.389+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/apache/lucene/lucene-core/5.5.0/lucene-core-5.5.0.jar
+2018-11-22 14:23:00.389+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/noggit/noggit/0.6/noggit-0.6.jar
+2018-11-22 14:23:00.389+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/de/codecentric/spring-boot-admin-starter-server/2.0.0/spring-boot-admin-starter-server-2.0.0.jar
+2018-11-22 14:23:00.389+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/apache/lucene/lucene-backward-codecs/5.5.0/lucene-backward-codecs-5.5.0.jar
+2018-11-22 14:23:00.389+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/io/netty/netty-handler/4.1.24.Final/netty-handler-4.1.24.Final.jar
+2018-11-22 14:23:00.389+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/psidev/psi/mi/jami/jami-commons/3.0.19-SNAPSHOT/jami-commons-3.0.19-SNAPSHOT.jar
+2018-11-22 14:23:00.389+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/apache/solr/solr-solrj/6.6.3/solr-solrj-6.6.3.jar
+2018-11-22 14:23:00.389+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/spring-expression/5.0.6.RELEASE/spring-expression-5.0.6.RELEASE.jar
+2018-11-22 14:23:00.389+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/unbescape/unbescape/1.1.5.RELEASE/unbescape-1.1.5.RELEASE.jar
+2018-11-22 14:23:00.389+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.9.5/jackson-module-parameter-names-2.9.5.jar
+2018-11-22 14:23:00.389+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/data/spring-data-commons/2.0.7.RELEASE/spring-data-commons-2.0.7.RELEASE.jar
+2018-11-22 14:23:00.389+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/de/codecentric/spring-boot-admin-client/2.0.0/spring-boot-admin-client-2.0.0.jar
+2018-11-22 14:23:00.389+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.9.5/jackson-datatype-jdk8-2.9.5.jar
+2018-11-22 14:23:00.389+0000 INFO  [o.n.k.i.DiagnosticsManager]  [loader.1] file:/home/anjali/Tools/jdk1.8.0_66/jre/lib/ext/cldrdata.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/boot/spring-boot-starter-data-solr/2.0.2.RELEASE/spring-boot-starter-data-solr-2.0.2.RELEASE.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/neo4j-ogm-embedded-driver/3.1.0/neo4j-ogm-embedded-driver-3.1.0.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/neo4j-cypher/3.1.0/neo4j-cypher-3.1.0.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/scala-lang/scala-reflect/2.11.8/scala-reflect-2.11.8.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/skyscreamer/jsonassert/1.5.0/jsonassert-1.5.0.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/io/micrometer/micrometer-core/1.0.4/micrometer-core-1.0.4.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/boot/spring-boot-starter-logging/2.0.2.RELEASE/spring-boot-starter-logging-2.0.2.RELEASE.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/io/netty/netty-handler-proxy/4.1.24.Final/netty-handler-proxy-4.1.24.Final.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/scala-lang/scala-library/2.11.8/scala-library-2.11.8.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/uk/ac/ebi/intact/search/intact-search-interactions/0.0.1-ANJALI-SNAPSHOT/intact-search-interactions-0.0.1-ANJALI-SNAPSHOT.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/mockito/mockito-core/2.15.0/mockito-core-2.15.0.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/io/projectreactor/addons/reactor-extra/3.1.6.RELEASE/reactor-extra-3.1.6.RELEASE.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/apache/commons/commons-io/1.3.2/commons-io-1.3.2.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/net/bytebuddy/byte-buddy-agent/1.7.11/byte-buddy-agent-1.7.11.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/spring-jcl/5.0.6.RELEASE/spring-jcl-5.0.6.RELEASE.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/hamcrest/hamcrest-library/1.3/hamcrest-library-1.3.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/io/netty/netty-transport/4.1.24.Final/netty-transport-4.1.24.Final.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/de/codecentric/spring-boot-admin-server/2.0.0/spring-boot-admin-server-2.0.0.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/assertj/assertj-core/3.9.1/assertj-core-3.9.1.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/neo4j-primitive-collections/3.1.0/neo4j-primitive-collections-3.1.0.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/com/googlecode/concurrentlinkedhashmap/concurrentlinkedhashmap-lru/1.4.2/concurrentlinkedhashmap-lru-1.4.2.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/hateoas/spring-hateoas/0.24.0.RELEASE/spring-hateoas-0.24.0.RELEASE.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/uk/ac/ebi/intact/graphdb/intact-graphdb/3.0.0-SNAPSHOT/intact-graphdb-3.0.0-SNAPSHOT.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/jboss/logging/jboss-logging/3.3.2.Final/jboss-logging-3.3.2.Final.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/boot/spring-boot-starter-web/2.0.2.RELEASE/spring-boot-starter-web-2.0.2.RELEASE.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/net/minidev/json-smart/2.3/json-smart-2.3.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [bootstrap] /home/anjali/Tools/jdk1.8.0_66/jre/lib/jfr.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/boot/spring-boot-starter-actuator/2.0.2.RELEASE/spring-boot-starter-actuator-2.0.2.RELEASE.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/spring-beans/5.0.6.RELEASE/spring-beans-5.0.6.RELEASE.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/intellij_projects/intact-portal-indexer/target/classes
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/boot/spring-boot-starter-json/2.0.2.RELEASE/spring-boot-starter-json-2.0.2.RELEASE.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/javax/xml/bind/jaxb-api/2.3.0/jaxb-api-2.3.0.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/neo4j-cypher-compiler-3.0/3.0.7/neo4j-cypher-compiler-3.0-3.0.7.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/io/netty/netty-codec-socks/4.1.24.Final/netty-codec-socks-4.1.24.Final.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/boot/spring-boot-actuator-autoconfigure/2.0.2.RELEASE/spring-boot-actuator-autoconfigure-2.0.2.RELEASE.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/neo4j-csv/3.1.0/neo4j-csv-3.1.0.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [bootstrap] /home/anjali/Tools/jdk1.8.0_66/jre/classes
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [loader.1] file:/home/anjali/Tools/jdk1.8.0_66/jre/lib/ext/zipfs.jar
+2018-11-22 14:23:00.390+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/boot/spring-boot/2.0.2.RELEASE/spring-boot-2.0.2.RELEASE.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/neo4j-ogm-core/3.1.0/neo4j-ogm-core-3.1.0.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/com/zaxxer/HikariCP/2.7.9/HikariCP-2.7.9.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [loader.1] file:/home/anjali/Tools/jdk1.8.0_66/jre/lib/ext/sunpkcs11.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/psidev/psi/mi/jami/jami-core/3.0.19-SNAPSHOT/jami-core-3.0.19-SNAPSHOT.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/neo4j-cypher-frontend-3.0/3.0.7/neo4j-cypher-frontend-3.0-3.0.7.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/spring-core/5.0.6.RELEASE/spring-core-5.0.6.RELEASE.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/driver/neo4j-java-driver/1.5.0/neo4j-java-driver-1.5.0.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/junit/junit/4.12/junit-4.12.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/boot/spring-boot-starter-thymeleaf/2.0.2.RELEASE/spring-boot-starter-thymeleaf-2.0.2.RELEASE.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/spring-webflux/5.0.6.RELEASE/spring-webflux-5.0.6.RELEASE.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/data/spring-data-rest-webmvc/3.0.7.RELEASE/spring-data-rest-webmvc-3.0.7.RELEASE.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/io/netty/netty-codec-http/4.1.24.Final/netty-codec-http-4.1.24.Final.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/neo4j-ogm-bolt-driver/3.1.0/neo4j-ogm-bolt-driver-3.1.0.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/batch/spring-batch-infrastructure/4.0.1.RELEASE/spring-batch-infrastructure-4.0.1.RELEASE.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/boot/spring-boot-starter-reactor-netty/2.0.2.RELEASE/spring-boot-starter-reactor-netty-2.0.2.RELEASE.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/net/bytebuddy/byte-buddy/1.7.11/byte-buddy-1.7.11.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/neo4j-jmx/3.1.0/neo4j-jmx-3.1.0.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [bootstrap] /home/anjali/Tools/jdk1.8.0_66/jre/lib/charsets.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/boot/spring-boot-starter-data-neo4j/2.0.2.RELEASE/spring-boot-starter-data-neo4j-2.0.2.RELEASE.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/neo4j-graphdb-api/3.1.0/neo4j-graphdb-api-3.1.0.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/batch/spring-batch-test/4.0.1.RELEASE/spring-batch-test-4.0.1.RELEASE.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/neo4j-logging/3.1.0/neo4j-logging-3.1.0.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/neo4j-common/3.1.0/neo4j-common-3.1.0.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/io/netty/netty-transport-native-unix-common/4.1.24.Final/netty-transport-native-unix-common-4.1.24.Final.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/commons-codec/commons-codec/1.11/commons-codec-1.11.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/neo4j-command-line/3.1.0/neo4j-command-line-3.1.0.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/apache/lucene/lucene-queryparser/5.5.0/lucene-queryparser-5.5.0.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/neo4j-ogm-api/3.1.0/neo4j-ogm-api-3.1.0.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/2.0.2.RELEASE/spring-boot-starter-jdbc-2.0.2.RELEASE.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/neo4j-codegen/3.1.0/neo4j-codegen-3.1.0.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/neo4j-udc/3.1.0/neo4j-udc-3.1.0.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/xmlunit/xmlunit-core/2.5.1/xmlunit-core-2.5.1.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/8.5.31/tomcat-embed-el-8.5.31.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/codehaus/woodstox/stax2-api/3.1.4/stax2-api-3.1.4.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/synchronoss/cloud/nio-multipart-parser/1.1.0/nio-multipart-parser-1.1.0.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/spring-web/5.0.6.RELEASE/spring-web-5.0.6.RELEASE.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/apache/lucene/lucene-analyzers-common/5.5.0/lucene-analyzers-common-5.5.0.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/parboiled/parboiled-scala_2.11/1.1.7/parboiled-scala_2.11-1.1.7.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/8.5.31/tomcat-embed-core-8.5.31.jar
+2018-11-22 14:23:00.391+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/spring-test/5.0.6.RELEASE/spring-test-5.0.6.RELEASE.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/plugin/spring-plugin-core/1.2.0.RELEASE/spring-plugin-core-1.2.0.RELEASE.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/uk/ac/ebi/intact/search/intact-search-interactors/0.0.1-NOE-SNAPSHOT/intact-search-interactors-0.0.1-NOE-SNAPSHOT.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/neo4j/3.1.0/neo4j-3.1.0.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/spring-jdbc/5.0.6.RELEASE/spring-jdbc-5.0.6.RELEASE.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [loader.1] file:/home/anjali/Tools/jdk1.8.0_66/jre/lib/ext/nashorn.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/synchronoss/cloud/nio-stream-storage/1.1.3/nio-stream-storage-1.1.3.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/boot/spring-boot-starter-batch/2.0.2.RELEASE/spring-boot-starter-batch-2.0.2.RELEASE.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/neo4j-unsafe/3.1.0/neo4j-unsafe-3.1.0.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/apache/httpcomponents/httpmime/4.5.5/httpmime-4.5.5.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/boot/spring-boot-starter/2.0.2.RELEASE/spring-boot-starter-2.0.2.RELEASE.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/apache/lucene/lucene-codecs/5.5.0/lucene-codecs-5.5.0.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.9.0/jackson-annotations-2.9.0.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/com/jayway/jsonpath/json-path/2.4.0/json-path-2.4.0.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [loader.1] file:/home/anjali/Tools/jdk1.8.0_66/jre/lib/ext/jfxrt.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/data/spring-data-neo4j/5.0.7.RELEASE/spring-data-neo4j-5.0.7.RELEASE.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/neo4j-dbms/3.1.0/neo4j-dbms-3.1.0.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [loader.0] file:/home/anjali/intellij_projects/intact-portal-indexer/target/surefire/surefirebooter6880442780228894622.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [loader.1] file:/home/anjali/Tools/jdk1.8.0_66/jre/lib/ext/localedata.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/com/sun/istack/istack-commons-runtime/2.16/istack-commons-runtime-2.16.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/batch/spring-batch-core/4.0.1.RELEASE/spring-batch-core-4.0.1.RELEASE.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/net/sf/jgrapht/jgrapht/0.8.3/jgrapht-0.8.3.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [bootstrap] /home/anjali/Tools/jdk1.8.0_66/jre/lib/jce.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/javax/activation/activation/1.1/activation-1.1.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [loader.1] file:/home/anjali/Tools/jdk1.8.0_66/jre/lib/ext/sunjce_provider.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/io/netty/netty-codec/4.1.24.Final/netty-codec-4.1.24.Final.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.10.0/log4j-to-slf4j-2.10.0.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/objenesis/objenesis/2.6/objenesis-2.6.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/commons-lang/commons-lang/2.6/commons-lang-2.6.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/data/spring-data-solr/3.0.7.RELEASE/spring-data-solr-3.0.7.RELEASE.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/spring-tx/5.0.6.RELEASE/spring-tx-5.0.6.RELEASE.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/apache/commons/commons-math3/3.4.1/commons-math3-3.4.1.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/psidev/psi/mi/jami/jami-xml/3.0.19-SNAPSHOT/jami-xml-3.0.19-SNAPSHOT.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/com/sun/xml/bind/jaxb-impl/2.2.7/jaxb-impl-2.2.7.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/io/netty/netty-transport-native-epoll/4.1.24.Final/netty-transport-native-epoll-4.1.24.Final-linux-x86_64.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/apache/commons/commons-pool2/2.5.0/commons-pool2-2.5.0.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.9.5/jackson-datatype-jsr310-2.9.5.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/neo4j-cypher-compiler-2.3/2.3.7/neo4j-cypher-compiler-2.3-2.3.7.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/neo4j-cypher-compiler-3.1/3.1.0/neo4j-cypher-compiler-3.1-3.1.0.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/de/codecentric/spring-boot-admin-starter-client/2.0.0/spring-boot-admin-starter-client-2.0.0.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/boot/spring-boot-starter-test/2.0.2.RELEASE/spring-boot-starter-test-2.0.2.RELEASE.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/io/netty/netty-resolver/4.1.24.Final/netty-resolver-4.1.24.Final.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/attoparser/attoparser/2.0.4.RELEASE/attoparser-2.0.4.RELEASE.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/yaml/snakeyaml/1.19/snakeyaml-1.19.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/thymeleaf/thymeleaf-spring5/3.0.9.RELEASE/thymeleaf-spring5-3.0.9.RELEASE.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/psidev/psi/mi/jami/jami-mitab/3.0.19-SNAPSHOT/jami-mitab-3.0.19-SNAPSHOT.jar
+2018-11-22 14:23:00.392+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.9.5/jackson-core-2.9.5.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/apache/httpcomponents/httpclient/4.5.5/httpclient-4.5.5.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/com/github/ben-manes/caffeine/caffeine/2.6.2/caffeine-2.6.2.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/apache/zookeeper/zookeeper/3.4.10/zookeeper-3.4.10.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/neo4j-consistency-check/3.1.0/neo4j-consistency-check-3.1.0.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/spring-context/5.0.6.RELEASE/spring-context-5.0.6.RELEASE.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/neo4j-graph-matching/3.1.0/neo4j-graph-matching-3.1.0.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/neo4j-resource/3.1.0/neo4j-resource-3.1.0.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/com/sun/xml/fastinfoset/FastInfoset/1.2.12/FastInfoset-1.2.12.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/hdrhistogram/HdrHistogram/2.1.10/HdrHistogram-2.1.10.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/apache/logging/log4j/log4j-api/2.10.0/log4j-api-2.10.0.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/jolokia/jolokia-core/1.5.0/jolokia-core-1.5.0.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/neo4j-kernel/3.1.0/neo4j-kernel-3.1.0.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [bootstrap] /home/anjali/Tools/jdk1.8.0_66/jre/lib/rt.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/javax/validation/validation-api/2.0.1.Final/validation-api-2.0.1.Final.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/neo4j-cypher-frontend-2.3/2.3.7/neo4j-cypher-frontend-2.3-2.3.7.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/8.5.31/tomcat-embed-websocket-8.5.31.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/2.0.2.RELEASE/spring-boot-autoconfigure-2.0.2.RELEASE.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/neo4j-lucene-upgrade/3.1.0/neo4j-lucene-upgrade-3.1.0.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/reactivestreams/reactive-streams/1.0.2/reactive-streams-1.0.2.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/boot/spring-boot-actuator/2.0.2.RELEASE/spring-boot-actuator-2.0.2.RELEASE.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/2.0.2.RELEASE/spring-boot-test-autoconfigure-2.0.2.RELEASE.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/retry/spring-retry/1.2.2.RELEASE/spring-retry-1.2.2.RELEASE.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/boot/spring-boot-starter-data-rest/2.0.2.RELEASE/spring-boot-starter-data-rest-2.0.2.RELEASE.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/com/fasterxml/classmate/1.3.4/classmate-1.3.4.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/boot/spring-boot-test/2.0.2.RELEASE/spring-boot-test-2.0.2.RELEASE.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/neo4j-cypher-frontend-3.1/3.1.0/neo4j-cypher-frontend-3.1-3.1.0.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/parboiled/parboiled-core/1.1.7/parboiled-core-1.1.7.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/intellij_projects/intact-portal-indexer/target/test-classes
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/slf4j/jul-to-slf4j/1.7.25/jul-to-slf4j-1.7.25.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [loader.1] file:/home/anjali/Tools/jdk1.8.0_66/jre/lib/ext/dnsns.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [bootstrap] /home/anjali/Tools/jdk1.8.0_66/jre/lib/sunrsasign.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/spring-context-support/5.0.6.RELEASE/spring-context-support-5.0.6.RELEASE.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/de/codecentric/spring-boot-admin-server-ui/2.0.0/spring-boot-admin-server-ui-2.0.0.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/neo4j-import-tool/3.1.0/neo4j-import-tool-3.1.0.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/javax/xml/bind/jsr173_api/1.0/jsr173_api-1.0.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/javax/annotation/javax.annotation-api/1.3.2/javax.annotation-api-1.3.2.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/data/spring-data-rest-core/3.0.7.RELEASE/spring-data-rest-core-3.0.7.RELEASE.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/apache/httpcomponents/httpcore/4.4.9/httpcore-4.4.9.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/codehaus/woodstox/woodstox-core-asl/4.4.1/woodstox-core-asl-4.4.1.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/io/netty/netty-common/4.1.24.Final/netty-common-4.1.24.Final.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/neo4j-io/3.1.0/neo4j-io-3.1.0.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/commons-io/commons-io/2.6/commons-io-2.6.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/com/sun/mail/javax.mail/1.6.1/javax.mail-1.6.1.jar
+2018-11-22 14:23:00.393+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/spring-webmvc/5.0.6.RELEASE/spring-webmvc-5.0.6.RELEASE.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/io/github/lukehutch/fast-classpath-scanner/2.7.4/fast-classpath-scanner-2.7.4.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager]  [loader.1] file:/home/anjali/Tools/jdk1.8.0_66/jre/lib/ext/jaccess.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager]  [bootstrap] /home/anjali/Tools/jdk1.8.0_66/jre/lib/resources.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/net/minidev/accessors-smart/1.2/accessors-smart-1.2.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/boot/spring-boot-starter-mail/2.0.2.RELEASE/spring-boot-starter-mail-2.0.2.RELEASE.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/spring-aop/5.0.6.RELEASE/spring-aop-5.0.6.RELEASE.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/ow2/asm/asm/5.0.4/asm-5.0.4.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/apache/commons/commons-lang3/3.7/commons-lang3-3.7.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/io/netty/netty-buffer/4.1.24.Final/netty-buffer-4.1.24.Final.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/apache/commons/commons-compress/1.12/commons-compress-1.12.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/com/sun/xml/bind/jaxb-core/2.2.7/jaxb-core-2.2.7.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/thymeleaf/thymeleaf/3.0.9.RELEASE/thymeleaf-3.0.9.RELEASE.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/atteo/evo-inflector/1.2.2/evo-inflector-1.2.2.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/io/projectreactor/reactor-core/3.1.7.RELEASE/reactor-core-3.1.7.RELEASE.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/hibernate/validator/hibernate-validator/6.0.9.Final/hibernate-validator-6.0.9.Final.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/net/sf/opencsv/opencsv/2.3/opencsv-2.3.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.9.5/jackson-databind-2.9.5.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/net/java/dev/stax-utils/stax-utils/20070216/stax-utils-20070216.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/codehaus/jettison/jettison/1.2/jettison-1.2.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/neo4j-graph-algo/3.1.0/neo4j-graph-algo-3.1.0.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/thymeleaf/extras/thymeleaf-extras-java8time/3.0.1.RELEASE/thymeleaf-extras-java8time-3.0.1.RELEASE.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/neo4j-lucene-index/3.1.0/neo4j-lucene-index-3.1.0.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/neo4j/neo4j-collections/3.1.0/neo4j-collections-3.1.0.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/boot/spring-boot-starter-webflux/2.0.2.RELEASE/spring-boot-starter-webflux-2.0.2.RELEASE.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager]  [bootstrap] /home/anjali/Tools/jdk1.8.0_66/jre/lib/jsse.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/javax/batch/javax.batch-api/1.0/javax.batch-api-1.0.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/2.0.2.RELEASE/spring-boot-starter-tomcat-2.0.2.RELEASE.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager]  [loader.1] file:/home/anjali/Tools/jdk1.8.0_66/jre/lib/ext/sunec.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/com/h2database/h2/1.4.197/h2-1.4.197.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager]  [classpath] /home/anjali/.m2/repository/io/projectreactor/ipc/reactor-netty/0.7.7.RELEASE/reactor-netty-0.7.7.RELEASE.jar
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager] Library path:
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager] /home/anjali/intellij_projects/intact-portal-indexer
+2018-11-22 14:23:00.394+0000 INFO  [o.n.k.i.DiagnosticsManager] /home/anjali/intellij_projects/intact-portal-indexer
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] /usr/java/packages/lib/amd64
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] /usr/lib64
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] /lib64
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] /lib
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] /usr/lib
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] System.properties:
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] sun.boot.library.path = /home/anjali/Tools/jdk1.8.0_66/jre/lib/amd64
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] path.separator = :
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] file.encoding.pkg = sun.io
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] user.country = GB
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] sun.java.launcher = SUN_STANDARD
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] sun.os.patch.level = unknown
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] PID = 12134
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] user.dir = /home/anjali/intellij_projects/intact-portal-indexer
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] basedir = /home/anjali/intellij_projects/intact-portal-indexer
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] surefire.real.class.path = /home/anjali/intellij_projects/intact-portal-indexer/target/surefire/surefirebooter6880442780228894622.jar
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] sun.jnu.encoding = UTF-8
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] spring.beaninfo.ignore = true
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] surefire.test.class.path = /home/anjali/intellij_projects/intact-portal-indexer/target/test-classes:/home/anjali/intellij_projects/intact-portal-indexer/target/classes:/home/anjali/.m2/repository/org/springframework/boot/spring-boot-starter-batch/2.0.2.RELEASE/spring-boot-starter-batch-2.0.2.RELEASE.jar:/home/anjali/.m2/repository/org/springframework/boot/spring-boot-starter/2.0.2.RELEASE/spring-boot-starter-2.0.2.RELEASE.jar:/home/anjali/.m2/repository/org/springframework/boot/spring-boot/2.0.2.RELEASE/spring-boot-2.0.2.RELEASE.jar:/home/anjali/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/2.0.2.RELEASE/spring-boot-autoconfigure-2.0.2.RELEASE.jar:/home/anjali/.m2/repository/org/springframework/boot/spring-boot-starter-logging/2.0.2.RELEASE/spring-boot-starter-logging-2.0.2.RELEASE.jar:/home/anjali/.m2/repository/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.jar:/home/anjali/.m2/repository/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3.jar:/home/anjali/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.10.0/log4j-to-slf4j-2.10.0.jar:/home/anjali/.m2/repository/org/apache/logging/log4j/log4j-api/2.10.0/log4j-api-2.10.0.jar:/home/anjali/.m2/repository/org/slf4j/jul-to-slf4j/1.7.25/jul-to-slf4j-1.7.25.jar:/home/anjali/.m2/repository/javax/annotation/javax.annotation-api/1.3.2/javax.annotation-api-1.3.2.jar:/home/anjali/.m2/repository/org/yaml/snakeyaml/1.19/snakeyaml-1.19.jar:/home/anjali/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/2.0.2.RELEASE/spring-boot-starter-jdbc-2.0.2.RELEASE.jar:/home/anjali/.m2/repository/com/zaxxer/HikariCP/2.7.9/HikariCP-2.7.9.jar:/home/anjali/.m2/repository/org/springframework/batch/spring-batch-core/4.0.1.RELEASE/spring-batch-core-4.0.1.RELEASE.jar:/home/anjali/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.9.5/jackson-databind-2.9.5.jar:/home/anjali/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.9.0/jackson-annotations-2.9.0.jar:/home/anjali/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.9.5/jackson-core-2.9.5.jar:/home/anjali/.m2/repository/javax/batch/javax.batch-api/1.0/javax.batch-api-1.0.jar:/home/anjali/.m2/repository/org/codehaus/jettison/jettison/1.2/jettison-1.2.jar:/home/anjali/.m2/repository/org/springframework/batch/spring-batch-infrastructure/4.0.1.RELEASE/spring-batch-infrastructure-4.0.1.RELEASE.jar:/home/anjali/.m2/repository/org/springframework/retry/spring-retry/1.2.2.RELEASE/spring-retry-1.2.2.RELEASE.jar:/home/anjali/.m2/repository/org/springframework/spring-aop/5.0.6.RELEASE/spring-aop-5.0.6.RELEASE.jar:/home/anjali/.m2/repository/org/springframework/spring-beans/5.0.6.RELEASE/spring-beans-5.0.6.RELEASE.jar:/home/anjali/.m2/repository/org/springframework/spring-tx/5.0.6.RELEASE/spring-tx-5.0.6.RELEASE.jar:/home/anjali/.m2/repository/org/springframework/boot/spring-boot-starter-data-neo4j/2.0.2.RELEASE/spring-boot-starter-data-neo4j-2.0.2.RELEASE.jar:/home/anjali/.m2/repository/org/springframework/data/spring-data-neo4j/5.0.7.RELEASE/spring-data-neo4j-5.0.7.RELEASE.jar:/home/anjali/.m2/repository/org/springframework/data/spring-data-commons/2.0.7.RELEASE/spring-data-commons-2.0.7.RELEASE.jar:/home/anjali/.m2/repository/org/neo4j/neo4j-ogm-bolt-driver/3.1.0/neo4j-ogm-bolt-driver-3.1.0.jar:/home/anjali/.m2/repository/org/neo4j/driver/neo4j-java-driver/1.5.0/neo4j-java-driver-1.5.0.jar:/home/anjali/.m2/repository/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar:/home/anjali/.m2/repository/org/springframework/boot/spring-boot-starter-data-solr/2.0.2.RELEASE/spring-boot-starter-data-solr-2.0.2.RELEASE.jar:/home/anjali/.m2/repository/org/apache/solr/solr-solrj/6.6.3/solr-solrj-6.6.3.jar:/home/anjali/.m2/repository/org/apache/commons/commons-math3/3.4.1/commons-math3-3.4.1.jar:/home/anjali/.m2/repository/org/apache/httpcomponents/httpclient/4.5.5/httpclient-4.5.5.jar:/home/anjali/.m2/repository/org/apache/httpcomponents/httpcore/4.4.9/httpcore-4.4.9.jar:/home/anjali/.m2/repository/org/apache/zookeeper/zookeeper/3.4.10/zookeeper-3.4.10.jar:/home/anjali/.m2/repository/org/codehaus/woodstox/stax2-api/3.1.4/stax2-api-3.1.4.jar:/home/anjali/.m2/repository/org/codehaus/woodstox/woodstox-core-asl/4.4.1/woodstox-core-asl-4.4.1.jar:/home/anjali/.m2/repository/org/noggit/noggit/0.6/noggit-0.6.jar:/home/anjali/.m2/repository/org/springframework/data/spring-data-solr/3.0.7.RELEASE/spring-data-solr-3.0.7.RELEASE.jar:/home/anjali/.m2/repository/org/apache/commons/commons-lang3/3.7/commons-lang3-3.7.jar:/home/anjali/.m2/repository/org/apache/httpcomponents/httpmime/4.5.5/httpmime-4.5.5.jar:/home/anjali/.m2/repository/org/springframework/boot/spring-boot-starter-mail/2.0.2.RELEASE/spring-boot-starter-mail-2.0.2.RELEASE.jar:/home/anjali/.m2/repository/org/springframework/spring-context/5.0.6.RELEASE/spring-context-5.0.6.RELEASE.jar:/home/anjali/.m2/repository/org/springframework/spring-expression/5.0.6.RELEASE/spring-expression-5.0.6.RELEASE.jar:/home/anjali/.m2/repository/org/springframework/spring-context-support/5.0.6.RELEASE/spring-context-support-5.0.6.RELEASE.jar:/home/anjali/.m2/repository/com/sun/mail/javax.mail/1.6.1/javax.mail-1.6.1.jar:/home/anjali/.m2/repository/javax/activation/activation/1.1/activation-1.1.jar:/home/anjali/.m2/repository/de/codecentric/spring-boot-admin-starter-client/2.0.0/spring-boot-admin-starter-client-2.0.0.jar:/home/anjali/.m2/repository/de/codecentric/spring-boot-admin-client/2.0.0/spring-boot-admin-client-2.0.0.jar:/home/anjali/.m2/repository/org/springframework/boot/spring-boot-starter-actuator/2.0.2.RELEASE/spring-boot-starter-actuator-2.0.2.RELEASE.jar:/home/anjali/.m2/repository/org/springframework/boot/spring-boot-actuator-autoconfigure/2.0.2.RELEASE/spring-boot-actuator-autoconfigure-2.0.2.RELEASE.jar:/home/anjali/.m2/repository/org/springframework/boot/spring-boot-actuator/2.0.2.RELEASE/spring-boot-actuator-2.0.2.RELEASE.jar:/home/anjali/.m2/repository/io/micrometer/micrometer-core/1.0.4/micrometer-core-1.0.4.jar:/home/anjali/.m2/repository/org/hdrhistogram/HdrHistogram/2.1.10/HdrHistogram-2.1.10.jar:/home/anjali/.m2/repository/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar:/home/anjali/.m2/repository/org/springframework/spring-web/5.0.6.RELEASE/spring-web-5.0.6.RELEASE.jar:/home/anjali/.m2/repository/org/jolokia/jolokia-core/1.5.0/jolokia-core-1.5.0.jar:/home/anjali/.m2/repository/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar:/home/anjali/.m2/repository/de/codecentric/spring-boot-admin-starter-server/2.0.0/spring-boot-admin-starter-server-2.0.0.jar:/home/anjali/.m2/repository/de/codecentric/spring-boot-admin-server/2.0.0/spring-boot-admin-server-2.0.0.jar:/home/anjali/.m2/repository/org/springframework/boot/spring-boot-starter-webflux/2.0.2.RELEASE/spring-boot-starter-webflux-2.0.2.RELEASE.jar:/home/anjali/.m2/repository/org/springframework/boot/spring-boot-starter-reactor-netty/2.0.2.RELEASE/spring-boot-starter-reactor-netty-2.0.2.RELEASE.jar:/home/anjali/.m2/repository/io/projectreactor/ipc/reactor-netty/0.7.7.RELEASE/reactor-netty-0.7.7.RELEASE.jar:/home/anjali/.m2/repository/io/netty/netty-codec-http/4.1.24.Final/netty-codec-http-4.1.24.Final.jar:/home/anjali/.m2/repository/io/netty/netty-codec/4.1.24.Final/netty-codec-4.1.24.Final.jar:/home/anjali/.m2/repository/io/netty/netty-handler/4.1.24.Final/netty-handler-4.1.24.Final.jar:/home/anjali/.m2/repository/io/netty/netty-buffer/4.1.24.Final/netty-buffer-4.1.24.Final.jar:/home/anjali/.m2/repository/io/netty/netty-transport/4.1.24.Final/netty-transport-4.1.24.Final.jar:/home/anjali/.m2/repository/io/netty/netty-resolver/4.1.24.Final/netty-resolver-4.1.24.Final.jar:/home/anjali/.m2/repository/io/netty/netty-handler-proxy/4.1.24.Final/netty-handler-proxy-4.1.24.Final.jar:/home/anjali/.m2/repository/io/netty/netty-codec-socks/4.1.24.Final/netty-codec-socks-4.1.24.Final.jar:/home/anjali/.m2/repository/io/netty/netty-transport-native-epoll/4.1.24.Final/netty-transport-native-epoll-4.1.24.Final-linux-x86_64.jar:/home/anjali/.m2/repository/io/netty/netty-common/4.1.24.Final/netty-common-4.1.24.Final.jar:/home/anjali/.m2/repository/io/netty/netty-transport-native-unix-common/4.1.24.Final/netty-transport-native-unix-common-4.1.24.Final.jar:/home/anjali/.m2/repository/org/springframework/spring-webflux/5.0.6.RELEASE/spring-webflux-5.0.6.RELEASE.jar:/home/anjali/.m2/repository/org/synchronoss/cloud/nio-multipart-parser/1.1.0/nio-multipart-parser-1.1.0.jar:/home/anjali/.m2/repository/org/synchronoss/cloud/nio-stream-storage/1.1.3/nio-stream-storage-1.1.3.jar:/home/anjali/.m2/repository/org/springframework/boot/spring-boot-starter-thymeleaf/2.0.2.RELEASE/spring-boot-starter-thymeleaf-2.0.2.RELEASE.jar:/home/anjali/.m2/repository/org/thymeleaf/thymeleaf-spring5/3.0.9.RELEASE/thymeleaf-spring5-3.0.9.RELEASE.jar:/home/anjali/.m2/repository/org/thymeleaf/thymeleaf/3.0.9.RELEASE/thymeleaf-3.0.9.RELEASE.jar:/home/anjali/.m2/repository/org/attoparser/attoparser/2.0.4.RELEASE/attoparser-2.0.4.RELEASE.jar:/home/anjali/.m2/repository/org/unbescape/unbescape/1.1.5.RELEASE/unbescape-1.1.5.RELEASE.jar:/home/anjali/.m2/repository/org/thymeleaf/extras/thymeleaf-extras-java8time/3.0.1.RELEASE/thymeleaf-extras-java8time-3.0.1.RELEASE.jar:/home/anjali/.m2/repository/io/projectreactor/addons/reactor-extra/3.1.6.RELEASE/reactor-extra-3.1.6.RELEASE.jar:/home/anjali/.m2/repository/io/projectreactor/reactor-core/3.1.7.RELEASE/reactor-core-3.1.7.RELEASE.jar:/home/anjali/.m2/repository/org/reactivestreams/reactive-streams/1.0.2/reactive-streams-1.0.2.jar:/home/anjali/.m2/repository/de/codecentric/spring-boot-admin-server-ui/2.0.0/spring-boot-admin-server-ui-2.0.0.jar:/home/anjali/.m2/repository/org/neo4j/neo4j/3.1.0/neo4j-3.1.0.jar:/home/anjali/.m2/repository/org/neo4j/neo4j-kernel/3.1.0/neo4j-kernel-3.1.0.jar:/home/anjali/.m2/repository/org/neo4j/neo4j-graphdb-api/3.1.0/neo4j-graphdb-api-3.1.0.jar:/home/anjali/.m2/repository/org/neo4j/neo4j-resource/3.1.0/neo4j-resource-3.1.0.jar:/home/anjali/.m2/repository/org/neo4j/neo4j-common/3.1.0/neo4j-common-3.1.0.jar:/home/anjali/.m2/repository/org/neo4j/neo4j-collections/3.1.0/neo4j-collections-3.1.0.jar:/home/anjali/.m2/repository/org/neo4j/neo4j-primitive-collections/3.1.0/neo4j-primitive-collections-3.1.0.jar:/home/anjali/.m2/repository/org/neo4j/neo4j-unsafe/3.1.0/neo4j-unsafe-3.1.0.jar:/home/anjali/.m2/repository/org/neo4j/neo4j-io/3.1.0/neo4j-io-3.1.0.jar:/home/anjali/.m2/repository/org/neo4j/neo4j-csv/3.1.0/neo4j-csv-3.1.0.jar:/home/anjali/.m2/repository/org/neo4j/neo4j-logging/3.1.0/neo4j-logging-3.1.0.jar:/home/anjali/.m2/repository/org/neo4j/neo4j-lucene-upgrade/3.1.0/neo4j-lucene-upgrade-3.1.0.jar:/home/anjali/.m2/repository/org/apache/lucene/lucene-backward-codecs/5.5.0/lucene-backward-codecs-5.5.0.jar:/home/anjali/.m2/repository/org/neo4j/neo4j-lucene-index/3.1.0/neo4j-lucene-index-3.1.0.jar:/home/anjali/.m2/repository/org/apache/lucene/lucene-analyzers-common/5.5.0/lucene-analyzers-common-5.5.0.jar:/home/anjali/.m2/repository/org/apache/lucene/lucene-core/5.5.0/lucene-core-5.5.0.jar:/home/anjali/.m2/repository/org/apache/lucene/lucene-queryparser/5.5.0/lucene-queryparser-5.5.0.jar:/home/anjali/.m2/repository/org/apache/lucene/lucene-codecs/5.5.0/lucene-codecs-5.5.0.jar:/home/anjali/.m2/repository/org/neo4j/neo4j-graph-algo/3.1.0/neo4j-graph-algo-3.1.0.jar:/home/anjali/.m2/repository/org/neo4j/neo4j-udc/3.1.0/neo4j-udc-3.1.0.jar:/home/anjali/.m2/repository/org/neo4j/neo4j-graph-matching/3.1.0/neo4j-graph-matching-3.1.0.jar:/home/anjali/.m2/repository/org/neo4j/neo4j-cypher/3.1.0/neo4j-cypher-3.1.0.jar:/home/anjali/.m2/repository/org/scala-lang/scala-library/2.11.8/scala-library-2.11.8.jar:/home/anjali/.m2/repository/org/scala-lang/scala-reflect/2.11.8/scala-reflect-2.11.8.jar:/home/anjali/.m2/repository/org/neo4j/neo4j-codegen/3.1.0/neo4j-codegen-3.1.0.jar:/home/anjali/.m2/repository/org/ow2/asm/asm/5.0.4/asm-5.0.4.jar:/home/anjali/.m2/repository/org/neo4j/neo4j-cypher-compiler-2.3/2.3.7/neo4j-cypher-compiler-2.3-2.3.7.jar:/home/anjali/.m2/repository/org/neo4j/neo4j-cypher-frontend-2.3/2.3.7/neo4j-cypher-frontend-2.3-2.3.7.jar:/home/anjali/.m2/repository/com/googlecode/concurrentlinkedhashmap/concurrentlinkedhashmap-lru/1.4.2/concurrentlinkedhashmap-lru-1.4.2.jar:/home/anjali/.m2/repository/org/neo4j/neo4j-cypher-compiler-3.0/3.0.7/neo4j-cypher-compiler-3.0-3.0.7.jar:/home/anjali/.m2/repository/org/neo4j/neo4j-cypher-frontend-3.0/3.0.7/neo4j-cypher-frontend-3.0-3.0.7.jar:/home/anjali/.m2/repository/org/neo4j/neo4j-cypher-compiler-3.1/3.1.0/neo4j-cypher-compiler-3.1-3.1.0.jar:/home/anjali/.m2/repository/org/neo4j/neo4j-cypher-frontend-3.1/3.1.0/neo4j-cypher-frontend-3.1-3.1.0.jar:/home/anjali/.m2/repository/com/github/ben-manes/caffeine/caffeine/2.6.2/caffeine-2.6.2.jar:/home/anjali/.m2/repository/org/parboiled/parboiled-scala_2.11/1.1.7/parboiled-scala_2.11-1.1.7.jar:/home/anjali/.m2/repository/org/parboiled/parboiled-core/1.1.7/parboiled-core-1.1.7.jar:/home/anjali/.m2/repository/net/sf/opencsv/opencsv/2.3/opencsv-2.3.jar:/home/anjali/.m2/repository/org/neo4j/neo4j-jmx/3.1.0/neo4j-jmx-3.1.0.jar:/home/anjali/.m2/repository/org/neo4j/neo4j-consistency-check/3.1.0/neo4j-consistency-check-3.1.0.jar:/home/anjali/.m2/repository/org/neo4j/neo4j-command-line/3.1.0/neo4j-command-line-3.1.0.jar:/home/anjali/.m2/repository/org/neo4j/neo4j-dbms/3.1.0/neo4j-dbms-3.1.0.jar:/home/anjali/.m2/repository/org/neo4j/neo4j-import-tool/3.1.0/neo4j-import-tool-3.1.0.jar:/home/anjali/.m2/repository/org/apache/commons/commons-compress/1.12/commons-compress-1.12.jar:/home/anjali/.m2/repository/uk/ac/ebi/intact/graphdb/intact-graphdb/3.0.0-SNAPSHOT/intact-graphdb-3.0.0-SNAPSHOT.jar:/home/anjali/.m2/repository/org/springframework/boot/spring-boot-starter-data-rest/2.0.2.RELEASE/spring-boot-starter-data-rest-2.0.2.RELEASE.jar:/home/anjali/.m2/repository/org/springframework/boot/spring-boot-starter-json/2.0.2.RELEASE/spring-boot-starter-json-2.0.2.RELEASE.jar:/home/anjali/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.9.5/jackson-datatype-jdk8-2.9.5.jar:/home/anjali/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.9.5/jackson-datatype-jsr310-2.9.5.jar:/home/anjali/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.9.5/jackson-module-parameter-names-2.9.5.jar:/home/anjali/.m2/repository/org/springframework/data/spring-data-rest-webmvc/3.0.7.RELEASE/spring-data-rest-webmvc-3.0.7.RELEASE.jar:/home/anjali/.m2/repository/org/springframework/data/spring-data-rest-core/3.0.7.RELEASE/spring-data-rest-core-3.0.7.RELEASE.jar:/home/anjali/.m2/repository/org/springframework/hateoas/spring-hateoas/0.24.0.RELEASE/spring-hateoas-0.24.0.RELEASE.jar:/home/anjali/.m2/repository/org/springframework/plugin/spring-plugin-core/1.2.0.RELEASE/spring-plugin-core-1.2.0.RELEASE.jar:/home/anjali/.m2/repository/org/atteo/evo-inflector/1.2.2/evo-inflector-1.2.2.jar:/home/anjali/.m2/repository/psidev/psi/mi/jami/jami-commons/3.0.19-SNAPSHOT/jami-commons-3.0.19-SNAPSHOT.jar:/home/anjali/.m2/repository/psidev/psi/mi/jami/jami-mitab/3.0.19-SNAPSHOT/jami-mitab-3.0.19-SNAPSHOT.jar:/home/anjali/.m2/repository/psidev/psi/mi/jami/jami-core/3.0.19-SNAPSHOT/jami-core-3.0.19-SNAPSHOT.jar:/home/anjali/.m2/repository/net/sf/jgrapht/jgrapht/0.8.3/jgrapht-0.8.3.jar:/home/anjali/.m2/repository/psidev/psi/mi/jami/jami-xml/3.0.19-SNAPSHOT/jami-xml-3.0.19-SNAPSHOT.jar:/home/anjali/.m2/repository/javax/xml/bind/jaxb-api/2.3.0/jaxb-api-2.3.0.jar:/home/anjali/.m2/repository/com/sun/xml/bind/jaxb-impl/2.2.7/jaxb-impl-2.2.7.jar:/home/anjali/.m2/repository/com/sun/xml/bind/jaxb-core/2.2.7/jaxb-core-2.2.7.jar:/home/anjali/.m2/repository/com/sun/istack/istack-commons-runtime/2.16/istack-commons-runtime-2.16.jar:/home/anjali/.m2/repository/com/sun/xml/fastinfoset/FastInfoset/1.2.12/FastInfoset-1.2.12.jar:/home/anjali/.m2/repository/javax/xml/bind/jsr173_api/1.0/jsr173_api-1.0.jar:/home/anjali/.m2/repository/net/java/dev/stax-utils/stax-utils/20070216/stax-utils-20070216.jar:/home/anjali/.m2/repository/commons-lang/commons-lang/2.6/commons-lang-2.6.jar:/home/anjali/.m2/repository/org/apache/commons/commons-io/1.3.2/commons-io-1.3.2.jar:/home/anjali/.m2/repository/org/apache/commons/commons-pool2/2.5.0/commons-pool2-2.5.0.jar:/home/anjali/.m2/repository/uk/ac/ebi/intact/search/intact-search-interactors/0.0.1-NOE-SNAPSHOT/intact-search-interactors-0.0.1-NOE-SNAPSHOT.jar:/home/anjali/.m2/repository/org/springframework/boot/spring-boot-starter-web/2.0.2.RELEASE/spring-boot-starter-web-2.0.2.RELEASE.jar:/home/anjali/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/2.0.2.RELEASE/spring-boot-starter-tomcat-2.0.2.RELEASE.jar:/home/anjali/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/8.5.31/tomcat-embed-core-8.5.31.jar:/home/anjali/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/8.5.31/tomcat-embed-el-8.5.31.jar:/home/anjali/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/8.5.31/tomcat-embed-websocket-8.5.31.jar:/home/anjali/.m2/repository/org/hibernate/validator/hibernate-validator/6.0.9.Final/hibernate-validator-6.0.9.Final.jar:/home/anjali/.m2/repository/javax/validation/validation-api/2.0.1.Final/validation-api-2.0.1.Final.jar:/home/anjali/.m2/repository/org/jboss/logging/jboss-logging/3.3.2.Final/jboss-logging-3.3.2.Final.jar:/home/anjali/.m2/repository/com/fasterxml/classmate/1.3.4/classmate-1.3.4.jar:/home/anjali/.m2/repository/org/springframework/spring-webmvc/5.0.6.RELEASE/spring-webmvc-5.0.6.RELEASE.jar:/home/anjali/.m2/repository/uk/ac/ebi/intact/search/intact-search-interactions/0.0.1-ANJALI-SNAPSHOT/intact-search-interactions-0.0.1-ANJALI-SNAPSHOT.jar:/home/anjali/.m2/repository/com/h2database/h2/1.4.197/h2-1.4.197.jar:/home/anjali/.m2/repository/org/springframework/boot/spring-boot-starter-test/2.0.2.RELEASE/spring-boot-starter-test-2.0.2.RELEASE.jar:/home/anjali/.m2/repository/org/springframework/boot/spring-boot-test/2.0.2.RELEASE/spring-boot-test-2.0.2.RELEASE.jar:/home/anjali/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/2.0.2.RELEASE/spring-boot-test-autoconfigure-2.0.2.RELEASE.jar:/home/anjali/.m2/repository/com/jayway/jsonpath/json-path/2.4.0/json-path-2.4.0.jar:/home/anjali/.m2/repository/net/minidev/json-smart/2.3/json-smart-2.3.jar:/home/anjali/.m2/repository/net/minidev/accessors-smart/1.2/accessors-smart-1.2.jar:/home/anjali/.m2/repository/junit/junit/4.12/junit-4.12.jar:/home/anjali/.m2/repository/org/assertj/assertj-core/3.9.1/assertj-core-3.9.1.jar:/home/anjali/.m2/repository/org/mockito/mockito-core/2.15.0/mockito-core-2.15.0.jar:/home/anjali/.m2/repository/net/bytebuddy/byte-buddy/1.7.11/byte-buddy-1.7.11.jar:/home/anjali/.m2/repository/net/bytebuddy/byte-buddy-agent/1.7.11/byte-buddy-agent-1.7.11.jar:/home/anjali/.m2/repository/org/objenesis/objenesis/2.6/objenesis-2.6.jar:/home/anjali/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/home/anjali/.m2/repository/org/hamcrest/hamcrest-library/1.3/hamcrest-library-1.3.jar:/home/anjali/.m2/repository/org/skyscreamer/jsonassert/1.5.0/jsonassert-1.5.0.jar:/home/anjali/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/home/anjali/.m2/repository/org/springframework/spring-core/5.0.6.RELEASE/spring-core-5.0.6.RELEASE.jar:/home/anjali/.m2/repository/org/springframework/spring-jcl/5.0.6.RELEASE/spring-jcl-5.0.6.RELEASE.jar:/home/anjali/.m2/repository/org/springframework/spring-test/5.0.6.RELEASE/spring-test-5.0.6.RELEASE.jar:/home/anjali/.m2/repository/org/xmlunit/xmlunit-core/2.5.1/xmlunit-core-2.5.1.jar:/home/anjali/.m2/repository/org/springframework/batch/spring-batch-test/4.0.1.RELEASE/spring-batch-test-4.0.1.RELEASE.jar:/home/anjali/.m2/repository/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.jar:/home/anjali/.m2/repository/commons-io/commons-io/2.6/commons-io-2.6.jar:/home/anjali/.m2/repository/org/springframework/spring-jdbc/5.0.6.RELEASE/spring-jdbc-5.0.6.RELEASE.jar:/home/anjali/.m2/repository/org/neo4j/neo4j-ogm-embedded-driver/3.1.0/neo4j-ogm-embedded-driver-3.1.0.jar:/home/anjali/.m2/repository/org/neo4j/neo4j-ogm-api/3.1.0/neo4j-ogm-api-3.1.0.jar:/home/anjali/.m2/repository/commons-codec/commons-codec/1.11/commons-codec-1.11.jar:/home/anjali/.m2/repository/org/neo4j/neo4j-ogm-core/3.1.0/neo4j-ogm-core-3.1.0.jar:/home/anjali/.m2/repository/io/github/lukehutch/fast-classpath-scanner/2.7.4/fast-classpath-scanner-2.7.4.jar:
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] sun.management.compiler = HotSpot 64-Bit Tiered Compilers
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] user.home = /home/anjali
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] user.timezone = Europe/London
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] file.encoding = UTF-8
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] user.name = anjali
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] sun.java.command = /home/anjali/intellij_projects/intact-portal-indexer/target/surefire/surefirebooter6880442780228894622.jar /home/anjali/intellij_projects/intact-portal-indexer/target/surefire 2018-11-22T14-22-56_294-jvmRun1 surefire6433639857837520030tmp surefire_02938977961613464159tmp
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] sun.arch.data.model = 64
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] user.language = en
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] awt.toolkit = sun.awt.X11.XToolkit
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] localRepository = /home/anjali/.m2/repository
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] file.separator = /
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] sun.io.unicode.encoding = UnicodeLittle
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] sun.cpu.endian = little
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] sun.desktop = gnome
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] sun.cpu.isalist = 
+2018-11-22 14:23:00.395+0000 INFO  [o.n.k.i.DiagnosticsManager] Linux scheduler information:
+2018-11-22 14:23:00.397+0000 INFO  [o.n.k.i.DiagnosticsManager] noop [deadline] cfq 
+2018-11-22 14:23:00.397+0000 INFO  [o.n.k.i.DiagnosticsManager] none
+2018-11-22 14:23:00.397+0000 INFO  [o.n.k.i.DiagnosticsManager] none
+2018-11-22 14:23:00.397+0000 INFO  [o.n.k.i.DiagnosticsManager] none
+2018-11-22 14:23:00.398+0000 INFO  [o.n.k.i.DiagnosticsManager] none
+2018-11-22 14:23:00.398+0000 INFO  [o.n.k.i.DiagnosticsManager] none
+2018-11-22 14:23:00.398+0000 INFO  [o.n.k.i.DiagnosticsManager] none
+2018-11-22 14:23:00.398+0000 INFO  [o.n.k.i.DiagnosticsManager] none
+2018-11-22 14:23:00.398+0000 INFO  [o.n.k.i.DiagnosticsManager] none
+2018-11-22 14:23:00.398+0000 INFO  [o.n.k.i.DiagnosticsManager] none
+2018-11-22 14:23:00.398+0000 INFO  [o.n.k.i.DiagnosticsManager] none
+2018-11-22 14:23:00.398+0000 INFO  [o.n.k.i.DiagnosticsManager] none
+2018-11-22 14:23:00.399+0000 INFO  [o.n.k.i.DiagnosticsManager] none
+2018-11-22 14:23:00.399+0000 INFO  [o.n.k.i.DiagnosticsManager] none
+2018-11-22 14:23:00.399+0000 INFO  [o.n.k.i.DiagnosticsManager] none
+2018-11-22 14:23:00.399+0000 INFO  [o.n.k.i.DiagnosticsManager] none
+2018-11-22 14:23:00.399+0000 INFO  [o.n.k.i.DiagnosticsManager] none
+2018-11-22 14:23:00.399+0000 INFO  [o.n.k.i.DiagnosticsManager] none
+2018-11-22 14:23:00.399+0000 INFO  [o.n.k.i.DiagnosticsManager] none
+2018-11-22 14:23:00.399+0000 INFO  [o.n.k.i.DiagnosticsManager] none
+2018-11-22 14:23:00.400+0000 INFO  [o.n.k.i.DiagnosticsManager] none
+2018-11-22 14:23:00.400+0000 INFO  [o.n.k.i.DiagnosticsManager] none
+2018-11-22 14:23:00.400+0000 INFO  [o.n.k.i.DiagnosticsManager] none
+2018-11-22 14:23:00.400+0000 INFO  [o.n.k.i.DiagnosticsManager] none
+2018-11-22 14:23:00.400+0000 INFO  [o.n.k.i.DiagnosticsManager] none
+2018-11-22 14:23:00.400+0000 INFO  [o.n.k.i.DiagnosticsManager] Network information:
+2018-11-22 14:23:00.401+0000 INFO  [o.n.k.i.DiagnosticsManager] Interface wlan0:
+2018-11-22 14:23:00.401+0000 INFO  [o.n.k.i.DiagnosticsManager]     address: fe80:0:0:0:7e7a:91ff:fe15:ebe%wlan0
+2018-11-22 14:23:00.401+0000 INFO  [o.n.k.i.DiagnosticsManager]     address: 172.23.41.136
+2018-11-22 14:23:00.402+0000 INFO  [o.n.k.i.DiagnosticsManager] Interface lo:
+2018-11-22 14:23:00.402+0000 INFO  [o.n.k.i.DiagnosticsManager]     address: 0:0:0:0:0:0:0:1%lo
+2018-11-22 14:23:00.402+0000 INFO  [o.n.k.i.DiagnosticsManager]     address: 127.0.0.1
+2018-11-22 14:23:00.402+0000 INFO  [o.n.k.i.DiagnosticsManager] --- INITIALIZED diagnostics END ---
+2018-11-22 14:23:00.493+0000 INFO  [o.n.k.i.s.f.RecordFormatSelector] Selected RecordFormat:StandardV3_0[v0.A.7] record format from store /home/anjali/intellij_projects/intact-portal-indexer/src/main/resources/graph.db
+2018-11-22 14:23:00.520+0000 INFO  [o.n.k.i.s.f.RecordFormatSelector] Selected RecordFormat:StandardV3_0[v0.A.7] record format from store /home/anjali/intellij_projects/intact-portal-indexer/src/main/resources/graph.db
+2018-11-22 14:23:00.520+0000 INFO  [o.n.k.i.s.f.RecordFormatSelector] Format not configured. Selected format from the store: RecordFormat:StandardV3_0[v0.A.7]
+2018-11-22 14:23:01.027+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.init: index 1 on :label[0](property[0]) is ONLINE
+2018-11-22 14:23:01.041+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.init: index 5 on :label[1](property[0]) is ONLINE
+2018-11-22 14:23:01.049+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.init: index 9 on :label[2](property[0]) is ONLINE
+2018-11-22 14:23:01.057+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.init: index 13 on :label[3](property[0]) is ONLINE
+2018-11-22 14:23:01.064+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.init: index 17 on :label[4](property[0]) is ONLINE
+2018-11-22 14:23:01.068+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.init: index 21 on :label[5](property[0]) is ONLINE
+2018-11-22 14:23:01.074+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.init: index 25 on :label[6](property[0]) is ONLINE
+2018-11-22 14:23:01.079+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.init: index 29 on :label[7](property[0]) is ONLINE
+2018-11-22 14:23:01.084+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.init: index 33 on :label[8](property[0]) is ONLINE
+2018-11-22 14:23:01.091+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.init: index 37 on :label[9](property[0]) is ONLINE
+2018-11-22 14:23:01.099+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.init: index 41 on :label[10](property[0]) is ONLINE
+2018-11-22 14:23:01.105+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.init: index 45 on :label[11](property[0]) is ONLINE
+2018-11-22 14:23:01.112+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.init: index 49 on :label[12](property[0]) is ONLINE
+2018-11-22 14:23:01.116+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.init: index 53 on :label[13](property[0]) is ONLINE
+2018-11-22 14:23:01.121+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.init: index 57 on :label[14](property[0]) is ONLINE
+2018-11-22 14:23:01.127+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.init: index 61 on :label[15](property[0]) is ONLINE
+2018-11-22 14:23:01.133+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.init: index 65 on :label[16](property[0]) is ONLINE
+2018-11-22 14:23:01.137+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.init: index 69 on :label[17](property[0]) is ONLINE
+2018-11-22 14:23:01.141+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.init: index 73 on :label[18](property[0]) is ONLINE
+2018-11-22 14:23:01.145+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.init: index 77 on :label[19](property[0]) is ONLINE
+2018-11-22 14:23:01.151+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.init: index 81 on :label[20](property[0]) is ONLINE
+2018-11-22 14:23:01.156+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.init: index 85 on :label[21](property[0]) is ONLINE
+2018-11-22 14:23:01.160+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.init: index 89 on :label[22](property[0]) is ONLINE
+2018-11-22 14:23:01.165+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.init: index 93 on :label[23](property[0]) is ONLINE
+2018-11-22 14:23:01.170+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.init: index 97 on :label[24](property[0]) is ONLINE
+2018-11-22 14:23:01.174+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.init: index 101 on :label[25](property[0]) is ONLINE
+2018-11-22 14:23:01.179+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.init: index 105 on :label[26](property[0]) is ONLINE
+2018-11-22 14:23:01.182+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.init: index 109 on :label[27](property[0]) is ONLINE
+2018-11-22 14:23:01.183+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.init: index 113 on :label[28](property[0]) is ONLINE
+2018-11-22 14:23:01.185+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.init: index 117 on :label[29](property[0]) is ONLINE
+2018-11-22 14:23:01.187+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.init: index 121 on :label[30](property[0]) is ONLINE
+2018-11-22 14:23:01.512+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.start: index 1 on :GraphCvTerm(uniqueKey) is ONLINE
+2018-11-22 14:23:01.512+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.start: index 65 on :GraphInteractor(uniqueKey) is ONLINE
+2018-11-22 14:23:01.512+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.start: index 5 on :GraphAlias(uniqueKey) is ONLINE
+2018-11-22 14:23:01.513+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.start: index 69 on :GraphNucleicAcid(uniqueKey) is ONLINE
+2018-11-22 14:23:01.513+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.start: index 9 on :GraphAnnotation(uniqueKey) is ONLINE
+2018-11-22 14:23:01.513+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.start: index 73 on :GraphPolymer(uniqueKey) is ONLINE
+2018-11-22 14:23:01.513+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.start: index 13 on :GraphXref(uniqueKey) is ONLINE
+2018-11-22 14:23:01.513+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.start: index 77 on :GraphOrganism(uniqueKey) is ONLINE
+2018-11-22 14:23:01.513+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.start: index 17 on :GraphBinaryInteractionEvidence(uniqueKey) is ONLINE
+2018-11-22 14:23:01.513+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.start: index 81 on :GraphParticipantEvidence(uniqueKey) is ONLINE
+2018-11-22 14:23:01.513+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.start: index 21 on :GraphCausalRelationship(uniqueKey) is ONLINE
+2018-11-22 14:23:01.513+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.start: index 85 on :GraphPosition(uniqueKey) is ONLINE
+2018-11-22 14:23:01.513+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.start: index 25 on :GraphChecksum(uniqueKey) is ONLINE
+2018-11-22 14:23:01.513+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.start: index 89 on :GraphProtein(uniqueKey) is ONLINE
+2018-11-22 14:23:01.513+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.start: index 29 on :GraphAuthor(uniqueKey) is ONLINE
+2018-11-22 14:23:01.513+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.start: index 93 on :GraphPublication(uniqueKey) is ONLINE
+2018-11-22 14:23:01.514+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.start: index 33 on :GraphParameter(uniqueKey) is ONLINE
+2018-11-22 14:23:01.514+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.start: index 97 on :GraphRange(uniqueKey) is ONLINE
+2018-11-22 14:23:01.514+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.start: index 37 on :GraphParameterValue(uniqueKey) is ONLINE
+2018-11-22 14:23:01.514+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.start: index 101 on :GraphResultingSequence(uniqueKey) is ONLINE
+2018-11-22 14:23:01.514+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.start: index 41 on :GraphClusteredInteraction(uniqueKey) is ONLINE
+2018-11-22 14:23:01.514+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.start: index 105 on :GraphSource(uniqueKey) is ONLINE
+2018-11-22 14:23:01.514+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.start: index 45 on :GraphConfidence(uniqueKey) is ONLINE
+2018-11-22 14:23:01.514+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.start: index 109 on :GraphStoichiometry(uniqueKey) is ONLINE
+2018-11-22 14:23:01.514+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.start: index 49 on :GraphExperiment(uniqueKey) is ONLINE
+2018-11-22 14:23:01.514+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.start: index 113 on :GraphVariableParameter(uniqueKey) is ONLINE
+2018-11-22 14:23:01.514+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.start: index 53 on :GraphExperimentalEntity(uniqueKey) is ONLINE
+2018-11-22 14:23:01.514+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.start: index 117 on :GraphVariableParameterValue(uniqueKey) is ONLINE
+2018-11-22 14:23:01.514+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.start: index 57 on :GraphFeatureEvidence(uniqueKey) is ONLINE
+2018-11-22 14:23:01.514+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.start: index 121 on :GraphVariableParameterValueSet(uniqueKey) is ONLINE
+2018-11-22 14:23:01.514+0000 INFO  [o.n.k.i.a.i.IndexingService] IndexingService.start: index 61 on :GraphInteractionEvidence(uniqueKey) is ONLINE
+2018-11-22 14:23:01.519+0000 WARN  [o.n.k.i.a.i.s.IndexSamplingController] Recovering index sampling for index :GraphVariableParameterValue(uniqueKey)
+2018-11-22 14:23:01.528+0000 INFO  [o.n.k.i.a.i.s.OnlineIndexSamplingJob] Sampled index :GraphVariableParameterValue(uniqueKey) with 0 unique values in sample of avg size 0 taken from index containing 0 entries
+2018-11-22 14:23:01.528+0000 WARN  [o.n.k.i.a.i.s.IndexSamplingController] Recovering index sampling for index :GraphStoichiometry(uniqueKey)
+2018-11-22 14:23:01.528+0000 INFO  [o.n.k.i.a.i.s.OnlineIndexSamplingJob] Sampled index :GraphStoichiometry(uniqueKey) with 0 unique values in sample of avg size 0 taken from index containing 0 entries
+2018-11-22 14:23:01.529+0000 WARN  [o.n.k.i.a.i.s.IndexSamplingController] Recovering index sampling for index :GraphNucleicAcid(uniqueKey)
+2018-11-22 14:23:01.529+0000 INFO  [o.n.k.i.a.i.s.OnlineIndexSamplingJob] Sampled index :GraphNucleicAcid(uniqueKey) with 0 unique values in sample of avg size 0 taken from index containing 0 entries
+2018-11-22 14:23:01.529+0000 WARN  [o.n.k.i.a.i.s.IndexSamplingController] Recovering index sampling for index :GraphExperimentalEntity(uniqueKey)
+2018-11-22 14:23:01.529+0000 INFO  [o.n.k.i.a.i.s.OnlineIndexSamplingJob] Sampled index :GraphExperimentalEntity(uniqueKey) with 0 unique values in sample of avg size 0 taken from index containing 0 entries
+2018-11-22 14:23:01.529+0000 WARN  [o.n.k.i.a.i.s.IndexSamplingController] Recovering index sampling for index :GraphConfidence(uniqueKey)
+2018-11-22 14:23:01.529+0000 INFO  [o.n.k.i.a.i.s.OnlineIndexSamplingJob] Sampled index :GraphConfidence(uniqueKey) with 0 unique values in sample of avg size 0 taken from index containing 0 entries
+2018-11-22 14:23:01.530+0000 WARN  [o.n.k.i.a.i.s.IndexSamplingController] Recovering index sampling for index :GraphAuthor(uniqueKey)
+2018-11-22 14:23:01.530+0000 INFO  [o.n.k.i.a.i.s.OnlineIndexSamplingJob] Sampled index :GraphAuthor(uniqueKey) with 0 unique values in sample of avg size 0 taken from index containing 0 entries
+2018-11-22 14:23:01.530+0000 WARN  [o.n.k.i.a.i.s.IndexSamplingController] Recovering index sampling for index :GraphCausalRelationship(uniqueKey)
+2018-11-22 14:23:01.530+0000 INFO  [o.n.k.i.a.i.s.OnlineIndexSamplingJob] Sampled index :GraphCausalRelationship(uniqueKey) with 0 unique values in sample of avg size 0 taken from index containing 0 entries
+2018-11-22 14:23:01.530+0000 WARN  [o.n.k.i.a.i.s.IndexSamplingController] Recovering index sampling for index :GraphVariableParameterValueSet(uniqueKey)
+2018-11-22 14:23:01.530+0000 INFO  [o.n.k.i.a.i.s.OnlineIndexSamplingJob] Sampled index :GraphVariableParameterValueSet(uniqueKey) with 0 unique values in sample of avg size 0 taken from index containing 0 entries
+2018-11-22 14:23:01.530+0000 WARN  [o.n.k.i.a.i.s.IndexSamplingController] Recovering index sampling for index :GraphVariableParameter(uniqueKey)
+2018-11-22 14:23:01.531+0000 INFO  [o.n.k.i.a.i.s.OnlineIndexSamplingJob] Sampled index :GraphVariableParameter(uniqueKey) with 0 unique values in sample of avg size 0 taken from index containing 0 entries
+2018-11-22 14:23:01.531+0000 WARN  [o.n.k.i.a.i.s.IndexSamplingController] Recovering index sampling for index :GraphProtein(uniqueKey)
+2018-11-22 14:23:01.531+0000 INFO  [o.n.k.i.a.i.s.OnlineIndexSamplingJob] Sampled index :GraphProtein(uniqueKey) with 0 unique values in sample of avg size 0 taken from index containing 0 entries
+2018-11-22 14:23:01.531+0000 WARN  [o.n.k.i.a.i.s.IndexSamplingController] Recovering index sampling for index :GraphPolymer(uniqueKey)
+2018-11-22 14:23:01.531+0000 INFO  [o.n.k.i.a.i.s.OnlineIndexSamplingJob] Sampled index :GraphPolymer(uniqueKey) with 0 unique values in sample of avg size 0 taken from index containing 0 entries
+2018-11-22 14:23:01.536+0000 INFO  [o.n.k.i.DatabaseHealth] Database health set to OK
+2018-11-22 14:23:01.718+0000 INFO  [o.n.k.AvailabilityGuard] Fulfilling of requirement makes database available: Database available
+2018-11-22 14:23:01.718+0000 INFO  [o.n.k.i.f.GraphDatabaseFacadeFactory] Database is now ready
+2018-11-22 14:23:01.719+0000 INFO  [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for KernelDiagnostics:Versions START ---
+2018-11-22 14:23:01.719+0000 INFO  [o.n.k.i.DiagnosticsManager] Graph Database: community single StoreId{creationTime=1534251253804, randomId=2769913862873300714, storeVersion=15531981201765894, upgradeTime=1534251253804, upgradeId=1}
+2018-11-22 14:23:01.719+0000 INFO  [o.n.k.i.DiagnosticsManager] Kernel version: 3.1.0,16a782b42d76ca37db72958eb2565cf6aa671a29
+2018-11-22 14:23:01.719+0000 INFO  [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for KernelDiagnostics:Versions END ---
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for NEO_STORE_VERSIONS START ---
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager] Store versions:
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager] Store versions:
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager]   ArrayPropertyStore v0.A.7
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager]   NodeStore v0.A.7
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager]   StringPropertyStore v0.A.7
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager]   PropertyIndexStore v0.A.7
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager]   StringPropertyStore v0.A.7
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager]   ArrayPropertyStore v0.A.7
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager]   PropertyStore v0.A.7
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager]   RelationshipStore v0.A.7
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager]   StringPropertyStore v0.A.7
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager]   RelationshipTypeStore v0.A.7
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager]   StringPropertyStore v0.A.7
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager]   LabelTokenStore v0.A.7
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager]   SchemaStore v0.A.7
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager]   RelationshipGroupStore v0.A.7
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager]   NeoStore v0.A.7
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for NEO_STORE_VERSIONS END ---
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for NEO_STORE_ID_USAGE START ---
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager] Id usage:
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager] Id usage:
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager]   ArrayPropertyStore: used=1 high=0
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager]   NodeStore: used=59721 high=59720
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager]   StringPropertyStore: used=39 high=38
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager]   PropertyIndexStore: used=38 high=37
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager]   StringPropertyStore: used=7140 high=7139
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager]   ArrayPropertyStore: used=175 high=174
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager]   PropertyStore: used=111353 high=111352
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager]   RelationshipStore: used=180605 high=180604
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager]   StringPropertyStore: used=53 high=52
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager]   RelationshipTypeStore: used=52 high=51
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager]   StringPropertyStore: used=36 high=35
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager]   LabelTokenStore: used=35 high=34
+2018-11-22 14:23:01.721+0000 INFO  [o.n.k.i.DiagnosticsManager]   SchemaStore: used=123 high=122
+2018-11-22 14:23:01.722+0000 INFO  [o.n.k.i.DiagnosticsManager]   RelationshipGroupStore: used=4568 high=4567
+2018-11-22 14:23:01.722+0000 INFO  [o.n.k.i.DiagnosticsManager]   NeoStore: used=15 high=14
+2018-11-22 14:23:01.722+0000 INFO  [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for NEO_STORE_ID_USAGE END ---
+2018-11-22 14:23:01.722+0000 INFO  [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for NEO_STORE_RECORDS START ---
+2018-11-22 14:23:01.722+0000 INFO  [o.n.k.i.DiagnosticsManager] Neostore records:
+2018-11-22 14:23:01.722+0000 INFO  [o.n.k.i.DiagnosticsManager] TIME (Creation time): 1534251253804
+2018-11-22 14:23:01.722+0000 INFO  [o.n.k.i.DiagnosticsManager] RANDOM_NUMBER (Random number for store id): 2769913862873300714
+2018-11-22 14:23:01.722+0000 INFO  [o.n.k.i.DiagnosticsManager] LOG_VERSION (Current log version): 0
+2018-11-22 14:23:01.722+0000 INFO  [o.n.k.i.DiagnosticsManager] LAST_TRANSACTION_ID (Last committed transaction): 1
+2018-11-22 14:23:01.722+0000 INFO  [o.n.k.i.DiagnosticsManager] STORE_VERSION (Store format version): 15531981201765894
+2018-11-22 14:23:01.722+0000 INFO  [o.n.k.i.DiagnosticsManager] FIRST_GRAPH_PROPERTY (First property record containing graph properties): -1
+2018-11-22 14:23:01.722+0000 INFO  [o.n.k.i.DiagnosticsManager] LAST_CONSTRAINT_TRANSACTION (Last committed transaction containing constraint changes): 0
+2018-11-22 14:23:01.722+0000 INFO  [o.n.k.i.DiagnosticsManager] UPGRADE_TRANSACTION_ID (Transaction id most recent upgrade was performed at): 1
+2018-11-22 14:23:01.722+0000 INFO  [o.n.k.i.DiagnosticsManager] UPGRADE_TIME (Time of last upgrade): 1534251253804
+2018-11-22 14:23:01.722+0000 INFO  [o.n.k.i.DiagnosticsManager] LAST_TRANSACTION_CHECKSUM (Checksum of last committed transaction): 0
+2018-11-22 14:23:01.722+0000 INFO  [o.n.k.i.DiagnosticsManager] UPGRADE_TRANSACTION_CHECKSUM (Checksum of transaction id the most recent upgrade was performed at): 0
+2018-11-22 14:23:01.722+0000 INFO  [o.n.k.i.DiagnosticsManager] LAST_CLOSED_TRANSACTION_LOG_VERSION (Log version where the last transaction commit entry has been written into): 0
+2018-11-22 14:23:01.722+0000 INFO  [o.n.k.i.DiagnosticsManager] LAST_CLOSED_TRANSACTION_LOG_BYTE_OFFSET (Byte offset in the log file where the last transaction commit entry has been written into): 16
+2018-11-22 14:23:01.722+0000 INFO  [o.n.k.i.DiagnosticsManager] LAST_TRANSACTION_COMMIT_TIMESTAMP (Commit time timestamp for last committed transaction): 0
+2018-11-22 14:23:01.722+0000 INFO  [o.n.k.i.DiagnosticsManager] UPGRADE_TRANSACTION_COMMIT_TIMESTAMP (Commit timestamp of transaction the most recent upgrade was performed at): 0
+2018-11-22 14:23:01.722+0000 INFO  [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for NEO_STORE_RECORDS END ---
+2018-11-22 14:23:01.723+0000 INFO  [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for TRANSACTION_RANGE START ---
+2018-11-22 14:23:01.723+0000 INFO  [o.n.k.i.DiagnosticsManager] Transaction log:
+2018-11-22 14:23:01.724+0000 INFO  [o.n.k.i.DiagnosticsManager] Oldest transaction 2 found in log with version 0
+2018-11-22 14:23:01.724+0000 INFO  [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for TRANSACTION_RANGE END ---
+2018-11-22 14:23:01.724+0000 INFO  [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for KernelDiagnostics:StoreFiles START ---
+2018-11-22 14:23:01.724+0000 INFO  [o.n.k.i.DiagnosticsManager] Disk space on partition (Total / Free / Free %): 313187860480 / 53849923584 / 17
+Storage files: (filename : modification date - size)
+2018-11-22 14:23:01.725+0000 INFO  [o.n.k.i.DiagnosticsManager]   debug.log: 2018-08-14T14:02:39+0100 - 3.88 kB
+2018-11-22 14:23:01.725+0000 INFO  [o.n.k.i.DiagnosticsManager]   index:
+2018-11-22 14:23:01.725+0000 INFO  [o.n.k.i.DiagnosticsManager]   - Total: 2018-08-14T14:03:47+0100 - 0.00 B
+2018-11-22 14:23:01.725+0000 INFO  [o.n.k.i.DiagnosticsManager]   logs:
+2018-11-22 14:23:01.725+0000 INFO  [o.n.k.i.DiagnosticsManager]     debug.log: 2018-11-22T14:23:01+0000 - 2.50 MB
+2018-11-22 14:23:01.725+0000 INFO  [o.n.k.i.DiagnosticsManager]   - Total: 2018-11-22T13:57:17+0000 - 2.50 MB
+2018-11-22 14:23:01.725+0000 INFO  [o.n.k.i.DiagnosticsManager]   neostore: 2018-08-14T13:54:13+0100 - 8.00 kB
+2018-11-22 14:23:01.725+0000 INFO  [o.n.k.i.DiagnosticsManager]   neostore.counts.db.a: 2018-11-22T14:00:48+0000 - 9.97 kB
+2018-11-22 14:23:01.726+0000 INFO  [o.n.k.i.DiagnosticsManager]   neostore.counts.db.b: 2018-11-22T14:04:33+0000 - 9.97 kB
+2018-11-22 14:23:01.726+0000 INFO  [o.n.k.i.DiagnosticsManager]   neostore.id: 2018-11-22T14:23:00+0000 - 9.00 B
+2018-11-22 14:23:01.726+0000 INFO  [o.n.k.i.DiagnosticsManager]   neostore.labeltokenstore.db: 2018-11-19T16:08:46+0000 - 8.00 kB
+2018-11-22 14:23:01.726+0000 INFO  [o.n.k.i.DiagnosticsManager]   neostore.labeltokenstore.db.id: 2018-11-22T14:23:00+0000 - 9.00 B
+2018-11-22 14:23:01.726+0000 INFO  [o.n.k.i.DiagnosticsManager]   neostore.labeltokenstore.db.names: 2018-08-14T14:01:37+0100 - 8.00 kB
+2018-11-22 14:23:01.726+0000 INFO  [o.n.k.i.DiagnosticsManager]   neostore.labeltokenstore.db.names.id: 2018-11-22T14:23:00+0000 - 9.00 B
+2018-11-22 14:23:01.726+0000 INFO  [o.n.k.i.DiagnosticsManager]   neostore.nodestore.db: 2018-08-14T14:02:39+0100 - 879.79 kB
+2018-11-22 14:23:01.726+0000 INFO  [o.n.k.i.DiagnosticsManager]   neostore.nodestore.db.id: 2018-11-22T14:23:00+0000 - 9.00 B
+2018-11-22 14:23:01.727+0000 INFO  [o.n.k.i.DiagnosticsManager]   neostore.nodestore.db.labels: 2018-08-14T13:54:13+0100 - 8.00 kB
+2018-11-22 14:23:01.727+0000 INFO  [o.n.k.i.DiagnosticsManager]   neostore.nodestore.db.labels.id: 2018-11-22T14:23:00+0000 - 9.00 B
+2018-11-22 14:23:01.727+0000 INFO  [o.n.k.i.DiagnosticsManager]   neostore.propertystore.db: 2018-08-14T14:02:39+0100 - 4.36 MB
+2018-11-22 14:23:01.727+0000 INFO  [o.n.k.i.DiagnosticsManager]   neostore.propertystore.db.arrays: 2018-08-14T14:01:37+0100 - 24.00 kB
+2018-11-22 14:23:01.727+0000 INFO  [o.n.k.i.DiagnosticsManager]   neostore.propertystore.db.arrays.id: 2018-11-22T14:23:00+0000 - 9.00 B
+2018-11-22 14:23:01.727+0000 INFO  [o.n.k.i.DiagnosticsManager]   neostore.propertystore.db.id: 2018-11-22T14:23:00+0000 - 9.00 B
+2018-11-22 14:23:01.727+0000 INFO  [o.n.k.i.DiagnosticsManager]   neostore.propertystore.db.index: 2018-11-19T16:08:46+0000 - 8.00 kB
+2018-11-22 14:23:01.727+0000 INFO  [o.n.k.i.DiagnosticsManager]   neostore.propertystore.db.index.id: 2018-11-22T14:23:00+0000 - 9.00 B
+2018-11-22 14:23:01.727+0000 INFO  [o.n.k.i.DiagnosticsManager]   neostore.propertystore.db.index.keys: 2018-08-14T14:02:39+0100 - 8.00 kB
+2018-11-22 14:23:01.727+0000 INFO  [o.n.k.i.DiagnosticsManager]   neostore.propertystore.db.index.keys.id: 2018-11-22T14:23:00+0000 - 9.00 B
+2018-11-22 14:23:01.728+0000 INFO  [o.n.k.i.DiagnosticsManager]   neostore.propertystore.db.strings: 2018-08-14T14:01:37+0100 - 896.00 kB
+2018-11-22 14:23:01.728+0000 INFO  [o.n.k.i.DiagnosticsManager]   neostore.propertystore.db.strings.id: 2018-11-22T14:23:00+0000 - 9.00 B
+2018-11-22 14:23:01.728+0000 INFO  [o.n.k.i.DiagnosticsManager]   neostore.relationshipgroupstore.db: 2018-08-14T14:02:39+0100 - 111.77 kB
+2018-11-22 14:23:01.728+0000 INFO  [o.n.k.i.DiagnosticsManager]   neostore.relationshipgroupstore.db.id: 2018-11-22T14:23:00+0000 - 9.00 B
+2018-11-22 14:23:01.728+0000 INFO  [o.n.k.i.DiagnosticsManager]   neostore.relationshipstore.db: 2018-08-14T14:02:39+0100 - 5.86 MB
+2018-11-22 14:23:01.728+0000 INFO  [o.n.k.i.DiagnosticsManager]   neostore.relationshipstore.db.id: 2018-11-22T14:23:00+0000 - 9.00 B
+2018-11-22 14:23:01.728+0000 INFO  [o.n.k.i.DiagnosticsManager]   neostore.relationshiptypestore.db: 2018-11-19T16:08:46+0000 - 8.00 kB
+2018-11-22 14:23:01.728+0000 INFO  [o.n.k.i.DiagnosticsManager]   neostore.relationshiptypestore.db.id: 2018-11-22T14:23:00+0000 - 9.00 B
+2018-11-22 14:23:01.728+0000 INFO  [o.n.k.i.DiagnosticsManager]   neostore.relationshiptypestore.db.names: 2018-08-14T14:02:39+0100 - 8.00 kB
+2018-11-22 14:23:01.729+0000 INFO  [o.n.k.i.DiagnosticsManager]   neostore.relationshiptypestore.db.names.id: 2018-11-22T14:23:00+0000 - 9.00 B
+2018-11-22 14:23:01.729+0000 INFO  [o.n.k.i.DiagnosticsManager]   neostore.schemastore.db: 2018-08-14T13:55:24+0100 - 8.00 kB
+2018-11-22 14:23:01.729+0000 INFO  [o.n.k.i.DiagnosticsManager]   neostore.schemastore.db.id: 2018-11-22T14:23:00+0000 - 9.00 B
+2018-11-22 14:23:01.729+0000 INFO  [o.n.k.i.DiagnosticsManager]   neostore.transaction.db.0: 2018-11-22T14:04:33+0000 - 394.00 B
+2018-11-22 14:23:01.729+0000 INFO  [o.n.k.i.DiagnosticsManager]   schema:
+2018-11-22 14:23:01.729+0000 INFO  [o.n.k.i.DiagnosticsManager]     index:
+2018-11-22 14:23:01.729+0000 INFO  [o.n.k.i.DiagnosticsManager]       lucene:
+2018-11-22 14:23:01.729+0000 INFO  [o.n.k.i.DiagnosticsManager]         1:
+2018-11-22 14:23:01.729+0000 INFO  [o.n.k.i.DiagnosticsManager]           1:
+2018-11-22 14:23:01.730+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfe: 2018-08-14T14:02:38+0100 - 305.00 B
+2018-11-22 14:23:01.730+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfs: 2018-08-14T14:02:38+0100 - 91.31 kB
+2018-11-22 14:23:01.730+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.si: 2018-08-14T14:02:38+0100 - 367.00 B
+2018-11-22 14:23:01.730+0000 INFO  [o.n.k.i.DiagnosticsManager]             segments_2: 2018-08-14T14:02:38+0100 - 150.00 B
+2018-11-22 14:23:01.730+0000 INFO  [o.n.k.i.DiagnosticsManager]             write.lock: 2018-08-14T14:02:36+0100 - 0.00 B
+2018-11-22 14:23:01.730+0000 INFO  [o.n.k.i.DiagnosticsManager]           - Total: 2018-08-14T14:02:38+0100 - 92.12 kB
+2018-11-22 14:23:01.730+0000 INFO  [o.n.k.i.DiagnosticsManager]           failure-message: 2018-08-14T14:02:36+0100 - 16.00 kB
+2018-11-22 14:23:01.730+0000 INFO  [o.n.k.i.DiagnosticsManager]         - Total: 2018-08-14T14:02:36+0100 - 108.12 kB
+2018-11-22 14:23:01.730+0000 INFO  [o.n.k.i.DiagnosticsManager]         101:
+2018-11-22 14:23:01.730+0000 INFO  [o.n.k.i.DiagnosticsManager]           1:
+2018-11-22 14:23:01.731+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfe: 2018-08-14T14:02:39+0100 - 305.00 B
+2018-11-22 14:23:01.731+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfs: 2018-08-14T14:02:39+0100 - 6.43 kB
+2018-11-22 14:23:01.731+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.si: 2018-08-14T14:02:39+0100 - 367.00 B
+2018-11-22 14:23:01.731+0000 INFO  [o.n.k.i.DiagnosticsManager]             segments_2: 2018-08-14T14:02:39+0100 - 150.00 B
+2018-11-22 14:23:01.731+0000 INFO  [o.n.k.i.DiagnosticsManager]             write.lock: 2018-08-14T14:02:36+0100 - 0.00 B
+2018-11-22 14:23:01.731+0000 INFO  [o.n.k.i.DiagnosticsManager]           - Total: 2018-08-14T14:02:39+0100 - 7.23 kB
+2018-11-22 14:23:01.731+0000 INFO  [o.n.k.i.DiagnosticsManager]           failure-message: 2018-08-14T14:02:36+0100 - 16.00 kB
+2018-11-22 14:23:01.731+0000 INFO  [o.n.k.i.DiagnosticsManager]         - Total: 2018-08-14T14:02:36+0100 - 23.23 kB
+2018-11-22 14:23:01.731+0000 INFO  [o.n.k.i.DiagnosticsManager]         105:
+2018-11-22 14:23:01.731+0000 INFO  [o.n.k.i.DiagnosticsManager]           1:
+2018-11-22 14:23:01.732+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfe: 2018-08-14T14:02:39+0100 - 305.00 B
+2018-11-22 14:23:01.732+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfs: 2018-08-14T14:02:39+0100 - 1.38 kB
+2018-11-22 14:23:01.732+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.si: 2018-08-14T14:02:39+0100 - 367.00 B
+2018-11-22 14:23:01.732+0000 INFO  [o.n.k.i.DiagnosticsManager]             segments_2: 2018-08-14T14:02:39+0100 - 150.00 B
+2018-11-22 14:23:01.732+0000 INFO  [o.n.k.i.DiagnosticsManager]             write.lock: 2018-08-14T14:02:36+0100 - 0.00 B
+2018-11-22 14:23:01.732+0000 INFO  [o.n.k.i.DiagnosticsManager]           - Total: 2018-08-14T14:02:39+0100 - 2.18 kB
+2018-11-22 14:23:01.732+0000 INFO  [o.n.k.i.DiagnosticsManager]           failure-message: 2018-08-14T14:02:36+0100 - 16.00 kB
+2018-11-22 14:23:01.732+0000 INFO  [o.n.k.i.DiagnosticsManager]         - Total: 2018-08-14T14:02:36+0100 - 18.18 kB
+2018-11-22 14:23:01.732+0000 INFO  [o.n.k.i.DiagnosticsManager]         109:
+2018-11-22 14:23:01.732+0000 INFO  [o.n.k.i.DiagnosticsManager]           1:
+2018-11-22 14:23:01.732+0000 INFO  [o.n.k.i.DiagnosticsManager]             segments_2: 2018-08-14T14:02:39+0100 - 85.00 B
+2018-11-22 14:23:01.733+0000 INFO  [o.n.k.i.DiagnosticsManager]             write.lock: 2018-08-14T14:02:36+0100 - 0.00 B
+2018-11-22 14:23:01.733+0000 INFO  [o.n.k.i.DiagnosticsManager]           - Total: 2018-08-14T14:02:39+0100 - 85.00 B
+2018-11-22 14:23:01.733+0000 INFO  [o.n.k.i.DiagnosticsManager]           failure-message: 2018-08-14T14:02:36+0100 - 16.00 kB
+2018-11-22 14:23:01.733+0000 INFO  [o.n.k.i.DiagnosticsManager]         - Total: 2018-08-14T14:02:36+0100 - 16.08 kB
+2018-11-22 14:23:01.733+0000 INFO  [o.n.k.i.DiagnosticsManager]         113:
+2018-11-22 14:23:01.733+0000 INFO  [o.n.k.i.DiagnosticsManager]           1:
+2018-11-22 14:23:01.733+0000 INFO  [o.n.k.i.DiagnosticsManager]             segments_2: 2018-08-14T14:02:39+0100 - 85.00 B
+2018-11-22 14:23:01.733+0000 INFO  [o.n.k.i.DiagnosticsManager]             write.lock: 2018-08-14T14:02:36+0100 - 0.00 B
+2018-11-22 14:23:01.733+0000 INFO  [o.n.k.i.DiagnosticsManager]           - Total: 2018-08-14T14:02:39+0100 - 85.00 B
+2018-11-22 14:23:01.733+0000 INFO  [o.n.k.i.DiagnosticsManager]           failure-message: 2018-08-14T14:02:36+0100 - 16.00 kB
+2018-11-22 14:23:01.733+0000 INFO  [o.n.k.i.DiagnosticsManager]         - Total: 2018-08-14T14:02:36+0100 - 16.08 kB
+2018-11-22 14:23:01.733+0000 INFO  [o.n.k.i.DiagnosticsManager]         117:
+2018-11-22 14:23:01.734+0000 INFO  [o.n.k.i.DiagnosticsManager]           1:
+2018-11-22 14:23:01.734+0000 INFO  [o.n.k.i.DiagnosticsManager]             segments_2: 2018-08-14T14:02:39+0100 - 85.00 B
+2018-11-22 14:23:01.734+0000 INFO  [o.n.k.i.DiagnosticsManager]             write.lock: 2018-08-14T14:02:36+0100 - 0.00 B
+2018-11-22 14:23:01.734+0000 INFO  [o.n.k.i.DiagnosticsManager]           - Total: 2018-08-14T14:02:39+0100 - 85.00 B
+2018-11-22 14:23:01.734+0000 INFO  [o.n.k.i.DiagnosticsManager]           failure-message: 2018-08-14T14:02:36+0100 - 16.00 kB
+2018-11-22 14:23:01.734+0000 INFO  [o.n.k.i.DiagnosticsManager]         - Total: 2018-08-14T14:02:36+0100 - 16.08 kB
+2018-11-22 14:23:01.734+0000 INFO  [o.n.k.i.DiagnosticsManager]         121:
+2018-11-22 14:23:01.734+0000 INFO  [o.n.k.i.DiagnosticsManager]           1:
+2018-11-22 14:23:01.734+0000 INFO  [o.n.k.i.DiagnosticsManager]             segments_2: 2018-08-14T14:02:39+0100 - 85.00 B
+2018-11-22 14:23:01.734+0000 INFO  [o.n.k.i.DiagnosticsManager]             write.lock: 2018-08-14T14:02:36+0100 - 0.00 B
+2018-11-22 14:23:01.734+0000 INFO  [o.n.k.i.DiagnosticsManager]           - Total: 2018-08-14T14:02:39+0100 - 85.00 B
+2018-11-22 14:23:01.735+0000 INFO  [o.n.k.i.DiagnosticsManager]           failure-message: 2018-08-14T14:02:36+0100 - 16.00 kB
+2018-11-22 14:23:01.735+0000 INFO  [o.n.k.i.DiagnosticsManager]         - Total: 2018-08-14T14:02:36+0100 - 16.08 kB
+2018-11-22 14:23:01.735+0000 INFO  [o.n.k.i.DiagnosticsManager]         13:
+2018-11-22 14:23:01.735+0000 INFO  [o.n.k.i.DiagnosticsManager]           1:
+2018-11-22 14:23:01.735+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfe: 2018-08-14T14:02:38+0100 - 305.00 B
+2018-11-22 14:23:01.735+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfs: 2018-08-14T14:02:38+0100 - 864.91 kB
+2018-11-22 14:23:01.735+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.si: 2018-08-14T14:02:38+0100 - 367.00 B
+2018-11-22 14:23:01.735+0000 INFO  [o.n.k.i.DiagnosticsManager]             segments_2: 2018-08-14T14:02:38+0100 - 150.00 B
+2018-11-22 14:23:01.735+0000 INFO  [o.n.k.i.DiagnosticsManager]             write.lock: 2018-08-14T14:02:36+0100 - 0.00 B
+2018-11-22 14:23:01.735+0000 INFO  [o.n.k.i.DiagnosticsManager]           - Total: 2018-08-14T14:02:38+0100 - 865.72 kB
+2018-11-22 14:23:01.736+0000 INFO  [o.n.k.i.DiagnosticsManager]           failure-message: 2018-08-14T14:02:36+0100 - 16.00 kB
+2018-11-22 14:23:01.736+0000 INFO  [o.n.k.i.DiagnosticsManager]         - Total: 2018-08-14T14:02:36+0100 - 881.72 kB
+2018-11-22 14:23:01.736+0000 INFO  [o.n.k.i.DiagnosticsManager]         17:
+2018-11-22 14:23:01.736+0000 INFO  [o.n.k.i.DiagnosticsManager]           1:
+2018-11-22 14:23:01.736+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfe: 2018-08-14T14:02:38+0100 - 305.00 B
+2018-11-22 14:23:01.736+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfs: 2018-08-14T14:02:38+0100 - 45.35 kB
+2018-11-22 14:23:01.736+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.si: 2018-08-14T14:02:38+0100 - 367.00 B
+2018-11-22 14:23:01.736+0000 INFO  [o.n.k.i.DiagnosticsManager]             segments_2: 2018-08-14T14:02:38+0100 - 150.00 B
+2018-11-22 14:23:01.736+0000 INFO  [o.n.k.i.DiagnosticsManager]             write.lock: 2018-08-14T14:02:36+0100 - 0.00 B
+2018-11-22 14:23:01.736+0000 INFO  [o.n.k.i.DiagnosticsManager]           - Total: 2018-08-14T14:02:38+0100 - 46.15 kB
+2018-11-22 14:23:01.736+0000 INFO  [o.n.k.i.DiagnosticsManager]           failure-message: 2018-08-14T14:02:36+0100 - 16.00 kB
+2018-11-22 14:23:01.736+0000 INFO  [o.n.k.i.DiagnosticsManager]         - Total: 2018-08-14T14:02:36+0100 - 62.15 kB
+2018-11-22 14:23:01.736+0000 INFO  [o.n.k.i.DiagnosticsManager]         21:
+2018-11-22 14:23:01.736+0000 INFO  [o.n.k.i.DiagnosticsManager]           1:
+2018-11-22 14:23:01.736+0000 INFO  [o.n.k.i.DiagnosticsManager]             segments_2: 2018-08-14T14:02:38+0100 - 85.00 B
+2018-11-22 14:23:01.736+0000 INFO  [o.n.k.i.DiagnosticsManager]             write.lock: 2018-08-14T14:02:36+0100 - 0.00 B
+2018-11-22 14:23:01.736+0000 INFO  [o.n.k.i.DiagnosticsManager]           - Total: 2018-08-14T14:02:38+0100 - 85.00 B
+2018-11-22 14:23:01.737+0000 INFO  [o.n.k.i.DiagnosticsManager]           failure-message: 2018-08-14T14:02:36+0100 - 16.00 kB
+2018-11-22 14:23:01.737+0000 INFO  [o.n.k.i.DiagnosticsManager]         - Total: 2018-08-14T14:02:36+0100 - 16.08 kB
+2018-11-22 14:23:01.737+0000 INFO  [o.n.k.i.DiagnosticsManager]         25:
+2018-11-22 14:23:01.737+0000 INFO  [o.n.k.i.DiagnosticsManager]           1:
+2018-11-22 14:23:01.737+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfe: 2018-08-14T14:02:38+0100 - 305.00 B
+2018-11-22 14:23:01.737+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfs: 2018-08-14T14:02:38+0100 - 17.43 kB
+2018-11-22 14:23:01.737+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.si: 2018-08-14T14:02:38+0100 - 367.00 B
+2018-11-22 14:23:01.737+0000 INFO  [o.n.k.i.DiagnosticsManager]             segments_2: 2018-08-14T14:02:38+0100 - 150.00 B
+2018-11-22 14:23:01.737+0000 INFO  [o.n.k.i.DiagnosticsManager]             write.lock: 2018-08-14T14:02:36+0100 - 0.00 B
+2018-11-22 14:23:01.737+0000 INFO  [o.n.k.i.DiagnosticsManager]           - Total: 2018-08-14T14:02:38+0100 - 18.24 kB
+2018-11-22 14:23:01.737+0000 INFO  [o.n.k.i.DiagnosticsManager]           failure-message: 2018-08-14T14:02:36+0100 - 16.00 kB
+2018-11-22 14:23:01.737+0000 INFO  [o.n.k.i.DiagnosticsManager]         - Total: 2018-08-14T14:02:36+0100 - 34.24 kB
+2018-11-22 14:23:01.737+0000 INFO  [o.n.k.i.DiagnosticsManager]         29:
+2018-11-22 14:23:01.737+0000 INFO  [o.n.k.i.DiagnosticsManager]           1:
+2018-11-22 14:23:01.737+0000 INFO  [o.n.k.i.DiagnosticsManager]             segments_2: 2018-08-14T14:02:38+0100 - 85.00 B
+2018-11-22 14:23:01.737+0000 INFO  [o.n.k.i.DiagnosticsManager]             write.lock: 2018-08-14T14:02:36+0100 - 0.00 B
+2018-11-22 14:23:01.737+0000 INFO  [o.n.k.i.DiagnosticsManager]           - Total: 2018-08-14T14:02:38+0100 - 85.00 B
+2018-11-22 14:23:01.737+0000 INFO  [o.n.k.i.DiagnosticsManager]           failure-message: 2018-08-14T14:02:36+0100 - 16.00 kB
+2018-11-22 14:23:01.738+0000 INFO  [o.n.k.i.DiagnosticsManager]         - Total: 2018-08-14T14:02:36+0100 - 16.08 kB
+2018-11-22 14:23:01.738+0000 INFO  [o.n.k.i.DiagnosticsManager]         33:
+2018-11-22 14:23:01.738+0000 INFO  [o.n.k.i.DiagnosticsManager]           1:
+2018-11-22 14:23:01.738+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfe: 2018-08-14T14:02:38+0100 - 305.00 B
+2018-11-22 14:23:01.738+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfs: 2018-08-14T14:02:38+0100 - 2.55 kB
+2018-11-22 14:23:01.738+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.si: 2018-08-14T14:02:38+0100 - 367.00 B
+2018-11-22 14:23:01.738+0000 INFO  [o.n.k.i.DiagnosticsManager]             segments_2: 2018-08-14T14:02:38+0100 - 150.00 B
+2018-11-22 14:23:01.738+0000 INFO  [o.n.k.i.DiagnosticsManager]             write.lock: 2018-08-14T14:02:36+0100 - 0.00 B
+2018-11-22 14:23:01.738+0000 INFO  [o.n.k.i.DiagnosticsManager]           - Total: 2018-08-14T14:02:38+0100 - 3.35 kB
+2018-11-22 14:23:01.738+0000 INFO  [o.n.k.i.DiagnosticsManager]           failure-message: 2018-08-14T14:02:36+0100 - 16.00 kB
+2018-11-22 14:23:01.738+0000 INFO  [o.n.k.i.DiagnosticsManager]         - Total: 2018-08-14T14:02:36+0100 - 19.35 kB
+2018-11-22 14:23:01.738+0000 INFO  [o.n.k.i.DiagnosticsManager]         37:
+2018-11-22 14:23:01.738+0000 INFO  [o.n.k.i.DiagnosticsManager]           1:
+2018-11-22 14:23:01.739+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfe: 2018-08-14T14:02:38+0100 - 305.00 B
+2018-11-22 14:23:01.739+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfs: 2018-08-14T14:02:38+0100 - 2.44 kB
+2018-11-22 14:23:01.739+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.si: 2018-08-14T14:02:38+0100 - 367.00 B
+2018-11-22 14:23:01.739+0000 INFO  [o.n.k.i.DiagnosticsManager]             segments_2: 2018-08-14T14:02:38+0100 - 150.00 B
+2018-11-22 14:23:01.739+0000 INFO  [o.n.k.i.DiagnosticsManager]             write.lock: 2018-08-14T14:02:36+0100 - 0.00 B
+2018-11-22 14:23:01.739+0000 INFO  [o.n.k.i.DiagnosticsManager]           - Total: 2018-08-14T14:02:38+0100 - 3.24 kB
+2018-11-22 14:23:01.739+0000 INFO  [o.n.k.i.DiagnosticsManager]           failure-message: 2018-08-14T14:02:36+0100 - 16.00 kB
+2018-11-22 14:23:01.739+0000 INFO  [o.n.k.i.DiagnosticsManager]         - Total: 2018-08-14T14:02:36+0100 - 19.24 kB
+2018-11-22 14:23:01.739+0000 INFO  [o.n.k.i.DiagnosticsManager]         41:
+2018-11-22 14:23:01.739+0000 INFO  [o.n.k.i.DiagnosticsManager]           1:
+2018-11-22 14:23:01.740+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfe: 2018-08-14T14:02:38+0100 - 305.00 B
+2018-11-22 14:23:01.740+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfs: 2018-08-14T14:02:38+0100 - 26.26 kB
+2018-11-22 14:23:01.740+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.si: 2018-08-14T14:02:38+0100 - 367.00 B
+2018-11-22 14:23:01.740+0000 INFO  [o.n.k.i.DiagnosticsManager]             segments_2: 2018-08-14T14:02:38+0100 - 150.00 B
+2018-11-22 14:23:01.740+0000 INFO  [o.n.k.i.DiagnosticsManager]             write.lock: 2018-08-14T14:02:36+0100 - 0.00 B
+2018-11-22 14:23:01.740+0000 INFO  [o.n.k.i.DiagnosticsManager]           - Total: 2018-08-14T14:02:38+0100 - 27.07 kB
+2018-11-22 14:23:01.740+0000 INFO  [o.n.k.i.DiagnosticsManager]           failure-message: 2018-08-14T14:02:36+0100 - 16.00 kB
+2018-11-22 14:23:01.740+0000 INFO  [o.n.k.i.DiagnosticsManager]         - Total: 2018-08-14T14:02:36+0100 - 43.07 kB
+2018-11-22 14:23:01.740+0000 INFO  [o.n.k.i.DiagnosticsManager]         45:
+2018-11-22 14:23:01.740+0000 INFO  [o.n.k.i.DiagnosticsManager]           1:
+2018-11-22 14:23:01.741+0000 INFO  [o.n.k.i.DiagnosticsManager]             segments_2: 2018-08-14T14:02:38+0100 - 85.00 B
+2018-11-22 14:23:01.741+0000 INFO  [o.n.k.i.DiagnosticsManager]             write.lock: 2018-08-14T14:02:36+0100 - 0.00 B
+2018-11-22 14:23:01.741+0000 INFO  [o.n.k.i.DiagnosticsManager]           - Total: 2018-08-14T14:02:38+0100 - 85.00 B
+2018-11-22 14:23:01.741+0000 INFO  [o.n.k.i.DiagnosticsManager]           failure-message: 2018-08-14T14:02:36+0100 - 16.00 kB
+2018-11-22 14:23:01.741+0000 INFO  [o.n.k.i.DiagnosticsManager]         - Total: 2018-08-14T14:02:36+0100 - 16.08 kB
+2018-11-22 14:23:01.741+0000 INFO  [o.n.k.i.DiagnosticsManager]         49:
+2018-11-22 14:23:01.741+0000 INFO  [o.n.k.i.DiagnosticsManager]           1:
+2018-11-22 14:23:01.741+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfe: 2018-08-14T14:02:38+0100 - 305.00 B
+2018-11-22 14:23:01.741+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfs: 2018-08-14T14:02:38+0100 - 12.50 kB
+2018-11-22 14:23:01.741+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.si: 2018-08-14T14:02:38+0100 - 367.00 B
+2018-11-22 14:23:01.742+0000 INFO  [o.n.k.i.DiagnosticsManager]             segments_2: 2018-08-14T14:02:38+0100 - 150.00 B
+2018-11-22 14:23:01.742+0000 INFO  [o.n.k.i.DiagnosticsManager]             write.lock: 2018-08-14T14:02:36+0100 - 0.00 B
+2018-11-22 14:23:01.742+0000 INFO  [o.n.k.i.DiagnosticsManager]           - Total: 2018-08-14T14:02:38+0100 - 13.30 kB
+2018-11-22 14:23:01.742+0000 INFO  [o.n.k.i.DiagnosticsManager]           failure-message: 2018-08-14T14:02:36+0100 - 16.00 kB
+2018-11-22 14:23:01.742+0000 INFO  [o.n.k.i.DiagnosticsManager]         - Total: 2018-08-14T14:02:36+0100 - 29.30 kB
+2018-11-22 14:23:01.742+0000 INFO  [o.n.k.i.DiagnosticsManager]         5:
+2018-11-22 14:23:01.742+0000 INFO  [o.n.k.i.DiagnosticsManager]           1:
+2018-11-22 14:23:01.742+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfe: 2018-08-14T14:02:38+0100 - 305.00 B
+2018-11-22 14:23:01.742+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfs: 2018-08-14T14:02:38+0100 - 154.58 kB
+2018-11-22 14:23:01.742+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.si: 2018-08-14T14:02:38+0100 - 367.00 B
+2018-11-22 14:23:01.743+0000 INFO  [o.n.k.i.DiagnosticsManager]             segments_2: 2018-08-14T14:02:38+0100 - 150.00 B
+2018-11-22 14:23:01.743+0000 INFO  [o.n.k.i.DiagnosticsManager]             write.lock: 2018-08-14T14:02:36+0100 - 0.00 B
+2018-11-22 14:23:01.743+0000 INFO  [o.n.k.i.DiagnosticsManager]           - Total: 2018-08-14T14:02:38+0100 - 155.38 kB
+2018-11-22 14:23:01.743+0000 INFO  [o.n.k.i.DiagnosticsManager]           failure-message: 2018-08-14T14:02:36+0100 - 16.00 kB
+2018-11-22 14:23:01.743+0000 INFO  [o.n.k.i.DiagnosticsManager]         - Total: 2018-08-14T14:02:36+0100 - 171.38 kB
+2018-11-22 14:23:01.743+0000 INFO  [o.n.k.i.DiagnosticsManager]         53:
+2018-11-22 14:23:01.743+0000 INFO  [o.n.k.i.DiagnosticsManager]           1:
+2018-11-22 14:23:01.743+0000 INFO  [o.n.k.i.DiagnosticsManager]             segments_2: 2018-08-14T14:02:38+0100 - 85.00 B
+2018-11-22 14:23:01.743+0000 INFO  [o.n.k.i.DiagnosticsManager]             write.lock: 2018-08-14T14:02:36+0100 - 0.00 B
+2018-11-22 14:23:01.743+0000 INFO  [o.n.k.i.DiagnosticsManager]           - Total: 2018-08-14T14:02:38+0100 - 85.00 B
+2018-11-22 14:23:01.743+0000 INFO  [o.n.k.i.DiagnosticsManager]           failure-message: 2018-08-14T14:02:36+0100 - 16.00 kB
+2018-11-22 14:23:01.744+0000 INFO  [o.n.k.i.DiagnosticsManager]         - Total: 2018-08-14T14:02:36+0100 - 16.08 kB
+2018-11-22 14:23:01.744+0000 INFO  [o.n.k.i.DiagnosticsManager]         57:
+2018-11-22 14:23:01.744+0000 INFO  [o.n.k.i.DiagnosticsManager]           1:
+2018-11-22 14:23:01.744+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfe: 2018-08-14T14:02:38+0100 - 305.00 B
+2018-11-22 14:23:01.744+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfs: 2018-08-14T14:02:38+0100 - 43.41 kB
+2018-11-22 14:23:01.744+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.si: 2018-08-14T14:02:38+0100 - 367.00 B
+2018-11-22 14:23:01.744+0000 INFO  [o.n.k.i.DiagnosticsManager]             segments_2: 2018-08-14T14:02:38+0100 - 150.00 B
+2018-11-22 14:23:01.744+0000 INFO  [o.n.k.i.DiagnosticsManager]             write.lock: 2018-08-14T14:02:36+0100 - 0.00 B
+2018-11-22 14:23:01.744+0000 INFO  [o.n.k.i.DiagnosticsManager]           - Total: 2018-08-14T14:02:38+0100 - 44.21 kB
+2018-11-22 14:23:01.744+0000 INFO  [o.n.k.i.DiagnosticsManager]           failure-message: 2018-08-14T14:02:36+0100 - 16.00 kB
+2018-11-22 14:23:01.744+0000 INFO  [o.n.k.i.DiagnosticsManager]         - Total: 2018-08-14T14:02:36+0100 - 60.21 kB
+2018-11-22 14:23:01.744+0000 INFO  [o.n.k.i.DiagnosticsManager]         61:
+2018-11-22 14:23:01.744+0000 INFO  [o.n.k.i.DiagnosticsManager]           1:
+2018-11-22 14:23:01.745+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfe: 2018-08-14T14:02:38+0100 - 305.00 B
+2018-11-22 14:23:01.745+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfs: 2018-08-14T14:02:38+0100 - 45.35 kB
+2018-11-22 14:23:01.745+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.si: 2018-08-14T14:02:38+0100 - 367.00 B
+2018-11-22 14:23:01.745+0000 INFO  [o.n.k.i.DiagnosticsManager]             segments_2: 2018-08-14T14:02:38+0100 - 150.00 B
+2018-11-22 14:23:01.745+0000 INFO  [o.n.k.i.DiagnosticsManager]             write.lock: 2018-08-14T14:02:36+0100 - 0.00 B
+2018-11-22 14:23:01.745+0000 INFO  [o.n.k.i.DiagnosticsManager]           - Total: 2018-08-14T14:02:38+0100 - 46.15 kB
+2018-11-22 14:23:01.745+0000 INFO  [o.n.k.i.DiagnosticsManager]           failure-message: 2018-08-14T14:02:36+0100 - 16.00 kB
+2018-11-22 14:23:01.745+0000 INFO  [o.n.k.i.DiagnosticsManager]         - Total: 2018-08-14T14:02:36+0100 - 62.15 kB
+2018-11-22 14:23:01.745+0000 INFO  [o.n.k.i.DiagnosticsManager]         65:
+2018-11-22 14:23:01.745+0000 INFO  [o.n.k.i.DiagnosticsManager]           1:
+2018-11-22 14:23:01.746+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfe: 2018-08-14T14:02:38+0100 - 305.00 B
+2018-11-22 14:23:01.746+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfs: 2018-08-14T14:02:38+0100 - 19.99 kB
+2018-11-22 14:23:01.746+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.si: 2018-08-14T14:02:38+0100 - 367.00 B
+2018-11-22 14:23:01.746+0000 INFO  [o.n.k.i.DiagnosticsManager]             segments_2: 2018-08-14T14:02:38+0100 - 150.00 B
+2018-11-22 14:23:01.746+0000 INFO  [o.n.k.i.DiagnosticsManager]             write.lock: 2018-08-14T14:02:36+0100 - 0.00 B
+2018-11-22 14:23:01.746+0000 INFO  [o.n.k.i.DiagnosticsManager]           - Total: 2018-08-14T14:02:38+0100 - 20.79 kB
+2018-11-22 14:23:01.746+0000 INFO  [o.n.k.i.DiagnosticsManager]           failure-message: 2018-08-14T14:02:36+0100 - 16.00 kB
+2018-11-22 14:23:01.746+0000 INFO  [o.n.k.i.DiagnosticsManager]         - Total: 2018-08-14T14:02:36+0100 - 36.79 kB
+2018-11-22 14:23:01.746+0000 INFO  [o.n.k.i.DiagnosticsManager]         69:
+2018-11-22 14:23:01.746+0000 INFO  [o.n.k.i.DiagnosticsManager]           1:
+2018-11-22 14:23:01.746+0000 INFO  [o.n.k.i.DiagnosticsManager]             segments_2: 2018-08-14T14:02:39+0100 - 85.00 B
+2018-11-22 14:23:01.747+0000 INFO  [o.n.k.i.DiagnosticsManager]             write.lock: 2018-08-14T14:02:36+0100 - 0.00 B
+2018-11-22 14:23:01.747+0000 INFO  [o.n.k.i.DiagnosticsManager]           - Total: 2018-08-14T14:02:39+0100 - 85.00 B
+2018-11-22 14:23:01.747+0000 INFO  [o.n.k.i.DiagnosticsManager]           failure-message: 2018-08-14T14:02:36+0100 - 16.00 kB
+2018-11-22 14:23:01.747+0000 INFO  [o.n.k.i.DiagnosticsManager]         - Total: 2018-08-14T14:02:36+0100 - 16.08 kB
+2018-11-22 14:23:01.747+0000 INFO  [o.n.k.i.DiagnosticsManager]         73:
+2018-11-22 14:23:01.747+0000 INFO  [o.n.k.i.DiagnosticsManager]           1:
+2018-11-22 14:23:01.747+0000 INFO  [o.n.k.i.DiagnosticsManager]             segments_2: 2018-08-14T14:02:39+0100 - 85.00 B
+2018-11-22 14:23:01.747+0000 INFO  [o.n.k.i.DiagnosticsManager]             write.lock: 2018-08-14T14:02:36+0100 - 0.00 B
+2018-11-22 14:23:01.747+0000 INFO  [o.n.k.i.DiagnosticsManager]           - Total: 2018-08-14T14:02:39+0100 - 85.00 B
+2018-11-22 14:23:01.747+0000 INFO  [o.n.k.i.DiagnosticsManager]           failure-message: 2018-08-14T14:02:36+0100 - 16.00 kB
+2018-11-22 14:23:01.747+0000 INFO  [o.n.k.i.DiagnosticsManager]         - Total: 2018-08-14T14:02:36+0100 - 16.08 kB
+2018-11-22 14:23:01.747+0000 INFO  [o.n.k.i.DiagnosticsManager]         77:
+2018-11-22 14:23:01.748+0000 INFO  [o.n.k.i.DiagnosticsManager]           1:
+2018-11-22 14:23:01.748+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfe: 2018-08-14T14:02:39+0100 - 305.00 B
+2018-11-22 14:23:01.748+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfs: 2018-08-14T14:02:39+0100 - 5.60 kB
+2018-11-22 14:23:01.748+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.si: 2018-08-14T14:02:39+0100 - 367.00 B
+2018-11-22 14:23:01.748+0000 INFO  [o.n.k.i.DiagnosticsManager]             segments_2: 2018-08-14T14:02:39+0100 - 150.00 B
+2018-11-22 14:23:01.748+0000 INFO  [o.n.k.i.DiagnosticsManager]             write.lock: 2018-08-14T14:02:36+0100 - 0.00 B
+2018-11-22 14:23:01.748+0000 INFO  [o.n.k.i.DiagnosticsManager]           - Total: 2018-08-14T14:02:39+0100 - 6.40 kB
+2018-11-22 14:23:01.748+0000 INFO  [o.n.k.i.DiagnosticsManager]           failure-message: 2018-08-14T14:02:36+0100 - 16.00 kB
+2018-11-22 14:23:01.748+0000 INFO  [o.n.k.i.DiagnosticsManager]         - Total: 2018-08-14T14:02:36+0100 - 22.40 kB
+2018-11-22 14:23:01.748+0000 INFO  [o.n.k.i.DiagnosticsManager]         81:
+2018-11-22 14:23:01.748+0000 INFO  [o.n.k.i.DiagnosticsManager]           1:
+2018-11-22 14:23:01.749+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfe: 2018-08-14T14:02:39+0100 - 305.00 B
+2018-11-22 14:23:01.749+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfs: 2018-08-14T14:02:39+0100 - 53.36 kB
+2018-11-22 14:23:01.749+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.si: 2018-08-14T14:02:39+0100 - 367.00 B
+2018-11-22 14:23:01.749+0000 INFO  [o.n.k.i.DiagnosticsManager]             segments_2: 2018-08-14T14:02:39+0100 - 150.00 B
+2018-11-22 14:23:01.749+0000 INFO  [o.n.k.i.DiagnosticsManager]             write.lock: 2018-08-14T14:02:36+0100 - 0.00 B
+2018-11-22 14:23:01.749+0000 INFO  [o.n.k.i.DiagnosticsManager]           - Total: 2018-08-14T14:02:39+0100 - 54.16 kB
+2018-11-22 14:23:01.749+0000 INFO  [o.n.k.i.DiagnosticsManager]           failure-message: 2018-08-14T14:02:36+0100 - 16.00 kB
+2018-11-22 14:23:01.749+0000 INFO  [o.n.k.i.DiagnosticsManager]         - Total: 2018-08-14T14:02:36+0100 - 70.16 kB
+2018-11-22 14:23:01.749+0000 INFO  [o.n.k.i.DiagnosticsManager]         85:
+2018-11-22 14:23:01.749+0000 INFO  [o.n.k.i.DiagnosticsManager]           1:
+2018-11-22 14:23:01.749+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfe: 2018-08-14T14:02:39+0100 - 305.00 B
+2018-11-22 14:23:01.750+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfs: 2018-08-14T14:02:39+0100 - 9.26 kB
+2018-11-22 14:23:01.750+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.si: 2018-08-14T14:02:39+0100 - 367.00 B
+2018-11-22 14:23:01.750+0000 INFO  [o.n.k.i.DiagnosticsManager]             segments_2: 2018-08-14T14:02:39+0100 - 150.00 B
+2018-11-22 14:23:01.750+0000 INFO  [o.n.k.i.DiagnosticsManager]             write.lock: 2018-08-14T14:02:36+0100 - 0.00 B
+2018-11-22 14:23:01.750+0000 INFO  [o.n.k.i.DiagnosticsManager]           - Total: 2018-08-14T14:02:39+0100 - 10.07 kB
+2018-11-22 14:23:01.750+0000 INFO  [o.n.k.i.DiagnosticsManager]           failure-message: 2018-08-14T14:02:36+0100 - 16.00 kB
+2018-11-22 14:23:01.750+0000 INFO  [o.n.k.i.DiagnosticsManager]         - Total: 2018-08-14T14:02:36+0100 - 26.07 kB
+2018-11-22 14:23:01.750+0000 INFO  [o.n.k.i.DiagnosticsManager]         89:
+2018-11-22 14:23:01.750+0000 INFO  [o.n.k.i.DiagnosticsManager]           1:
+2018-11-22 14:23:01.750+0000 INFO  [o.n.k.i.DiagnosticsManager]             segments_2: 2018-08-14T14:02:39+0100 - 85.00 B
+2018-11-22 14:23:01.750+0000 INFO  [o.n.k.i.DiagnosticsManager]             write.lock: 2018-08-14T14:02:36+0100 - 0.00 B
+2018-11-22 14:23:01.751+0000 INFO  [o.n.k.i.DiagnosticsManager]           - Total: 2018-08-14T14:02:39+0100 - 85.00 B
+2018-11-22 14:23:01.751+0000 INFO  [o.n.k.i.DiagnosticsManager]           failure-message: 2018-08-14T14:02:36+0100 - 16.00 kB
+2018-11-22 14:23:01.751+0000 INFO  [o.n.k.i.DiagnosticsManager]         - Total: 2018-08-14T14:02:36+0100 - 16.08 kB
+2018-11-22 14:23:01.751+0000 INFO  [o.n.k.i.DiagnosticsManager]         9:
+2018-11-22 14:23:01.751+0000 INFO  [o.n.k.i.DiagnosticsManager]           1:
+2018-11-22 14:23:01.751+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfe: 2018-08-14T14:02:38+0100 - 305.00 B
+2018-11-22 14:23:01.751+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfs: 2018-08-14T14:02:38+0100 - 101.87 kB
+2018-11-22 14:23:01.751+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.si: 2018-08-14T14:02:38+0100 - 367.00 B
+2018-11-22 14:23:01.751+0000 INFO  [o.n.k.i.DiagnosticsManager]             segments_2: 2018-08-14T14:02:38+0100 - 150.00 B
+2018-11-22 14:23:01.751+0000 INFO  [o.n.k.i.DiagnosticsManager]             write.lock: 2018-08-14T14:02:36+0100 - 0.00 B
+2018-11-22 14:23:01.751+0000 INFO  [o.n.k.i.DiagnosticsManager]           - Total: 2018-08-14T14:02:38+0100 - 102.67 kB
+2018-11-22 14:23:01.751+0000 INFO  [o.n.k.i.DiagnosticsManager]           failure-message: 2018-08-14T14:02:36+0100 - 16.00 kB
+2018-11-22 14:23:01.751+0000 INFO  [o.n.k.i.DiagnosticsManager]         - Total: 2018-08-14T14:02:36+0100 - 118.67 kB
+2018-11-22 14:23:01.752+0000 INFO  [o.n.k.i.DiagnosticsManager]         93:
+2018-11-22 14:23:01.752+0000 INFO  [o.n.k.i.DiagnosticsManager]           1:
+2018-11-22 14:23:01.752+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfe: 2018-08-14T14:02:39+0100 - 305.00 B
+2018-11-22 14:23:01.752+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfs: 2018-08-14T14:02:39+0100 - 6.14 kB
+2018-11-22 14:23:01.752+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.si: 2018-08-14T14:02:39+0100 - 367.00 B
+2018-11-22 14:23:01.752+0000 INFO  [o.n.k.i.DiagnosticsManager]             segments_2: 2018-08-14T14:02:39+0100 - 150.00 B
+2018-11-22 14:23:01.752+0000 INFO  [o.n.k.i.DiagnosticsManager]             write.lock: 2018-08-14T14:02:36+0100 - 0.00 B
+2018-11-22 14:23:01.752+0000 INFO  [o.n.k.i.DiagnosticsManager]           - Total: 2018-08-14T14:02:39+0100 - 6.94 kB
+2018-11-22 14:23:01.752+0000 INFO  [o.n.k.i.DiagnosticsManager]           failure-message: 2018-08-14T14:02:36+0100 - 16.00 kB
+2018-11-22 14:23:01.752+0000 INFO  [o.n.k.i.DiagnosticsManager]         - Total: 2018-08-14T14:02:36+0100 - 22.94 kB
+2018-11-22 14:23:01.752+0000 INFO  [o.n.k.i.DiagnosticsManager]         97:
+2018-11-22 14:23:01.752+0000 INFO  [o.n.k.i.DiagnosticsManager]           1:
+2018-11-22 14:23:01.753+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfe: 2018-08-14T14:02:39+0100 - 305.00 B
+2018-11-22 14:23:01.753+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.cfs: 2018-08-14T14:02:39+0100 - 10.01 kB
+2018-11-22 14:23:01.753+0000 INFO  [o.n.k.i.DiagnosticsManager]             _0.si: 2018-08-14T14:02:39+0100 - 367.00 B
+2018-11-22 14:23:01.753+0000 INFO  [o.n.k.i.DiagnosticsManager]             segments_2: 2018-08-14T14:02:39+0100 - 150.00 B
+2018-11-22 14:23:01.753+0000 INFO  [o.n.k.i.DiagnosticsManager]             write.lock: 2018-08-14T14:02:36+0100 - 0.00 B
+2018-11-22 14:23:01.753+0000 INFO  [o.n.k.i.DiagnosticsManager]           - Total: 2018-08-14T14:02:39+0100 - 10.81 kB
+2018-11-22 14:23:01.753+0000 INFO  [o.n.k.i.DiagnosticsManager]           failure-message: 2018-08-14T14:02:36+0100 - 16.00 kB
+2018-11-22 14:23:01.753+0000 INFO  [o.n.k.i.DiagnosticsManager]         - Total: 2018-08-14T14:02:36+0100 - 26.81 kB
+2018-11-22 14:23:01.753+0000 INFO  [o.n.k.i.DiagnosticsManager]       - Total: 2018-08-14T14:02:36+0100 - 1.99 MB
+2018-11-22 14:23:01.753+0000 INFO  [o.n.k.i.DiagnosticsManager]     - Total: 2018-08-14T13:55:23+0100 - 1.99 MB
+2018-11-22 14:23:01.753+0000 INFO  [o.n.k.i.DiagnosticsManager]     label:
+2018-11-22 14:23:01.753+0000 INFO  [o.n.k.i.DiagnosticsManager]       lucene:
+2018-11-22 14:23:01.754+0000 INFO  [o.n.k.i.DiagnosticsManager]         labelStore:
+2018-11-22 14:23:01.754+0000 INFO  [o.n.k.i.DiagnosticsManager]           1:
+2018-11-22 14:23:01.754+0000 INFO  [o.n.k.i.DiagnosticsManager]             _2.cfe: 2018-08-14T14:02:39+0100 - 305.00 B
+2018-11-22 14:23:01.754+0000 INFO  [o.n.k.i.DiagnosticsManager]             _2.cfs: 2018-08-14T14:02:39+0100 - 375.78 kB
+2018-11-22 14:23:01.754+0000 INFO  [o.n.k.i.DiagnosticsManager]             _2.si: 2018-08-14T14:02:39+0100 - 367.00 B
+2018-11-22 14:23:01.754+0000 INFO  [o.n.k.i.DiagnosticsManager]             segments_3: 2018-08-14T14:02:39+0100 - 136.00 B
+2018-11-22 14:23:01.754+0000 INFO  [o.n.k.i.DiagnosticsManager]             write.lock: 2018-08-14T13:54:13+0100 - 0.00 B
+2018-11-22 14:23:01.754+0000 INFO  [o.n.k.i.DiagnosticsManager]           - Total: 2018-08-14T14:02:39+0100 - 376.57 kB
+2018-11-22 14:23:01.754+0000 INFO  [o.n.k.i.DiagnosticsManager]           failure-message: 2018-08-14T13:54:13+0100 - 16.00 kB
+2018-11-22 14:23:01.754+0000 INFO  [o.n.k.i.DiagnosticsManager]         - Total: 2018-08-14T13:54:13+0100 - 392.57 kB
+2018-11-22 14:23:01.754+0000 INFO  [o.n.k.i.DiagnosticsManager]       - Total: 2018-08-14T13:54:13+0100 - 392.57 kB
+2018-11-22 14:23:01.754+0000 INFO  [o.n.k.i.DiagnosticsManager]     - Total: 2018-08-14T13:54:13+0100 - 392.57 kB
+2018-11-22 14:23:01.754+0000 INFO  [o.n.k.i.DiagnosticsManager]   - Total: 2018-08-14T13:55:23+0100 - 2.37 MB
+2018-11-22 14:23:01.755+0000 INFO  [o.n.k.i.DiagnosticsManager]   store_lock: 2018-11-20T17:23:40+0000 - 0.00 B
+2018-11-22 14:23:01.755+0000 INFO  [o.n.k.i.DiagnosticsManager] --- STARTED diagnostics for KernelDiagnostics:StoreFiles END ---
+2018-11-22 14:23:03.741+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 418ms.
+2018-11-22 14:27:10.079+0000 WARN  [o.n.k.i.c.MonitorGc] GC Monitor: Application threads blocked for 531ms.
+2018-11-22 14:31:41.580+0000 INFO  [o.n.k.i.f.GraphDatabaseFacadeFactory] Shutdown started
+2018-11-22 14:31:41.580+0000 INFO  [o.n.k.i.f.GraphDatabaseFacadeFactory] Database is now unavailable
+2018-11-22 14:31:41.657+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by database shutdown [1]:  Starting check pointing...
+2018-11-22 14:31:41.657+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by database shutdown [1]:  Starting store flush...
+2018-11-22 14:31:41.668+0000 INFO  [o.n.k.i.s.c.CountsTracker] About to rotate counts store at transaction 1 to [/home/anjali/intellij_projects/intact-portal-indexer/src/main/resources/graph.db/neostore.counts.db.a], from [/home/anjali/intellij_projects/intact-portal-indexer/src/main/resources/graph.db/neostore.counts.db.b].
+2018-11-22 14:31:41.679+0000 INFO  [o.n.k.i.s.c.CountsTracker] Successfully rotated counts store at transaction 1 to [/home/anjali/intellij_projects/intact-portal-indexer/src/main/resources/graph.db/neostore.counts.db.a], from [/home/anjali/intellij_projects/intact-portal-indexer/src/main/resources/graph.db/neostore.counts.db.b].
+2018-11-22 14:31:41.695+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by database shutdown [1]:  Store flush completed
+2018-11-22 14:31:41.695+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by database shutdown [1]:  Starting appending check point entry into the tx log...
+2018-11-22 14:31:41.701+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by database shutdown [1]:  Appending check point entry into the tx log completed
+2018-11-22 14:31:41.701+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by database shutdown [1]:  Check pointing completed
+2018-11-22 14:31:41.701+0000 INFO  [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Starting log pruning.
+2018-11-22 14:31:41.701+0000 INFO  [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Log pruning complete.
+2018-11-22 14:31:41.771+0000 INFO  [o.n.k.i.DiagnosticsManager] --- STOPPING diagnostics START ---
+2018-11-22 14:31:41.771+0000 INFO  [o.n.k.i.DiagnosticsManager] --- STOPPING diagnostics END ---
