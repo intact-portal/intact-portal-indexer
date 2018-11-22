@@ -51,6 +51,7 @@ public class InteractorIndexerTasklet implements Tasklet {
     @Resource
     private SolrClient solrClient;
 
+
     private boolean simulation = false;
 
 

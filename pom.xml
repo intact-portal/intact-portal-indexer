@@ -108,11 +108,6 @@
             <!--TODO uncomment the scope when the embedded is not used to generate the index-->
             <!--<scope>test</scope>-->
         </dependency>
-        <!--<dependency>-->
-        <!--<groupId>org.neo4j</groupId>-->
-        <!--<artifactId>neo4j-ogm-http-driver</artifactId>-->
-        <!--<version>${neo4j-ogm.version}</version>-->
-        <!--</dependency>-->
     </dependencies>
 
     <dependencyManagement>
