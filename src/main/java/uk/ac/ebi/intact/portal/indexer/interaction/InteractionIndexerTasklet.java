@@ -9,12 +9,14 @@ import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import psidev.psi.mi.jami.binary.BinaryInteractionEvidence;
 import uk.ac.ebi.intact.graphdb.model.nodes.*;
 import uk.ac.ebi.intact.graphdb.services.*;
+import uk.ac.ebi.intact.portal.indexer.interactor.InteractorUtility;
 import uk.ac.ebi.intact.search.interactions.model.Interaction;
 import uk.ac.ebi.intact.search.interactions.service.InteractionIndexService;
 import utilities.CommonUtility;
@@ -31,7 +33,7 @@ public class InteractionIndexerTasklet implements Tasklet {
     private static final Log log = LogFactory.getLog(InteractionIndexerTasklet.class);
 
 
-    private static final int pageSize = 10;
+    private static final int pageSize = 1000;
 
     private static final int MAX_PING_TIME = 1000;
     private static final int MAX_ATTEMPTS = 5;
@@ -41,9 +43,6 @@ public class InteractionIndexerTasklet implements Tasklet {
 
     @Resource
     private GraphInteractionService graphInteractionService;
-
-    @Resource
-    private GraphInteractorService graphInteractorService;
 
     @Resource
     private GraphParticipantService graphParticipantService;
@@ -62,6 +61,9 @@ public class InteractionIndexerTasklet implements Tasklet {
 
     @Resource
     private SolrClient solrClient;
+
+    @Autowired
+    InteractorUtility interactorUtility;
 
 
     private boolean simulation = false;
@@ -176,8 +178,7 @@ public class InteractionIndexerTasklet implements Tasklet {
 
             // Interactor details
             if (graphBinaryInteractionEvidence.getInteractorA() != null) {
-                Optional<GraphInteractor> oGraphInteractorA = graphInteractorService.findWithDepth(graphBinaryInteractionEvidence.getInteractorA().getUniqueKey(), DEPTH);
-                GraphInteractor graphInteractorA = oGraphInteractorA.get();
+                GraphInteractor graphInteractorA = interactorUtility.fetchInteractorAccToType(graphBinaryInteractionEvidence.getInteractorA(),DEPTH);
                 interaction.setIdA(SolrDocumentConverter.xrefToSolrDocument(graphInteractorA.getPreferredIdentifier()));
                 interaction.setAltIdsA((graphInteractorA.getIdentifiers() != null && graphInteractorA.getIdentifiers().size() > 0) ? SolrDocumentConverter.xrefsToSolrDocument(graphInteractorA.getIdentifiers()) : null);
                 graphAliasesA.addAll(graphInteractorA.getAliases());
@@ -196,8 +197,7 @@ public class InteractionIndexerTasklet implements Tasklet {
             }
 
             if (graphBinaryInteractionEvidence.getInteractorB() != null) {
-                Optional<GraphInteractor> oGraphInteractorB = graphInteractorService.findWithDepth(graphBinaryInteractionEvidence.getInteractorB().getUniqueKey(), DEPTH);
-                GraphInteractor graphInteractorB = oGraphInteractorB.get();
+                GraphInteractor graphInteractorB = interactorUtility.fetchInteractorAccToType(graphBinaryInteractionEvidence.getInteractorB(),DEPTH);
 
                 interaction.setIdB(SolrDocumentConverter.xrefToSolrDocument(graphInteractorB.getPreferredIdentifier()));
                 interaction.setAltIdsB((graphInteractorB.getIdentifiers() != null && graphInteractorB.getIdentifiers().size() > 0) ? SolrDocumentConverter.xrefsToSolrDocument(graphInteractorB.getIdentifiers()) : null);

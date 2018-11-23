@@ -67,7 +67,7 @@ public class SolrDocumentConverter {
     public static Set<String> featuresToSolrDocument(Collection<GraphFeatureEvidence> featureEvidences) {
 
         Set<String> features = new HashSet<>();
-        for (FeatureEvidence featureEvidence : featureEvidences) {
+        for (Feature featureEvidence : featureEvidences) {
             String ranges;
             if (featureEvidence.getRanges()!=null) {
                 ranges = StringUtils.join(featureEvidence.getRanges(), ",");
@@ -83,7 +83,7 @@ public class SolrDocumentConverter {
     public static Set<String> featuresShortlabelToSolrDocument(Collection<GraphFeatureEvidence> featureEvidences) {
 
         Set<String> features = new HashSet<>();
-        for (FeatureEvidence featureEvidence : featureEvidences) {
+        for (Feature featureEvidence : featureEvidences) {
             features.add(featureEvidence.getShortName());
         }
         return features;

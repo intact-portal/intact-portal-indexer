@@ -35,7 +35,7 @@ public class InteractorIndexerTasklet implements Tasklet {
     private static final Log log = LogFactory.getLog(InteractorIndexerTasklet.class);
 
 
-    private static final int pageSize = 10;
+    private static final int pageSize = 1000;
 
     private static final int MAX_PING_TIME = 1000;
     private static final int MAX_ATTEMPTS = 5;
