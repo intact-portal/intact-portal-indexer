@@ -12,22 +12,17 @@ import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
-import psidev.psi.mi.jami.model.Alias;
-import psidev.psi.mi.jami.model.Interactor;
-import psidev.psi.mi.jami.model.ParticipantEvidence;
-import psidev.psi.mi.jami.model.Xref;
-import psidev.psi.mi.jami.utils.XrefUtils;
-import uk.ac.ebi.intact.graphdb.model.nodes.GraphBinaryInteractionEvidence;
-import uk.ac.ebi.intact.graphdb.model.nodes.GraphFeatureEvidence;
-import uk.ac.ebi.intact.graphdb.model.nodes.GraphInteractor;
+import uk.ac.ebi.intact.graphdb.model.nodes.*;
+import uk.ac.ebi.intact.graphdb.services.GraphExperimentService;
 import uk.ac.ebi.intact.graphdb.services.GraphInteractorService;
 import uk.ac.ebi.intact.search.interactor.model.SearchInteractor;
 import uk.ac.ebi.intact.search.interactor.service.InteractorIndexService;
-import utilities.SolrDocumentConverter;
 
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.*;
+
+import static utilities.SolrDocumentConverterUtils.*;
 
 @Component
 public class InteractorIndexerTasklet implements Tasklet {
@@ -47,6 +42,9 @@ public class InteractorIndexerTasklet implements Tasklet {
 
     @Resource
     private InteractorIndexService interactorIndexService;
+
+    @Resource
+    private GraphExperimentService graphExperimentService;
 
     @Resource
     private SolrClient solrClient;
@@ -74,6 +72,8 @@ public class InteractorIndexerTasklet implements Tasklet {
 
             log.debug("Starting to retrieve data");
             // loop over the data in pages until we are done with all
+            long totalTime = System.currentTimeMillis();
+
             while (!done) {
                 log.info("Retrieving page : " + page);
                 request = new PageRequest(page, pageSize);
@@ -91,16 +91,7 @@ public class InteractorIndexerTasklet implements Tasklet {
 
                 long convStart = System.currentTimeMillis();
                 for (GraphInteractor graphInteractor : interactorList) {
-                    Set<String> interactionsIds = new HashSet<>();
-                    long interactionCount = graphInteractor.getInteractions().size();
-                    if (interactionCount > 0) {
-                        for (GraphBinaryInteractionEvidence graphBinaryInteractionEvidence : graphInteractor.getInteractions()) {
-                            interactionsIds.add(graphBinaryInteractionEvidence.getIdentifiers().iterator().next().getId());
-                        }
-                    } else {
-                        log.warn("Interactor without interactions: " + graphInteractor.getAc());
-                    }
-                    searchInteractors.add(toSolrDocument(graphInteractor, interactionsIds, interactionCount));
+                    searchInteractors.add(toSolrDocument(graphInteractor, graphInteractor.getInteractions(), graphExperimentService));
                 }
                 log.info("\tConversion of " + searchInteractors.size() + " records took [ms] : " + (System.currentTimeMillis() - convStart));
 
@@ -118,6 +109,8 @@ public class InteractorIndexerTasklet implements Tasklet {
             }
 
             log.info("Indexing complete.");
+            log.info("\tTotal indexing took [ms] : " + (System.currentTimeMillis() - totalTime));
+
         } catch (Exception e) {
             System.out.println("Unexpected exception: " + e.toString());
             e.printStackTrace();
@@ -152,67 +145,70 @@ public class InteractorIndexerTasklet implements Tasklet {
         }
     }
 
-    /**
-     * Converts Graph interactor to Solr interactor
-     * @param interactor
-     * @param interactionIds
-     * @param interactionCount
-     * @return
-     */
-    private static SearchInteractor toSolrDocument(Interactor interactor, Set<String> interactionIds, long interactionCount) {
+
+    private static SearchInteractor toSolrDocument(GraphInteractor graphInteractor, Collection<GraphBinaryInteractionEvidence> interactionEvidences, GraphExperimentService graphExperimentService) {
+
         SearchInteractor searchInteractor = new SearchInteractor();
 
-        if (interactor instanceof GraphInteractor) { //|| interactor instanceof IntactInteractor if we add intact-jami
-            searchInteractor.setInteractorId(XrefUtils.collectFirstIdentifierWithDatabase(interactor.getIdentifiers(), "MI:0469", "intact").getId());
-            GraphInteractor graphInteractor = (GraphInteractor) interactor;
-            Collection<GraphFeatureEvidence> featureEvidences = new ArrayList<GraphFeatureEvidence>();
-            if (graphInteractor.getParticipantEvidences() != null) {
-                for (ParticipantEvidence participantEvidence : graphInteractor.getParticipantEvidences()) {
-                    if (participantEvidence.getFeatures() != null) {
-                        featureEvidences.addAll(participantEvidence.getFeatures());
-                    }
+        //Id
+        searchInteractor.setInteractorId(graphInteractor.getAc());
+
+        //Features
+        Collection<GraphFeatureEvidence> featureEvidences = new ArrayList<>();
+        if (graphInteractor.getParticipantEvidences() != null) {
+            for (GraphParticipantEvidence participantEvidence : graphInteractor.getParticipantEvidences()) {
+                if (participantEvidence.getFeatures() != null) {
+                    featureEvidences.addAll(participantEvidence.getFeatures());
                 }
             }
-            searchInteractor.setFeatureShortLabels(!featureEvidences.isEmpty() ? SolrDocumentConverter.featuresShortlabelToSolrDocument(featureEvidences) : null);
+
+            searchInteractor.setFeatureShortLabels(featuresShortlabelToSolrDocument(featureEvidences));
+//            searchInteractor.setFeatureShortLabels(!featureEvidences.isEmpty() ? featuresShortlabelToSolrDocument(featureEvidences) : null);
         }
 
+        int interactionCount = interactionEvidences.size();
+        Set<String> interactionsIds = new HashSet<>();
+        Set<String> interactionDetectionMethods = new HashSet<>();
+        Set<String> interactionsType = new HashSet<>();
+        Set<String> interactionExpansionMethods = new HashSet<>();
+        Set<String> interactionsAc = new HashSet<>();
+        Set<Boolean> interactionNegative = new HashSet<>();
+
+        if (interactionCount > 0) {
+            for (GraphBinaryInteractionEvidence binaryInteractionEvidence : interactionEvidences) {
+                interactionsIds.add(binaryInteractionEvidence.getIdentifiers().iterator().next().getId());
+                interactionsType.add(cvTermToSolrDocument(binaryInteractionEvidence.getInteractionType()));
+                interactionsAc.add(binaryInteractionEvidence.getAc());
+                GraphExperiment experiment = graphExperimentService.findByAc(((GraphExperiment)binaryInteractionEvidence.getExperiment()).getAc());
+                interactionDetectionMethods.add(cvTermToSolrDocument(experiment.getInteractionDetectionMethod()));
+                interactionExpansionMethods.add(cvTermToSolrDocument(binaryInteractionEvidence.getComplexExpansion()));
+                interactionNegative.add(binaryInteractionEvidence.isNegative());
+
+            }
+        } else {
+            log.warn("Interactor without interactions: " + graphInteractor.getAc());
+        }
         //TODO Deal with complexes and sets
 
-        searchInteractor.setInteractorName(interactor.getPreferredIdentifier().getId());
-        searchInteractor.setDescription(interactor.getFullName());
-        searchInteractor.setInteractorAlias(aliasToSolrDocument(interactor.getAliases()));
-        searchInteractor.setInteractorAltIds(xrefToSolrDocument(interactor.getIdentifiers()));
+        searchInteractor.setInteractorName(graphInteractor.getPreferredIdentifier().getId());
+        searchInteractor.setDescription(graphInteractor.getFullName());
+        searchInteractor.setInteractorAlias(aliasesToSolrDocument(graphInteractor.getAliases()));
+        searchInteractor.setInteractorAltIds(xrefsToSolrDocument(graphInteractor.getIdentifiers()));
 
-        searchInteractor.setInteractorType(interactor.getInteractorType().getShortName());
-        searchInteractor.setSpecies(interactor.getOrganism().getScientificName());
-        searchInteractor.setTaxId(interactor.getOrganism().getTaxId());
-        searchInteractor.setInteractorXrefs(xrefToSolrDocument(interactor.getXrefs()));
-        searchInteractor.setInteractionCount(interactionIds.size());
-        searchInteractor.setInteractionIds(interactionIds);
+        searchInteractor.setInteractorType(graphInteractor.getInteractorType().getShortName());
+        searchInteractor.setSpecies(graphInteractor.getOrganism().getScientificName());
+        searchInteractor.setTaxId(graphInteractor.getOrganism().getTaxId());
+        searchInteractor.setInteractorXrefs(xrefsToSolrDocument(graphInteractor.getXrefs()));
+        searchInteractor.setInteractionCount(interactionCount);
+        searchInteractor.setInteractionIds(interactionsIds);
 
+        searchInteractor.setInteractionType(interactionsType);
+        searchInteractor.setInteractionAc(interactionsAc);
+        searchInteractor.setInteractionDetectionMethod(interactionDetectionMethods);
+        searchInteractor.setInteractionExpansionMethod(interactionExpansionMethods);
+        searchInteractor.setInteractionNegative(interactionNegative);
 
         return searchInteractor;
-    }
-
-    private static Set<String> aliasToSolrDocument(Collection<Alias> aliases) {
-
-        Set<String> searchInteractorAliases = new HashSet<>();
-        for (Alias alias : aliases) {
-            searchInteractorAliases.add(alias.getName() + " (" + alias.getType() + ")");
-        }
-        return searchInteractorAliases;
-
-    }
-
-    private static Set<String> xrefToSolrDocument(Collection<Xref> xrefs) {
-
-        Set<String> searchInteractorXrefs = new HashSet<>();
-        for (Xref xref : xrefs) {
-            searchInteractorXrefs.add(xref.getId() + " (" + xref.getDatabase().getShortName() + ")");
-        }
-
-        return searchInteractorXrefs;
-
     }
 
 }

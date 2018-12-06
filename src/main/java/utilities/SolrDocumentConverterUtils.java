@@ -6,35 +6,31 @@ import uk.ac.ebi.intact.graphdb.model.nodes.*;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 /**
  * Created by anjali on 12/07/18.
  */
-public class SolrDocumentConverter {
+public class SolrDocumentConverterUtils {
 
     public static String xrefToSolrDocument(Xref xref) {
-        String solr_xref = xref.getId() + " (" + xref.getDatabase().getShortName() + ")";
-        return solr_xref;
+        return xref.getId() + " (" + xref.getDatabase().getShortName() + ")";
 
     }
 
-    public static Set<String> xrefsToSolrDocument(Collection<GraphXref> xrefs) {
+    public static Set<String> xrefsToSolrDocument(Collection<? extends Xref> xrefs) {
 
         Set<String> searchInteractorXrefs = new HashSet<>();
-        try {
-            for (Xref xref : xrefs) {
-                searchInteractorXrefs.add(xref.getId() + " (" + xref.getDatabase().getShortName() + ")");
-            }
-        }catch (Exception e){
-            e.printStackTrace();
+        for (Xref xref : xrefs) {
+            searchInteractorXrefs.add(xref.getId() + " (" + xref.getDatabase().getShortName() + ")");
         }
 
         return searchInteractorXrefs;
 
     }
 
-    public static Set<String> aliasesToSolrDocument(Collection<GraphAlias> aliases) {
+    public static Set<String> aliasesToSolrDocument(Collection<? extends Alias> aliases) {
 
         Set<String> searchInteractorAliases = new HashSet<>();
         for (Alias alias : aliases) {
@@ -44,7 +40,7 @@ public class SolrDocumentConverter {
 
     }
 
-    public static Set<String> annotationsToSolrDocument(Collection<GraphAnnotation> annotations) {
+    public static Set<String> annotationsToSolrDocument(Collection<? extends Annotation> annotations) {
 
         Set<String> searchInteractorAliases = new HashSet<>();
         for (Annotation annotation : annotations) {
@@ -54,7 +50,7 @@ public class SolrDocumentConverter {
 
     }
 
-    public static Set<String> checksumsToSolrDocument(Collection<GraphChecksum> checksums) {
+    public static Set<String> checksumsToSolrDocument(Collection<? extends Checksum> checksums) {
 
         Set<String> searchInteractorAliases = new HashSet<>();
         for (Checksum checksum : checksums) {
@@ -64,23 +60,23 @@ public class SolrDocumentConverter {
 
     }
 
-    public static Set<String> featuresToSolrDocument(Collection<GraphFeatureEvidence> featureEvidences) {
+    public static Set<String> featuresToSolrDocument(Collection<? extends GraphFeatureEvidence> featureEvidences) {
 
         Set<String> features = new HashSet<>();
         for (Feature featureEvidence : featureEvidences) {
             String ranges;
-            if (featureEvidence.getRanges()!=null) {
+            if (featureEvidence.getRanges() != null) {
                 ranges = StringUtils.join(featureEvidence.getRanges(), ",");
-            }else {
-                ranges="";
+            } else {
+                ranges = "";
             }
-            features.add(featureEvidence.getType().getShortName()+ ":" +ranges+ "("+(featureEvidence.getShortName()!=null?featureEvidence.getShortName():"")+")");
+            features.add(featureEvidence.getType().getShortName() + ":" + ranges + "(" + (featureEvidence.getShortName() != null ? featureEvidence.getShortName() : "") + ")");
         }
         return features;
 
     }
 
-    public static Set<String> featuresShortlabelToSolrDocument(Collection<GraphFeatureEvidence> featureEvidences) {
+    public static Set<String> featuresShortlabelToSolrDocument(Collection<? extends GraphFeatureEvidence> featureEvidences) {
 
         Set<String> features = new HashSet<>();
         for (Feature featureEvidence : featureEvidences) {
@@ -90,32 +86,34 @@ public class SolrDocumentConverter {
 
     }
 
-    public static Set<String> cvTermsToSolrDocument(Collection<GraphCvTerm> cvTerms) {
-
+    public static Set<String> cvTermsToSolrDocument(Collection<? extends CvTerm> cvTerms) {
         Set<String> terms = new HashSet<>();
         for (CvTerm cvTerm : cvTerms) {
-
-            terms.add(cvTerm.getShortName());
+            terms.add(cvTermToSolrDocument(cvTerm));
         }
         return terms;
 
     }
 
-    public static Set<String> confidencesToSolrDocument(Collection<GraphConfidence> graphConfidences) {
+    public static String cvTermToSolrDocument(CvTerm cvTerm) {
+        return (cvTerm!= null) ? cvTerm.getShortName() : null;
+    }
+
+    public static Set<String> confidencesToSolrDocument(Collection<? extends Confidence> graphConfidences) {
 
         Set<String> confidences = new HashSet<>();
-        for (GraphConfidence graphConfidence : graphConfidences) {
-            confidences.add(graphConfidence.getType().getShortName()+"("+graphConfidence.getValue()+")");
+        for (Confidence confidence : graphConfidences) {
+            confidences.add(confidence.getType().getShortName() + "(" + confidence.getValue() + ")");
         }
         return confidences;
 
     }
 
-    public static Set<String> parametersToSolrDocument(Collection<GraphParameter> graphParameters) {
+    public static Set<String> parametersToSolrDocument(Collection<? extends Parameter> graphParameters) {
 
         Set<String> parameters = new HashSet<>();
-        for (GraphParameter graphParameter : graphParameters) {
-            parameters.add(graphParameter.getType().getShortName()+":"+graphParameter.getValue()+"("+graphParameter.getUnit().getShortName()+")");
+        for (Parameter parameter : graphParameters) {
+            parameters.add(parameter.getType().getShortName() + ":" + parameter.getValue() + "(" + parameter.getUnit().getShortName() + ")");
         }
         return parameters;
 

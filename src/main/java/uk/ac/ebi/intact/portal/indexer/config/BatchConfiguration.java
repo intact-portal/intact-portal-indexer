@@ -66,9 +66,9 @@ public class BatchConfiguration {
 
     @Bean
     public Job intactPortalIndexerJob(JobCompletionNotificationListener listener,
-                                    Step interactorCleanerStep,
-                                    Step interactorIndexingStep,Step interactionIndexCleanerStep,Step interactionIndexingStep,
-                                    Step cvIndexCleanerStep,Step cvIndexingStep,Step clusteredInteractionIndexCleanerStep, Step clusteredInteractionIndexingStep  ) {
+                                      Step interactorCleanerStep,
+                                      Step interactorIndexingStep, Step interactionIndexCleanerStep, Step interactionIndexingStep,
+                                      Step cvIndexCleanerStep, Step cvIndexingStep, Step clusteredInteractionIndexCleanerStep, Step clusteredInteractionIndexingStep) {
         return jobBuilderFactory.get("intactPortalIndexerJob")
                 .incrementer(new RunIdIncrementer())
                 .listener(listener)
@@ -85,8 +85,8 @@ public class BatchConfiguration {
 
     @Bean
     public Job interactorIndexerJob(JobCompletionNotificationListener listener,
-                                      Step interactorCleanerStep,
-                                      Step interactorIndexingStep) {
+                                    Step interactorCleanerStep,
+                                    Step interactorIndexingStep) {
         return jobBuilderFactory.get("interactorIndexerJob")
                 .incrementer(new RunIdIncrementer())
                 .listener(listener)
@@ -97,7 +97,8 @@ public class BatchConfiguration {
 
     @Bean
     public Job interactionIndexerJob(JobCompletionNotificationListener listener,
-                                      Step interactionIndexCleanerStep,Step interactionIndexingStep ) {
+                                     Step interactionIndexCleanerStep,
+                                     Step interactionIndexingStep) {
         return jobBuilderFactory.get("interactionIndexerJob")
                 .incrementer(new RunIdIncrementer())
                 .listener(listener)
@@ -108,7 +109,7 @@ public class BatchConfiguration {
 
     @Bean
     public Job cvIndexerJob(JobCompletionNotificationListener listener,
-                                     Step cvIndexCleanerStep,Step cvIndexingStep ) {
+                            Step cvIndexCleanerStep, Step cvIndexingStep) {
         return jobBuilderFactory.get("cvIndexerJob")
                 .incrementer(new RunIdIncrementer())
                 .listener(listener)
@@ -119,7 +120,8 @@ public class BatchConfiguration {
 
     @Bean
     public Job clusteredInteractionIndexerJob(JobCompletionNotificationListener listener,
-                            Step clusteredInteractionIndexCleanerStep,Step clusteredInteractionIndexingStep ) {
+                                              Step clusteredInteractionIndexCleanerStep,
+                                              Step clusteredInteractionIndexingStep) {
         return jobBuilderFactory.get("clusteredInteractionIndexerJob")
                 .incrementer(new RunIdIncrementer())
                 .listener(listener)
