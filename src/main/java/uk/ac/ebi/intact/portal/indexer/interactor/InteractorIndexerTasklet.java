@@ -14,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import uk.ac.ebi.intact.graphdb.model.nodes.*;
 import uk.ac.ebi.intact.graphdb.services.GraphExperimentService;
+import uk.ac.ebi.intact.graphdb.services.GraphInteractionService;
 import uk.ac.ebi.intact.graphdb.services.GraphInteractorService;
 import uk.ac.ebi.intact.search.interactor.model.SearchInteractor;
 import uk.ac.ebi.intact.search.interactor.service.InteractorIndexService;
@@ -45,6 +46,9 @@ public class InteractorIndexerTasklet implements Tasklet {
 
     @Resource
     private GraphExperimentService graphExperimentService;
+
+    @Resource
+    private GraphInteractionService graphInteractionService;
 
     @Resource
     private SolrClient solrClient;
@@ -91,7 +95,8 @@ public class InteractorIndexerTasklet implements Tasklet {
 
                 long convStart = System.currentTimeMillis();
                 for (GraphInteractor graphInteractor : interactorList) {
-                    searchInteractors.add(toSolrDocument(graphInteractor, graphInteractor.getInteractions(), graphExperimentService));
+                    searchInteractors.add(toSolrDocument(graphInteractor, graphInteractor.getInteractions(),
+                            graphExperimentService, graphInteractionService));
                 }
                 log.info("\tConversion of " + searchInteractors.size() + " records took [ms] : " + (System.currentTimeMillis() - convStart));
 
@@ -146,7 +151,10 @@ public class InteractorIndexerTasklet implements Tasklet {
     }
 
 
-    private static SearchInteractor toSolrDocument(GraphInteractor graphInteractor, Collection<GraphBinaryInteractionEvidence> interactionEvidences, GraphExperimentService graphExperimentService) {
+    private static SearchInteractor toSolrDocument(GraphInteractor graphInteractor,
+                                                   Collection<GraphBinaryInteractionEvidence> interactionEvidences,
+                                                   GraphExperimentService graphExperimentService,
+                                                   GraphInteractionService graphInteractionService) {
 
         SearchInteractor searchInteractor = new SearchInteractor();
 
@@ -173,21 +181,30 @@ public class InteractorIndexerTasklet implements Tasklet {
         Set<String> interactionExpansionMethods = new HashSet<>();
         Set<String> interactionsAc = new HashSet<>();
         Set<Boolean> interactionNegative = new HashSet<>();
+        Set<Double> interactionMiScore = new HashSet<>();
 
         if (interactionCount > 0) {
             for (GraphBinaryInteractionEvidence binaryInteractionEvidence : interactionEvidences) {
                 interactionsIds.add(binaryInteractionEvidence.getIdentifiers().iterator().next().getId());
                 interactionsType.add(cvTermToSolrDocument(binaryInteractionEvidence.getInteractionType()));
                 interactionsAc.add(binaryInteractionEvidence.getAc());
-                GraphExperiment experiment = graphExperimentService.findByAc(((GraphExperiment)binaryInteractionEvidence.getExperiment()).getAc());
+                GraphExperiment experiment =
+                        graphExperimentService.findByAc(((GraphExperiment)binaryInteractionEvidence.getExperiment()).getAc());
                 interactionDetectionMethods.add(cvTermToSolrDocument(experiment.getInteractionDetectionMethod()));
                 interactionExpansionMethods.add(cvTermToSolrDocument(binaryInteractionEvidence.getComplexExpansion()));
                 interactionNegative.add(binaryInteractionEvidence.isNegative());
 
+                GraphClusteredInteraction graphClusteredInteraction =
+                        graphInteractionService.findClusteredInteraction(binaryInteractionEvidence.getUniqueKey());
+
+                if (graphClusteredInteraction != null ) {
+                    interactionMiScore.add(graphClusteredInteraction.getMiscore());
+                }
             }
         } else {
             log.warn("Interactor without interactions: " + graphInteractor.getAc());
         }
+
         //TODO Deal with complexes and sets
 
         searchInteractor.setInteractorName(graphInteractor.getPreferredIdentifier().getId());
@@ -207,6 +224,7 @@ public class InteractorIndexerTasklet implements Tasklet {
         searchInteractor.setInteractionDetectionMethod(interactionDetectionMethods);
         searchInteractor.setInteractionExpansionMethod(interactionExpansionMethods);
         searchInteractor.setInteractionNegative(interactionNegative);
+        searchInteractor.setInteractionMiScore(interactionMiScore);
 
         return searchInteractor;
     }
