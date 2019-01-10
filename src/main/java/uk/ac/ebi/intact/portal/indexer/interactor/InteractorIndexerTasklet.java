@@ -180,6 +180,7 @@ public class InteractorIndexerTasklet implements Tasklet {
         Set<String> interactionsType = new HashSet<>();
         Set<String> interactionExpansionMethods = new HashSet<>();
         Set<String> interactionsAc = new HashSet<>();
+        Set<String> interactionHostOrganism = new HashSet<>();
         Set<Boolean> interactionNegative = new HashSet<>();
         Set<Double> interactionMiScore = new HashSet<>();
 
@@ -191,6 +192,7 @@ public class InteractorIndexerTasklet implements Tasklet {
                 GraphExperiment experiment =
                         graphExperimentService.findByAc(((GraphExperiment)binaryInteractionEvidence.getExperiment()).getAc());
                 interactionDetectionMethods.add(cvTermToSolrDocument(experiment.getInteractionDetectionMethod()));
+                interactionHostOrganism.add(experiment.getHostOrganism().getScientificName());
                 interactionExpansionMethods.add(cvTermToSolrDocument(binaryInteractionEvidence.getComplexExpansion()));
                 interactionNegative.add(binaryInteractionEvidence.isNegative());
 
@@ -223,6 +225,7 @@ public class InteractorIndexerTasklet implements Tasklet {
         searchInteractor.setInteractionAc(interactionsAc);
         searchInteractor.setInteractionDetectionMethod(interactionDetectionMethods);
         searchInteractor.setInteractionExpansionMethod(interactionExpansionMethods);
+        searchInteractor.setInteractionHostOrganism(interactionHostOrganism);
         searchInteractor.setInteractionNegative(interactionNegative);
         searchInteractor.setInteractionMiScore(interactionMiScore);
 
