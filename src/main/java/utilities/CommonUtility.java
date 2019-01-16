@@ -1,6 +1,6 @@
 package utilities;
 
-import uk.ac.ebi.intact.search.interactions.model.Interaction;
+import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 
 import java.beans.XMLEncoder;
 import java.io.BufferedOutputStream;
@@ -37,7 +37,7 @@ public class CommonUtility {
     }
 
     //only for testing
-    public static void saveInteractioninDisc(Collection<Interaction> interactions) {
+    public static void saveInteractioninDisc(Collection<SearchInteraction> interactions) {
         XMLEncoder encoder = null;
         try {
             encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream("./src/test/resources/Interactions.xml")));
