@@ -37,7 +37,7 @@ public class CommonUtility {
     }
 
     //only for testing
-    public static void saveInteractioninDisc(Collection<SearchInteraction> interactions) {
+    public static void saveInteractionInDisc(Collection<SearchInteraction> interactions) {
         XMLEncoder encoder = null;
         try {
             encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream("./src/test/resources/Interactions.xml")));

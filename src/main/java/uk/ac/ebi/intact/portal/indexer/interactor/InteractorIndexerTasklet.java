@@ -80,12 +80,12 @@ public class InteractorIndexerTasklet implements Tasklet {
 
             while (!done) {
                 log.info("Retrieving page : " + page);
-                request = new PageRequest(page, pageSize);
+                request = PageRequest.of(page, pageSize);
 
                 long dbStart = System.currentTimeMillis();
 
                 Page<GraphInteractor> graphInteractorPage = graphInteractorService.findAll(request, DEPTH);
-                log.info("\tMain DB query took [ms] : " + (System.currentTimeMillis() - dbStart));
+                log.info("Main DB query took [ms] : " + (System.currentTimeMillis() - dbStart));
 
                 done = (page >= graphInteractorPage.getTotalPages() - 1); // stop criteria when using paged results
 //                done = (page >= 9); // testing with 10 pages (0-9)
@@ -98,7 +98,7 @@ public class InteractorIndexerTasklet implements Tasklet {
                     searchInteractors.add(toSolrDocument(graphInteractor, graphInteractor.getInteractions(),
                             graphExperimentService, graphInteractionService));
                 }
-                log.info("\tConversion of " + searchInteractors.size() + " records took [ms] : " + (System.currentTimeMillis() - convStart));
+                log.info("Conversion of " + searchInteractors.size() + " records took [ms] : " + (System.currentTimeMillis() - convStart));
 
                 long indexStart = System.currentTimeMillis();
 
@@ -106,7 +106,7 @@ public class InteractorIndexerTasklet implements Tasklet {
 //                    solrServerCheck();
 
                     interactorIndexService.saveAll(searchInteractors);
-                    log.info("\tIndex save took [ms] : " + (System.currentTimeMillis() - indexStart));
+                    log.info("Index save took [ms] : " + (System.currentTimeMillis() - indexStart));
                 }
 
                 // increase the page number
@@ -114,7 +114,7 @@ public class InteractorIndexerTasklet implements Tasklet {
             }
 
             log.info("Indexing complete.");
-            log.info("\tTotal indexing took [ms] : " + (System.currentTimeMillis() - totalTime));
+            log.info("Total indexing took [ms] : " + (System.currentTimeMillis() - totalTime));
 
         } catch (Exception e) {
             System.out.println("Unexpected exception: " + e.toString());
@@ -171,7 +171,6 @@ public class InteractorIndexerTasklet implements Tasklet {
             }
 
             searchInteractor.setFeatureShortLabels(featuresShortlabelToSolrDocument(featureEvidences));
-//            searchInteractor.setFeatureShortLabels(!featureEvidences.isEmpty() ? featuresShortlabelToSolrDocument(featureEvidences) : null);
         }
 
         int interactionCount = interactionEvidences.size();

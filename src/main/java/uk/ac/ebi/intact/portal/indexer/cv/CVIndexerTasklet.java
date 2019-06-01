@@ -9,22 +9,12 @@ import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
-import psidev.psi.mi.jami.model.Alias;
 import psidev.psi.mi.jami.model.Interactor;
-import psidev.psi.mi.jami.model.Xref;
-import psidev.psi.mi.jami.utils.XrefUtils;
-import uk.ac.ebi.intact.graphdb.model.nodes.GraphBinaryInteractionEvidence;
-import uk.ac.ebi.intact.graphdb.model.nodes.GraphInteractor;
-import uk.ac.ebi.intact.graphdb.services.GraphInteractorService;
-import uk.ac.ebi.intact.search.interactor.model.SearchInteractor;
-import uk.ac.ebi.intact.search.interactor.service.InteractorIndexService;
 
 import javax.annotation.Resource;
 import java.io.IOException;
-import java.util.*;
+import java.util.Set;
 
 @Component
 public class CVIndexerTasklet implements Tasklet {

@@ -95,7 +95,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 long dbStart = System.currentTimeMillis();
 
                 Page<GraphBinaryInteractionEvidence> graphInteractionPage = graphInteractionService.findAll(request, DEPTH);
-                log.info("\tMain DB query took [ms] : " + (System.currentTimeMillis() - dbStart));
+                log.info("Main DB query took [ms] : " + (System.currentTimeMillis() - dbStart));
 
                 done = (page >= graphInteractionPage.getTotalPages() - 1); // stop criteria when using paged results
 //                done = (page >= 9); // testing with 10 pages (0-9)
@@ -108,7 +108,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                     Set<String> interactionsIds = new HashSet<>();
                     interactions.add(toSolrDocument(graphInteraction));
                 }
-                log.info("\tConversion of " + interactions.size() + " records took [ms] : " + (System.currentTimeMillis() - convStart));
+                log.info("Conversion of " + interactions.size() + " records took [ms] : " + (System.currentTimeMillis() - convStart));
 
                 long indexStart = System.currentTimeMillis();
 
@@ -116,7 +116,7 @@ public class InteractionIndexerTasklet implements Tasklet {
 //                    solrServerCheck();
 
                     interactionIndexService.save(interactions);
-                    log.info("\tIndex save took [ms] : " + (System.currentTimeMillis() - indexStart));
+                    log.info("Index save took [ms] : " + (System.currentTimeMillis() - indexStart));
                 }
 
                 // increase the page number
@@ -176,7 +176,6 @@ public class InteractionIndexerTasklet implements Tasklet {
 
         if (interactionEvidence instanceof GraphBinaryInteractionEvidence) {
             GraphBinaryInteractionEvidence graphBinaryInteractionEvidence = (GraphBinaryInteractionEvidence) interactionEvidence;
-            searchInteraction.setUniqueKey(graphBinaryInteractionEvidence.getUniqueKey());
 
             // Interactor details
             if (graphBinaryInteractionEvidence.getInteractorA() != null) {

@@ -8,7 +8,6 @@ import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.stereotype.Component;
 import uk.ac.ebi.intact.search.interactions.service.InteractionIndexService;
-import uk.ac.ebi.intact.search.interactor.service.InteractorIndexService;
 
 import javax.annotation.Resource;
 import java.text.DateFormat;
@@ -45,7 +44,6 @@ public class InteractionCleanerTasklet implements Tasklet {
     public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
 
 
-        //By default the index it will not take into account contaminant proteins)
         Calendar cal = Calendar.getInstance();
         DateFormat df = new SimpleDateFormat("dd-MM-yy HH:mm:ss");
         cal.setTimeInMillis(System.currentTimeMillis());

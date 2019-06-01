@@ -17,8 +17,8 @@ import uk.ac.ebi.intact.portal.indexer.interaction.InteractionCleanerTasklet;
 import uk.ac.ebi.intact.portal.indexer.interaction.InteractionIndexerTasklet;
 import uk.ac.ebi.intact.portal.indexer.interaction.clusteredInteraction.ClusteredInteractionCleanerTasklet;
 import uk.ac.ebi.intact.portal.indexer.interaction.clusteredInteraction.ClusteredInteractionIndexerTasklet;
-import uk.ac.ebi.intact.portal.indexer.listeners.JobCompletionNotificationListener;
 import uk.ac.ebi.intact.portal.indexer.interactor.InteractorIndexerTasklet;
+import uk.ac.ebi.intact.portal.indexer.listeners.JobCompletionNotificationListener;
 
 @Configuration
 @EnableBatchProcessing
@@ -31,44 +31,18 @@ public class BatchConfiguration {
     @Autowired
     public StepBuilderFactory stepBuilderFactory;
 
-//    // tag::readerwriterprocessor[]
-//    @Bean
-//    public FlatFileItemReader<Person> reader() {
-//        return new FlatFileItemReaderBuilder<Person>()
-//                .name("personItemReader")
-//                .resource(new ClassPathResource("sample-data.csv"))
-//                .delimited()
-//                .names(new String[]{"firstName", "lastName"})
-//                .fieldSetMapper(new BeanWrapperFieldSetMapper<Person>() {{
-//                    setTargetType(Person.class);
-//                }})
-//                .build();
-//    }
-//
-//    @Bean
-//    public PersonItemProcessor processor() {
-//        return new PersonItemProcessor();
-//    }
-//
-//    @Bean
-//    public JdbcBatchItemWriter<Person> writer(DataSource dataSource) {
-//        return new JdbcBatchItemWriterBuilder<Person>()
-//                .itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
-//                .sql("INSERT INTO people (first_name, last_name) VALUES (:firstName, :lastName)")
-//                .dataSource(dataSource)
-//                .build();
-//    }
-//    // end::readerwriterprocessor[]
-
-    // tag::jobstep[]
-
     /*Job will all the indexing  steps*/
 
     @Bean
     public Job intactPortalIndexerJob(JobCompletionNotificationListener listener,
                                       Step interactorCleanerStep,
-                                      Step interactorIndexingStep, Step interactionIndexCleanerStep, Step interactionIndexingStep,
-                                      Step cvIndexCleanerStep, Step cvIndexingStep, Step clusteredInteractionIndexCleanerStep, Step clusteredInteractionIndexingStep) {
+                                      Step interactorIndexingStep,
+                                      Step interactionIndexCleanerStep,
+                                      Step interactionIndexingStep,
+                                      Step cvIndexCleanerStep,
+                                      Step cvIndexingStep,
+                                      Step clusteredInteractionIndexCleanerStep,
+                                      Step clusteredInteractionIndexingStep) {
         return jobBuilderFactory.get("intactPortalIndexerJob")
                 .incrementer(new RunIdIncrementer())
                 .listener(listener)
