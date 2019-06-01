@@ -1,4 +1,4 @@
-package uk.ac.ebi.intact.portal.indexer;
+package uk.ac.ebi.intact.portal.indexer.interactor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,9 +16,9 @@ import java.util.Calendar;
 
 
 @Component
-public class IndexCleanerTasklet implements Tasklet {
+public class InteractorCleanerTasklet implements Tasklet {
 
-    private static final Logger logger = LoggerFactory.getLogger(IndexCleanerTasklet.class);
+    private static final Logger logger = LoggerFactory.getLogger(InteractorCleanerTasklet.class);
 
     @Resource
     private InteractorIndexService interactorIndexService;

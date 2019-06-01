@@ -10,13 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import uk.ac.ebi.intact.portal.indexer.IndexCleanerTasklet;
 import uk.ac.ebi.intact.portal.indexer.cv.CVCleanerTasklet;
 import uk.ac.ebi.intact.portal.indexer.cv.CVIndexerTasklet;
 import uk.ac.ebi.intact.portal.indexer.interaction.InteractionCleanerTasklet;
 import uk.ac.ebi.intact.portal.indexer.interaction.InteractionIndexerTasklet;
 import uk.ac.ebi.intact.portal.indexer.interaction.clusteredInteraction.ClusteredInteractionCleanerTasklet;
 import uk.ac.ebi.intact.portal.indexer.interaction.clusteredInteraction.ClusteredInteractionIndexerTasklet;
+import uk.ac.ebi.intact.portal.indexer.interactor.InteractorCleanerTasklet;
 import uk.ac.ebi.intact.portal.indexer.interactor.InteractorIndexerTasklet;
 import uk.ac.ebi.intact.portal.indexer.listeners.JobCompletionNotificationListener;
 
@@ -107,7 +107,7 @@ public class BatchConfiguration {
     /*Interactor Indexing*/
 
     @Bean
-    public Step interactorCleanerStep(IndexCleanerTasklet tasklet) {
+    public Step interactorCleanerStep(InteractorCleanerTasklet tasklet) {
         return stepBuilderFactory.get("interactorCleanerStep")
                 .tasklet(tasklet)
                 .build();
