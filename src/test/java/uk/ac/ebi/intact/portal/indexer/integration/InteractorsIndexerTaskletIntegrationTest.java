@@ -1,6 +1,7 @@
 package uk.ac.ebi.intact.portal.indexer.integration;
 
 import org.junit.Assert;
+import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.batch.core.*;
@@ -13,6 +14,7 @@ import org.springframework.batch.test.JobLauncherTestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import uk.ac.ebi.intact.search.interactions.service.util.RequiresSolrServer;
 
 import javax.annotation.Resource;
 
@@ -44,6 +46,10 @@ public class InteractorsIndexerTaskletIntegrationTest {
 
     @Autowired
     private Job interactorIndexerJob;
+
+    @ClassRule
+    public static RequiresSolrServer requiresRunningServer = RequiresSolrServer.onLocalhost();
+
 
     private void initializeJobLauncherTestUtils() {
         this.jobLauncherTestUtils = new JobLauncherTestUtils();
