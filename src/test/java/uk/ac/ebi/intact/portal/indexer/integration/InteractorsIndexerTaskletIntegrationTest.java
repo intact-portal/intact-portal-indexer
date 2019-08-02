@@ -14,7 +14,7 @@ import org.springframework.batch.test.JobLauncherTestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import uk.ac.ebi.intact.search.interactions.service.util.RequiresSolrServer;
+import uk.ac.ebi.intact.portal.indexer.RequiresSolrServer;
 
 import javax.annotation.Resource;
 
@@ -30,26 +30,19 @@ import static org.springframework.batch.test.MetaDataInstanceFactory.createStepE
 //TODO Review the configuration of the test to be sure that used the localhost, in memory resources
 public class InteractorsIndexerTaskletIntegrationTest {
 
-    private JobLauncherTestUtils jobLauncherTestUtils;
-
-    @Resource
-    private Tasklet indexCleanerTasklet;
-
-    @Resource
-    private Tasklet interactorIndexerTasklet;
-
-    @Autowired
-    private JobLauncher jobLauncher;
-
-    @Autowired
-    private JobRepository jobRepository;
-
-    @Autowired
-    private Job interactorIndexerJob;
-
     @ClassRule
     public static RequiresSolrServer requiresRunningServer = RequiresSolrServer.onLocalhost();
-
+    private JobLauncherTestUtils jobLauncherTestUtils;
+    @Resource
+    private Tasklet indexCleanerTasklet;
+    @Resource
+    private Tasklet interactorIndexerTasklet;
+    @Autowired
+    private JobLauncher jobLauncher;
+    @Autowired
+    private JobRepository jobRepository;
+    @Autowired
+    private Job interactorIndexerJob;
 
     private void initializeJobLauncherTestUtils() {
         this.jobLauncherTestUtils = new JobLauncherTestUtils();
@@ -60,6 +53,7 @@ public class InteractorsIndexerTaskletIntegrationTest {
 
     /**
      * Tests if interactor index cleaning and creation (interactorIndexerJob) Job runs completely
+     *
      * @throws Exception
      */
     @Test
@@ -75,6 +69,7 @@ public class InteractorsIndexerTaskletIntegrationTest {
 
     /**
      * Tests if interactor index cleaning (interactorCleanerStep) Step runs completely
+     *
      * @throws Exception
      */
     @Test
@@ -90,6 +85,7 @@ public class InteractorsIndexerTaskletIntegrationTest {
 
     /**
      * Tests if interactor indexing (interactorIndexingStep) Step runs completely
+     *
      * @throws Exception
      */
     @Test
@@ -105,6 +101,7 @@ public class InteractorsIndexerTaskletIntegrationTest {
 
     /**
      * Tests if interactor index cleaning (indexCleanerTasklet) Tasklet runs completely
+     *
      * @throws Exception
      */
     // TODO check for completion
@@ -122,6 +119,7 @@ public class InteractorsIndexerTaskletIntegrationTest {
 
     /**
      * Tests if interactor indexing (interactorIndexerTasklet) Tasklet runs completely
+     *
      * @throws Exception
      */
     @Test

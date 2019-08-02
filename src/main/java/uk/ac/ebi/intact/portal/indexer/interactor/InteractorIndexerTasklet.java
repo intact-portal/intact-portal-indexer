@@ -56,9 +56,89 @@ public class InteractorIndexerTasklet implements Tasklet {
 
     private boolean simulation = false;
 
+    private static SearchInteractor toSolrDocument(GraphInteractor graphInteractor,
+                                                   Collection<GraphBinaryInteractionEvidence> interactionEvidences,
+                                                   GraphExperimentService graphExperimentService,
+                                                   GraphInteractionService graphInteractionService) {
+
+        SearchInteractor searchInteractor = new SearchInteractor();
+
+        //Id
+        searchInteractor.setInteractorId(graphInteractor.getAc());
+
+        //Features
+        Collection<GraphFeature> featureEvidences = new ArrayList<>();
+        if (graphInteractor.getParticipantEvidences() != null) {
+            for (GraphParticipantEvidence participantEvidence : graphInteractor.getParticipantEvidences()) {
+                if (participantEvidence.getFeatures() != null) {
+                    featureEvidences.addAll(participantEvidence.getFeatures());
+                }
+            }
+
+            searchInteractor.setFeatureShortLabels(featuresShortlabelToSolrDocument(featureEvidences));
+        }
+
+        int interactionCount = interactionEvidences.size();
+        Set<String> interactionsIds = new HashSet<>();
+        Set<String> interactionDetectionMethods = new HashSet<>();
+        Set<String> interactionsType = new HashSet<>();
+        Set<String> interactionExpansionMethods = new HashSet<>();
+        Set<String> interactionsAc = new HashSet<>();
+        Set<String> interactionHostOrganism = new HashSet<>();
+        Set<Boolean> interactionNegative = new HashSet<>();
+        Set<Double> interactionMiScore = new HashSet<>();
+
+        if (interactionCount > 0) {
+            for (GraphBinaryInteractionEvidence binaryInteractionEvidence : interactionEvidences) {
+                interactionsIds.add(binaryInteractionEvidence.getIdentifiers().iterator().next().getId());
+                interactionsType.add(cvTermToSolrDocument(binaryInteractionEvidence.getInteractionType()));
+                interactionsAc.add(binaryInteractionEvidence.getAc());
+                GraphExperiment experiment = (GraphExperiment) binaryInteractionEvidence.getExperiment();
+
+                interactionDetectionMethods.add(cvTermToSolrDocument(experiment.getInteractionDetectionMethod()));
+                interactionHostOrganism.add(experiment.getHostOrganism().getScientificName());
+                interactionExpansionMethods.add(cvTermToSolrDocument(binaryInteractionEvidence.getComplexExpansion()));
+                interactionNegative.add(binaryInteractionEvidence.isNegative());
+
+                GraphClusteredInteraction graphClusteredInteraction = binaryInteractionEvidence.getClusteredInteraction();
+
+
+                if (graphClusteredInteraction != null) {
+                    interactionMiScore.add(graphClusteredInteraction.getMiscore());
+                }
+            }
+        } else {
+            log.warn("Interactor without interactions: " + graphInteractor.getAc());
+        }
+
+        //TODO Deal with complexes and sets
+
+        searchInteractor.setInteractorName(graphInteractor.getPreferredIdentifier().getId());
+        searchInteractor.setDescription(graphInteractor.getFullName());
+        searchInteractor.setInteractorAlias(aliasesToSolrDocument(graphInteractor.getAliases()));
+        searchInteractor.setInteractorAltIds(xrefsToSolrDocument(graphInteractor.getIdentifiers()));
+
+        searchInteractor.setInteractorType(graphInteractor.getInteractorType().getShortName());
+        searchInteractor.setSpecies(graphInteractor.getOrganism().getScientificName());
+        searchInteractor.setTaxId(graphInteractor.getOrganism().getTaxId());
+        searchInteractor.setInteractorXrefs(xrefsToSolrDocument(graphInteractor.getXrefs()));
+        searchInteractor.setInteractionCount(interactionCount);
+        searchInteractor.setInteractionIds(interactionsIds);
+
+        searchInteractor.setInteractionType(interactionsType);
+        searchInteractor.setInteractionAc(interactionsAc);
+        searchInteractor.setInteractionDetectionMethod(interactionDetectionMethods);
+        searchInteractor.setInteractionExpansionMethod(interactionExpansionMethods);
+        searchInteractor.setInteractionHostOrganism(interactionHostOrganism);
+        searchInteractor.setInteractionNegative(interactionNegative);
+        searchInteractor.setInteractionMiScore(interactionMiScore);
+
+        return searchInteractor;
+    }
 
     /**
      * It reads interactors from graph db and create interactor index in solr
+     *
      * @param stepContribution
      * @param chunkContext
      * @return
@@ -148,87 +228,6 @@ public class InteractorIndexerTasklet implements Tasklet {
         } else {
             throw new IllegalStateException("Solr server not responding in time. Aborting.");
         }
-    }
-
-
-    private static SearchInteractor toSolrDocument(GraphInteractor graphInteractor,
-                                                   Collection<GraphBinaryInteractionEvidence> interactionEvidences,
-                                                   GraphExperimentService graphExperimentService,
-                                                   GraphInteractionService graphInteractionService) {
-
-        SearchInteractor searchInteractor = new SearchInteractor();
-
-        //Id
-        searchInteractor.setInteractorId(graphInteractor.getAc());
-
-        //Features
-        Collection<GraphFeatureEvidence> featureEvidences = new ArrayList<>();
-        if (graphInteractor.getParticipantEvidences() != null) {
-            for (GraphParticipantEvidence participantEvidence : graphInteractor.getParticipantEvidences()) {
-                if (participantEvidence.getFeatures() != null) {
-                    featureEvidences.addAll(participantEvidence.getFeatures());
-                }
-            }
-
-            searchInteractor.setFeatureShortLabels(featuresShortlabelToSolrDocument(featureEvidences));
-        }
-
-        int interactionCount = interactionEvidences.size();
-        Set<String> interactionsIds = new HashSet<>();
-        Set<String> interactionDetectionMethods = new HashSet<>();
-        Set<String> interactionsType = new HashSet<>();
-        Set<String> interactionExpansionMethods = new HashSet<>();
-        Set<String> interactionsAc = new HashSet<>();
-        Set<String> interactionHostOrganism = new HashSet<>();
-        Set<Boolean> interactionNegative = new HashSet<>();
-        Set<Double> interactionMiScore = new HashSet<>();
-
-        if (interactionCount > 0) {
-            for (GraphBinaryInteractionEvidence binaryInteractionEvidence : interactionEvidences) {
-                interactionsIds.add(binaryInteractionEvidence.getIdentifiers().iterator().next().getId());
-                interactionsType.add(cvTermToSolrDocument(binaryInteractionEvidence.getInteractionType()));
-                interactionsAc.add(binaryInteractionEvidence.getAc());
-                GraphExperiment experiment =
-                        graphExperimentService.findByAc(((GraphExperiment)binaryInteractionEvidence.getExperiment()).getAc());
-                interactionDetectionMethods.add(cvTermToSolrDocument(experiment.getInteractionDetectionMethod()));
-                interactionHostOrganism.add(experiment.getHostOrganism().getScientificName());
-                interactionExpansionMethods.add(cvTermToSolrDocument(binaryInteractionEvidence.getComplexExpansion()));
-                interactionNegative.add(binaryInteractionEvidence.isNegative());
-
-                GraphClusteredInteraction graphClusteredInteraction =
-                        graphInteractionService.findClusteredInteraction(binaryInteractionEvidence.getUniqueKey());
-
-                if (graphClusteredInteraction != null ) {
-                    interactionMiScore.add(graphClusteredInteraction.getMiscore());
-                }
-            }
-        } else {
-            log.warn("Interactor without interactions: " + graphInteractor.getAc());
-        }
-
-        //TODO Deal with complexes and sets
-
-        searchInteractor.setInteractorName(graphInteractor.getPreferredIdentifier().getId());
-        searchInteractor.setDescription(graphInteractor.getFullName());
-        searchInteractor.setInteractorAlias(aliasesToSolrDocument(graphInteractor.getAliases()));
-        searchInteractor.setInteractorAltIds(xrefsToSolrDocument(graphInteractor.getIdentifiers()));
-
-        searchInteractor.setInteractorType(graphInteractor.getInteractorType().getShortName());
-        searchInteractor.setSpecies(graphInteractor.getOrganism().getScientificName());
-        searchInteractor.setTaxId(graphInteractor.getOrganism().getTaxId());
-        searchInteractor.setInteractorXrefs(xrefsToSolrDocument(graphInteractor.getXrefs()));
-        searchInteractor.setInteractionCount(interactionCount);
-        searchInteractor.setInteractionIds(interactionsIds);
-
-        searchInteractor.setInteractionType(interactionsType);
-        searchInteractor.setInteractionAc(interactionsAc);
-        searchInteractor.setInteractionDetectionMethod(interactionDetectionMethods);
-        searchInteractor.setInteractionExpansionMethod(interactionExpansionMethods);
-        searchInteractor.setInteractionHostOrganism(interactionHostOrganism);
-        searchInteractor.setInteractionNegative(interactionNegative);
-        searchInteractor.setInteractionMiScore(interactionMiScore);
-
-        return searchInteractor;
     }
 
 }

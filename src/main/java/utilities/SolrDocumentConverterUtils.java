@@ -2,11 +2,10 @@ package utilities;
 
 import org.apache.commons.lang.StringUtils;
 import psidev.psi.mi.jami.model.*;
-import uk.ac.ebi.intact.graphdb.model.nodes.*;
+import uk.ac.ebi.intact.graphdb.model.nodes.GraphFeature;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -60,7 +59,7 @@ public class SolrDocumentConverterUtils {
 
     }
 
-    public static Set<String> featuresToSolrDocument(Collection<? extends GraphFeatureEvidence> featureEvidences) {
+    public static Set<String> featuresToSolrDocument(Collection<? extends GraphFeature> featureEvidences) {
 
         Set<String> features = new HashSet<>();
         for (Feature featureEvidence : featureEvidences) {
@@ -76,7 +75,7 @@ public class SolrDocumentConverterUtils {
 
     }
 
-    public static Set<String> featuresShortlabelToSolrDocument(Collection<? extends GraphFeatureEvidence> featureEvidences) {
+    public static Set<String> featuresShortlabelToSolrDocument(Collection<? extends GraphFeature> featureEvidences) {
 
         Set<String> features = new HashSet<>();
         for (Feature featureEvidence : featureEvidences) {
@@ -96,7 +95,7 @@ public class SolrDocumentConverterUtils {
     }
 
     public static String cvTermToSolrDocument(CvTerm cvTerm) {
-        return (cvTerm!= null) ? cvTerm.getShortName() : null;
+        return (cvTerm != null) ? cvTerm.getShortName() : null;
     }
 
     public static Set<String> confidencesToSolrDocument(Collection<? extends Confidence> graphConfidences) {

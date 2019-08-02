@@ -14,7 +14,7 @@ import org.springframework.batch.test.JobLauncherTestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import uk.ac.ebi.intact.search.interactions.service.util.RequiresSolrServer;
+import uk.ac.ebi.intact.portal.indexer.RequiresSolrServer;
 
 import javax.annotation.Resource;
 
@@ -30,27 +30,21 @@ import static org.springframework.batch.test.MetaDataInstanceFactory.createStepE
 //TODO Review the configuration of the test to be sure that used the localhost, in memory resources
 public class InteractionIndexerIntegrationTest {
 
-    private JobLauncherTestUtils jobLauncherTestUtils;
-
-    @Resource
-    private Tasklet interactionCleanerTasklet;
-
-    @Resource
-    private Tasklet interactionIndexerTasklet;
-
-    @Autowired
-    private JobLauncher jobLauncher;
-
-    @Autowired
-    private JobRepository jobRepository;
-
-    @Autowired
-    private Job  interactionIndexerJob;
-
     @ClassRule
     public static RequiresSolrServer requiresRunningServer = RequiresSolrServer.onLocalhost();
+    private JobLauncherTestUtils jobLauncherTestUtils;
+    @Resource
+    private Tasklet interactionCleanerTasklet;
+    @Resource
+    private Tasklet interactionIndexerTasklet;
+    @Autowired
+    private JobLauncher jobLauncher;
+    @Autowired
+    private JobRepository jobRepository;
+    @Autowired
+    private Job interactionIndexerJob;
 
-    private void initializeJobLauncherTestUtils(){
+    private void initializeJobLauncherTestUtils() {
         this.jobLauncherTestUtils = new JobLauncherTestUtils();
         this.jobLauncherTestUtils.setJobLauncher(jobLauncher);
         this.jobLauncherTestUtils.setJobRepository(jobRepository);
@@ -59,12 +53,13 @@ public class InteractionIndexerIntegrationTest {
 
     /**
      * Tests if interaction index cleaning and creation 'interactionIndexerJob' Job runs completely
+     *
      * @throws Exception
      */
     @Test
     public void jobSimulation() throws Exception {
 
-        if(jobLauncherTestUtils==null){
+        if (jobLauncherTestUtils == null) {
             initializeJobLauncherTestUtils();
         }
         JobExecution jobExecution = jobLauncherTestUtils.launchJob();
@@ -74,12 +69,13 @@ public class InteractionIndexerIntegrationTest {
 
     /**
      * Tests if interaction index cleaning (interactionIndexCleanerStep) Step runs completely
+     *
      * @throws Exception
      */
     @Test
     public void cleanerStepSimulation() throws Exception {
 
-        if(jobLauncherTestUtils==null){
+        if (jobLauncherTestUtils == null) {
             initializeJobLauncherTestUtils();
         }
         JobExecution jobExecution = jobLauncherTestUtils.launchStep("interactionIndexCleanerStep");
@@ -89,12 +85,13 @@ public class InteractionIndexerIntegrationTest {
 
     /**
      * Tests if interaction indexing (interactionIndexingStep) Step runs completely
+     *
      * @throws Exception
      */
     @Test
     public void indexingStepSimulation() throws Exception {
 
-        if(jobLauncherTestUtils==null){
+        if (jobLauncherTestUtils == null) {
             initializeJobLauncherTestUtils();
         }
         JobExecution jobExecution = jobLauncherTestUtils.launchStep("interactionIndexingStep");
@@ -104,6 +101,7 @@ public class InteractionIndexerIntegrationTest {
 
     /**
      * Tests if interaction index cleaning (interactionCleanerTasklet) Tasklet runs completely
+     *
      * @throws Exception
      */
     // TODO check for completion
@@ -121,6 +119,7 @@ public class InteractionIndexerIntegrationTest {
 
     /**
      * Tests if interaction indexing (interactionIndexingStep) Tasklet runs completely
+     *
      * @throws Exception
      */
     // TODO check for completion

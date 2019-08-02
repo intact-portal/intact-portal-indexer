@@ -1,4 +1,4 @@
-package uk.ac.ebi.intact.search.interactions.service.util;
+package uk.ac.ebi.intact.portal.indexer;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
