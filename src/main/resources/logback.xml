@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+
+    <jmxConfigurator/>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[%d] &lt; %level  &gt;  %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.springframework.data.neo4j" level="ERROR" />
+    <logger name="org.hibernate" level="ERROR" />
+    <logger name="org.apache.tomcat" level="ERROR" />
+    <logger name="org.neo4j" level="ERROR"/>
+    <logger name="org.springframework" level="ERROR"/>
+    <logger name="uk.ac.ebi.intact.portal.indexer" level="ERROR,DEBUG"/>
+
+
+    <root level="INFO">
+        <appender-ref ref="console" />
+    </root>
+</configuration>
