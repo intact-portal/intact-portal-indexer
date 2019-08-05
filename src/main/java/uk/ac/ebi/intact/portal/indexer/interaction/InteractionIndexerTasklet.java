@@ -91,7 +91,12 @@ public class InteractionIndexerTasklet implements Tasklet {
                 long convStart = System.currentTimeMillis();
                 for (GraphBinaryInteractionEvidence graphInteraction : interactionList) {
                     Set<String> interactionsIds = new HashSet<>();
-                    interactions.add(toSolrDocument(graphInteraction));
+                    try {
+                        interactions.add(toSolrDocument(graphInteraction));
+                    }catch (Exception e){
+                        log.error("Interaction with ac: "+ graphInteraction.getAc() +" could not be indexed because of exception  :- ");
+                        e.printStackTrace();
+                    }
                 }
                 log.info("Conversion of " + interactions.size() + " records took [ms] : " + (System.currentTimeMillis() - convStart));
 

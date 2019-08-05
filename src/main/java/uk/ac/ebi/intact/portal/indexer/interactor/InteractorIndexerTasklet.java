@@ -35,7 +35,7 @@ public class InteractorIndexerTasklet implements Tasklet {
 
     private static final int MAX_PING_TIME = 1000;
     private static final int MAX_ATTEMPTS = 5;
-    private static final int DEPTH = 2;
+    private static final int DEPTH = 0;
     private int attempts = 0;
 
     @Resource
@@ -45,21 +45,13 @@ public class InteractorIndexerTasklet implements Tasklet {
     private InteractorIndexService interactorIndexService;
 
     @Resource
-    private GraphExperimentService graphExperimentService;
-
-    @Resource
-    private GraphInteractionService graphInteractionService;
-
-    @Resource
     private SolrClient solrClient;
 
 
     private boolean simulation = false;
 
     private static SearchInteractor toSolrDocument(GraphInteractor graphInteractor,
-                                                   Collection<GraphBinaryInteractionEvidence> interactionEvidences,
-                                                   GraphExperimentService graphExperimentService,
-                                                   GraphInteractionService graphInteractionService) {
+                                                   Collection<GraphBinaryInteractionEvidence> interactionEvidences) {
 
         SearchInteractor searchInteractor = new SearchInteractor();
 
@@ -175,8 +167,12 @@ public class InteractorIndexerTasklet implements Tasklet {
 
                 long convStart = System.currentTimeMillis();
                 for (GraphInteractor graphInteractor : interactorList) {
-                    searchInteractors.add(toSolrDocument(graphInteractor, graphInteractor.getInteractions(),
-                            graphExperimentService, graphInteractionService));
+                    try {
+                        searchInteractors.add(toSolrDocument(graphInteractor, graphInteractor.getInteractions()));
+                    }catch (Exception e){
+                        log.error("Interactor with ac: "+ graphInteractor.getAc() +" could not be indexed because of exception  :- ");
+                        e.printStackTrace();
+                    }
                 }
                 log.info("Conversion of " + searchInteractors.size() + " records took [ms] : " + (System.currentTimeMillis() - convStart));
 
