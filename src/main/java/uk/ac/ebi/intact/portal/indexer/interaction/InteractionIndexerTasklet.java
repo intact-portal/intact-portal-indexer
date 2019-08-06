@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 import psidev.psi.mi.jami.binary.BinaryInteractionEvidence;
 import uk.ac.ebi.intact.graphdb.model.nodes.*;
 import uk.ac.ebi.intact.graphdb.services.GraphInteractionService;
-import uk.ac.ebi.intact.graphdb.services.GraphParticipantService;
 import uk.ac.ebi.intact.portal.indexer.interactor.InteractorUtility;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.service.InteractionIndexService;
@@ -45,8 +44,6 @@ public class InteractionIndexerTasklet implements Tasklet {
     private int attempts = 0;
     @Resource
     private GraphInteractionService graphInteractionService;
-    @Resource
-    private GraphParticipantService graphParticipantService;
     @Resource
     private InteractionIndexService interactionIndexService;
     @Resource
@@ -93,8 +90,8 @@ public class InteractionIndexerTasklet implements Tasklet {
                     Set<String> interactionsIds = new HashSet<>();
                     try {
                         interactions.add(toSolrDocument(graphInteraction));
-                    }catch (Exception e){
-                        log.error("Interaction with ac: "+ graphInteraction.getAc() +" could not be indexed because of exception  :- ");
+                    } catch (Exception e) {
+                        log.error("Interaction with ac: " + graphInteraction.getAc() + " could not be indexed because of exception  :- ");
                         e.printStackTrace();
                     }
                 }
