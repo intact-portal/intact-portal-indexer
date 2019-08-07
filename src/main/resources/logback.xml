@@ -15,6 +15,7 @@
     <logger name="org.neo4j" level="ERROR"/>
     <logger name="org.springframework" level="ERROR"/>
     <logger name="uk.ac.ebi.intact.portal.indexer" level="ERROR,DEBUG"/>
+    <logger name="uk.ac.ebi.intact.graphdb" level="ERROR,DEBUG"/>
 
 
     <root level="INFO">
