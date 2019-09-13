@@ -174,6 +174,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setChecksumsA((graphInteractorA.getChecksums() != null && graphInteractorA.getChecksums().size() > 0) ? SolrDocumentConverterUtils.checksumsToSolrDocument(graphInteractorA.getChecksums()) : null);
                 searchInteraction.setTaxIdA(graphInteractorA.getOrganism().getTaxId());
                 searchInteraction.setTypeA(graphInteractorA.getInteractorType().getShortName());
+                searchInteraction.setTypeMIA(graphInteractorA.getInteractorType().getMIIdentifier());
                 searchInteraction.setXrefsA((graphInteractorA.getXrefs() != null && graphInteractorA.getXrefs().size() > 0) ? SolrDocumentConverterUtils.xrefsToSolrDocument(graphInteractorA.getXrefs()) : null);
                 searchInteraction.setSpeciesA(graphInteractorA.getOrganism().getScientificName());
                 searchInteraction.setInteractorAAc(graphInteractorA.getAc());
@@ -194,6 +195,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setChecksumsB((graphInteractorB.getChecksums() != null && graphInteractorB.getChecksums().size() > 0) ? SolrDocumentConverterUtils.checksumsToSolrDocument(graphInteractorB.getChecksums()) : null);
                 searchInteraction.setTaxIdB(graphInteractorB.getOrganism().getTaxId());
                 searchInteraction.setTypeB(graphInteractorB.getInteractorType().getShortName());
+                searchInteraction.setTypeMIB(graphInteractorB.getInteractorType().getMIIdentifier());
                 searchInteraction.setXrefsB((graphInteractorB.getXrefs() != null && graphInteractorB.getXrefs().size() > 0) ? SolrDocumentConverterUtils.xrefsToSolrDocument(graphInteractorB.getXrefs()) : null);
                 searchInteraction.setSpeciesB(graphInteractorB.getOrganism().getScientificName());
                 searchInteraction.setInteractorBAc(graphInteractorB.getAc());
