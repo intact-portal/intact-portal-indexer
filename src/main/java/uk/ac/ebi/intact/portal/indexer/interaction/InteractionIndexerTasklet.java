@@ -262,6 +262,9 @@ public class InteractionIndexerTasklet implements Tasklet {
             searchInteraction.setInteractionIdentifiers((graphBinaryInteractionEvidence.getIdentifiers() != null && !graphBinaryInteractionEvidence.getIdentifiers().isEmpty()) ? SolrDocumentConverterUtils.xrefsToSolrDocument(graphBinaryInteractionEvidence.getIdentifiers()) : null);
             searchInteraction.setConfidenceValues(!intactConfidence.isEmpty() ? intactConfidence : null);
             searchInteraction.setInteractionType(graphBinaryInteractionEvidence.getInteractionType() != null ? graphBinaryInteractionEvidence.getInteractionType().getShortName() : null);
+            if (searchInteraction.getInteractionType() != null) {
+                searchInteraction.setInteractionTypeMIIdentifier(graphBinaryInteractionEvidence.getInteractionType().getMIIdentifier() != null ? graphBinaryInteractionEvidence.getInteractionType().getMIIdentifier() : null);
+            }
             searchInteraction.setInteractionAc(graphBinaryInteractionEvidence.getAc());
 
             if (graphBinaryInteractionEvidence.getConfidences() != null) {
