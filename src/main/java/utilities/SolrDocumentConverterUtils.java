@@ -4,6 +4,7 @@ import org.apache.commons.lang.StringUtils;
 import psidev.psi.mi.jami.model.*;
 import uk.ac.ebi.intact.graphdb.model.nodes.GraphFeature;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -82,6 +83,29 @@ public class SolrDocumentConverterUtils {
             features.add(featureEvidence.getShortName());
         }
         return features;
+
+    }
+
+    public static boolean doesAnyFeatureHaveDisruptedMutation(Collection<? extends GraphFeature> featureEvidences) {
+
+        /*TODO... Code to be changed when parent child relationship is stored in graphdb*/
+        boolean isDisruptedMutation = false;
+        ArrayList<String> mutationIdentifiers = new ArrayList<>();
+        mutationIdentifiers.add("MI:0429");
+        mutationIdentifiers.add("MI:1128");
+        mutationIdentifiers.add("MI:1129");
+        mutationIdentifiers.add("MI:0573");
+        mutationIdentifiers.add("MI:0119");
+        mutationIdentifiers.add("MI:0118");
+
+        for (Feature featureEvidence : featureEvidences) {
+            if (featureEvidence.getType() != null && featureEvidence.getType().getMIIdentifier() != null &&
+                    mutationIdentifiers.contains(featureEvidence.getType().getMIIdentifier())) {
+                isDisruptedMutation = true;
+                break;
+            }
+        }
+        return isDisruptedMutation;
 
     }
 
