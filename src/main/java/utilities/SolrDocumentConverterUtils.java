@@ -86,26 +86,34 @@ public class SolrDocumentConverterUtils {
 
     }
 
-    public static boolean doesAnyFeatureHaveDisruptedMutation(Collection<? extends GraphFeature> featureEvidences) {
+    public static boolean doesAnyFeatureHaveMutation(Collection<? extends GraphFeature> featureEvidences) {
 
         /*TODO... Code to be changed when parent child relationship is stored in graphdb*/
-        boolean isDisruptedMutation = false;
+        boolean isMutation = false;
         ArrayList<String> mutationIdentifiers = new ArrayList<>();
-        mutationIdentifiers.add("MI:0429");
         mutationIdentifiers.add("MI:1128");
         mutationIdentifiers.add("MI:1129");
         mutationIdentifiers.add("MI:0573");
         mutationIdentifiers.add("MI:0119");
         mutationIdentifiers.add("MI:0118");
+        mutationIdentifiers.add("MI:2227");
+        mutationIdentifiers.add("MI:1130");
+        mutationIdentifiers.add("MI:1133");
+        mutationIdentifiers.add("MI:0382");
+        mutationIdentifiers.add("MI:1131");
+        mutationIdentifiers.add("MI:1132");
+        mutationIdentifiers.add("MI:2333");
+        mutationIdentifiers.add("MI:2226");
+
 
         for (Feature featureEvidence : featureEvidences) {
             if (featureEvidence.getType() != null && featureEvidence.getType().getMIIdentifier() != null &&
                     mutationIdentifiers.contains(featureEvidence.getType().getMIIdentifier())) {
-                isDisruptedMutation = true;
+                isMutation = true;
                 break;
             }
         }
-        return isDisruptedMutation;
+        return isMutation;
 
     }
 

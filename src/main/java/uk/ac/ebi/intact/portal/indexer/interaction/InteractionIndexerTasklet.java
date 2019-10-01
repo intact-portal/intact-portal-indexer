@@ -221,9 +221,9 @@ public class InteractionIndexerTasklet implements Tasklet {
                 List<GraphFeature> ographFeaturesA = (List<GraphFeature>) graphParticipantEvidenceA.getFeatures();
                 searchInteraction.setFeatureA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? SolrDocumentConverterUtils.featuresToSolrDocument(ographFeaturesA) : null);
                 searchInteraction.setFeatureShortLabelA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? SolrDocumentConverterUtils.featuresShortlabelToSolrDocument(ographFeaturesA) : null);
-                boolean isDisruptedByMutation = (ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? SolrDocumentConverterUtils.doesAnyFeatureHaveDisruptedMutation(ographFeaturesA) : false;
-                searchInteraction.setInteractionDisruptedByMutation(isDisruptedByMutation);
-                searchInteraction.setDisruptedByMutationA(isDisruptedByMutation);
+                boolean mutation = (ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? SolrDocumentConverterUtils.doesAnyFeatureHaveMutation(ographFeaturesA) : false;
+                searchInteraction.setInteractionDisruptedByMutation(mutation);
+                searchInteraction.setMutationA(mutation);
             }
 
             if (graphBinaryInteractionEvidence.getParticipantB() != null) {
@@ -240,11 +240,11 @@ public class InteractionIndexerTasklet implements Tasklet {
                 List<GraphFeature> ographFeaturesB = (List<GraphFeature>) graphParticipantEvidenceB.getFeatures();
                 searchInteraction.setFeatureB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? SolrDocumentConverterUtils.featuresToSolrDocument(ographFeaturesB) : null);
                 searchInteraction.setFeatureShortLabelB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? SolrDocumentConverterUtils.featuresShortlabelToSolrDocument(ographFeaturesB) : null);
-                boolean isDisruptedByMutation = (ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? SolrDocumentConverterUtils.doesAnyFeatureHaveDisruptedMutation(ographFeaturesB) : false;
+                boolean mutation = (ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? SolrDocumentConverterUtils.doesAnyFeatureHaveMutation(ographFeaturesB) : false;
                 if (!searchInteraction.isInteractionDisruptedByMutation()) {
-                    searchInteraction.setInteractionDisruptedByMutation(isDisruptedByMutation);
+                    searchInteraction.setInteractionDisruptedByMutation(mutation);
                 }
-                searchInteraction.setDisruptedByMutationB(isDisruptedByMutation);
+                searchInteraction.setMutationB(mutation);
 
             }
 
