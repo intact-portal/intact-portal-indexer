@@ -67,7 +67,7 @@ public class InteractorIndexerTasklet implements Tasklet {
                 }
             }
 
-            searchInteractor.setFeatureShortLabels(featuresShortlabelToSolrDocument(featureEvidences));
+            searchInteractor.setInteractorFeatureShortLabels(featuresShortlabelToSolrDocument(featureEvidences));
         }
 
         int interactionCount = interactionEvidences.size();
@@ -111,8 +111,8 @@ public class InteractorIndexerTasklet implements Tasklet {
         searchInteractor.setInteractorAltIds(xrefsToSolrDocument(graphInteractor.getIdentifiers()));
 
         searchInteractor.setInteractorType(graphInteractor.getInteractorType().getShortName());
-        searchInteractor.setSpecies(graphInteractor.getOrganism().getScientificName());
-        searchInteractor.setTaxId(graphInteractor.getOrganism().getTaxId());
+        searchInteractor.setInteractorSpecies(graphInteractor.getOrganism().getScientificName());
+        searchInteractor.setInteractorTaxId(graphInteractor.getOrganism().getTaxId());
         searchInteractor.setInteractorXrefs(xrefsToSolrDocument(graphInteractor.getXrefs()));
         searchInteractor.setInteractionCount(interactionCount);
         searchInteractor.setInteractionIds(interactionsIds);
