@@ -159,6 +159,7 @@ public class InteractionIndexerTasklet implements Tasklet {
         List<GraphAnnotation> graphAnnotations = new ArrayList<GraphAnnotation>();
         List<GraphAlias> graphAliasesA = new ArrayList<GraphAlias>();
         List<GraphAlias> graphAliasesB = new ArrayList<GraphAlias>();
+        Integer featureCount = 0;
 
         if (interactionEvidence instanceof GraphBinaryInteractionEvidence) {
             GraphBinaryInteractionEvidence graphBinaryInteractionEvidence = (GraphBinaryInteractionEvidence) interactionEvidence;
@@ -218,6 +219,7 @@ public class InteractionIndexerTasklet implements Tasklet {
 
                 // featureDetails
                 List<GraphFeature> ographFeaturesA = (List<GraphFeature>) graphParticipantEvidenceA.getFeatures();
+                featureCount += (ographFeaturesA != null ? ographFeaturesA.size() : 0);
                 searchInteraction.setFeatureA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? SolrDocumentConverterUtils.featuresToSolrDocument(ographFeaturesA) : null);
                 searchInteraction.setFeatureShortLabelA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? SolrDocumentConverterUtils.featuresShortlabelToSolrDocument(ographFeaturesA) : null);
                 boolean mutation = (ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? SolrDocumentConverterUtils.doesAnyFeatureHaveMutation(ographFeaturesA) : false;
@@ -237,6 +239,7 @@ public class InteractionIndexerTasklet implements Tasklet {
 
                 // featureDetails
                 List<GraphFeature> ographFeaturesB = (List<GraphFeature>) graphParticipantEvidenceB.getFeatures();
+                featureCount += (ographFeaturesB != null ? ographFeaturesB.size() : 0);
                 searchInteraction.setFeatureB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? SolrDocumentConverterUtils.featuresToSolrDocument(ographFeaturesB) : null);
                 searchInteraction.setFeatureShortLabelB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? SolrDocumentConverterUtils.featuresShortlabelToSolrDocument(ographFeaturesB) : null);
                 boolean mutation = (ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? SolrDocumentConverterUtils.doesAnyFeatureHaveMutation(ographFeaturesB) : false;
@@ -247,6 +250,7 @@ public class InteractionIndexerTasklet implements Tasklet {
 
             }
 
+            searchInteraction.setFeatureCount(featureCount);
             searchInteraction.setAliasesA(!graphAliasesA.isEmpty() ? SolrDocumentConverterUtils.aliasesToSolrDocument(graphAliasesA) : null);
             searchInteraction.setAliasesB(!graphAliasesB.isEmpty() ? SolrDocumentConverterUtils.aliasesToSolrDocument(graphAliasesB) : null);
 
@@ -285,6 +289,7 @@ public class InteractionIndexerTasklet implements Tasklet {
             }
 
             graphAnnotations.addAll(graphBinaryInteractionEvidence.getAnnotations());
+            searchInteraction.setAnnotations(!graphBinaryInteractionEvidence.getAnnotations().isEmpty() ? SolrDocumentConverterUtils.annotationsToSolrDocument(graphBinaryInteractionEvidence.getAnnotations()) : null);
             searchInteraction.setExpansionMethod((graphBinaryInteractionEvidence.getComplexExpansion() != null) ? graphBinaryInteractionEvidence.getComplexExpansion().getShortName() : null);
             searchInteraction.setXrefs((graphBinaryInteractionEvidence.getXrefs() != null && !graphBinaryInteractionEvidence.getXrefs().isEmpty()) ? SolrDocumentConverterUtils.xrefsToSolrDocument(graphBinaryInteractionEvidence.getXrefs()) : null);
             searchInteraction.setParameters((graphBinaryInteractionEvidence.getParameters() != null && !graphBinaryInteractionEvidence.getParameters().isEmpty()) ? SolrDocumentConverterUtils.parametersToSolrDocument(graphBinaryInteractionEvidence.getParameters()) : null);
