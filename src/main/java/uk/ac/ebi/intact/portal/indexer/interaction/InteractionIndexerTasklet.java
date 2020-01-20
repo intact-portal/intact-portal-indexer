@@ -221,7 +221,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setFeatureA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? SolrDocumentConverterUtils.featuresToSolrDocument(ographFeaturesA) : null);
                 searchInteraction.setFeatureShortLabelA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? SolrDocumentConverterUtils.featuresShortlabelToSolrDocument(ographFeaturesA) : null);
                 boolean mutation = (ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? SolrDocumentConverterUtils.doesAnyFeatureHaveMutation(ographFeaturesA) : false;
-                searchInteraction.setInteractionDisruptedByMutation(mutation);
+                searchInteraction.setDisruptedByMutation(mutation);
                 searchInteraction.setMutationA(mutation);
             }
 
@@ -240,8 +240,8 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setFeatureB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? SolrDocumentConverterUtils.featuresToSolrDocument(ographFeaturesB) : null);
                 searchInteraction.setFeatureShortLabelB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? SolrDocumentConverterUtils.featuresShortlabelToSolrDocument(ographFeaturesB) : null);
                 boolean mutation = (ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? SolrDocumentConverterUtils.doesAnyFeatureHaveMutation(ographFeaturesB) : false;
-                if (!searchInteraction.isInteractionDisruptedByMutation()) {
-                    searchInteraction.setInteractionDisruptedByMutation(mutation);
+                if (!searchInteraction.isDisruptedByMutation()) {
+                    searchInteraction.setDisruptedByMutation(mutation);
                 }
                 searchInteraction.setMutationB(mutation);
 
@@ -255,7 +255,7 @@ public class InteractionIndexerTasklet implements Tasklet {
 
 
             graphAnnotations.addAll(experiment.getAnnotations());
-            searchInteraction.setInteractionDetectionMethod((graphBinaryInteractionEvidence.getExperiment() != null && graphBinaryInteractionEvidence.getExperiment().getInteractionDetectionMethod() != null) ? graphBinaryInteractionEvidence.getExperiment().getInteractionDetectionMethod().getShortName() : null);
+            searchInteraction.setDetectionMethod((graphBinaryInteractionEvidence.getExperiment() != null && graphBinaryInteractionEvidence.getExperiment().getInteractionDetectionMethod() != null) ? graphBinaryInteractionEvidence.getExperiment().getInteractionDetectionMethod().getShortName() : null);
             searchInteraction.setHostOrganism(experiment.getHostOrganism() != null ? experiment.getHostOrganism().getScientificName() : null);
 
 
@@ -267,13 +267,13 @@ public class InteractionIndexerTasklet implements Tasklet {
                 intactConfidence.add("intact-miscore:" + graphClusteredInteraction.getMiscore());
                 searchInteraction.setIntactMiscore(graphClusteredInteraction.getMiscore());
             }
-            searchInteraction.setInteractionIdentifiers((graphBinaryInteractionEvidence.getIdentifiers() != null && !graphBinaryInteractionEvidence.getIdentifiers().isEmpty()) ? SolrDocumentConverterUtils.xrefsToSolrDocument(graphBinaryInteractionEvidence.getIdentifiers()) : null);
+            searchInteraction.setIdentifiers((graphBinaryInteractionEvidence.getIdentifiers() != null && !graphBinaryInteractionEvidence.getIdentifiers().isEmpty()) ? SolrDocumentConverterUtils.xrefsToSolrDocument(graphBinaryInteractionEvidence.getIdentifiers()) : null);
             searchInteraction.setConfidenceValues(!intactConfidence.isEmpty() ? intactConfidence : null);
-            searchInteraction.setInteractionType(graphBinaryInteractionEvidence.getInteractionType() != null ? graphBinaryInteractionEvidence.getInteractionType().getShortName() : null);
-            if (searchInteraction.getInteractionType() != null) {
-                searchInteraction.setInteractionTypeMIIdentifier(graphBinaryInteractionEvidence.getInteractionType().getMIIdentifier() != null ? graphBinaryInteractionEvidence.getInteractionType().getMIIdentifier() : null);
+            searchInteraction.setType(graphBinaryInteractionEvidence.getInteractionType() != null ? graphBinaryInteractionEvidence.getInteractionType().getShortName() : null);
+            if (searchInteraction.getType() != null) {
+                searchInteraction.setTypeMIIdentifier(graphBinaryInteractionEvidence.getInteractionType().getMIIdentifier() != null ? graphBinaryInteractionEvidence.getInteractionType().getMIIdentifier() : null);
             }
-            searchInteraction.setInteractionAc(graphBinaryInteractionEvidence.getAc());
+            searchInteraction.setAc(graphBinaryInteractionEvidence.getAc());
 
             if (graphBinaryInteractionEvidence.getConfidences() != null) {
                 Set<String> confidences = SolrDocumentConverterUtils.confidencesToSolrDocument(graphBinaryInteractionEvidence.getConfidences());
@@ -286,11 +286,11 @@ public class InteractionIndexerTasklet implements Tasklet {
 
             graphAnnotations.addAll(graphBinaryInteractionEvidence.getAnnotations());
             searchInteraction.setExpansionMethod((graphBinaryInteractionEvidence.getComplexExpansion() != null) ? graphBinaryInteractionEvidence.getComplexExpansion().getShortName() : null);
-            searchInteraction.setInteractionXrefs((graphBinaryInteractionEvidence.getXrefs() != null && !graphBinaryInteractionEvidence.getXrefs().isEmpty()) ? SolrDocumentConverterUtils.xrefsToSolrDocument(graphBinaryInteractionEvidence.getXrefs()) : null);
-            searchInteraction.setInteractionParameters((graphBinaryInteractionEvidence.getParameters() != null && !graphBinaryInteractionEvidence.getParameters().isEmpty()) ? SolrDocumentConverterUtils.parametersToSolrDocument(graphBinaryInteractionEvidence.getParameters()) : null);
+            searchInteraction.setXrefs((graphBinaryInteractionEvidence.getXrefs() != null && !graphBinaryInteractionEvidence.getXrefs().isEmpty()) ? SolrDocumentConverterUtils.xrefsToSolrDocument(graphBinaryInteractionEvidence.getXrefs()) : null);
+            searchInteraction.setParameters((graphBinaryInteractionEvidence.getParameters() != null && !graphBinaryInteractionEvidence.getParameters().isEmpty()) ? SolrDocumentConverterUtils.parametersToSolrDocument(graphBinaryInteractionEvidence.getParameters()) : null);
             searchInteraction.setCreationDate(graphBinaryInteractionEvidence.getCreatedDate());
             searchInteraction.setUpdationDate(graphBinaryInteractionEvidence.getUpdatedDate());
-            searchInteraction.setInteractionChecksums((graphBinaryInteractionEvidence.getChecksums() != null && !graphBinaryInteractionEvidence.getChecksums().isEmpty()) ? SolrDocumentConverterUtils.checksumsToSolrDocument(graphBinaryInteractionEvidence.getChecksums()) : null);
+            searchInteraction.setChecksums((graphBinaryInteractionEvidence.getChecksums() != null && !graphBinaryInteractionEvidence.getChecksums().isEmpty()) ? SolrDocumentConverterUtils.checksumsToSolrDocument(graphBinaryInteractionEvidence.getChecksums()) : null);
             searchInteraction.setNegative(graphBinaryInteractionEvidence.isNegative());
 
             // publications details
@@ -309,7 +309,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 }
             }
 
-            searchInteraction.setInteractionAnnotations(!graphAnnotations.isEmpty() ? SolrDocumentConverterUtils.annotationsToSolrDocument(graphAnnotations) : null);
+            searchInteraction.setAnnotations(!graphAnnotations.isEmpty() ? SolrDocumentConverterUtils.annotationsToSolrDocument(graphAnnotations) : null);
 
         }
 
