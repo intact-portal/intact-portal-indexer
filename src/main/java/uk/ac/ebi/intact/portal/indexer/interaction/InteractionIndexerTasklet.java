@@ -176,7 +176,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setTypeMIA(graphInteractorA.getInteractorType().getMIIdentifier());
                 searchInteraction.setXrefsA((graphInteractorA.getXrefs() != null && graphInteractorA.getXrefs().size() > 0) ? SolrDocumentConverterUtils.xrefsToSolrDocument(graphInteractorA.getXrefs()) : null);
                 searchInteraction.setSpeciesA(graphInteractorA.getOrganism().getScientificName());
-                searchInteraction.setInteractorAAc(graphInteractorA.getAc());
+                searchInteraction.setAcA(graphInteractorA.getAc());
                 searchInteraction.setUniqueIdA((graphInteractorA.getInteractorType() != null
                         && graphInteractorA.getInteractorType().getShortName() != null
                         && graphInteractorA.getInteractorType().getShortName().equals(Constants.MOLECULE_SET)) ? graphInteractorA.getAc() : graphInteractorA.getPreferredIdentifier() != null ? graphInteractorA.getPreferredIdentifier().getId() : "");
@@ -197,7 +197,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setTypeMIB(graphInteractorB.getInteractorType().getMIIdentifier());
                 searchInteraction.setXrefsB((graphInteractorB.getXrefs() != null && graphInteractorB.getXrefs().size() > 0) ? SolrDocumentConverterUtils.xrefsToSolrDocument(graphInteractorB.getXrefs()) : null);
                 searchInteraction.setSpeciesB(graphInteractorB.getOrganism().getScientificName());
-                searchInteraction.setInteractorBAc(graphInteractorB.getAc());
+                searchInteraction.setAcB(graphInteractorB.getAc());
                 searchInteraction.setUniqueIdB((graphInteractorB.getInteractorType() != null
                         && graphInteractorB.getInteractorType().getShortName() != null
                         && graphInteractorB.getInteractorType().getShortName().equals(Constants.MOLECULE_SET)) ? graphInteractorB.getAc()
@@ -309,7 +309,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 }
             }
 
-            searchInteraction.setAnnotations(!graphAnnotations.isEmpty() ? SolrDocumentConverterUtils.annotationsToSolrDocument(graphAnnotations) : null);
+            searchInteraction.setAllAnnotations(!graphAnnotations.isEmpty() ? SolrDocumentConverterUtils.annotationsToSolrDocument(graphAnnotations) : null);
 
         }
 
