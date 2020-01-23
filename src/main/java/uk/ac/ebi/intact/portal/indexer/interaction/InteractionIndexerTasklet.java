@@ -182,7 +182,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                         && graphInteractorA.getInteractorType().getShortName() != null
                         && graphInteractorA.getInteractorType().getShortName().equals(Constants.MOLECULE_SET)) ? graphInteractorA.getAc() : graphInteractorA.getPreferredIdentifier() != null ? graphInteractorA.getPreferredIdentifier().getId() : "");
                 searchInteraction.setMoleculeA(graphInteractorA.getPreferredName());
-
+                searchInteraction.setDescriptionA(graphInteractorA.getFullName());
             }
 
             if (graphBinaryInteractionEvidence.getInteractorB() != null) {
@@ -204,6 +204,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                         && graphInteractorB.getInteractorType().getShortName().equals(Constants.MOLECULE_SET)) ? graphInteractorB.getAc()
                         : graphInteractorB.getPreferredIdentifier() != null ? graphInteractorB.getPreferredIdentifier().getId() : "");
                 searchInteraction.setMoleculeB(graphInteractorB.getPreferredName());
+                searchInteraction.setDescriptionB(graphInteractorB.getFullName());
             }
 
             //participant details
