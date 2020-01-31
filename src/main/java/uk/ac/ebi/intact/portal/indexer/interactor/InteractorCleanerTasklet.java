@@ -7,7 +7,7 @@ import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.stereotype.Component;
-import uk.ac.ebi.intact.search.interactor.service.InteractorIndexService;
+import uk.ac.ebi.intact.search.interactors.service.InteractorIndexService;
 
 import javax.annotation.Resource;
 import java.text.DateFormat;

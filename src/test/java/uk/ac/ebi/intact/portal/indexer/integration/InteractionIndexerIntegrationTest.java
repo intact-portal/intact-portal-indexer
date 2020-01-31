@@ -10,6 +10,7 @@ import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.scope.context.StepContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
+import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.batch.test.JobLauncherTestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,6 +19,7 @@ import uk.ac.ebi.intact.portal.indexer.RequiresSolrServer;
 
 import javax.annotation.Resource;
 
+import static org.junit.Assert.fail;
 import static org.springframework.batch.test.MetaDataInstanceFactory.createStepExecution;
 
 /**
@@ -27,11 +29,8 @@ import static org.springframework.batch.test.MetaDataInstanceFactory.createStepE
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-//TODO Review the configuration of the test to be sure that used the localhost, in memory resources
 public class InteractionIndexerIntegrationTest {
 
-    @ClassRule
-    public static RequiresSolrServer requiresRunningServer = RequiresSolrServer.onLocalhost();
     private JobLauncherTestUtils jobLauncherTestUtils;
     @Resource
     private Tasklet interactionCleanerTasklet;
@@ -44,6 +43,9 @@ public class InteractionIndexerIntegrationTest {
     @Autowired
     private Job interactionIndexerJob;
 
+    @ClassRule
+    public static RequiresSolrServer requiresRunningServer = RequiresSolrServer.onLocalhost();
+
     private void initializeJobLauncherTestUtils() {
         this.jobLauncherTestUtils = new JobLauncherTestUtils();
         this.jobLauncherTestUtils.setJobLauncher(jobLauncher);
@@ -54,7 +56,7 @@ public class InteractionIndexerIntegrationTest {
     /**
      * Tests if interaction index cleaning and creation 'interactionIndexerJob' Job runs completely
      *
-     * @throws Exception
+     * @throws Exception thrown if error occurs during execution.
      */
     @Test
     public void jobSimulation() throws Exception {
@@ -69,11 +71,9 @@ public class InteractionIndexerIntegrationTest {
 
     /**
      * Tests if interaction index cleaning (interactionIndexCleanerStep) Step runs completely
-     *
-     * @throws Exception
      */
     @Test
-    public void cleanerStepSimulation() throws Exception {
+    public void cleanerStepSimulation() {
 
         if (jobLauncherTestUtils == null) {
             initializeJobLauncherTestUtils();
@@ -85,11 +85,9 @@ public class InteractionIndexerIntegrationTest {
 
     /**
      * Tests if interaction indexing (interactionIndexingStep) Step runs completely
-     *
-     * @throws Exception
      */
     @Test
-    public void indexingStepSimulation() throws Exception {
+    public void indexingStepSimulation() {
 
         if (jobLauncherTestUtils == null) {
             initializeJobLauncherTestUtils();
@@ -101,39 +99,48 @@ public class InteractionIndexerIntegrationTest {
 
     /**
      * Tests if interaction index cleaning (interactionCleanerTasklet) Tasklet runs completely
-     *
-     * @throws Exception
      */
-    // TODO check for completion
     @Test
-    public void cleanerTaskletSimulation() throws Exception {
+    public void cleanerTaskletSimulation() {
 
         StepExecution execution = createStepExecution();
 
         ChunkContext chunkContext = new ChunkContext(new StepContext(execution));
         StepContribution stepContribution = new StepContribution(execution);
 
-        interactionCleanerTasklet.execute(stepContribution, chunkContext);
+        RepeatStatus repeatStatus = null;
+        try {
+            repeatStatus = interactionCleanerTasklet.execute(stepContribution, chunkContext);
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail("Should not have thrown any exception: " + e.toString());
+        }
 
+        Assert.assertNotNull(repeatStatus);
+        Assert.assertFalse(repeatStatus.isContinuable());
     }
 
     /**
      * Tests if interaction indexing (interactionIndexingStep) Tasklet runs completely
-     *
-     * @throws Exception
      */
-    // TODO check for completion
     @Test
-    public void indexerTaskletSimulation() throws Exception {
+    public void indexerTaskletSimulation() {
 
         StepExecution execution = createStepExecution();
 
         ChunkContext chunkContext = new ChunkContext(new StepContext(execution));
         StepContribution stepContribution = new StepContribution(execution);
 
-        interactionIndexerTasklet.execute(stepContribution, chunkContext);
+        RepeatStatus repeatStatus = null;
+        try {
+            repeatStatus = interactionIndexerTasklet.execute(stepContribution, chunkContext);
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail("Should not have thrown any exception: " + e.toString());
+        }
+
+        Assert.assertNotNull(repeatStatus);
+        Assert.assertFalse(repeatStatus.isContinuable());
 
     }
-
-
 }

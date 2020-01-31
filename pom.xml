@@ -14,7 +14,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.2.RELEASE</version>
+        <version>2.1.0.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -24,24 +24,16 @@
         <java.version>1.8</java.version>
         <spring-boot-admin.version>2.0.0</spring-boot-admin.version>
         <intact.graphdb.version>3.0.24-aspect-indexer-SNAPSHOT</intact.graphdb.version>
-        <intact.search.interactors.version>1.0.1-SNAPSHOT</intact.search.interactors.version>
-        <intact.search.interactions.version>1.0.3-SNAPSHOT</intact.search.interactions.version>
+        <intact.search.interactors.version>1.0.0-SNAPSHOT</intact.search.interactors.version>
+        <intact.search.interactions.version>1.0.1-SNAPSHOT</intact.search.interactions.version>
         <intact.search.terms.version>0.0.1-SNAPSHOT</intact.search.terms.version>
-        <neo4j.version>3.2.13</neo4j.version>
+<!--        <neo4j.version>3.2.13</neo4j.version>-->
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-batch</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-neo4j</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-solr</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -56,28 +48,28 @@
 <!--            <artifactId>spring-boot-admin-starter-server</artifactId>-->
 <!--        </dependency>-->
 
-        <dependency>
-            <groupId>org.neo4j</groupId>
-            <artifactId>neo4j</artifactId>
-            <version>${neo4j.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.neo4j</groupId>-->
+<!--            <artifactId>neo4j</artifactId>-->
+<!--            <version>${neo4j.version}</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>uk.ac.ebi.intact.graphdb</groupId>
-            <artifactId>intact-graphdb</artifactId>
+            <artifactId>intact-graphdb-service</artifactId>
             <version>${intact.graphdb.version}</version>
         </dependency>
 
         <!-- Intact Search -->
         <dependency>
-            <groupId>uk.ac.ebi.intact.search</groupId>
-            <artifactId>intact-search-interactors</artifactId>
+            <groupId>uk.ac.ebi.intact.search.interactors</groupId>
+            <artifactId>intact-search-interactors-service</artifactId>
             <version>${intact.search.interactors.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>uk.ac.ebi.intact.search</groupId>
-            <artifactId>intact-search-interactions</artifactId>
+            <groupId>uk.ac.ebi.intact.search.interactions</groupId>
+            <artifactId>intact-search-interactions-service</artifactId>
             <version>${intact.search.interactions.version}</version>
         </dependency>
 
@@ -127,13 +119,13 @@
 <!--            <scope>test</scope>-->
 <!--        </dependency>-->
 
-        <dependency>
-            <groupId>org.neo4j</groupId>
-            <artifactId>neo4j-ogm-embedded-driver</artifactId>
-            <version>${neo4j-ogm.version}</version>
-            <!--TODO uncomment the scope when the embedded is not used to generate the index-->
-            <!--<scope>test</scope>-->
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.neo4j</groupId>-->
+<!--            <artifactId>neo4j-ogm-embedded-driver</artifactId>-->
+<!--            <version>${neo4j-ogm.version}</version>-->
+<!--            &lt;!&ndash;TODO uncomment the scope when the embedded is not used to generate the index&ndash;&gt;-->
+<!--            &lt;!&ndash;<scope>test</scope>&ndash;&gt;-->
+<!--        </dependency>-->
     </dependencies>
 
 <!--    <dependencyManagement>-->
@@ -203,16 +195,6 @@
             <id>nexus-ebi-snapshot-repo</id>
             <url>http://www.ebi.ac.uk/Tools/maven/repos/content/groups/ebi-snapshots/</url>
         </repository>
-            <repository>
-                <id>spring-releases</id>
-                <url>https://repo.spring.io/libs-release</url>
-            </repository>
     </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>spring-releases</id>
-            <url>https://repo.spring.io/libs-release</url>
-        </pluginRepository>
-    </pluginRepositories>
 
 </project>

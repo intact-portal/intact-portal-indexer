@@ -15,7 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import psidev.psi.mi.jami.binary.BinaryInteractionEvidence;
 import uk.ac.ebi.intact.graphdb.model.nodes.*;
-import uk.ac.ebi.intact.graphdb.services.GraphInteractionService;
+import uk.ac.ebi.intact.graphdb.service.GraphInteractionService;
 import uk.ac.ebi.intact.portal.indexer.interactor.InteractorUtility;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.service.InteractionIndexService;
@@ -31,15 +31,19 @@ import java.util.*;
 public class InteractionIndexerTasklet implements Tasklet {
 
     private static final Log log = LogFactory.getLog(InteractionIndexerTasklet.class);
+
     private static final int pageSize = 1000;
     private static final int MAX_PING_TIME = 1000;
     private static final int MAX_ATTEMPTS = 5;
     private static final int DEPTH = 0;
     private static final int DEPTH_3 = 3;
+
     @Autowired
     InteractorUtility interactorUtility;
+
     private int binaryCounter = 1;
     private int attempts = 0;
+
     @Resource
     private GraphInteractionService graphInteractionService;
     @Resource

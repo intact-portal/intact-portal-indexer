@@ -13,9 +13,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import uk.ac.ebi.intact.graphdb.model.nodes.*;
-import uk.ac.ebi.intact.graphdb.services.GraphInteractorService;
-import uk.ac.ebi.intact.search.interactor.model.SearchInteractor;
-import uk.ac.ebi.intact.search.interactor.service.InteractorIndexService;
+import uk.ac.ebi.intact.graphdb.service.GraphInteractorService;
+import uk.ac.ebi.intact.search.interactors.model.SearchInteractor;
+import uk.ac.ebi.intact.search.interactors.service.InteractorIndexService;
 
 import javax.annotation.Resource;
 import java.io.IOException;
@@ -53,7 +53,7 @@ public class InteractorIndexerTasklet implements Tasklet {
 
         SearchInteractor searchInteractor = new SearchInteractor();
 
-        //Id
+        //Ac
         searchInteractor.setInteractorAc(graphInteractor.getAc());
 
         //Features
@@ -102,7 +102,7 @@ public class InteractorIndexerTasklet implements Tasklet {
         //TODO Deal with complexes and sets
 
         searchInteractor.setInteractorName(graphInteractor.getPreferredIdentifier().getId());
-        searchInteractor.setDescription(graphInteractor.getFullName());
+        searchInteractor.setInteractorDescription(graphInteractor.getFullName());
         searchInteractor.setInteractorAlias(aliasesToSolrDocument(graphInteractor.getAliases()));
         searchInteractor.setInteractorAltIds(xrefsToSolrDocument(graphInteractor.getIdentifiers()));
 
@@ -134,7 +134,7 @@ public class InteractorIndexerTasklet implements Tasklet {
     @Override
     public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
 
-        try {
+//        try {
             log.info("Start indexing Interactors data");
 
             int page = 0;
@@ -187,10 +187,10 @@ public class InteractorIndexerTasklet implements Tasklet {
             log.info("Indexing complete.");
             log.info("Total indexing took [ms] : " + (System.currentTimeMillis() - totalTime));
 
-        } catch (Exception e) {
-            System.out.println("Unexpected exception: " + e.toString());
-            e.printStackTrace();
-        }
+//        } catch (Exception e) {
+//            System.out.println("Unexpected exception: " + e.toString());
+//            e.printStackTrace();
+//        }
 
         return RepeatStatus.FINISHED;
     }
