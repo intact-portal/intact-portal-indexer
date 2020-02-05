@@ -28,13 +28,12 @@ public class InteractorIndexerTasklet implements Tasklet {
 
     private static final Log log = LogFactory.getLog(InteractorIndexerTasklet.class);
 
-
-    private static final int pageSize = 1000;
-
+    private static final int PAGE_SIZE = 1000;
     private static final int MAX_PING_TIME = 1000;
     private static final int MAX_ATTEMPTS = 5;
     private static final int DEPTH = 0;
     private int attempts = 0;
+    private boolean simulation = false;
 
     @Resource
     private GraphInteractorService graphInteractorService;
@@ -45,8 +44,6 @@ public class InteractorIndexerTasklet implements Tasklet {
     @Resource
     private SolrClient solrClient;
 
-
-    private boolean simulation = false;
 
     private static SearchInteractor toSolrDocument(GraphInteractor graphInteractor,
                                                    Collection<GraphBinaryInteractionEvidence> interactionEvidences) {
@@ -137,25 +134,18 @@ public class InteractorIndexerTasklet implements Tasklet {
 //        try {
             log.info("Start indexing Interactors data");
 
-            int page = 0;
-            PageRequest request;
-            boolean done = false;
+        int pageNumber = 0;
+        Page<GraphInteractor> graphInteractorPage;
 
             log.debug("Starting to retrieve data");
             // loop over the data in pages until we are done with all
             long totalTime = System.currentTimeMillis();
 
-            while (!done) {
-                log.info("Retrieving page : " + page);
-                request = PageRequest.of(page, pageSize);
-
-                long dbStart = System.currentTimeMillis();
-
-                Page<GraphInteractor> graphInteractorPage = graphInteractorService.findAll(request, DEPTH);
+        do {
+            log.info("Retrieving page : " + pageNumber);
+            long dbStart = System.currentTimeMillis();
+            graphInteractorPage =  graphInteractorService.findAll(PageRequest.of(pageNumber, PAGE_SIZE), DEPTH);
                 log.info("Main DB query took [ms] : " + (System.currentTimeMillis() - dbStart));
-
-                done = (page >= graphInteractorPage.getTotalPages() - 1); // stop criteria when using paged results
-//                done = (page >= 9); // testing with 10 pages (0-9)
 
                 List<GraphInteractor> interactorList = graphInteractorPage.getContent();
                 List<SearchInteractor> searchInteractors = new ArrayList<>();
@@ -181,8 +171,8 @@ public class InteractorIndexerTasklet implements Tasklet {
                 }
 
                 // increase the page number
-                page++;
-            }
+                pageNumber++;
+            } while (graphInteractorPage.hasNext());
 
             log.info("Indexing complete.");
             log.info("Total indexing took [ms] : " + (System.currentTimeMillis() - totalTime));

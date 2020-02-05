@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import psidev.psi.mi.jami.binary.BinaryInteractionEvidence;
 import uk.ac.ebi.intact.graphdb.model.nodes.*;
 import uk.ac.ebi.intact.graphdb.service.GraphInteractionService;
@@ -28,29 +29,30 @@ import java.io.IOException;
 import java.util.*;
 
 @Component
+@Transactional
 public class InteractionIndexerTasklet implements Tasklet {
 
     private static final Log log = LogFactory.getLog(InteractionIndexerTasklet.class);
 
-    private static final int pageSize = 1000;
+    private static final int PAGE_SIZE = 2000;
     private static final int MAX_PING_TIME = 1000;
     private static final int MAX_ATTEMPTS = 5;
     private static final int DEPTH = 0;
-    private static final int DEPTH_3 = 3;
+    private int attempts = 0;
+    private boolean simulation = false;
+    private int binaryCounter = 1;
 
     @Autowired
     InteractorUtility interactorUtility;
-
-    private int binaryCounter = 1;
-    private int attempts = 0;
 
     @Resource
     private GraphInteractionService graphInteractionService;
     @Resource
     private InteractionIndexService interactionIndexService;
+
     @Resource
     private SolrClient solrClient;
-    private boolean simulation = false;
+
 
     /**
      * It reads interactions from graph db and create interaction index in solr
@@ -63,35 +65,30 @@ public class InteractionIndexerTasklet implements Tasklet {
     @Override
     public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
 
-        try {
+//        try {
             log.info("Start indexing Interaction data");
 
-            int page = 0;
-            PageRequest request;
-            boolean done = false;
+            int pageNumber = 0;
+            Page<GraphBinaryInteractionEvidence> graphInteractionPage;
 
             log.debug("Starting to retrieve data");
             // loop over the data in pages until we are done with all
-            while (!done) {
-                log.info("Retrieving page : " + page);
-                request = new PageRequest(page, pageSize);
+            long totalTime = System.currentTimeMillis();
 
+            do {
+                log.info("Retrieving page : " + pageNumber);
                 long dbStart = System.currentTimeMillis();
-
-                Page<GraphBinaryInteractionEvidence> graphInteractionPage = graphInteractionService.findAll(request, DEPTH);
+                graphInteractionPage = graphInteractionService.findAll(PageRequest.of(pageNumber, PAGE_SIZE), DEPTH);
                 log.info("Main DB query took [ms] : " + (System.currentTimeMillis() - dbStart));
-
-                done = (page >= graphInteractionPage.getTotalPages() - 1); // stop criteria when using paged results
-//                done = (page >= 9); // testing with 10 pages (0-9)
 
                 List<GraphBinaryInteractionEvidence> interactionList = graphInteractionPage.getContent();
                 List<SearchInteraction> interactions = new ArrayList<>();
 
                 long convStart = System.currentTimeMillis();
                 for (GraphBinaryInteractionEvidence graphInteraction : interactionList) {
-                    Set<String> interactionsIds = new HashSet<>();
+
                     try {
-                        interactions.add(toSolrDocument(graphInteraction));
+                        interactions.add(toSolrDocument(graphInteraction, binaryCounter));
                         this.binaryCounter++;
                     } catch (Exception e) {
                         log.error("Interaction with ac: " + graphInteraction.getAc() + " could not be indexed because of exception  :- ");
@@ -101,7 +98,6 @@ public class InteractionIndexerTasklet implements Tasklet {
                 log.info("Conversion of " + interactions.size() + " records took [ms] : " + (System.currentTimeMillis() - convStart));
 
                 long indexStart = System.currentTimeMillis();
-
                 if (!simulation) {
 //                    solrServerCheck();
 
@@ -110,14 +106,16 @@ public class InteractionIndexerTasklet implements Tasklet {
                 }
 
                 // increase the page number
-                page++;
-            }
+                pageNumber++;
+            } while (graphInteractionPage.hasNext());
 
             log.info("Indexing complete.");
-        } catch (Exception e) {
-            System.out.println("Unexpected exception: " + e.toString());
-            e.printStackTrace();
-        }
+            log.info("Total indexing took [ms] : " + (System.currentTimeMillis() - totalTime));
+
+//        } catch (Exception e) {
+//            System.out.println("Unexpected exception: " + e.toString());
+//            e.printStackTrace();
+//        }
 
         return RepeatStatus.FINISHED;
     }
@@ -156,7 +154,7 @@ public class InteractionIndexerTasklet implements Tasklet {
      * @return
      */
     // TODO try to split this method into methods for specific(eg. Interactor/publication/participant etc.) details
-    private SearchInteraction toSolrDocument(BinaryInteractionEvidence interactionEvidence) {
+    private static SearchInteraction toSolrDocument(BinaryInteractionEvidence interactionEvidence, int binaryCounter) {
 
         SearchInteraction searchInteraction = new SearchInteraction();
 
@@ -269,7 +267,7 @@ public class InteractionIndexerTasklet implements Tasklet {
 
 
             //interaction details
-            searchInteraction.setBinaryInteractionId(this.binaryCounter);
+            searchInteraction.setBinaryInteractionId(binaryCounter);
             GraphClusteredInteraction graphClusteredInteraction = graphBinaryInteractionEvidence.getClusteredInteraction();
             Set<String> intactConfidence = new HashSet<String>();
             if (graphClusteredInteraction != null) {
@@ -326,6 +324,4 @@ public class InteractionIndexerTasklet implements Tasklet {
 
         return searchInteraction;
     }
-
-
 }
