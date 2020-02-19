@@ -29,9 +29,7 @@ import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.*;
 
-import static utilities.SolrDocumentConverterUtils.aliasesToSolrDocument;
-import static utilities.SolrDocumentConverterUtils.featuresShortlabelToSolrDocument;
-import static utilities.SolrDocumentConverterUtils.xrefsToSolrDocument;
+import static utilities.SolrDocumentConverterUtils.*;
 
 @Component
 @Transactional
@@ -43,13 +41,11 @@ public class InteractionIndexerTasklet implements Tasklet {
     private static final int MAX_PING_TIME = 1000;
     private static final int MAX_ATTEMPTS = 5;
     private static final int DEPTH = 0;
+    @Autowired
+    InteractorUtility interactorUtility;
     private int attempts = 0;
     private boolean simulation = false;
     private int binaryCounter = 1;
-
-    @Autowired
-    InteractorUtility interactorUtility;
-
     @Resource
     private GraphInteractionService graphInteractionService;
     @Resource
@@ -57,100 +53,6 @@ public class InteractionIndexerTasklet implements Tasklet {
 
     @Resource
     private SolrClient solrClient;
-
-
-    /**
-     * It reads interactions from graph db and create interaction index in solr
-     *
-     * @param stepContribution
-     * @param chunkContext
-     * @return
-     * @throws Exception
-     */
-    @Override
-    public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
-
-//        try {
-            log.info("Start indexing Interaction data");
-
-            int pageNumber = 0;
-            Page<GraphBinaryInteractionEvidence> graphInteractionPage;
-
-            log.debug("Starting to retrieve data");
-            // loop over the data in pages until we are done with all
-            long totalTime = System.currentTimeMillis();
-
-            do {
-                log.info("Retrieving page : " + pageNumber);
-                long dbStart = System.currentTimeMillis();
-                graphInteractionPage = graphInteractionService.findAll(PageRequest.of(pageNumber, PAGE_SIZE), DEPTH);
-                log.info("Main DB query took [ms] : " + (System.currentTimeMillis() - dbStart));
-
-                List<GraphBinaryInteractionEvidence> interactionList = graphInteractionPage.getContent();
-                List<SearchInteraction> interactions = new ArrayList<>();
-
-                long convStart = System.currentTimeMillis();
-                for (GraphBinaryInteractionEvidence graphInteraction : interactionList) {
-
-                    try {
-                        interactions.add(toSolrDocument(graphInteraction, binaryCounter));
-                        this.binaryCounter++;
-                    } catch (Exception e) {
-                        log.error("Interaction with ac: " + graphInteraction.getAc() + " could not be indexed because of exception  :- ");
-                        e.printStackTrace();
-                    }
-                }
-                log.info("Conversion of " + interactions.size() + " records took [ms] : " + (System.currentTimeMillis() - convStart));
-
-                long indexStart = System.currentTimeMillis();
-                if (!simulation) {
-//                    solrServerCheck();
-
-                    interactionIndexService.save(interactions);
-                    log.info("Index save took [ms] : " + (System.currentTimeMillis() - indexStart));
-                }
-
-                // increase the page number
-                pageNumber++;
-            } while (graphInteractionPage.hasNext());
-
-            log.info("Indexing complete.");
-            log.info("Total indexing took [ms] : " + (System.currentTimeMillis() - totalTime));
-
-//        } catch (Exception e) {
-//            System.out.println("Unexpected exception: " + e.toString());
-//            e.printStackTrace();
-//        }
-
-        return RepeatStatus.FINISHED;
-    }
-
-    public void setSimulation(boolean simulation) {
-        this.simulation = simulation;
-    }
-
-    private void solrServerCheck() {
-        if (attempts < MAX_ATTEMPTS) {
-            try {
-                //TODO Ping method gives an error so solrServerCheck() is not call for now
-                SolrPingResponse response = solrClient.ping();
-
-                long elapsedTime = response.getElapsedTime();
-                if (elapsedTime > MAX_PING_TIME) {
-                    log.debug("Solr response too slow: " + elapsedTime + ". Attempt: " + attempts + ". Waiting... ");
-                    //Wait 30 seconds before next attemp
-                    Thread.sleep(30 * 1000);
-                    attempts++;
-                } else {
-                    attempts = 0;
-                }
-            } catch (SolrServerException | IOException | InterruptedException e) {
-                e.printStackTrace();
-            }
-        } else {
-            throw new IllegalStateException("Solr server not responding in time. Aborting.");
-        }
-    }
 
     /**
      * Converts Graph interaction to Solr interaction and extract more depth details from graph db if needed.
@@ -162,7 +64,7 @@ public class InteractionIndexerTasklet implements Tasklet {
     private static SearchInteraction toSolrDocument(BinaryInteractionEvidence interactionEvidence, int binaryCounter) {
 
         SearchInteraction searchInteraction = new SearchInteraction();
-        List<SearchChildInteractor> searchChildInteractors= new ArrayList<>();
+        List<SearchChildInteractor> searchChildInteractors = new ArrayList<>();
 
         List<GraphAnnotation> graphAnnotations = new ArrayList<GraphAnnotation>();
         List<GraphAlias> graphAliasesA = new ArrayList<GraphAlias>();
@@ -190,11 +92,11 @@ public class InteractionIndexerTasklet implements Tasklet {
                         && graphInteractorA.getInteractorType().getShortName() != null
                         && graphInteractorA.getInteractorType().getShortName().equals(Constants.MOLECULE_SET)) ? graphInteractorA.getAc() : graphInteractorA.getPreferredIdentifier() != null ? graphInteractorA.getPreferredIdentifier().getId() : "");
                 searchInteraction.setMoleculeA(graphInteractorA.getPreferredName());
-                searchInteraction.setDescriptionA(graphInteractorA.getFullName());
+                //searchInteraction.setDescriptionA(graphInteractorA.getFullName());
 
                 // Indexing nested interactor documents
                 SearchChildInteractor searchChildInteractorA = new SearchChildInteractor();
-                searchChildInteractorA.setDocumentType(Constants.CHILD_INTERACTOR_DOCUMENT_TYPE);
+                searchChildInteractorA.setDocumentType(uk.ac.ebi.intact.search.interactions.utils.Constants.INTERACTOR_DOCUMENT_TYPE_VALUE);
                 searchChildInteractorA.setInteractorName(graphInteractorA.getPreferredIdentifier().getId());
                 searchChildInteractorA.setDescription(graphInteractorA.getFullName());
                 searchChildInteractorA.setInteractorAlias(aliasesToSolrDocument(graphInteractorA.getAliases()));
@@ -205,6 +107,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchChildInteractorA.setInteractorTaxId(graphInteractorA.getOrganism().getTaxId());
                 searchChildInteractorA.setInteractorXrefs(xrefsToSolrDocument(graphInteractorA.getXrefs()));
                 searchChildInteractorA.setInteractorAc(graphInteractorA.getAc());
+                searchInteraction.setDefaultChildInteractors(CommonUtility.populateDefaultChildInteractors(searchChildInteractorA));
 
                 Collection<GraphFeature> featureEvidences = new ArrayList<>();
                 if (graphInteractorA.getParticipantEvidences() != null) {
@@ -238,11 +141,11 @@ public class InteractionIndexerTasklet implements Tasklet {
                         && graphInteractorB.getInteractorType().getShortName().equals(Constants.MOLECULE_SET)) ? graphInteractorB.getAc()
                         : graphInteractorB.getPreferredIdentifier() != null ? graphInteractorB.getPreferredIdentifier().getId() : "");
                 searchInteraction.setMoleculeB(graphInteractorB.getPreferredName());
-                searchInteraction.setDescriptionB(graphInteractorB.getFullName());
+                //searchInteraction.setDescriptionB(graphInteractorB.getFullName());
 
                 // Indexing nested interactor documents
                 SearchChildInteractor searchChildInteractorB = new SearchChildInteractor();
-                searchChildInteractorB.setDocumentType(Constants.CHILD_INTERACTOR_DOCUMENT_TYPE);
+                searchChildInteractorB.setDocumentType(uk.ac.ebi.intact.search.interactions.utils.Constants.INTERACTOR_DOCUMENT_TYPE_VALUE);
                 searchChildInteractorB.setInteractorName(graphInteractorB.getPreferredIdentifier().getId());
                 searchChildInteractorB.setDescription(graphInteractorB.getFullName());
                 searchChildInteractorB.setInteractorAlias(aliasesToSolrDocument(graphInteractorB.getAliases()));
@@ -253,6 +156,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchChildInteractorB.setInteractorTaxId(graphInteractorB.getOrganism().getTaxId());
                 searchChildInteractorB.setInteractorXrefs(xrefsToSolrDocument(graphInteractorB.getXrefs()));
                 searchChildInteractorB.setInteractorAc(graphInteractorB.getAc());
+                searchInteraction.getDefaultChildInteractors().addAll(CommonUtility.populateDefaultChildInteractors(searchChildInteractorB));
 
                 Collection<GraphFeature> featureEvidences = new ArrayList<>();
                 if (graphInteractorB.getParticipantEvidences() != null) {
@@ -328,7 +232,7 @@ public class InteractionIndexerTasklet implements Tasklet {
 
             //interaction details
             searchInteraction.setBinaryInteractionId(binaryCounter);
-            searchInteraction.setDocumentType(Constants.INTERACTION_DOCUMENT_TYPE);
+            searchInteraction.setDocumentType(uk.ac.ebi.intact.search.interactions.utils.Constants.INTERACTION_DOCUMENT_TYPE_VALUE);
             GraphClusteredInteraction graphClusteredInteraction = graphBinaryInteractionEvidence.getClusteredInteraction();
             Set<String> intactConfidence = new HashSet<String>();
             if (graphClusteredInteraction != null) {
@@ -384,5 +288,101 @@ public class InteractionIndexerTasklet implements Tasklet {
 
 
         return searchInteraction;
+    }
+
+    /**
+     * It reads interactions from graph db and create interaction index in solr
+     *
+     * @param stepContribution
+     * @param chunkContext
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
+
+//        try {
+        log.info("Start indexing Interaction data");
+
+        int pageNumber = 0;
+        Page<GraphBinaryInteractionEvidence> graphInteractionPage;
+
+        log.debug("Starting to retrieve data");
+        // loop over the data in pages until we are done with all
+        long totalTime = System.currentTimeMillis();
+
+        do {
+            log.info("Retrieving page : " + pageNumber);
+            long dbStart = System.currentTimeMillis();
+            graphInteractionPage = graphInteractionService.findAll(PageRequest.of(pageNumber, PAGE_SIZE), DEPTH);
+            log.info("Main DB query took [ms] : " + (System.currentTimeMillis() - dbStart));
+
+            List<GraphBinaryInteractionEvidence> interactionList = graphInteractionPage.getContent();
+            List<SearchInteraction> interactions = new ArrayList<>();
+
+            long convStart = System.currentTimeMillis();
+            for (GraphBinaryInteractionEvidence graphInteraction : interactionList) {
+
+                try {
+                    interactions.add(toSolrDocument(graphInteraction, binaryCounter));
+                    if (binaryCounter <= 10) {
+                        CommonUtility.saveInteractionInDisc(interactions);
+                    }
+                    this.binaryCounter++;
+                } catch (Exception e) {
+                    log.error("Interaction with ac: " + graphInteraction.getAc() + " could not be indexed because of exception  :- ");
+                    e.printStackTrace();
+                }
+            }
+            log.info("Conversion of " + interactions.size() + " records took [ms] : " + (System.currentTimeMillis() - convStart));
+
+            long indexStart = System.currentTimeMillis();
+            if (!simulation) {
+//                    solrServerCheck();
+
+                interactionIndexService.save(interactions);
+                log.info("Index save took [ms] : " + (System.currentTimeMillis() - indexStart));
+            }
+
+            // increase the page number
+            pageNumber++;
+        } while (graphInteractionPage.hasNext());
+
+        log.info("Indexing complete.");
+        log.info("Total indexing took [ms] : " + (System.currentTimeMillis() - totalTime));
+
+//        } catch (Exception e) {
+//            System.out.println("Unexpected exception: " + e.toString());
+//            e.printStackTrace();
+//        }
+
+        return RepeatStatus.FINISHED;
+    }
+
+    public void setSimulation(boolean simulation) {
+        this.simulation = simulation;
+    }
+
+    private void solrServerCheck() {
+        if (attempts < MAX_ATTEMPTS) {
+            try {
+                //TODO Ping method gives an error so solrServerCheck() is not call for now
+                SolrPingResponse response = solrClient.ping();
+
+                long elapsedTime = response.getElapsedTime();
+                if (elapsedTime > MAX_PING_TIME) {
+                    log.debug("Solr response too slow: " + elapsedTime + ". Attempt: " + attempts + ". Waiting... ");
+                    //Wait 30 seconds before next attemp
+                    Thread.sleep(30 * 1000);
+                    attempts++;
+                } else {
+                    attempts = 0;
+                }
+            } catch (SolrServerException | IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        } else {
+            throw new IllegalStateException("Solr server not responding in time. Aborting.");
+        }
     }
 }
