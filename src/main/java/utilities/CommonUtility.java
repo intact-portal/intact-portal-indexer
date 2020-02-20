@@ -37,6 +37,10 @@ public class CommonUtility {
         return calendar.get(Calendar.YEAR);
     }
 
+    /*
+    * This method can be used to create default field of Child Interactors
+    * to be included in parent interaction in future if needed
+    * */
     public static Set<String> populateDefaultChildInteractors(SearchChildInteractor searchChildInteractor) {
         SearchChildInteractor myClass = new SearchChildInteractor();
         Class objClass = myClass.getClass();

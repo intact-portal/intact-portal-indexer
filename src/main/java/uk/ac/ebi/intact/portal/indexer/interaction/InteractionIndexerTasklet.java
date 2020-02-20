@@ -92,7 +92,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                         && graphInteractorA.getInteractorType().getShortName() != null
                         && graphInteractorA.getInteractorType().getShortName().equals(Constants.MOLECULE_SET)) ? graphInteractorA.getAc() : graphInteractorA.getPreferredIdentifier() != null ? graphInteractorA.getPreferredIdentifier().getId() : "");
                 searchInteraction.setMoleculeA(graphInteractorA.getPreferredName());
-                //searchInteraction.setDescriptionA(graphInteractorA.getFullName());
+                searchInteraction.setDescriptionA(graphInteractorA.getFullName());
 
                 // Indexing nested interactor documents
                 SearchChildInteractor searchChildInteractorA = new SearchChildInteractor();
@@ -107,7 +107,6 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchChildInteractorA.setInteractorTaxId(graphInteractorA.getOrganism().getTaxId());
                 searchChildInteractorA.setInteractorXrefs(xrefsToSolrDocument(graphInteractorA.getXrefs()));
                 searchChildInteractorA.setInteractorAc(graphInteractorA.getAc());
-                searchInteraction.setDefaultChildInteractors(CommonUtility.populateDefaultChildInteractors(searchChildInteractorA));
 
                 Collection<GraphFeature> featureEvidences = new ArrayList<>();
                 if (graphInteractorA.getParticipantEvidences() != null) {
@@ -141,7 +140,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                         && graphInteractorB.getInteractorType().getShortName().equals(Constants.MOLECULE_SET)) ? graphInteractorB.getAc()
                         : graphInteractorB.getPreferredIdentifier() != null ? graphInteractorB.getPreferredIdentifier().getId() : "");
                 searchInteraction.setMoleculeB(graphInteractorB.getPreferredName());
-                //searchInteraction.setDescriptionB(graphInteractorB.getFullName());
+                searchInteraction.setDescriptionB(graphInteractorB.getFullName());
 
                 // Indexing nested interactor documents
                 SearchChildInteractor searchChildInteractorB = new SearchChildInteractor();
@@ -156,7 +155,6 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchChildInteractorB.setInteractorTaxId(graphInteractorB.getOrganism().getTaxId());
                 searchChildInteractorB.setInteractorXrefs(xrefsToSolrDocument(graphInteractorB.getXrefs()));
                 searchChildInteractorB.setInteractorAc(graphInteractorB.getAc());
-                searchInteraction.getDefaultChildInteractors().addAll(CommonUtility.populateDefaultChildInteractors(searchChildInteractorB));
 
                 Collection<GraphFeature> featureEvidences = new ArrayList<>();
                 if (graphInteractorB.getParticipantEvidences() != null) {
