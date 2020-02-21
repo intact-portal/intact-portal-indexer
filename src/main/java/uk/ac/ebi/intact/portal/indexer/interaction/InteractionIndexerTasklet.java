@@ -107,6 +107,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchChildInteractorA.setInteractorTaxId(graphInteractorA.getOrganism().getTaxId());
                 searchChildInteractorA.setInteractorXrefs(xrefsToSolrDocument(graphInteractorA.getXrefs()));
                 searchChildInteractorA.setInteractorAc(graphInteractorA.getAc());
+                searchChildInteractorA.setInteractionCount(graphInteractorA.getInteractions().size());
 
                 Collection<GraphFeature> featureEvidences = new ArrayList<>();
                 if (graphInteractorA.getParticipantEvidences() != null) {
@@ -155,6 +156,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchChildInteractorB.setInteractorTaxId(graphInteractorB.getOrganism().getTaxId());
                 searchChildInteractorB.setInteractorXrefs(xrefsToSolrDocument(graphInteractorB.getXrefs()));
                 searchChildInteractorB.setInteractorAc(graphInteractorB.getAc());
+                searchChildInteractorB.setInteractionCount(graphInteractorB.getInteractions().size());
 
                 Collection<GraphFeature> featureEvidences = new ArrayList<>();
                 if (graphInteractorB.getParticipantEvidences() != null) {
@@ -323,9 +325,6 @@ public class InteractionIndexerTasklet implements Tasklet {
 
                 try {
                     interactions.add(toSolrDocument(graphInteraction, binaryCounter));
-                    if (binaryCounter <= 10) {
-                        CommonUtility.saveInteractionInDisc(interactions);
-                    }
                     this.binaryCounter++;
                 } catch (Exception e) {
                     log.error("Interaction with ac: " + graphInteraction.getAc() + " could not be indexed because of exception  :- ");
