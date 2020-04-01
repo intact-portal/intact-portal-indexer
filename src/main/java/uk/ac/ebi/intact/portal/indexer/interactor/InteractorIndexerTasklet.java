@@ -98,7 +98,8 @@ public class InteractorIndexerTasklet implements Tasklet {
 
         //TODO Deal with complexes and sets
 
-        searchInteractor.setInteractorName(graphInteractor.getPreferredIdentifier().getId());
+        searchInteractor.setInteractorName(graphInteractor.getPreferredName());
+        searchInteractor.setInteractorPreferredIdentifier(graphInteractor.getPreferredIdentifier().getId());
         searchInteractor.setInteractorDescription(graphInteractor.getFullName());
         searchInteractor.setInteractorAlias(aliasesToSolrDocument(graphInteractor.getAliases()));
         searchInteractor.setInteractorAltIds(xrefsToSolrDocument(graphInteractor.getIdentifiers()));

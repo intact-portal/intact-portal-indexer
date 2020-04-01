@@ -21,6 +21,7 @@ import uk.ac.ebi.intact.portal.indexer.interactor.InteractorUtility;
 import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.service.InteractionIndexService;
+import uk.ac.ebi.intact.search.interactions.utils.DocumentType;
 import utilities.CommonUtility;
 import utilities.Constants;
 import utilities.SolrDocumentConverterUtils;
@@ -96,9 +97,10 @@ public class InteractionIndexerTasklet implements Tasklet {
 
                 // Indexing nested interactor documents
                 SearchChildInteractor searchChildInteractorA = new SearchChildInteractor();
-                searchChildInteractorA.setDocumentType(uk.ac.ebi.intact.search.interactions.utils.Constants.INTERACTOR_DOCUMENT_TYPE_VALUE);
-                searchChildInteractorA.setInteractorName(graphInteractorA.getPreferredIdentifier().getId());
-                searchChildInteractorA.setDescription(graphInteractorA.getFullName());
+                searchChildInteractorA.setDocumentType(DocumentType.INTERACTOR);
+                searchChildInteractorA.setInteractorName(graphInteractorA.getPreferredName());
+                searchChildInteractorA.setInteractorDescription(graphInteractorA.getFullName());
+                searchChildInteractorA.setInteractorPreferredIdentifier(graphInteractorA.getPreferredIdentifier() != null ? graphInteractorA.getPreferredIdentifier().getId() : "");
                 searchChildInteractorA.setInteractorAlias(aliasesToSolrDocument(graphInteractorA.getAliases()));
                 searchChildInteractorA.setInteractorAltIds(xrefsToSolrDocument(graphInteractorA.getIdentifiers()));
 
@@ -145,9 +147,10 @@ public class InteractionIndexerTasklet implements Tasklet {
 
                 // Indexing nested interactor documents
                 SearchChildInteractor searchChildInteractorB = new SearchChildInteractor();
-                searchChildInteractorB.setDocumentType(uk.ac.ebi.intact.search.interactions.utils.Constants.INTERACTOR_DOCUMENT_TYPE_VALUE);
-                searchChildInteractorB.setInteractorName(graphInteractorB.getPreferredIdentifier().getId());
-                searchChildInteractorB.setDescription(graphInteractorB.getFullName());
+                searchChildInteractorB.setDocumentType(DocumentType.INTERACTOR);
+                searchChildInteractorB.setInteractorName(graphInteractorB.getPreferredName());
+                searchChildInteractorB.setInteractorPreferredIdentifier(graphInteractorB.getPreferredIdentifier() != null ? graphInteractorB.getPreferredIdentifier().getId() : "");
+                searchChildInteractorB.setInteractorDescription(graphInteractorB.getFullName());
                 searchChildInteractorB.setInteractorAlias(aliasesToSolrDocument(graphInteractorB.getAliases()));
                 searchChildInteractorB.setInteractorAltIds(xrefsToSolrDocument(graphInteractorB.getIdentifiers()));
 
@@ -189,7 +192,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 featureCount += (ographFeaturesA != null ? ographFeaturesA.size() : 0);
                 searchInteraction.setFeatureA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? SolrDocumentConverterUtils.featuresToSolrDocument(ographFeaturesA) : null);
                 searchInteraction.setFeatureShortLabelA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? SolrDocumentConverterUtils.featuresShortlabelToSolrDocument(ographFeaturesA) : null);
-                boolean mutation = (ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? SolrDocumentConverterUtils.doesAnyFeatureHaveMutation(ographFeaturesA) : false;
+                boolean mutation = (ographFeaturesA != null && !ographFeaturesA.isEmpty()) && SolrDocumentConverterUtils.doesAnyFeatureHaveMutation(ographFeaturesA);
                 searchInteraction.setDisruptedByMutation(mutation);
                 searchInteraction.setMutationA(mutation);
             }
@@ -209,7 +212,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 featureCount += (ographFeaturesB != null ? ographFeaturesB.size() : 0);
                 searchInteraction.setFeatureB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? SolrDocumentConverterUtils.featuresToSolrDocument(ographFeaturesB) : null);
                 searchInteraction.setFeatureShortLabelB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? SolrDocumentConverterUtils.featuresShortlabelToSolrDocument(ographFeaturesB) : null);
-                boolean mutation = (ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? SolrDocumentConverterUtils.doesAnyFeatureHaveMutation(ographFeaturesB) : false;
+                boolean mutation = (ographFeaturesB != null && !ographFeaturesB.isEmpty()) && SolrDocumentConverterUtils.doesAnyFeatureHaveMutation(ographFeaturesB);
                 if (!searchInteraction.isDisruptedByMutation()) {
                     searchInteraction.setDisruptedByMutation(mutation);
                 }
@@ -232,7 +235,7 @@ public class InteractionIndexerTasklet implements Tasklet {
 
             //interaction details
             searchInteraction.setBinaryInteractionId(binaryCounter);
-            searchInteraction.setDocumentType(uk.ac.ebi.intact.search.interactions.utils.Constants.INTERACTION_DOCUMENT_TYPE_VALUE);
+            searchInteraction.setDocumentType(DocumentType.INTERACTION);
             GraphClusteredInteraction graphClusteredInteraction = graphBinaryInteractionEvidence.getClusteredInteraction();
             Set<String> intactConfidence = new HashSet<String>();
             if (graphClusteredInteraction != null) {
