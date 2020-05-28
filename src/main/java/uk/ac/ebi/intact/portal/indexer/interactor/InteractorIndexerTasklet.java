@@ -67,30 +67,10 @@ public class InteractorIndexerTasklet implements Tasklet {
 
         int interactionCount = interactionEvidences.size();
         Set<String> interactionsIds = new HashSet<>();
-        Set<String> interactionDetectionMethods = new HashSet<>();
-        Set<String> interactionsTypes = new HashSet<>();
-        Set<String> interactionExpansionMethods = new HashSet<>();
-        Set<String> interactionHostOrganisms = new HashSet<>();
-        Set<Boolean> interactionNegatives = new HashSet<>();
-        Set<Double> interactionMiScores = new HashSet<>();
 
         if (interactionCount > 0) {
             for (GraphBinaryInteractionEvidence binaryInteractionEvidence : interactionEvidences) {
                 interactionsIds.add(binaryInteractionEvidence.getIdentifiers().iterator().next().getId());
-                interactionsTypes.add(cvTermToSolrDocument(binaryInteractionEvidence.getInteractionType()));
-                GraphExperiment experiment = (GraphExperiment) binaryInteractionEvidence.getExperiment();
-
-                interactionDetectionMethods.add(cvTermToSolrDocument(experiment.getInteractionDetectionMethod()));
-                interactionHostOrganisms.add(experiment.getHostOrganism().getScientificName());
-                interactionExpansionMethods.add(cvTermToSolrDocument(binaryInteractionEvidence.getComplexExpansion()));
-                interactionNegatives.add(binaryInteractionEvidence.isNegative());
-
-                GraphClusteredInteraction graphClusteredInteraction = binaryInteractionEvidence.getClusteredInteraction();
-
-
-                if (graphClusteredInteraction != null) {
-                    interactionMiScores.add(graphClusteredInteraction.getMiscore());
-                }
             }
         } else {
             log.warn("Interactor without interactions: " + graphInteractor.getAc());
@@ -110,13 +90,6 @@ public class InteractorIndexerTasklet implements Tasklet {
         searchInteractor.setInteractorXrefs(xrefsToSolrDocument(graphInteractor.getXrefs()));
         searchInteractor.setInteractionCount(interactionCount);
         searchInteractor.setInteractionIds(interactionsIds);
-
-        searchInteractor.setInteractionTypes(interactionsTypes);
-        searchInteractor.setInteractionDetectionMethods(interactionDetectionMethods);
-        searchInteractor.setInteractionExpansionMethods(interactionExpansionMethods);
-        searchInteractor.setInteractionHostOrganisms(interactionHostOrganisms);
-        searchInteractor.setInteractionNegatives(interactionNegatives);
-        searchInteractor.setInteractionMiScores(interactionMiScores);
 
         return searchInteractor;
     }
