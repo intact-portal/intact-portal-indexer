@@ -38,7 +38,7 @@ public class InteractionIndexerTasklet implements Tasklet {
 
     private static final Log log = LogFactory.getLog(InteractionIndexerTasklet.class);
 
-    private static final int PAGE_SIZE = 1000;
+    private static final int PAGE_SIZE = 2000;
     private static final int MAX_PING_TIME = 1000;
     private static final int MAX_ATTEMPTS = 5;
     private static final int DEPTH = 0;
