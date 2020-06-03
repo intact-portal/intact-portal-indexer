@@ -1,11 +1,10 @@
 package uk.ac.ebi.intact.portal.indexer.interactor;
 
 import org.springframework.stereotype.Component;
-import uk.ac.ebi.intact.graphdb.model.nodes.*;
-import uk.ac.ebi.intact.graphdb.service.*;
+import uk.ac.ebi.intact.graphdb.model.nodes.GraphInteractor;
+import uk.ac.ebi.intact.graphdb.service.GraphInteractorService;
 
 import javax.annotation.Resource;
-import java.util.Optional;
 
 /**
  * Created by anjali on 23/11/18.
@@ -17,7 +16,7 @@ public class InteractorUtility {
     private GraphInteractorService graphInteractorService;
 
     public GraphInteractor fetchInteractorAccToType(GraphInteractor graphInteractor, int depth) {
-            Optional<GraphInteractor> oGraphInteractorA = graphInteractorService.findByAc(graphInteractor.getAc(), depth);
-            return oGraphInteractorA.get();
+        GraphInteractor oGraphInteractorA = graphInteractorService.findByAc(graphInteractor.getAc(), depth);
+        return oGraphInteractorA;
     }
 }
