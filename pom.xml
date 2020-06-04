@@ -190,6 +190,12 @@
             <id>nexus-ebi-snapshot-repo</id>
             <url>http://www.ebi.ac.uk/Tools/maven/repos/content/groups/ebi-snapshots/</url>
         </repository>
+        <!--This is needed until we have a later version of mvn in LSF-->
+        <repository>
+            <id>Central Maven repository</id>
+            <name>Central Maven repository https</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
     </repositories>
 
 </project>
