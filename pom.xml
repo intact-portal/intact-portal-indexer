@@ -24,8 +24,8 @@
         <java.version>1.8</java.version>
         <spring-boot-admin.version>2.0.0</spring-boot-admin.version>
         <intact.graphdb.version>3.0.26-SNAPSHOT</intact.graphdb.version>
-        <intact.search.interactors.version>1.0.0-SNAPSHOT</intact.search.interactors.version>
-        <intact.search.interactions.version>1.0.2-SNAPSHOT</intact.search.interactions.version>
+        <intact.search.interactors.version>1.0.1-SNAPSHOT</intact.search.interactors.version>
+        <intact.search.interactions.version>1.0.3-SNAPSHOT</intact.search.interactions.version>
         <intact.search.terms.version>0.0.1-SNAPSHOT</intact.search.terms.version>
     </properties>
 
