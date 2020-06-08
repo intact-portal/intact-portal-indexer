@@ -12,7 +12,11 @@ import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
-import uk.ac.ebi.intact.graphdb.model.nodes.*;
+import psidev.psi.mi.jami.model.Organism;
+import uk.ac.ebi.intact.graphdb.model.nodes.GraphBinaryInteractionEvidence;
+import uk.ac.ebi.intact.graphdb.model.nodes.GraphFeature;
+import uk.ac.ebi.intact.graphdb.model.nodes.GraphInteractor;
+import uk.ac.ebi.intact.graphdb.model.nodes.GraphParticipantEvidence;
 import uk.ac.ebi.intact.graphdb.service.GraphInteractorService;
 import uk.ac.ebi.intact.search.interactors.model.SearchInteractor;
 import uk.ac.ebi.intact.search.interactors.service.InteractorIndexService;
@@ -85,8 +89,9 @@ public class InteractorIndexerTasklet implements Tasklet {
         searchInteractor.setInteractorAltIds(xrefsToSolrDocument(graphInteractor.getIdentifiers()));
 
         searchInteractor.setInteractorType(graphInteractor.getInteractorType().getShortName());
-        searchInteractor.setInteractorSpecies(graphInteractor.getOrganism().getScientificName());
-        searchInteractor.setInteractorTaxId(graphInteractor.getOrganism().getTaxId());
+        Organism organism = graphInteractor.getOrganism();
+        searchInteractor.setInteractorSpecies(organism != null ? graphInteractor.getOrganism().getScientificName() : null);
+        searchInteractor.setInteractorTaxId(organism != null ? graphInteractor.getOrganism().getTaxId() : null);
         searchInteractor.setInteractorXrefs(xrefsToSolrDocument(graphInteractor.getXrefs()));
         searchInteractor.setInteractionCount(interactionCount);
         searchInteractor.setInteractionIds(interactionsIds);
@@ -106,50 +111,50 @@ public class InteractorIndexerTasklet implements Tasklet {
     public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
 
 //        try {
-            log.info("Start indexing Interactors data");
+        log.info("Start indexing Interactors data");
 
         int pageNumber = 0;
         Page<GraphInteractor> graphInteractorPage;
 
-            log.debug("Starting to retrieve data");
-            // loop over the data in pages until we are done with all
-            long totalTime = System.currentTimeMillis();
+        log.debug("Starting to retrieve data");
+        // loop over the data in pages until we are done with all
+        long totalTime = System.currentTimeMillis();
 
         do {
             log.info("Retrieving page : " + pageNumber);
             long dbStart = System.currentTimeMillis();
-            graphInteractorPage =  graphInteractorService.findAll(PageRequest.of(pageNumber, PAGE_SIZE), DEPTH);
-                log.info("Main DB query took [ms] : " + (System.currentTimeMillis() - dbStart));
+            graphInteractorPage = graphInteractorService.findAll(PageRequest.of(pageNumber, PAGE_SIZE), DEPTH);
+            log.info("Main DB query took [ms] : " + (System.currentTimeMillis() - dbStart));
 
-                List<GraphInteractor> interactorList = graphInteractorPage.getContent();
-                List<SearchInteractor> searchInteractors = new ArrayList<>();
+            List<GraphInteractor> interactorList = graphInteractorPage.getContent();
+            List<SearchInteractor> searchInteractors = new ArrayList<>();
 
-                long convStart = System.currentTimeMillis();
-                for (GraphInteractor graphInteractor : interactorList) {
-                    try {
-                        searchInteractors.add(toSolrDocument(graphInteractor, graphInteractor.getInteractions()));
-                    } catch (Exception e) {
-                        log.error("Interactor with ac: " + graphInteractor.getAc() + " could not be indexed because of exception  :- ");
-                        e.printStackTrace();
-                    }
+            long convStart = System.currentTimeMillis();
+            for (GraphInteractor graphInteractor : interactorList) {
+                try {
+                    searchInteractors.add(toSolrDocument(graphInteractor, graphInteractor.getInteractions()));
+                } catch (Exception e) {
+                    log.error("Interactor with ac: " + graphInteractor.getAc() + " could not be indexed because of exception  :- ");
+                    e.printStackTrace();
                 }
-                log.info("Conversion of " + searchInteractors.size() + " records took [ms] : " + (System.currentTimeMillis() - convStart));
+            }
+            log.info("Conversion of " + searchInteractors.size() + " records took [ms] : " + (System.currentTimeMillis() - convStart));
 
-                long indexStart = System.currentTimeMillis();
+            long indexStart = System.currentTimeMillis();
 
-                if (!simulation) {
+            if (!simulation) {
 //                    solrServerCheck();
 
-                    interactorIndexService.saveAll(searchInteractors);
-                    log.info("Index save took [ms] : " + (System.currentTimeMillis() - indexStart));
-                }
+                interactorIndexService.saveAll(searchInteractors);
+                log.info("Index save took [ms] : " + (System.currentTimeMillis() - indexStart));
+            }
 
-                // increase the page number
-                pageNumber++;
-            } while (graphInteractorPage.hasNext());
+            // increase the page number
+            pageNumber++;
+        } while (graphInteractorPage.hasNext());
 
-            log.info("Indexing complete.");
-            log.info("Total indexing took [ms] : " + (System.currentTimeMillis() - totalTime));
+        log.info("Indexing complete.");
+        log.info("Total indexing took [ms] : " + (System.currentTimeMillis() - totalTime));
 
 //        } catch (Exception e) {
 //            System.out.println("Unexpected exception: " + e.toString());

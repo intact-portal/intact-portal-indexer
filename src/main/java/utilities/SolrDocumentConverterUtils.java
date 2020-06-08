@@ -144,7 +144,11 @@ public class SolrDocumentConverterUtils {
 
         Set<String> parameters = new HashSet<>();
         for (Parameter parameter : graphParameters) {
-            parameters.add(parameter.getType().getShortName() + ":" + parameter.getValue() + "(" + parameter.getUnit().getShortName() + ")");
+            String param = parameter.getType().getShortName() + ":" + parameter.getValue();
+            if (parameter.getUnit() != null) {
+                param = param + "(" + parameter.getUnit().getShortName() + ")";
+            }
+            parameters.add(param);
         }
         return parameters;
 

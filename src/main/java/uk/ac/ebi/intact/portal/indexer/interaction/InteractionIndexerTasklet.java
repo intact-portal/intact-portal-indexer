@@ -15,6 +15,7 @@ import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import psidev.psi.mi.jami.binary.BinaryInteractionEvidence;
+import psidev.psi.mi.jami.model.Organism;
 import uk.ac.ebi.intact.graphdb.model.nodes.*;
 import uk.ac.ebi.intact.graphdb.service.GraphInteractionService;
 import uk.ac.ebi.intact.portal.indexer.interactor.InteractorUtility;
@@ -105,8 +106,9 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchChildInteractorA.setInteractorAltIds(xrefsToSolrDocument(graphInteractorA.getIdentifiers()));
 
                 searchChildInteractorA.setInteractorType(graphInteractorA.getInteractorType().getShortName());
-                searchChildInteractorA.setInteractorSpecies(graphInteractorA.getOrganism().getScientificName());
-                searchChildInteractorA.setInteractorTaxId(graphInteractorA.getOrganism().getTaxId());
+                Organism organism = graphInteractorA.getOrganism();
+                searchChildInteractorA.setInteractorSpecies(organism != null ? graphInteractorA.getOrganism().getScientificName() : null);
+                searchChildInteractorA.setInteractorTaxId(organism != null ? graphInteractorA.getOrganism().getTaxId() : null);
                 searchChildInteractorA.setInteractorXrefs(xrefsToSolrDocument(graphInteractorA.getXrefs()));
                 searchChildInteractorA.setInteractorAc(graphInteractorA.getAc());
                 searchChildInteractorA.setInteractionCount(graphInteractorA.getInteractions().size());
@@ -155,8 +157,9 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchChildInteractorB.setInteractorAltIds(xrefsToSolrDocument(graphInteractorB.getIdentifiers()));
 
                 searchChildInteractorB.setInteractorType(graphInteractorB.getInteractorType().getShortName());
-                searchChildInteractorB.setInteractorSpecies(graphInteractorB.getOrganism().getScientificName());
-                searchChildInteractorB.setInteractorTaxId(graphInteractorB.getOrganism().getTaxId());
+                Organism organism = graphInteractorB.getOrganism();
+                searchChildInteractorB.setInteractorSpecies(organism != null ? graphInteractorB.getOrganism().getScientificName() : null);
+                searchChildInteractorB.setInteractorTaxId(organism != null ? graphInteractorB.getOrganism().getTaxId() : null);
                 searchChildInteractorB.setInteractorXrefs(xrefsToSolrDocument(graphInteractorB.getXrefs()));
                 searchChildInteractorB.setInteractorAc(graphInteractorB.getAc());
                 searchChildInteractorB.setInteractionCount(graphInteractorB.getInteractions().size());
@@ -276,8 +279,14 @@ public class InteractionIndexerTasklet implements Tasklet {
                 graphAnnotations.addAll(publication.getAnnotations());
                 if (publication != null) {
                     searchInteraction.setAuthors((publication.getAuthors() != null && !publication.getAuthors().isEmpty()) ? new LinkedHashSet(publication.getAuthors()) : null);
-                    searchInteraction.setFirstAuthor((searchInteraction.getAuthors() != null && !searchInteraction.getAuthors().isEmpty()) ? searchInteraction.getAuthors().iterator().next() + " et al. (" + CommonUtility.getYearOutOfDate(publication.getPublicationDate()) + ")" +
-                            "\t\n" : "");
+                    String firstAuthor = (searchInteraction.getAuthors() != null && !searchInteraction.getAuthors().isEmpty()) ? searchInteraction.getAuthors().iterator().next() + " et al." : "";
+                    if (!firstAuthor.isEmpty()) {
+                        if (publication.getPublicationDate() != null) {
+                            firstAuthor = firstAuthor + " (" + CommonUtility.getYearOutOfDate(publication.getPublicationDate()) + ")";
+                        }
+                        firstAuthor = firstAuthor + "\t\n";
+                    }
+                    searchInteraction.setFirstAuthor(firstAuthor);
 //                    searchInteraction.setPublicationId((publication.getAuthors() != null) ? publication.getPubmedId() : "");
                     searchInteraction.setSourceDatabase((publication.getSource() != null) ? publication.getSource().getShortName() : "");
                     searchInteraction.setReleaseDate((publication.getReleasedDate() != null) ? publication.getReleasedDate() : null);
