@@ -85,7 +85,8 @@ public class InteractorIndexerTasklet implements Tasklet {
         searchInteractor.setInteractorName(graphInteractor.getPreferredName());
         searchInteractor.setInteractorPreferredIdentifier(graphInteractor.getPreferredIdentifier().getId());
         searchInteractor.setInteractorDescription(graphInteractor.getFullName());
-        searchInteractor.setInteractorAlias(aliasesToSolrDocument(graphInteractor.getAliases()));
+        searchInteractor.setInteractorAlias(aliasesWithTypesToSolrDocument(graphInteractor.getAliases()));
+        searchInteractor.setInteractorAliasNames(aliasesToSolrDocument(graphInteractor.getAliases()));
         searchInteractor.setInteractorAltIds(xrefsToSolrDocument(graphInteractor.getIdentifiers()));
 
         searchInteractor.setInteractorType(graphInteractor.getInteractorType().getShortName());

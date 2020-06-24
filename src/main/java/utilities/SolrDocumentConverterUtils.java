@@ -30,11 +30,21 @@ public class SolrDocumentConverterUtils {
 
     }
 
-    public static Set<String> aliasesToSolrDocument(Collection<? extends Alias> aliases) {
+    public static Set<String> aliasesWithTypesToSolrDocument(Collection<? extends Alias> aliases) {
 
         Set<String> searchInteractorAliases = new HashSet<>();
         for (Alias alias : aliases) {
             searchInteractorAliases.add(alias.getName() + " (" + alias.getType() + ")");
+        }
+        return searchInteractorAliases;
+
+    }
+
+    public static Set<String> aliasesToSolrDocument(Collection<? extends Alias> aliases) {
+
+        Set<String> searchInteractorAliases = new HashSet<>();
+        for (Alias alias : aliases) {
+            searchInteractorAliases.add(alias.getName());
         }
         return searchInteractorAliases;
 

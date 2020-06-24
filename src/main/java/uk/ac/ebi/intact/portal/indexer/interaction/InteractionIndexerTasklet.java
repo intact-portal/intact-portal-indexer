@@ -155,7 +155,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchChildInteractorB.setInteractorName(graphInteractorB.getPreferredName());
                 searchChildInteractorB.setInteractorPreferredIdentifier(graphInteractorB.getPreferredIdentifier() != null ? graphInteractorB.getPreferredIdentifier().getId() : "");
                 searchChildInteractorB.setInteractorDescription(graphInteractorB.getFullName());
-                searchChildInteractorB.setInteractorAlias(aliasesToSolrDocument(graphInteractorB.getAliases()));
+                searchChildInteractorB.setInteractorAlias(aliasesWithTypesToSolrDocument(graphInteractorB.getAliases()));
                 searchChildInteractorB.setInteractorAltIds(xrefsToSolrDocument(graphInteractorB.getIdentifiers()));
                 searchChildInteractorB.setInteractorType(graphInteractorB.getInteractorType().getShortName());
                 searchChildInteractorB.setInteractorSpecies(organismB != null ? organismB.getScientificName() : null);
