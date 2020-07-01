@@ -103,7 +103,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchChildInteractorA.setInteractorName(graphInteractorA.getPreferredName());
                 searchChildInteractorA.setInteractorDescription(graphInteractorA.getFullName());
                 searchChildInteractorA.setInteractorPreferredIdentifier(graphInteractorA.getPreferredIdentifier() != null ? graphInteractorA.getPreferredIdentifier().getId() : "");
-                searchChildInteractorA.setInteractorAlias(aliasesToSolrDocument(graphInteractorA.getAliases()));
+                searchChildInteractorA.setInteractorAlias(aliasesWithTypesToSolrDocument(graphInteractorA.getAliases()));
                 searchChildInteractorA.setInteractorAltIds(xrefsToSolrDocument(graphInteractorA.getIdentifiers()));
 
                 searchChildInteractorA.setInteractorType(graphInteractorA.getInteractorType().getShortName());
