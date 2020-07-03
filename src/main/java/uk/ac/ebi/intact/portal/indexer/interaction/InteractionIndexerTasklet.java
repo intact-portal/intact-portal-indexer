@@ -224,8 +224,8 @@ public class InteractionIndexerTasklet implements Tasklet {
             }
 
             searchInteraction.setFeatureCount(featureCount);
-            searchInteraction.setAliasesA(!graphAliasesA.isEmpty() ? SolrDocumentConverterUtils.aliasesToSolrDocument(graphAliasesA) : null);
-            searchInteraction.setAliasesB(!graphAliasesB.isEmpty() ? SolrDocumentConverterUtils.aliasesToSolrDocument(graphAliasesB) : null);
+            searchInteraction.setAliasesA(!graphAliasesA.isEmpty() ? SolrDocumentConverterUtils.aliasesWithTypesToSolrDocument(graphAliasesA) : null);
+            searchInteraction.setAliasesB(!graphAliasesB.isEmpty() ? SolrDocumentConverterUtils.aliasesWithTypesToSolrDocument(graphAliasesB) : null);
 
             //experiment details
             GraphExperiment experiment = (GraphExperiment) graphBinaryInteractionEvidence.getExperiment();
