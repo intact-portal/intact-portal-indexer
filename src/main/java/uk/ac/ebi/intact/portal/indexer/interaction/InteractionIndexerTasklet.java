@@ -101,6 +101,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 SearchChildInteractor searchChildInteractorA = new SearchChildInteractor();
                 searchChildInteractorA.setDocumentType(DocumentType.INTERACTOR);
                 searchChildInteractorA.setInteractorName(graphInteractorA.getPreferredName());
+                searchChildInteractorA.setInteractorIntactName(graphInteractorA.getShortName());
                 searchChildInteractorA.setInteractorDescription(graphInteractorA.getFullName());
                 searchChildInteractorA.setInteractorPreferredIdentifier(graphInteractorA.getPreferredIdentifier() != null ? graphInteractorA.getPreferredIdentifier().getId() : "");
                 searchChildInteractorA.setInteractorAlias(aliasesWithTypesToSolrDocument(graphInteractorA.getAliases()));
@@ -153,6 +154,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 SearchChildInteractor searchChildInteractorB = new SearchChildInteractor();
                 searchChildInteractorB.setDocumentType(DocumentType.INTERACTOR);
                 searchChildInteractorB.setInteractorName(graphInteractorB.getPreferredName());
+                searchChildInteractorB.setInteractorIntactName(graphInteractorB.getShortName());
                 searchChildInteractorB.setInteractorPreferredIdentifier(graphInteractorB.getPreferredIdentifier() != null ? graphInteractorB.getPreferredIdentifier().getId() : "");
                 searchChildInteractorB.setInteractorDescription(graphInteractorB.getFullName());
                 searchChildInteractorB.setInteractorAlias(aliasesWithTypesToSolrDocument(graphInteractorB.getAliases()));

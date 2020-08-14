@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import psidev.psi.mi.jami.model.Organism;
+import psidev.psi.mi.jami.model.Xref;
 import uk.ac.ebi.intact.graphdb.model.nodes.GraphBinaryInteractionEvidence;
 import uk.ac.ebi.intact.graphdb.model.nodes.GraphFeature;
 import uk.ac.ebi.intact.graphdb.model.nodes.GraphInteractor;
@@ -71,10 +72,12 @@ public class InteractorIndexerTasklet implements Tasklet {
 
         int interactionCount = interactionEvidences.size();
         Set<String> interactionsIds = new HashSet<>();
+        Collection<Xref> interactionXrefs = new ArrayList<>();
 
         if (interactionCount > 0) {
             for (GraphBinaryInteractionEvidence binaryInteractionEvidence : interactionEvidences) {
                 interactionsIds.add(binaryInteractionEvidence.getIdentifiers().iterator().next().getId());
+                interactionXrefs.addAll(binaryInteractionEvidence.getXrefs());
             }
         } else {
             log.warn("Interactor without interactions: " + graphInteractor.getAc());
@@ -83,6 +86,7 @@ public class InteractorIndexerTasklet implements Tasklet {
         //TODO Deal with complexes and sets
 
         searchInteractor.setInteractorName(graphInteractor.getPreferredName());
+        searchInteractor.setInteractorIntactName(graphInteractor.getShortName());
         searchInteractor.setInteractorPreferredIdentifier(graphInteractor.getPreferredIdentifier().getId());
         searchInteractor.setInteractorDescription(graphInteractor.getFullName());
         searchInteractor.setInteractorAlias(aliasesWithTypesToSolrDocument(graphInteractor.getAliases()));
@@ -96,6 +100,7 @@ public class InteractorIndexerTasklet implements Tasklet {
         searchInteractor.setInteractorXrefs(xrefsToSolrDocument(graphInteractor.getXrefs()));
         searchInteractor.setInteractionCount(interactionCount);
         searchInteractor.setInteractionIds(interactionsIds);
+        searchInteractor.setInteractionXrefs(xrefsToSolrDocument(interactionXrefs));
 
         return searchInteractor;
     }
