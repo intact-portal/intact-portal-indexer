@@ -295,6 +295,9 @@ public class InteractionIndexerTasklet implements Tasklet {
                     searchInteraction.setSourceDatabase((publication.getSource() != null) ? publication.getSource().getShortName() : "");
                     searchInteraction.setReleaseDate((publication.getReleasedDate() != null) ? publication.getReleasedDate() : null);
                     searchInteraction.setPublicationIdentifiers((publication.getIdentifiers() != null && !publication.getIdentifiers().isEmpty()) ? SolrDocumentConverterUtils.xrefsToSolrDocument(publication.getIdentifiers()) : null);
+                    //TODO... Enable in graphdb to get from pubmedId instead
+                    //this is needed for sorting on publication id
+                    searchInteraction.setPublicationPubmedIdentifier((publication.getPubmedIdStr() != null) ? publication.getPubmedIdStr() : null);
                 }
             }
 
