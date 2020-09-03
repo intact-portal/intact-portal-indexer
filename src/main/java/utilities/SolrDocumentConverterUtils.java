@@ -96,6 +96,16 @@ public class SolrDocumentConverterUtils {
 
     }
 
+    public static Set<String> featuresTypeToSolrDocument(Collection<? extends GraphFeature> featureEvidences) {
+
+        Set<String> featureTypes = new HashSet<>();
+        for (Feature featureEvidence : featureEvidences) {
+            featureTypes.add(cvTermToSolrDocument(featureEvidence.getType()));
+        }
+        return featureTypes;
+
+    }
+
     public static boolean doesAnyFeatureHaveMutation(Collection<? extends GraphFeature> featureEvidences) {
 
         /*TODO... Code to be changed when parent child relationship is stored in graphdb*/
@@ -161,6 +171,16 @@ public class SolrDocumentConverterUtils {
             parameters.add(param);
         }
         return parameters;
+
+    }
+
+    public static Set<String> parameterTypeToSolrDocument(Collection<? extends Parameter> graphParameters) {
+
+        Set<String> parameterTypes = new HashSet<>();
+        for (Parameter parameter : graphParameters) {
+            parameterTypes.add(cvTermToSolrDocument(parameter.getType()));
+        }
+        return parameterTypes;
 
     }
 

@@ -199,6 +199,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 featureCount += (ographFeaturesA != null ? ographFeaturesA.size() : 0);
                 searchInteraction.setFeatureA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? SolrDocumentConverterUtils.featuresToSolrDocument(ographFeaturesA) : null);
                 searchInteraction.setFeatureShortLabelA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? SolrDocumentConverterUtils.featuresShortlabelToSolrDocument(ographFeaturesA) : null);
+                searchInteraction.setFeatureTypesA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? SolrDocumentConverterUtils.featuresTypeToSolrDocument(ographFeaturesA) : null);
                 boolean mutation = (ographFeaturesA != null && !ographFeaturesA.isEmpty()) && SolrDocumentConverterUtils.doesAnyFeatureHaveMutation(ographFeaturesA);
                 searchInteraction.setDisruptedByMutation(mutation);
                 searchInteraction.setMutationA(mutation);
@@ -219,6 +220,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 featureCount += (ographFeaturesB != null ? ographFeaturesB.size() : 0);
                 searchInteraction.setFeatureB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? SolrDocumentConverterUtils.featuresToSolrDocument(ographFeaturesB) : null);
                 searchInteraction.setFeatureShortLabelB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? SolrDocumentConverterUtils.featuresShortlabelToSolrDocument(ographFeaturesB) : null);
+                searchInteraction.setFeatureTypesB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? SolrDocumentConverterUtils.featuresTypeToSolrDocument(ographFeaturesB) : null);
                 boolean mutation = (ographFeaturesB != null && !ographFeaturesB.isEmpty()) && SolrDocumentConverterUtils.doesAnyFeatureHaveMutation(ographFeaturesB);
                 if (!searchInteraction.isDisruptedByMutation()) {
                     searchInteraction.setDisruptedByMutation(mutation);
@@ -271,6 +273,7 @@ public class InteractionIndexerTasklet implements Tasklet {
             searchInteraction.setExpansionMethod((graphBinaryInteractionEvidence.getComplexExpansion() != null) ? graphBinaryInteractionEvidence.getComplexExpansion().getShortName() : null);
             searchInteraction.setXrefs((graphBinaryInteractionEvidence.getXrefs() != null && !graphBinaryInteractionEvidence.getXrefs().isEmpty()) ? SolrDocumentConverterUtils.xrefsToSolrDocument(graphBinaryInteractionEvidence.getXrefs()) : null);
             searchInteraction.setParameters((graphBinaryInteractionEvidence.getParameters() != null && !graphBinaryInteractionEvidence.getParameters().isEmpty()) ? SolrDocumentConverterUtils.parametersToSolrDocument(graphBinaryInteractionEvidence.getParameters()) : null);
+            searchInteraction.setParameterTypes((graphBinaryInteractionEvidence.getParameters() != null && !graphBinaryInteractionEvidence.getParameters().isEmpty()) ? SolrDocumentConverterUtils.parameterTypeToSolrDocument(graphBinaryInteractionEvidence.getParameters()) : null);
             searchInteraction.setCreationDate(graphBinaryInteractionEvidence.getCreatedDate());
             searchInteraction.setUpdationDate(graphBinaryInteractionEvidence.getUpdatedDate());
             searchInteraction.setChecksums((graphBinaryInteractionEvidence.getChecksums() != null && !graphBinaryInteractionEvidence.getChecksums().isEmpty()) ? SolrDocumentConverterUtils.checksumsToSolrDocument(graphBinaryInteractionEvidence.getChecksums()) : null);

@@ -68,6 +68,8 @@ public class InteractorIndexerTasklet implements Tasklet {
             }
 
             searchInteractor.setInteractorFeatureShortLabels(featuresShortlabelToSolrDocument(featureEvidences));
+            searchInteractor.setInteractorFeatureTypes(featuresTypeToSolrDocument(featureEvidences));
+
         }
 
         int interactionCount = interactionEvidences.size();
