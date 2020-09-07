@@ -146,8 +146,21 @@ public class SolrDocumentConverterUtils {
 
     }
 
+    public static Set<String> cvTermsMIToSolrDocument(Collection<? extends CvTerm> cvTerms) {
+        Set<String> terms = new HashSet<>();
+        for (CvTerm cvTerm : cvTerms) {
+            terms.add(cvTermMIToSolrDocument(cvTerm));
+        }
+        return terms;
+
+    }
+
     public static String cvTermToSolrDocument(CvTerm cvTerm) {
         return (cvTerm != null) ? cvTerm.getShortName() : null;
+    }
+
+    public static String cvTermMIToSolrDocument(CvTerm cvTerm) {
+        return (cvTerm != null) ? cvTerm.getMIIdentifier() : null;
     }
 
     public static Set<String> confidencesToSolrDocument(Collection<? extends Confidence> graphConfidences) {
