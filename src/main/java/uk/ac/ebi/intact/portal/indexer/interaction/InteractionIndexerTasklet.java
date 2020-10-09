@@ -107,9 +107,8 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchChildInteractorA.setInteractorPreferredIdentifier(graphInteractorA.getPreferredIdentifier() != null ? graphInteractorA.getPreferredIdentifier().getId() : "");
                 searchChildInteractorA.setInteractorAlias(aliasesWithTypesToSolrDocument(graphInteractorA.getAliases()));
                 searchChildInteractorA.setInteractorAltIds(xrefsToSolrDocument(graphInteractorA.getIdentifiers()));
-
                 searchChildInteractorA.setInteractorType(graphInteractorA.getInteractorType().getShortName());
-
+                searchChildInteractorA.setInteractorTypeMIIdentifier(graphInteractorA.getInteractorType().getMIIdentifier());
                 searchChildInteractorA.setInteractorSpecies(organismA != null ? organismA.getScientificName() : null);
                 searchChildInteractorA.setInteractorTaxId(organismA != null ? organismA.getTaxId() : null);
                 searchChildInteractorA.setInteractorXrefs(xrefsToSolrDocument(graphInteractorA.getXrefs()));
@@ -162,6 +161,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchChildInteractorB.setInteractorAlias(aliasesWithTypesToSolrDocument(graphInteractorB.getAliases()));
                 searchChildInteractorB.setInteractorAltIds(xrefsToSolrDocument(graphInteractorB.getIdentifiers()));
                 searchChildInteractorB.setInteractorType(graphInteractorB.getInteractorType().getShortName());
+                searchChildInteractorB.setInteractorTypeMIIdentifier(graphInteractorB.getInteractorType().getMIIdentifier());
                 searchChildInteractorB.setInteractorSpecies(organismB != null ? organismB.getScientificName() : null);
                 searchChildInteractorB.setInteractorTaxId(organismB != null ? organismB.getTaxId() : null);
                 searchChildInteractorB.setInteractorXrefs(xrefsToSolrDocument(graphInteractorB.getXrefs()));
