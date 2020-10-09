@@ -21,8 +21,13 @@ import static org.springframework.boot.SpringApplication.run;
 public class IntactPortalIndexerApplication {
 
     public static void main(String[] args) {
-        ApplicationContext applicationContext= run(IntactPortalIndexerApplication.class, args);
+        ApplicationContext applicationContext = run(IntactPortalIndexerApplication.class, args);
         System.exit(SpringApplication.exit(applicationContext));
+    }
+
+    @Bean
+    public boolean isEmbeddedSolr() {
+        return false;
     }
 
     /* This enables aspectJ (together with the aop.enable property in application.properties) */
