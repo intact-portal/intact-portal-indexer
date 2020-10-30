@@ -203,6 +203,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setFeatureA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? SolrDocumentConverterUtils.featuresToSolrDocument(ographFeaturesA) : null);
                 searchInteraction.setFeatureShortLabelA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? SolrDocumentConverterUtils.featuresShortlabelToSolrDocument(ographFeaturesA) : null);
                 searchInteraction.setFeatureTypesA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? SolrDocumentConverterUtils.featuresTypeToSolrDocument(ographFeaturesA) : null);
+                searchInteraction.setFeatureRangesA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? SolrDocumentConverterUtils.featuresRangesToSolrDocument(ographFeaturesA) : null);
                 boolean mutation = (ographFeaturesA != null && !ographFeaturesA.isEmpty()) && SolrDocumentConverterUtils.doesAnyFeatureHaveMutation(ographFeaturesA);
                 searchInteraction.setDisruptedByMutation(mutation);
                 searchInteraction.setMutationA(mutation);
@@ -227,6 +228,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setFeatureB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? SolrDocumentConverterUtils.featuresToSolrDocument(ographFeaturesB) : null);
                 searchInteraction.setFeatureShortLabelB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? SolrDocumentConverterUtils.featuresShortlabelToSolrDocument(ographFeaturesB) : null);
                 searchInteraction.setFeatureTypesB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? SolrDocumentConverterUtils.featuresTypeToSolrDocument(ographFeaturesB) : null);
+                searchInteraction.setFeatureRangesB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? SolrDocumentConverterUtils.featuresRangesToSolrDocument(ographFeaturesB) : null);
                 boolean mutation = (ographFeaturesB != null && !ographFeaturesB.isEmpty()) && SolrDocumentConverterUtils.doesAnyFeatureHaveMutation(ographFeaturesB);
                 if (!searchInteraction.isDisruptedByMutation()) {
                     searchInteraction.setDisruptedByMutation(mutation);
@@ -247,7 +249,7 @@ public class InteractionIndexerTasklet implements Tasklet {
             searchInteraction.setDetectionMethod((graphBinaryInteractionEvidence.getExperiment() != null && graphBinaryInteractionEvidence.getExperiment().getInteractionDetectionMethod() != null) ? graphBinaryInteractionEvidence.getExperiment().getInteractionDetectionMethod().getShortName() : null);
             searchInteraction.setDetectionMethodMIIdentifier((graphBinaryInteractionEvidence.getExperiment() != null && graphBinaryInteractionEvidence.getExperiment().getInteractionDetectionMethod() != null) ? graphBinaryInteractionEvidence.getExperiment().getInteractionDetectionMethod().getMIIdentifier() : null);
             searchInteraction.setHostOrganism(experiment.getHostOrganism() != null ? experiment.getHostOrganism().getScientificName() : null);
-
+            searchInteraction.setHostOrganismTaxId(experiment.getHostOrganism() != null ? experiment.getHostOrganism().getTaxId() : null);
 
             //interaction details
             searchInteraction.setBinaryInteractionId(binaryCounter);
@@ -309,8 +311,8 @@ public class InteractionIndexerTasklet implements Tasklet {
                     //this is needed for sorting on publication id
                     searchInteraction.setPublicationPubmedIdentifier((publication.getPubmedIdStr() != null) ? publication.getPubmedIdStr() : null);
                 }
+                searchInteraction.setPublicationAnnotations(!publication.getAnnotations().isEmpty() ? SolrDocumentConverterUtils.annotationsToSolrDocument(publication.getAnnotations()) : null);
             }
-
             searchInteraction.setAllAnnotations(!graphAnnotations.isEmpty() ? SolrDocumentConverterUtils.annotationsToSolrDocument(graphAnnotations) : null);
 
         }
@@ -358,6 +360,10 @@ public class InteractionIndexerTasklet implements Tasklet {
                 } catch (Exception e) {
                     log.error("Interaction with ac: " + graphInteraction.getAc() + " could not be indexed because of exception  :- ");
                     e.printStackTrace();
+                }
+
+                if (interactions.size() == 10) {
+                    CommonUtility.saveInteractionInDisc(interactions);
                 }
             }
             log.info("Conversion of " + interactions.size() + " records took [ms] : " + (System.currentTimeMillis() - convStart));

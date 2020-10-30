@@ -3,6 +3,7 @@ package utilities;
 import org.apache.commons.lang.StringUtils;
 import psidev.psi.mi.jami.model.*;
 import uk.ac.ebi.intact.graphdb.model.nodes.GraphFeature;
+import uk.ac.ebi.intact.graphdb.model.nodes.GraphRange;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -106,6 +107,18 @@ public class SolrDocumentConverterUtils {
 
     }
 
+    public static Set<String> featuresRangesToSolrDocument(Collection<? extends GraphFeature> featureEvidences) {
+
+        Set<String> featureRanges = new HashSet<>();
+        for (Feature featureEvidence : featureEvidences) {
+            for (Range range : (Collection<Range>) featureEvidence.getRanges()) {
+                featureRanges.add(rangeToSolrDocument(range));
+            }
+        }
+        return featureRanges;
+
+    }
+
     public static boolean doesAnyFeatureHaveMutation(Collection<? extends GraphFeature> featureEvidences) {
 
         /*TODO... Code to be changed when parent child relationship is stored in graphdb*/
@@ -161,6 +174,19 @@ public class SolrDocumentConverterUtils {
 
     public static String cvTermMIToSolrDocument(CvTerm cvTerm) {
         return (cvTerm != null) ? cvTerm.getMIIdentifier() : null;
+    }
+
+    public static String rangeToSolrDocument(Range range) {
+        String rangeStr = null;
+        if (range != null) {
+            if (range instanceof GraphRange) {
+                rangeStr = ((GraphRange) range).getRangeString();
+            } else {
+                rangeStr = range.getStart().getStart() + ".." + range.getStart().getEnd() + "-" +
+                        range.getEnd().getStart() + ".." + range.getEnd().getEnd();
+            }
+        }
+        return rangeStr;
     }
 
     public static Set<String> confidencesToSolrDocument(Collection<? extends Confidence> graphConfidences) {
