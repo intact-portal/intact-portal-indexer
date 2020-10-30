@@ -311,7 +311,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                     //this is needed for sorting on publication id
                     searchInteraction.setPublicationPubmedIdentifier((publication.getPubmedIdStr() != null) ? publication.getPubmedIdStr() : null);
                 }
-                searchInteraction.setPublicationAnnotations(!publication.getAnnotations().isEmpty() ? SolrDocumentConverterUtils.annotationsToSolrDocument(publication.getAnnotations()) : null);
+                searchInteraction.setPublicationAnnotations(!publication.getAnnotations().isEmpty() ? SolrDocumentConverterUtils.annotationValuesOnlyToSolrDocument(publication.getAnnotations()) : null);
             }
             searchInteraction.setAllAnnotations(!graphAnnotations.isEmpty() ? SolrDocumentConverterUtils.annotationsToSolrDocument(graphAnnotations) : null);
 
