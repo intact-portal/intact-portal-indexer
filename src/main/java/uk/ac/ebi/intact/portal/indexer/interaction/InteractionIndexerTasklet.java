@@ -361,10 +361,6 @@ public class InteractionIndexerTasklet implements Tasklet {
                     log.error("Interaction with ac: " + graphInteraction.getAc() + " could not be indexed because of exception  :- ");
                     e.printStackTrace();
                 }
-
-                if (interactions.size() == 10) {
-                    CommonUtility.saveInteractionInDisc(interactions);
-                }
             }
             log.info("Conversion of " + interactions.size() + " records took [ms] : " + (System.currentTimeMillis() - convStart));
 
