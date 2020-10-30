@@ -104,7 +104,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchChildInteractorA.setInteractorName(graphInteractorA.getPreferredName());
                 searchChildInteractorA.setInteractorIntactName(graphInteractorA.getShortName());
                 searchChildInteractorA.setInteractorDescription(graphInteractorA.getFullName());
-                searchChildInteractorA.setInteractorPreferredIdentifier(graphInteractorA.getPreferredIdentifier() != null ? graphInteractorA.getPreferredIdentifier().getId() : "");
+                searchChildInteractorA.setInteractorPreferredIdentifier(SolrDocumentConverterUtils.xrefToSolrDocument(graphInteractorA.getPreferredIdentifier()));
                 searchChildInteractorA.setInteractorAlias(aliasesWithTypesToSolrDocument(graphInteractorA.getAliases()));
                 searchChildInteractorA.setInteractorAltIds(xrefsToSolrDocument(graphInteractorA.getIdentifiers()));
                 searchChildInteractorA.setInteractorType(graphInteractorA.getInteractorType().getShortName());
@@ -156,7 +156,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchChildInteractorB.setDocumentType(DocumentType.INTERACTOR);
                 searchChildInteractorB.setInteractorName(graphInteractorB.getPreferredName());
                 searchChildInteractorB.setInteractorIntactName(graphInteractorB.getShortName());
-                searchChildInteractorB.setInteractorPreferredIdentifier(graphInteractorB.getPreferredIdentifier() != null ? graphInteractorB.getPreferredIdentifier().getId() : "");
+                searchChildInteractorB.setInteractorPreferredIdentifier(SolrDocumentConverterUtils.xrefToSolrDocument(graphInteractorB.getPreferredIdentifier()));
                 searchChildInteractorB.setInteractorDescription(graphInteractorB.getFullName());
                 searchChildInteractorB.setInteractorAlias(aliasesWithTypesToSolrDocument(graphInteractorB.getAliases()));
                 searchChildInteractorB.setInteractorAltIds(xrefsToSolrDocument(graphInteractorB.getIdentifiers()));

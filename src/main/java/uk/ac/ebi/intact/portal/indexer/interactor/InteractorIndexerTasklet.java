@@ -96,6 +96,7 @@ public class InteractorIndexerTasklet implements Tasklet {
         searchInteractor.setInteractorAltIds(xrefsToSolrDocument(graphInteractor.getIdentifiers()));
 
         searchInteractor.setInteractorType(graphInteractor.getInteractorType().getShortName());
+        searchInteractor.setInteractorTypeMIIdentifier(graphInteractor.getInteractorType().getMIIdentifier());
         Organism organism = graphInteractor.getOrganism();
         searchInteractor.setInteractorSpecies(organism != null ? graphInteractor.getOrganism().getScientificName() : null);
         searchInteractor.setInteractorTaxId(organism != null ? graphInteractor.getOrganism().getTaxId() : null);
