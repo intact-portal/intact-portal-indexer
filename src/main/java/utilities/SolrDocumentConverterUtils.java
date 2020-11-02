@@ -61,6 +61,16 @@ public class SolrDocumentConverterUtils {
 
     }
 
+    public static Set<String> annotationValuesOnlyToSolrDocument(Collection<? extends Annotation> annotations) {
+
+        Set<String> searchInteractorAliases = new HashSet<>();
+        for (Annotation annotation : annotations) {
+            searchInteractorAliases.add(annotation.getValue());
+        }
+        return searchInteractorAliases;
+
+    }
+
     public static Set<String> checksumsToSolrDocument(Collection<? extends Checksum> checksums) {
 
         Set<String> searchInteractorAliases = new HashSet<>();
