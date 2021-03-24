@@ -47,7 +47,7 @@ public class InteractionIndexerTasklet implements Tasklet {
     InteractorUtility interactorUtility;
     private int attempts = 0;
     private boolean simulation = false;
-    private int binaryCounter = 1;
+    private int binaryCounter = 1;//TODO... we need this for generating test interactions.xml, separate the logic later
     @Resource
     private GraphInteractionService graphInteractionService;
     @Resource
@@ -63,7 +63,7 @@ public class InteractionIndexerTasklet implements Tasklet {
      * @return
      */
     // TODO try to split this method into methods for specific(eg. Interactor/publication/participant etc.) details
-    private static SearchInteraction toSolrDocument(BinaryInteractionEvidence interactionEvidence, int binaryCounter) {
+    public static SearchInteraction toSolrDocument(BinaryInteractionEvidence interactionEvidence, int binaryCounter) {
 
         SearchInteraction searchInteraction = new SearchInteraction();
         List<SearchChildInteractor> searchChildInteractors = new ArrayList<>();
@@ -252,7 +252,7 @@ public class InteractionIndexerTasklet implements Tasklet {
             searchInteraction.setHostOrganismTaxId(experiment.getHostOrganism() != null ? experiment.getHostOrganism().getTaxId() : null);
 
             //interaction details
-            searchInteraction.setBinaryInteractionId(binaryCounter);
+            searchInteraction.setBinaryInteractionId(graphBinaryInteractionEvidence.getGraphId());// use binary counter while generating test interactions.xml
             searchInteraction.setDocumentType(DocumentType.INTERACTION);
             GraphClusteredInteraction graphClusteredInteraction = graphBinaryInteractionEvidence.getClusteredInteraction();
             Set<String> intactConfidence = new HashSet<String>();
