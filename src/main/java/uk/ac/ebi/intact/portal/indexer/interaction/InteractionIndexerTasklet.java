@@ -9,7 +9,6 @@ import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Component;
@@ -18,11 +17,11 @@ import psidev.psi.mi.jami.binary.BinaryInteractionEvidence;
 import psidev.psi.mi.jami.model.Organism;
 import uk.ac.ebi.intact.graphdb.model.nodes.*;
 import uk.ac.ebi.intact.graphdb.service.GraphInteractionService;
-import uk.ac.ebi.intact.portal.indexer.interactor.InteractorUtility;
 import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.service.InteractionIndexService;
 import uk.ac.ebi.intact.search.interactions.utils.DocumentType;
+import uk.ac.ebi.intact.style.service.StyleService;
 import utilities.CommonUtility;
 import utilities.Constants;
 import utilities.SolrDocumentConverterUtils;
@@ -43,15 +42,19 @@ public class InteractionIndexerTasklet implements Tasklet {
     private static final int MAX_PING_TIME = 1000;
     private static final int MAX_ATTEMPTS = 5;
     private static final int DEPTH = 0;
-    @Autowired
-    InteractorUtility interactorUtility;
+
     private int attempts = 0;
     private boolean simulation = false;
     private int binaryCounter = 1;//TODO... we need this for generating test interactions.xml, separate the logic later
+
     @Resource
     private GraphInteractionService graphInteractionService;
+
     @Resource
     private InteractionIndexService interactionIndexService;
+
+    @Resource
+    private StyleService styleService;
 
     @Resource
     private SolrClient solrClient;
@@ -63,7 +66,7 @@ public class InteractionIndexerTasklet implements Tasklet {
      * @return
      */
     // TODO try to split this method into methods for specific(eg. Interactor/publication/participant etc.) details
-    public static SearchInteraction toSolrDocument(BinaryInteractionEvidence interactionEvidence, int binaryCounter) {
+    public static SearchInteraction toSolrDocument(BinaryInteractionEvidence interactionEvidence, int binaryCounter, StyleService styleService) {
 
         SearchInteraction searchInteraction = new SearchInteraction();
         List<SearchChildInteractor> searchChildInteractors = new ArrayList<>();
@@ -80,68 +83,59 @@ public class InteractionIndexerTasklet implements Tasklet {
             if (graphBinaryInteractionEvidence.getInteractorA() != null) {
                 GraphInteractor graphInteractorA = (GraphInteractor) graphBinaryInteractionEvidence.getInteractorA();
                 Organism organismA = graphInteractorA.getOrganism();
-                searchInteraction.setIdA(SolrDocumentConverterUtils.xrefToSolrDocument(graphInteractorA.getPreferredIdentifier()));
-                searchInteraction.setAltIdsA((graphInteractorA.getIdentifiers() != null && graphInteractorA.getIdentifiers().size() > 0) ? SolrDocumentConverterUtils.xrefsToSolrDocument(graphInteractorA.getIdentifiers()) : null);
+                searchInteraction.setIdA(xrefToSolrDocument(graphInteractorA.getPreferredIdentifier()));
+                searchInteraction.setAltIdsA((graphInteractorA.getIdentifiers() != null && graphInteractorA.getIdentifiers().size() > 0) ? xrefsToSolrDocument(graphInteractorA.getIdentifiers()) : null);
                 graphAliasesA.addAll(graphInteractorA.getAliases());
-                searchInteraction.setAnnotationsA((graphInteractorA.getAnnotations() != null && graphInteractorA.getAnnotations().size() > 0) ? SolrDocumentConverterUtils.annotationsToSolrDocument(graphInteractorA.getAnnotations()) : null);
-                searchInteraction.setChecksumsA((graphInteractorA.getChecksums() != null && graphInteractorA.getChecksums().size() > 0) ? SolrDocumentConverterUtils.checksumsToSolrDocument(graphInteractorA.getChecksums()) : null);
+                searchInteraction.setAnnotationsA((graphInteractorA.getAnnotations() != null && graphInteractorA.getAnnotations().size() > 0) ? annotationsToSolrDocument(graphInteractorA.getAnnotations()) : null);
+                searchInteraction.setChecksumsA((graphInteractorA.getChecksums() != null && graphInteractorA.getChecksums().size() > 0) ? checksumsToSolrDocument(graphInteractorA.getChecksums()) : null);
                 searchInteraction.setTaxIdA(organismA != null ? organismA.getTaxId() : null);
+                searchInteraction.setTaxIdAStyled(organismA != null ?
+                        organismA.getTaxId() + "__" + organismA.getScientificName() + "__" +
+                                "#" + Integer.toHexString(styleService.getInteractorColor(String.valueOf(organismA.getTaxId())).getRGB()).substring(2): null);
                 searchInteraction.setSpeciesA(organismA != null ? organismA.getScientificName() : null);
-                searchInteraction.setTypeA(graphInteractorA.getInteractorType().getShortName());
-                searchInteraction.setTypeMIA(graphInteractorA.getInteractorType().getMIIdentifier());
-                searchInteraction.setXrefsA((graphInteractorA.getXrefs() != null && graphInteractorA.getXrefs().size() > 0) ? SolrDocumentConverterUtils.xrefsToSolrDocument(graphInteractorA.getXrefs()) : null);
+
+                final String typeAShortName = graphInteractorA.getInteractorType().getShortName();
+                searchInteraction.setTypeA(typeAShortName);
+
+                final String typeMIA = graphInteractorA.getInteractorType().getMIIdentifier();
+                searchInteraction.setTypeMIA(typeMIA);
+                searchInteraction.setTypeMIAStyled(typeMIA + "__" + typeAShortName + "__" + styleService.getInteractorShape(typeMIA));
+
+                searchInteraction.setXrefsA((graphInteractorA.getXrefs() != null && graphInteractorA.getXrefs().size() > 0) ? xrefsToSolrDocument(graphInteractorA.getXrefs()) : null);
                 searchInteraction.setAcA(graphInteractorA.getAc());
                 searchInteraction.setUniqueIdA((graphInteractorA.getInteractorType() != null
-                        && graphInteractorA.getInteractorType().getShortName() != null
-                        && graphInteractorA.getInteractorType().getShortName().equals(Constants.MOLECULE_SET)) ? graphInteractorA.getAc() : graphInteractorA.getPreferredIdentifier() != null ? graphInteractorA.getPreferredIdentifier().getId() : "");
+                        && typeAShortName != null
+                        && typeAShortName.equals(Constants.MOLECULE_SET)) ? graphInteractorA.getAc() : graphInteractorA.getPreferredIdentifier() != null ? graphInteractorA.getPreferredIdentifier().getId() : "");
                 searchInteraction.setMoleculeA(graphInteractorA.getPreferredName());
                 searchInteraction.setIntactNameA(graphInteractorA.getShortName());
                 searchInteraction.setDescriptionA(graphInteractorA.getFullName());
 
                 // Indexing nested interactor documents
-                SearchChildInteractor searchChildInteractorA = new SearchChildInteractor();
-                searchChildInteractorA.setDocumentType(DocumentType.INTERACTOR);
-                searchChildInteractorA.setInteractorName(graphInteractorA.getPreferredName());
-                searchChildInteractorA.setInteractorIntactName(graphInteractorA.getShortName());
-                searchChildInteractorA.setInteractorDescription(graphInteractorA.getFullName());
-                searchChildInteractorA.setInteractorPreferredIdentifier(SolrDocumentConverterUtils.xrefToSolrDocument(graphInteractorA.getPreferredIdentifier()));
-                searchChildInteractorA.setInteractorAlias(aliasesWithTypesToSolrDocument(graphInteractorA.getAliases()));
-                searchChildInteractorA.setInteractorAltIds(xrefsToSolrDocument(graphInteractorA.getIdentifiers()));
-                searchChildInteractorA.setInteractorType(graphInteractorA.getInteractorType().getShortName());
-                searchChildInteractorA.setInteractorTypeMIIdentifier(graphInteractorA.getInteractorType().getMIIdentifier());
-                searchChildInteractorA.setInteractorSpecies(organismA != null ? organismA.getScientificName() : null);
-                searchChildInteractorA.setInteractorTaxId(organismA != null ? organismA.getTaxId() : null);
-                searchChildInteractorA.setInteractorXrefs(xrefsToSolrDocument(graphInteractorA.getXrefs()));
-                searchChildInteractorA.setInteractorAc(graphInteractorA.getAc());
-                searchChildInteractorA.setInteractionCount(graphInteractorA.getInteractions().size());
-
-                Collection<GraphFeature> featureEvidences = new ArrayList<>();
-                if (graphInteractorA.getParticipantEvidences() != null) {
-                    for (GraphParticipantEvidence participantEvidence : graphInteractorA.getParticipantEvidences()) {
-                        if (participantEvidence.getFeatures() != null) {
-                            featureEvidences.addAll(participantEvidence.getFeatures());
-                        }
-                    }
-
-                    searchChildInteractorA.setInteractorFeatureShortLabels(featuresShortlabelToSolrDocument(featureEvidences));
-                }
-                searchChildInteractors.add(searchChildInteractorA);
+                interactorToSolrDocument(searchChildInteractors, graphInteractorA, organismA, styleService);
             }
 
             if (graphBinaryInteractionEvidence.getInteractorB() != null) {
                 GraphInteractor graphInteractorB = (GraphInteractor) graphBinaryInteractionEvidence.getInteractorB();
                 Organism organismB = graphInteractorB.getOrganism();
-                searchInteraction.setIdB(SolrDocumentConverterUtils.xrefToSolrDocument(graphInteractorB.getPreferredIdentifier()));
-                searchInteraction.setAltIdsB((graphInteractorB.getIdentifiers() != null && graphInteractorB.getIdentifiers().size() > 0) ? SolrDocumentConverterUtils.xrefsToSolrDocument(graphInteractorB.getIdentifiers()) : null);
+                searchInteraction.setIdB(xrefToSolrDocument(graphInteractorB.getPreferredIdentifier()));
+                searchInteraction.setAltIdsB((graphInteractorB.getIdentifiers() != null && graphInteractorB.getIdentifiers().size() > 0) ? xrefsToSolrDocument(graphInteractorB.getIdentifiers()) : null);
                 graphAliasesB.addAll(graphInteractorB.getAliases());
-                searchInteraction.setAnnotationsB((graphInteractorB.getAnnotations() != null && graphInteractorB.getAnnotations().size() > 0) ? SolrDocumentConverterUtils.annotationsToSolrDocument(graphInteractorB.getAnnotations()) : null);
-                searchInteraction.setChecksumsB((graphInteractorB.getChecksums() != null && graphInteractorB.getChecksums().size() > 0) ? SolrDocumentConverterUtils.checksumsToSolrDocument(graphInteractorB.getChecksums()) : null);
+                searchInteraction.setAnnotationsB((graphInteractorB.getAnnotations() != null && graphInteractorB.getAnnotations().size() > 0) ? annotationsToSolrDocument(graphInteractorB.getAnnotations()) : null);
+                searchInteraction.setChecksumsB((graphInteractorB.getChecksums() != null && graphInteractorB.getChecksums().size() > 0) ? checksumsToSolrDocument(graphInteractorB.getChecksums()) : null);
                 searchInteraction.setTaxIdB(organismB != null ? organismB.getTaxId() : null);
+                searchInteraction.setTaxIdBStyled(organismB != null ?
+                        organismB.getTaxId() + "__" + organismB.getScientificName() + "__" +
+                                "#" + Integer.toHexString(styleService.getInteractorColor(String.valueOf(organismB.getTaxId())).getRGB()).substring(2): null);
                 searchInteraction.setSpeciesB(organismB != null ? organismB.getScientificName() : null);
-                searchInteraction.setTypeB(graphInteractorB.getInteractorType().getShortName());
-                searchInteraction.setTypeMIB(graphInteractorB.getInteractorType().getMIIdentifier());
-                searchInteraction.setXrefsB((graphInteractorB.getXrefs() != null && graphInteractorB.getXrefs().size() > 0) ? SolrDocumentConverterUtils.xrefsToSolrDocument(graphInteractorB.getXrefs()) : null);
-                searchInteraction.setSpeciesB(organismB != null ? organismB.getScientificName() : null);
+
+                final String typeBShortName = graphInteractorB.getInteractorType().getShortName();
+                searchInteraction.setTypeB(typeBShortName);
+
+                final String typeMIB = graphInteractorB.getInteractorType().getMIIdentifier();
+                searchInteraction.setTypeMIB(typeMIB);
+                searchInteraction.setTypeMIBStyled(typeMIB + "__" + typeBShortName + "__" + styleService.getInteractorShape(typeMIB));
+
+                searchInteraction.setXrefsB((graphInteractorB.getXrefs() != null && graphInteractorB.getXrefs().size() > 0) ? xrefsToSolrDocument(graphInteractorB.getXrefs()) : null);
                 searchInteraction.setAcB(graphInteractorB.getAc());
                 searchInteraction.setUniqueIdB((graphInteractorB.getInteractorType() != null
                         && graphInteractorB.getInteractorType().getShortName() != null
@@ -152,33 +146,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setDescriptionB(graphInteractorB.getFullName());
 
                 // Indexing nested interactor documents
-                SearchChildInteractor searchChildInteractorB = new SearchChildInteractor();
-                searchChildInteractorB.setDocumentType(DocumentType.INTERACTOR);
-                searchChildInteractorB.setInteractorName(graphInteractorB.getPreferredName());
-                searchChildInteractorB.setInteractorIntactName(graphInteractorB.getShortName());
-                searchChildInteractorB.setInteractorPreferredIdentifier(SolrDocumentConverterUtils.xrefToSolrDocument(graphInteractorB.getPreferredIdentifier()));
-                searchChildInteractorB.setInteractorDescription(graphInteractorB.getFullName());
-                searchChildInteractorB.setInteractorAlias(aliasesWithTypesToSolrDocument(graphInteractorB.getAliases()));
-                searchChildInteractorB.setInteractorAltIds(xrefsToSolrDocument(graphInteractorB.getIdentifiers()));
-                searchChildInteractorB.setInteractorType(graphInteractorB.getInteractorType().getShortName());
-                searchChildInteractorB.setInteractorTypeMIIdentifier(graphInteractorB.getInteractorType().getMIIdentifier());
-                searchChildInteractorB.setInteractorSpecies(organismB != null ? organismB.getScientificName() : null);
-                searchChildInteractorB.setInteractorTaxId(organismB != null ? organismB.getTaxId() : null);
-                searchChildInteractorB.setInteractorXrefs(xrefsToSolrDocument(graphInteractorB.getXrefs()));
-                searchChildInteractorB.setInteractorAc(graphInteractorB.getAc());
-                searchChildInteractorB.setInteractionCount(graphInteractorB.getInteractions().size());
-
-                Collection<GraphFeature> featureEvidences = new ArrayList<>();
-                if (graphInteractorB.getParticipantEvidences() != null) {
-                    for (GraphParticipantEvidence participantEvidence : graphInteractorB.getParticipantEvidences()) {
-                        if (participantEvidence.getFeatures() != null) {
-                            featureEvidences.addAll(participantEvidence.getFeatures());
-                        }
-                    }
-
-                    searchChildInteractorB.setInteractorFeatureShortLabels(featuresShortlabelToSolrDocument(featureEvidences));
-                }
-                searchChildInteractors.add(searchChildInteractorB);
+                interactorToSolrDocument(searchChildInteractors, graphInteractorB, organismB, styleService);
             }
 
             searchInteraction.setSearchChildInteractors(searchChildInteractors);
@@ -191,21 +159,21 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setExperimentalRoleA(graphParticipantEvidenceA.getExperimentalRole().getShortName());
                 searchInteraction.setBiologicalRoleMIIdentifierA(graphParticipantEvidenceA.getBiologicalRole().getMIIdentifier());
                 searchInteraction.setExperimentalRoleMIIdentifierA(graphParticipantEvidenceA.getExperimentalRole().getMIIdentifier());
-                searchInteraction.setExperimentalPreparationsA((graphParticipantEvidenceA.getExperimentalPreparations() != null && !graphParticipantEvidenceA.getExperimentalPreparations().isEmpty()) ? SolrDocumentConverterUtils.cvTermsToSolrDocument(graphParticipantEvidenceA.getExperimentalPreparations()) : null);
+                searchInteraction.setExperimentalPreparationsA((graphParticipantEvidenceA.getExperimentalPreparations() != null && !graphParticipantEvidenceA.getExperimentalPreparations().isEmpty()) ? cvTermsToSolrDocument(graphParticipantEvidenceA.getExperimentalPreparations()) : null);
                 searchInteraction.setStoichiometryA(graphParticipantEvidenceA.getStoichiometry() != null ? graphParticipantEvidenceA.getStoichiometry().getMinValue() + "-" + graphParticipantEvidenceA.getStoichiometry().getMaxValue() : null);
-                searchInteraction.setIdentificationMethodA((graphParticipantEvidenceA.getIdentificationMethods() != null && !graphParticipantEvidenceA.getIdentificationMethods().isEmpty()) ? SolrDocumentConverterUtils.cvTermsToSolrDocument(graphParticipantEvidenceA.getIdentificationMethods()) : null);
-                searchInteraction.setIdentificationMethodMIIdentifierA((graphParticipantEvidenceA.getIdentificationMethods() != null && !graphParticipantEvidenceA.getIdentificationMethods().isEmpty()) ? SolrDocumentConverterUtils.cvTermsMIToSolrDocument(graphParticipantEvidenceA.getIdentificationMethods()) : null);
+                searchInteraction.setIdentificationMethodsA((graphParticipantEvidenceA.getIdentificationMethods() != null && !graphParticipantEvidenceA.getIdentificationMethods().isEmpty()) ? cvTermsToSolrDocument(graphParticipantEvidenceA.getIdentificationMethods()) : null);
+                searchInteraction.setIdentificationMethodMIIdentifiersA((graphParticipantEvidenceA.getIdentificationMethods() != null && !graphParticipantEvidenceA.getIdentificationMethods().isEmpty()) ? cvTermsMIToSolrDocument(graphParticipantEvidenceA.getIdentificationMethods()) : null);
                 graphAliasesA.addAll(graphParticipantEvidenceA.getAliases());
 
                 // featureDetails
                 List<GraphFeature> ographFeaturesA = (List<GraphFeature>) graphParticipantEvidenceA.getFeatures();
                 featureCount += (ographFeaturesA != null ? ographFeaturesA.size() : 0);
-                searchInteraction.setFeatureA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? SolrDocumentConverterUtils.featuresToSolrDocument(ographFeaturesA) : null);
-                searchInteraction.setFeatureShortLabelA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? SolrDocumentConverterUtils.featuresShortlabelToSolrDocument(ographFeaturesA) : null);
-                searchInteraction.setFeatureTypesA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? SolrDocumentConverterUtils.featuresTypeToSolrDocument(ographFeaturesA) : null);
-                searchInteraction.setFeatureRangesA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? SolrDocumentConverterUtils.featuresRangesToSolrDocument(ographFeaturesA) : null);
-                boolean mutation = (ographFeaturesA != null && !ographFeaturesA.isEmpty()) && SolrDocumentConverterUtils.doesAnyFeatureHaveMutation(ographFeaturesA);
-                searchInteraction.setDisruptedByMutation(mutation);
+                searchInteraction.setFeaturesA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? featuresToSolrDocument(ographFeaturesA) : null);
+                searchInteraction.setFeatureShortLabelsA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? featuresShortlabelToSolrDocument(ographFeaturesA) : null);
+                searchInteraction.setFeatureTypesA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? featuresTypeToSolrDocument(ographFeaturesA) : null);
+                searchInteraction.setFeatureRangesA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? featuresRangesToSolrDocument(ographFeaturesA) : null);
+                boolean mutation = (ographFeaturesA != null && !ographFeaturesA.isEmpty()) && doesAnyFeatureHaveMutation(ographFeaturesA);
+                searchInteraction.setAffectedByMutation(mutation);
                 searchInteraction.setMutationA(mutation);
             }
 
@@ -216,30 +184,31 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setExperimentalRoleB(graphParticipantEvidenceB.getExperimentalRole().getShortName());
                 searchInteraction.setBiologicalRoleMIIdentifierB(graphParticipantEvidenceB.getBiologicalRole().getMIIdentifier());
                 searchInteraction.setExperimentalRoleMIIdentifierB(graphParticipantEvidenceB.getExperimentalRole().getMIIdentifier());
-                searchInteraction.setExperimentalPreparationsB((graphParticipantEvidenceB.getExperimentalPreparations() != null && !graphParticipantEvidenceB.getExperimentalPreparations().isEmpty()) ? SolrDocumentConverterUtils.cvTermsToSolrDocument(graphParticipantEvidenceB.getExperimentalPreparations()) : null);
+                searchInteraction.setExperimentalPreparationsB((graphParticipantEvidenceB.getExperimentalPreparations() != null && !graphParticipantEvidenceB.getExperimentalPreparations().isEmpty()) ? cvTermsToSolrDocument(graphParticipantEvidenceB.getExperimentalPreparations()) : null);
                 searchInteraction.setStoichiometryB(graphParticipantEvidenceB.getStoichiometry() != null ? graphParticipantEvidenceB.getStoichiometry().getMinValue() + "-" + graphParticipantEvidenceB.getStoichiometry().getMaxValue() : null);
-                searchInteraction.setIdentificationMethodB((graphParticipantEvidenceB.getIdentificationMethods() != null && !graphParticipantEvidenceB.getIdentificationMethods().isEmpty()) ? SolrDocumentConverterUtils.cvTermsToSolrDocument(graphParticipantEvidenceB.getIdentificationMethods()) : null);
-                searchInteraction.setIdentificationMethodMIIdentifierB((graphParticipantEvidenceB.getIdentificationMethods() != null && !graphParticipantEvidenceB.getIdentificationMethods().isEmpty()) ? SolrDocumentConverterUtils.cvTermsMIToSolrDocument(graphParticipantEvidenceB.getIdentificationMethods()) : null);
+                searchInteraction.setIdentificationMethodsB((graphParticipantEvidenceB.getIdentificationMethods() != null && !graphParticipantEvidenceB.getIdentificationMethods().isEmpty()) ? cvTermsToSolrDocument(graphParticipantEvidenceB.getIdentificationMethods()) : null);
+                searchInteraction.setIdentificationMethodMIIdentifiersB((graphParticipantEvidenceB.getIdentificationMethods() != null && !graphParticipantEvidenceB.getIdentificationMethods().isEmpty()) ? cvTermsMIToSolrDocument(graphParticipantEvidenceB.getIdentificationMethods()) : null);
                 graphAliasesB.addAll(graphParticipantEvidenceB.getAliases());
 
                 // featureDetails
                 List<GraphFeature> ographFeaturesB = (List<GraphFeature>) graphParticipantEvidenceB.getFeatures();
                 featureCount += (ographFeaturesB != null ? ographFeaturesB.size() : 0);
-                searchInteraction.setFeatureB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? SolrDocumentConverterUtils.featuresToSolrDocument(ographFeaturesB) : null);
-                searchInteraction.setFeatureShortLabelB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? SolrDocumentConverterUtils.featuresShortlabelToSolrDocument(ographFeaturesB) : null);
-                searchInteraction.setFeatureTypesB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? SolrDocumentConverterUtils.featuresTypeToSolrDocument(ographFeaturesB) : null);
-                searchInteraction.setFeatureRangesB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? SolrDocumentConverterUtils.featuresRangesToSolrDocument(ographFeaturesB) : null);
-                boolean mutation = (ographFeaturesB != null && !ographFeaturesB.isEmpty()) && SolrDocumentConverterUtils.doesAnyFeatureHaveMutation(ographFeaturesB);
-                if (!searchInteraction.isDisruptedByMutation()) {
-                    searchInteraction.setDisruptedByMutation(mutation);
+                searchInteraction.setFeaturesB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? featuresToSolrDocument(ographFeaturesB) : null);
+                searchInteraction.setFeatureShortLabelsB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? featuresShortlabelToSolrDocument(ographFeaturesB) : null);
+                searchInteraction.setFeatureTypesB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? featuresTypeToSolrDocument(ographFeaturesB) : null);
+                searchInteraction.setFeatureRangesB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? featuresRangesToSolrDocument(ographFeaturesB) : null);
+                boolean mutation = (ographFeaturesB != null && !ographFeaturesB.isEmpty()) && doesAnyFeatureHaveMutation(ographFeaturesB);
+                if (!searchInteraction.isAffectedByMutation()) {
+                    searchInteraction.setAffectedByMutation(mutation);
+                    searchInteraction.setAffectedByMutationStyled(mutation + "____" + styleService.getMutationInteractionColor(mutation));
                 }
                 searchInteraction.setMutationB(mutation);
 
             }
 
             searchInteraction.setFeatureCount(featureCount);
-            searchInteraction.setAliasesA(!graphAliasesA.isEmpty() ? SolrDocumentConverterUtils.aliasesWithTypesToSolrDocument(graphAliasesA) : null);
-            searchInteraction.setAliasesB(!graphAliasesB.isEmpty() ? SolrDocumentConverterUtils.aliasesWithTypesToSolrDocument(graphAliasesB) : null);
+            searchInteraction.setAliasesA(!graphAliasesA.isEmpty() ? aliasesWithTypesToSolrDocument(graphAliasesA) : null);
+            searchInteraction.setAliasesB(!graphAliasesB.isEmpty() ? aliasesWithTypesToSolrDocument(graphAliasesB) : null);
 
             //experiment details
             GraphExperiment experiment = (GraphExperiment) graphBinaryInteractionEvidence.getExperiment();
@@ -248,8 +217,13 @@ public class InteractionIndexerTasklet implements Tasklet {
             graphAnnotations.addAll(experiment.getAnnotations());
             searchInteraction.setDetectionMethod((graphBinaryInteractionEvidence.getExperiment() != null && graphBinaryInteractionEvidence.getExperiment().getInteractionDetectionMethod() != null) ? graphBinaryInteractionEvidence.getExperiment().getInteractionDetectionMethod().getShortName() : null);
             searchInteraction.setDetectionMethodMIIdentifier((graphBinaryInteractionEvidence.getExperiment() != null && graphBinaryInteractionEvidence.getExperiment().getInteractionDetectionMethod() != null) ? graphBinaryInteractionEvidence.getExperiment().getInteractionDetectionMethod().getMIIdentifier() : null);
-            searchInteraction.setHostOrganism(experiment.getHostOrganism() != null ? experiment.getHostOrganism().getScientificName() : null);
-            searchInteraction.setHostOrganismTaxId(experiment.getHostOrganism() != null ? experiment.getHostOrganism().getTaxId() : null);
+
+            final Organism hostOrganism = experiment.getHostOrganism();
+            searchInteraction.setHostOrganism(hostOrganism != null ? hostOrganism.getScientificName() : null);
+            searchInteraction.setHostOrganismTaxId(hostOrganism != null ? hostOrganism.getTaxId() : null);
+            searchInteraction.setHostOrganismTaxIdStyled(hostOrganism != null ? hostOrganism.getTaxId() + "__"
+                    + hostOrganism.getScientificName() + "__"
+                    + "#" + Integer.toHexString(styleService.getInteractorColor(String.valueOf(hostOrganism.getTaxId())).getRGB()).substring(2): null);
 
             //interaction details
             searchInteraction.setBinaryInteractionId(graphBinaryInteractionEvidence.getGraphId());// use binary counter while generating test interactions.xml
@@ -260,16 +234,23 @@ public class InteractionIndexerTasklet implements Tasklet {
                 intactConfidence.add("intact-miscore:" + graphClusteredInteraction.getMiscore());
                 searchInteraction.setIntactMiscore(graphClusteredInteraction.getMiscore());
             }
-            searchInteraction.setIdentifiers((graphBinaryInteractionEvidence.getIdentifiers() != null && !graphBinaryInteractionEvidence.getIdentifiers().isEmpty()) ? SolrDocumentConverterUtils.xrefsToSolrDocument(graphBinaryInteractionEvidence.getIdentifiers()) : null);
+            searchInteraction.setIdentifiers((graphBinaryInteractionEvidence.getIdentifiers() != null && !graphBinaryInteractionEvidence.getIdentifiers().isEmpty()) ? xrefsToSolrDocument(graphBinaryInteractionEvidence.getIdentifiers()) : null);
             searchInteraction.setConfidenceValues(!intactConfidence.isEmpty() ? intactConfidence : null);
-            searchInteraction.setType(graphBinaryInteractionEvidence.getInteractionType() != null ? graphBinaryInteractionEvidence.getInteractionType().getShortName() : null);
+
+            final String shortName = graphBinaryInteractionEvidence.getInteractionType().getShortName();
+            searchInteraction.setType(graphBinaryInteractionEvidence.getInteractionType() != null ? shortName : null);
+
             if (searchInteraction.getType() != null) {
-                searchInteraction.setTypeMIIdentifier(graphBinaryInteractionEvidence.getInteractionType().getMIIdentifier() != null ? graphBinaryInteractionEvidence.getInteractionType().getMIIdentifier() : null);
+                final String miIdentifier = graphBinaryInteractionEvidence.getInteractionType().getMIIdentifier();
+                searchInteraction.setTypeMIIdentifier(miIdentifier);
+                searchInteraction.setTypeMIIdentifierStyled(miIdentifier != null ?
+                                miIdentifier + "__" + shortName + "__" +
+                                        "#" + Integer.toHexString(styleService.getInteractionColor(miIdentifier).getRGB()).substring(2): null);
             }
             searchInteraction.setAc(graphBinaryInteractionEvidence.getAc());
 
             if (graphBinaryInteractionEvidence.getConfidences() != null) {
-                Set<String> confidences = SolrDocumentConverterUtils.confidencesToSolrDocument(graphBinaryInteractionEvidence.getConfidences());
+                Set<String> confidences = confidencesToSolrDocument(graphBinaryInteractionEvidence.getConfidences());
                 if (searchInteraction.getConfidenceValues() != null) {
                     searchInteraction.getConfidenceValues().addAll(confidences);
                 } else {
@@ -278,15 +259,26 @@ public class InteractionIndexerTasklet implements Tasklet {
             }
 
             graphAnnotations.addAll(graphBinaryInteractionEvidence.getAnnotations());
-            searchInteraction.setAnnotations(!graphBinaryInteractionEvidence.getAnnotations().isEmpty() ? SolrDocumentConverterUtils.annotationsToSolrDocument(graphBinaryInteractionEvidence.getAnnotations()) : null);
+            searchInteraction.setAnnotations(!graphBinaryInteractionEvidence.getAnnotations().isEmpty() ? annotationsToSolrDocument(graphBinaryInteractionEvidence.getAnnotations()) : null);
             searchInteraction.setExpansionMethod((graphBinaryInteractionEvidence.getComplexExpansion() != null) ? graphBinaryInteractionEvidence.getComplexExpansion().getShortName() : null);
-            searchInteraction.setXrefs((graphBinaryInteractionEvidence.getXrefs() != null && !graphBinaryInteractionEvidence.getXrefs().isEmpty()) ? SolrDocumentConverterUtils.xrefsToSolrDocument(graphBinaryInteractionEvidence.getXrefs()) : null);
-            searchInteraction.setParameters((graphBinaryInteractionEvidence.getParameters() != null && !graphBinaryInteractionEvidence.getParameters().isEmpty()) ? SolrDocumentConverterUtils.parametersToSolrDocument(graphBinaryInteractionEvidence.getParameters()) : null);
-            searchInteraction.setParameterTypes((graphBinaryInteractionEvidence.getParameters() != null && !graphBinaryInteractionEvidence.getParameters().isEmpty()) ? SolrDocumentConverterUtils.parameterTypeToSolrDocument(graphBinaryInteractionEvidence.getParameters()) : null);
+            searchInteraction.setXrefs((graphBinaryInteractionEvidence.getXrefs() != null && !graphBinaryInteractionEvidence.getXrefs().isEmpty()) ? xrefsToSolrDocument(graphBinaryInteractionEvidence.getXrefs()) : null);
+            searchInteraction.setParameters((graphBinaryInteractionEvidence.getParameters() != null && !graphBinaryInteractionEvidence.getParameters().isEmpty()) ? parametersToSolrDocument(graphBinaryInteractionEvidence.getParameters()) : null);
+            searchInteraction.setParameterTypes((graphBinaryInteractionEvidence.getParameters() != null && !graphBinaryInteractionEvidence.getParameters().isEmpty()) ? parameterTypeToSolrDocument(graphBinaryInteractionEvidence.getParameters()) : null);
             searchInteraction.setCreationDate(graphBinaryInteractionEvidence.getCreatedDate());
             searchInteraction.setUpdationDate(graphBinaryInteractionEvidence.getUpdatedDate());
-            searchInteraction.setChecksums((graphBinaryInteractionEvidence.getChecksums() != null && !graphBinaryInteractionEvidence.getChecksums().isEmpty()) ? SolrDocumentConverterUtils.checksumsToSolrDocument(graphBinaryInteractionEvidence.getChecksums()) : null);
+            searchInteraction.setChecksums((graphBinaryInteractionEvidence.getChecksums() != null && !graphBinaryInteractionEvidence.getChecksums().isEmpty()) ? checksumsToSolrDocument(graphBinaryInteractionEvidence.getChecksums()) : null);
             searchInteraction.setNegative(graphBinaryInteractionEvidence.isNegative());
+
+            if(searchInteraction.getTaxIdA() != null && searchInteraction.getTaxIdA().equals(searchInteraction.getTaxIdB())) {
+                searchInteraction.setIntraTaxId(searchInteraction.getTaxIdA());
+                searchInteraction.setIntraTaxIdStyled(searchInteraction.getTaxIdA() + "__"
+                        + searchInteraction.getSpeciesA() + "__"
+                        + "#" + Integer.toHexString(styleService.getInteractorColor(String.valueOf(searchInteraction.getTaxIdA())).getRGB()).substring(2));
+            }
+
+            if(searchInteraction.getSpeciesA() != null && searchInteraction.getSpeciesA().equals(searchInteraction.getSpeciesB())) {
+                searchInteraction.setIntraSpecies(searchInteraction.getSpeciesA());
+            }
 
             // publications details
 
@@ -306,19 +298,64 @@ public class InteractionIndexerTasklet implements Tasklet {
 //                    searchInteraction.setPublicationId((publication.getAuthors() != null) ? publication.getPubmedId() : "");
                     searchInteraction.setSourceDatabase((publication.getSource() != null) ? publication.getSource().getShortName() : "");
                     searchInteraction.setReleaseDate((publication.getReleasedDate() != null) ? publication.getReleasedDate() : null);
-                    searchInteraction.setPublicationIdentifiers((publication.getIdentifiers() != null && !publication.getIdentifiers().isEmpty()) ? SolrDocumentConverterUtils.xrefsToSolrDocument(publication.getIdentifiers()) : null);
+                    searchInteraction.setPublicationIdentifiers((publication.getIdentifiers() != null && !publication.getIdentifiers().isEmpty()) ? xrefsToSolrDocument(publication.getIdentifiers()) : null);
                     //TODO... Enable in graphdb to get from pubmedId instead
                     //this is needed for sorting on publication id
                     searchInteraction.setPublicationPubmedIdentifier((publication.getPubmedIdStr() != null) ? publication.getPubmedIdStr() : null);
                 }
-                searchInteraction.setPublicationAnnotations(!publication.getAnnotations().isEmpty() ? SolrDocumentConverterUtils.annotationValuesOnlyToSolrDocument(publication.getAnnotations()) : null);
+                searchInteraction.setPublicationAnnotations(!publication.getAnnotations().isEmpty() ? annotationValuesOnlyToSolrDocument(publication.getAnnotations()) : null);
             }
-            searchInteraction.setAllAnnotations(!graphAnnotations.isEmpty() ? SolrDocumentConverterUtils.annotationsToSolrDocument(graphAnnotations) : null);
+            searchInteraction.setAllAnnotations(!graphAnnotations.isEmpty() ? annotationsToSolrDocument(graphAnnotations) : null);
 
         }
 
 
         return searchInteraction;
+    }
+
+    private static void interactorToSolrDocument(List<SearchChildInteractor> searchChildInteractors, GraphInteractor graphInteractor, Organism organism, StyleService styleService) {
+
+        SearchChildInteractor searchChildInteractor = new SearchChildInteractor();
+        searchChildInteractor.setDocumentType(DocumentType.INTERACTOR);
+        searchChildInteractor.setInteractorName(graphInteractor.getPreferredName());
+        searchChildInteractor.setInteractorIntactName(graphInteractor.getShortName());
+        searchChildInteractor.setInteractorPreferredIdentifier(SolrDocumentConverterUtils.xrefToSolrDocument(graphInteractor.getPreferredIdentifier()));
+        searchChildInteractor.setInteractorDescription(graphInteractor.getFullName());
+        searchChildInteractor.setInteractorAlias(aliasesWithTypesToSolrDocument(graphInteractor.getAliases()));
+        searchChildInteractor.setInteractorAltIds(xrefsToSolrDocument(graphInteractor.getIdentifiers()));
+
+        final String shortName = graphInteractor.getInteractorType().getShortName();
+        searchChildInteractor.setInteractorType(shortName);
+
+        final String interactorTypeMIIdentifier = graphInteractor.getInteractorType().getMIIdentifier();
+        searchChildInteractor.setInteractorTypeMIIdentifier(interactorTypeMIIdentifier);
+
+        // We add the interactor shape and the display name in indexing time to avoid remapping the results
+        searchChildInteractor.setInteractorTypeMIIdentifierStyled(interactorTypeMIIdentifier + "__"
+                + shortName + "__"
+                + styleService.getInteractorShape(interactorTypeMIIdentifier));
+
+        searchChildInteractor.setInteractorSpecies(organism != null ? organism.getScientificName() : null);
+        searchChildInteractor.setInteractorTaxId(organism != null ? organism.getTaxId() : null);
+        searchChildInteractor.setInteractorTaxIdStyled(organism != null ? organism.getTaxId() + "__"
+                + organism.getScientificName() + "__"
+                + "#" + Integer.toHexString(styleService.getInteractorColor(String.valueOf(organism.getTaxId())).getRGB()).substring(2): null);
+
+        searchChildInteractor.setInteractorXrefs(xrefsToSolrDocument(graphInteractor.getXrefs()));
+        searchChildInteractor.setInteractorAc(graphInteractor.getAc());
+        searchChildInteractor.setInteractionCount(graphInteractor.getInteractions().size());
+
+        Collection<GraphFeature> featureEvidences = new ArrayList<>();
+        if (graphInteractor.getParticipantEvidences() != null) {
+            for (GraphParticipantEvidence participantEvidence : graphInteractor.getParticipantEvidences()) {
+                if (participantEvidence.getFeatures() != null) {
+                    featureEvidences.addAll(participantEvidence.getFeatures());
+                }
+            }
+
+            searchChildInteractor.setInteractorFeatureShortLabels(featuresShortlabelToSolrDocument(featureEvidences));
+        }
+        searchChildInteractors.add(searchChildInteractor);
     }
 
     /**
@@ -355,7 +392,7 @@ public class InteractionIndexerTasklet implements Tasklet {
             for (GraphBinaryInteractionEvidence graphInteraction : interactionList) {
 
                 try {
-                    interactions.add(toSolrDocument(graphInteraction, binaryCounter));
+                    interactions.add(toSolrDocument(graphInteraction, binaryCounter, styleService));
                     this.binaryCounter++;
                 } catch (Exception e) {
                     log.error("Interaction with ac: " + graphInteraction.getAc() + " could not be indexed because of exception  :- ");
