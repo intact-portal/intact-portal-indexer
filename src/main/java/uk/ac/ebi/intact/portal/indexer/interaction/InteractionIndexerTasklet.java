@@ -172,9 +172,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setFeatureShortLabelsA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? featuresShortlabelToSolrDocument(ographFeaturesA) : null);
                 searchInteraction.setFeatureTypesA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? featuresTypeToSolrDocument(ographFeaturesA) : null);
                 searchInteraction.setFeatureRangesA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? featuresRangesToSolrDocument(ographFeaturesA) : null);
-                boolean mutation = (ographFeaturesA != null && !ographFeaturesA.isEmpty()) && doesAnyFeatureHaveMutation(ographFeaturesA);
-                searchInteraction.setAffectedByMutation(mutation);
-                searchInteraction.setMutationA(mutation);
+                searchInteraction.setMutationA(affectedByMutationToSolrDocument(styleService, searchInteraction, ographFeaturesA));
             }
 
             if (graphBinaryInteractionEvidence.getParticipantB() != null) {
@@ -197,13 +195,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setFeatureShortLabelsB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? featuresShortlabelToSolrDocument(ographFeaturesB) : null);
                 searchInteraction.setFeatureTypesB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? featuresTypeToSolrDocument(ographFeaturesB) : null);
                 searchInteraction.setFeatureRangesB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? featuresRangesToSolrDocument(ographFeaturesB) : null);
-                boolean mutation = (ographFeaturesB != null && !ographFeaturesB.isEmpty()) && doesAnyFeatureHaveMutation(ographFeaturesB);
-                if (!searchInteraction.isAffectedByMutation()) {
-                    searchInteraction.setAffectedByMutation(mutation);
-                    searchInteraction.setAffectedByMutationStyled(mutation + "____" + styleService.getMutationInteractionColor(mutation));
-                }
-                searchInteraction.setMutationB(mutation);
-
+                searchInteraction.setMutationB(affectedByMutationToSolrDocument(styleService, searchInteraction, ographFeaturesB));
             }
 
             searchInteraction.setFeatureCount(featureCount);
@@ -281,7 +273,6 @@ public class InteractionIndexerTasklet implements Tasklet {
             }
 
             // publications details
-
             if (experiment != null) {
                 GraphPublication publication = (GraphPublication) experiment.getPublication();
                 graphAnnotations.addAll(publication.getAnnotations());
@@ -311,6 +302,15 @@ public class InteractionIndexerTasklet implements Tasklet {
 
 
         return searchInteraction;
+    }
+
+    private static boolean affectedByMutationToSolrDocument(StyleService styleService, SearchInteraction searchInteraction, List<GraphFeature> ographFeatures) {
+        boolean affectedByMutation = (ographFeatures != null && !ographFeatures.isEmpty()) && doesAnyFeatureHaveMutation(ographFeatures);
+        if (!searchInteraction.isAffectedByMutation()) {
+            searchInteraction.setAffectedByMutation(affectedByMutation);
+            searchInteraction.setAffectedByMutationStyled("none__" + affectedByMutation + "__" + "#" + Integer.toHexString(styleService.getMutationInteractionColor(affectedByMutation).getRGB()).substring(2));
+        }
+        return affectedByMutation;
     }
 
     private static void interactorToSolrDocument(List<SearchChildInteractor> searchChildInteractors, GraphInteractor graphInteractor, Organism organism, StyleService styleService) {
