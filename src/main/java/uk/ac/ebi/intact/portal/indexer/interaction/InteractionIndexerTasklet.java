@@ -28,6 +28,7 @@ import utilities.SolrDocumentConverterUtils;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.*;
 
 import static utilities.SolrDocumentConverterUtils.*;
@@ -38,7 +39,7 @@ public class InteractionIndexerTasklet implements Tasklet {
 
     private static final Log log = LogFactory.getLog(InteractionIndexerTasklet.class);
 
-    private static final int PAGE_SIZE = 2000;
+    private static final int PAGE_SIZE = 500;
     private static final int MAX_PING_TIME = 1000;
     private static final int MAX_ATTEMPTS = 5;
     private static final int DEPTH = 0;
@@ -405,7 +406,7 @@ public class InteractionIndexerTasklet implements Tasklet {
             if (!simulation) {
 //                    solrServerCheck();
 
-                interactionIndexService.save(interactions);
+                interactionIndexService.save(interactions, Duration.ofMinutes(5));
                 log.info("Index save took [ms] : " + (System.currentTimeMillis() - indexStart));
             }
 
