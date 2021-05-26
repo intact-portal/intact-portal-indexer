@@ -22,16 +22,16 @@ import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.service.InteractionIndexService;
 import uk.ac.ebi.intact.search.interactions.utils.DocumentType;
 import uk.ac.ebi.intact.style.service.StyleService;
-import utilities.CommonUtility;
-import utilities.Constants;
-import utilities.SolrDocumentConverterUtils;
+import uk.ac.ebi.intact.portal.indexer.utilities.CommonUtility;
+import uk.ac.ebi.intact.portal.indexer.utilities.Constants;
+import uk.ac.ebi.intact.portal.indexer.utilities.SolrDocumentConverterUtils;
 
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.*;
 
-import static utilities.SolrDocumentConverterUtils.*;
+import static uk.ac.ebi.intact.portal.indexer.utilities.SolrDocumentConverterUtils.*;
 
 @Component
 @Transactional
