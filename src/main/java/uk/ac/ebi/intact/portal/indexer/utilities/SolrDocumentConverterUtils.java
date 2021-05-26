@@ -1,4 +1,4 @@
-package utilities;
+package uk.ac.ebi.intact.portal.indexer.utilities;
 
 import org.apache.commons.lang.StringUtils;
 import psidev.psi.mi.jami.model.*;
@@ -232,6 +232,4 @@ public class SolrDocumentConverterUtils {
         return parameterTypes;
 
     }
-
-
 }

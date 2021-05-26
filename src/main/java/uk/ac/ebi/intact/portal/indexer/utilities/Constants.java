@@ -1,4 +1,4 @@
-package utilities;
+package uk.ac.ebi.intact.portal.indexer.utilities;
 
 /**
  * Created by anjali on 03/08/18.

@@ -1,4 +1,4 @@
-package utilities;
+package uk.ac.ebi.intact.portal.indexer.utilities;
 
 import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
