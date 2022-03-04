@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.*;
 
+import static utilities.SolrASDocumentConverterUtils.*;
 import static utilities.SolrDocumentConverterUtils.*;
 
 @Component
@@ -85,7 +86,9 @@ public class InteractionIndexerTasklet implements Tasklet {
                 GraphInteractor graphInteractorA = (GraphInteractor) graphBinaryInteractionEvidence.getInteractorA();
                 Organism organismA = graphInteractorA.getOrganism();
                 searchInteraction.setIdA(xrefToSolrDocument(graphInteractorA.getPreferredIdentifier()));
+                searchInteraction.setAsIdA(xrefToASSolrDocument(graphInteractorA.getPreferredIdentifier()));
                 searchInteraction.setAltIdsA((graphInteractorA.getIdentifiers() != null && graphInteractorA.getIdentifiers().size() > 0) ? xrefsToSolrDocument(graphInteractorA.getIdentifiers()) : null);
+                searchInteraction.setAsAltidA((graphInteractorA.getIdentifiers() != null && graphInteractorA.getIdentifiers().size() > 0) ? xrefsToASSolrDocument(graphInteractorA.getIdentifiers()) : null);
                 graphAliasesA.addAll(graphInteractorA.getAliases());
                 searchInteraction.setAnnotationsA((graphInteractorA.getAnnotations() != null && graphInteractorA.getAnnotations().size() > 0) ? annotationsToSolrDocument(graphInteractorA.getAnnotations()) : null);
                 searchInteraction.setChecksumsA((graphInteractorA.getChecksums() != null && graphInteractorA.getChecksums().size() > 0) ? checksumsToSolrDocument(graphInteractorA.getChecksums()) : null);
@@ -119,7 +122,9 @@ public class InteractionIndexerTasklet implements Tasklet {
                 GraphInteractor graphInteractorB = (GraphInteractor) graphBinaryInteractionEvidence.getInteractorB();
                 Organism organismB = graphInteractorB.getOrganism();
                 searchInteraction.setIdB(xrefToSolrDocument(graphInteractorB.getPreferredIdentifier()));
+                searchInteraction.setAsIdB(xrefToASSolrDocument(graphInteractorB.getPreferredIdentifier()));
                 searchInteraction.setAltIdsB((graphInteractorB.getIdentifiers() != null && graphInteractorB.getIdentifiers().size() > 0) ? xrefsToSolrDocument(graphInteractorB.getIdentifiers()) : null);
+                searchInteraction.setAsAltidB((graphInteractorB.getIdentifiers() != null && graphInteractorB.getIdentifiers().size() > 0) ? xrefsToASSolrDocument(graphInteractorB.getIdentifiers()) : null);
                 graphAliasesB.addAll(graphInteractorB.getAliases());
                 searchInteraction.setAnnotationsB((graphInteractorB.getAnnotations() != null && graphInteractorB.getAnnotations().size() > 0) ? annotationsToSolrDocument(graphInteractorB.getAnnotations()) : null);
                 searchInteraction.setChecksumsB((graphInteractorB.getChecksums() != null && graphInteractorB.getChecksums().size() > 0) ? checksumsToSolrDocument(graphInteractorB.getChecksums()) : null);
