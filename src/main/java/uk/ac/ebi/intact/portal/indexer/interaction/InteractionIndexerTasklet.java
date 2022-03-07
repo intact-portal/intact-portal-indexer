@@ -95,7 +95,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setTaxIdA(organismA != null ? organismA.getTaxId() : null);
                 searchInteraction.setTaxIdAStyled(organismA != null ?
                         organismA.getTaxId() + "__" + organismA.getScientificName() + "__" +
-                                "#" + Integer.toHexString(styleService.getInteractorColor(String.valueOf(organismA.getTaxId())).getRGB()).substring(2): null);
+                                "#" + Integer.toHexString(styleService.getInteractorColor(String.valueOf(organismA.getTaxId())).getRGB()).substring(2) : null);
                 searchInteraction.setSpeciesA(organismA != null ? organismA.getScientificName() : null);
 
                 final String typeAShortName = graphInteractorA.getInteractorType().getShortName();
@@ -131,7 +131,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setTaxIdB(organismB != null ? organismB.getTaxId() : null);
                 searchInteraction.setTaxIdBStyled(organismB != null ?
                         organismB.getTaxId() + "__" + organismB.getScientificName() + "__" +
-                                "#" + Integer.toHexString(styleService.getInteractorColor(String.valueOf(organismB.getTaxId())).getRGB()).substring(2): null);
+                                "#" + Integer.toHexString(styleService.getInteractorColor(String.valueOf(organismB.getTaxId())).getRGB()).substring(2) : null);
                 searchInteraction.setSpeciesB(organismB != null ? organismB.getScientificName() : null);
 
                 final String typeBShortName = graphInteractorB.getInteractorType().getShortName();
@@ -207,7 +207,8 @@ public class InteractionIndexerTasklet implements Tasklet {
             searchInteraction.setFeatureCount(featureCount);
             searchInteraction.setAliasesA(!graphAliasesA.isEmpty() ? aliasesWithTypesToSolrDocument(graphAliasesA) : null);
             searchInteraction.setAliasesB(!graphAliasesB.isEmpty() ? aliasesWithTypesToSolrDocument(graphAliasesB) : null);
-
+            searchInteraction.setAsAliasA(!graphAliasesA.isEmpty() ? aliasesWithTypesToASSolrDocument(graphAliasesA) : null);
+            searchInteraction.setAsAliasB(!graphAliasesB.isEmpty() ? aliasesWithTypesToASSolrDocument(graphAliasesB) : null);
             //experiment details
             GraphExperiment experiment = (GraphExperiment) graphBinaryInteractionEvidence.getExperiment();
 
@@ -221,7 +222,7 @@ public class InteractionIndexerTasklet implements Tasklet {
             searchInteraction.setHostOrganismTaxId(hostOrganism != null ? hostOrganism.getTaxId() : null);
             searchInteraction.setHostOrganismTaxIdStyled(hostOrganism != null ? hostOrganism.getTaxId() + "__"
                     + hostOrganism.getScientificName() + "__"
-                    + "#" + Integer.toHexString(styleService.getInteractorColor(String.valueOf(hostOrganism.getTaxId())).getRGB()).substring(2): null);
+                    + "#" + Integer.toHexString(styleService.getInteractorColor(String.valueOf(hostOrganism.getTaxId())).getRGB()).substring(2) : null);
 
             //interaction details
             searchInteraction.setBinaryInteractionId(graphBinaryInteractionEvidence.getGraphId());// use binary counter while generating test interactions.xml
@@ -242,8 +243,8 @@ public class InteractionIndexerTasklet implements Tasklet {
                 final String miIdentifier = graphBinaryInteractionEvidence.getInteractionType().getMIIdentifier();
                 searchInteraction.setTypeMIIdentifier(miIdentifier);
                 searchInteraction.setTypeMIIdentifierStyled(miIdentifier != null ?
-                                miIdentifier + "__" + shortName + "__" +
-                                        "#" + Integer.toHexString(styleService.getInteractionColor(miIdentifier).getRGB()).substring(2): null);
+                        miIdentifier + "__" + shortName + "__" +
+                                "#" + Integer.toHexString(styleService.getInteractionColor(miIdentifier).getRGB()).substring(2) : null);
             }
             searchInteraction.setAc(graphBinaryInteractionEvidence.getAc());
 
@@ -267,14 +268,14 @@ public class InteractionIndexerTasklet implements Tasklet {
             searchInteraction.setChecksums((graphBinaryInteractionEvidence.getChecksums() != null && !graphBinaryInteractionEvidence.getChecksums().isEmpty()) ? checksumsToSolrDocument(graphBinaryInteractionEvidence.getChecksums()) : null);
             searchInteraction.setNegative(graphBinaryInteractionEvidence.isNegative());
 
-            if(searchInteraction.getTaxIdA() != null && searchInteraction.getTaxIdA().equals(searchInteraction.getTaxIdB())) {
+            if (searchInteraction.getTaxIdA() != null && searchInteraction.getTaxIdA().equals(searchInteraction.getTaxIdB())) {
                 searchInteraction.setIntraTaxId(searchInteraction.getTaxIdA());
                 searchInteraction.setIntraTaxIdStyled(searchInteraction.getTaxIdA() + "__"
                         + searchInteraction.getSpeciesA() + "__"
                         + "#" + Integer.toHexString(styleService.getInteractorColor(String.valueOf(searchInteraction.getTaxIdA())).getRGB()).substring(2));
             }
 
-            if(searchInteraction.getSpeciesA() != null && searchInteraction.getSpeciesA().equals(searchInteraction.getSpeciesB())) {
+            if (searchInteraction.getSpeciesA() != null && searchInteraction.getSpeciesA().equals(searchInteraction.getSpeciesB())) {
                 searchInteraction.setIntraSpecies(searchInteraction.getSpeciesA());
             }
 
@@ -345,7 +346,7 @@ public class InteractionIndexerTasklet implements Tasklet {
         searchChildInteractor.setInteractorTaxId(organism != null ? organism.getTaxId() : null);
         searchChildInteractor.setInteractorTaxIdStyled(organism != null ? organism.getTaxId() + "__"
                 + organism.getScientificName() + "__"
-                + "#" + Integer.toHexString(styleService.getInteractorColor(String.valueOf(organism.getTaxId())).getRGB()).substring(2): null);
+                + "#" + Integer.toHexString(styleService.getInteractorColor(String.valueOf(organism.getTaxId())).getRGB()).substring(2) : null);
 
         searchChildInteractor.setInteractorXrefs(xrefsToSolrDocument(graphInteractor.getXrefs()));
         searchChildInteractor.setInteractorAc(graphInteractor.getAc());
