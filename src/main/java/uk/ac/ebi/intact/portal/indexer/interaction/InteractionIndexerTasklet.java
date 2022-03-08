@@ -261,6 +261,16 @@ public class InteractionIndexerTasklet implements Tasklet {
             searchInteraction.setAnnotations(!graphBinaryInteractionEvidence.getAnnotations().isEmpty() ? annotationsToSolrDocument(graphBinaryInteractionEvidence.getAnnotations()) : null);
             searchInteraction.setExpansionMethod((graphBinaryInteractionEvidence.getComplexExpansion() != null) ? graphBinaryInteractionEvidence.getComplexExpansion().getShortName() : null);
             searchInteraction.setXrefs((graphBinaryInteractionEvidence.getXrefs() != null && !graphBinaryInteractionEvidence.getXrefs().isEmpty()) ? xrefsToSolrDocument(graphBinaryInteractionEvidence.getXrefs()) : null);
+            Set<String> interactionXrefs = new HashSet<>();
+            if (graphBinaryInteractionEvidence.getXrefs() != null && !graphBinaryInteractionEvidence.getXrefs().isEmpty()) {
+                interactionXrefs.addAll(xrefsToASSolrDocument(graphBinaryInteractionEvidence.getXrefs()));
+            }
+            // to include intact ac as well and any future additional identifiers, any duplicate will be filtered since interactionXrefs is a set
+            if (graphBinaryInteractionEvidence.getIdentifiers() != null && !graphBinaryInteractionEvidence.getIdentifiers().isEmpty()) {
+                interactionXrefs.addAll(xrefsToASSolrDocument(graphBinaryInteractionEvidence.getIdentifiers()));
+            }
+            searchInteraction.setAsInteractionXrefs(interactionXrefs);
+
             searchInteraction.setParameters((graphBinaryInteractionEvidence.getParameters() != null && !graphBinaryInteractionEvidence.getParameters().isEmpty()) ? parametersToSolrDocument(graphBinaryInteractionEvidence.getParameters()) : null);
             searchInteraction.setParameterTypes((graphBinaryInteractionEvidence.getParameters() != null && !graphBinaryInteractionEvidence.getParameters().isEmpty()) ? parameterTypeToSolrDocument(graphBinaryInteractionEvidence.getParameters()) : null);
             searchInteraction.setCreationDate(graphBinaryInteractionEvidence.getCreatedDate());
@@ -297,6 +307,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                     searchInteraction.setSourceDatabase((publication.getSource() != null) ? publication.getSource().getShortName() : "");
                     searchInteraction.setReleaseDate((publication.getReleasedDate() != null) ? publication.getReleasedDate() : null);
                     searchInteraction.setPublicationIdentifiers((publication.getIdentifiers() != null && !publication.getIdentifiers().isEmpty()) ? xrefsToSolrDocument(publication.getIdentifiers()) : null);
+                    searchInteraction.setAsPubId((publication.getXrefs() != null && !publication.getXrefs().isEmpty()) ? xrefsToASSolrDocument(publication.getXrefs()) : null);
                     //TODO... Enable in graphdb to get from pubmedId instead
                     //this is needed for sorting on publication id
                     searchInteraction.setPublicationPubmedIdentifier((publication.getPubmedIdStr() != null) ? publication.getPubmedIdStr() : null);
