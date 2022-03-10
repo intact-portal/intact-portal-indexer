@@ -296,6 +296,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 graphAnnotations.addAll(publication.getAnnotations());
                 if (publication != null) {
                     searchInteraction.setAuthors((publication.getAuthors() != null && !publication.getAuthors().isEmpty()) ? new LinkedHashSet(publication.getAuthors()) : null);
+                    searchInteraction.setAsPubAuthors((publication.getAuthors() != null && !publication.getAuthors().isEmpty()) ? authorsToASSolrDocument(publication.getAuthors()) : null);
                     String firstAuthor = (searchInteraction.getAuthors() != null && !searchInteraction.getAuthors().isEmpty()) ? searchInteraction.getAuthors().iterator().next() + " et al." : "";
                     if (!firstAuthor.isEmpty()) {
                         if (publication.getPublicationDate() != null) {
