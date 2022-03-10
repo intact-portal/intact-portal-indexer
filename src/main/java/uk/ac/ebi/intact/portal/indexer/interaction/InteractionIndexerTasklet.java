@@ -299,12 +299,16 @@ public class InteractionIndexerTasklet implements Tasklet {
                     searchInteraction.setAsPubAuthors((publication.getAuthors() != null && !publication.getAuthors().isEmpty()) ? authorsToASSolrDocument(publication.getAuthors()) : null);
                     String firstAuthor = (searchInteraction.getAuthors() != null && !searchInteraction.getAuthors().isEmpty()) ? searchInteraction.getAuthors().iterator().next() + " et al." : "";
                     if (!firstAuthor.isEmpty()) {
+                        searchInteraction.setAsPubFirstAuthor(authorToASSolrDocument(firstAuthor));
                         if (publication.getPublicationDate() != null) {
-                            firstAuthor = firstAuthor + " (" + CommonUtility.getYearOutOfDate(publication.getPublicationDate()) + ")";
+                            int publicationYear = CommonUtility.getYearOutOfDate(publication.getPublicationDate());
+                            firstAuthor = firstAuthor + " (" + publicationYear + ")";
+                            searchInteraction.setAsPubYear(publicationYear);
                         }
                         firstAuthor = firstAuthor + "\t\n";
                     }
                     searchInteraction.setFirstAuthor(firstAuthor);
+
 //                    searchInteraction.setPublicationId((publication.getAuthors() != null) ? publication.getPubmedId() : "");
                     searchInteraction.setSourceDatabase((publication.getSource() != null) ? publication.getSource().getShortName() : "");
                     searchInteraction.setReleaseDate((publication.getReleasedDate() != null) ? publication.getReleasedDate() : null);

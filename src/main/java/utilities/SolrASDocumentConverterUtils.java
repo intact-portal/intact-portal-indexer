@@ -51,4 +51,14 @@ public class SolrASDocumentConverterUtils {
         return publicationAuthors;
     }
 
+    public static Set<String> authorToASSolrDocument(String author) {
+        if (author != null) {
+            Set<String> publicationAuthors = new HashSet<>();
+            publicationAuthors.addAll((TextFieldConverter.indexFieldValues(null, null, author)));
+            return publicationAuthors;
+        } else {
+            return null;
+        }
+    }
+
 }
