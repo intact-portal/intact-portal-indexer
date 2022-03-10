@@ -97,7 +97,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                         organismA.getTaxId() + "__" + organismA.getScientificName() + "__" +
                                 "#" + Integer.toHexString(styleService.getInteractorColor(String.valueOf(organismA.getTaxId())).getRGB()).substring(2) : null);
                 searchInteraction.setSpeciesA(organismA != null ? organismA.getScientificName() : null);
-
+                searchInteraction.setAsTaxIdA(organismToASSolrDocument(organismA));
                 final String typeAShortName = graphInteractorA.getInteractorType().getShortName();
                 searchInteraction.setTypeA(typeAShortName);
 
@@ -133,7 +133,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                         organismB.getTaxId() + "__" + organismB.getScientificName() + "__" +
                                 "#" + Integer.toHexString(styleService.getInteractorColor(String.valueOf(organismB.getTaxId())).getRGB()).substring(2) : null);
                 searchInteraction.setSpeciesB(organismB != null ? organismB.getScientificName() : null);
-
+                searchInteraction.setAsTaxIdB(organismToASSolrDocument(organismB));
                 final String typeBShortName = graphInteractorB.getInteractorType().getShortName();
                 searchInteraction.setTypeB(typeBShortName);
 

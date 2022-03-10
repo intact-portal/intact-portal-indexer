@@ -1,7 +1,9 @@
 package utilities;
 
 import psidev.psi.mi.jami.model.Alias;
+import psidev.psi.mi.jami.model.Organism;
 import psidev.psi.mi.jami.model.Xref;
+import uk.ac.ebi.intact.search.interactions.utils.as.converters.TextFieldConverter;
 import uk.ac.ebi.intact.search.interactions.utils.as.converters.XrefFieldConverter;
 
 import java.util.Collection;
@@ -28,6 +30,17 @@ public class SolrASDocumentConverterUtils {
             searchInteractorAliases.addAll((XrefFieldConverter.indexFieldValues(null, alias.getName())));
         }
         return searchInteractorAliases;
+    }
+
+    public static Set<String> organismToASSolrDocument(Organism organism) {
+        if (organism != null) {
+            Set<String> organismIndexValues = new HashSet<>();
+            organismIndexValues.addAll((TextFieldConverter.indexFieldValues("taxid", organism.getTaxId() + "", organism.getCommonName())));
+            organismIndexValues.addAll((TextFieldConverter.indexFieldValues(null, null, organism.getScientificName())));// null because we don't need to store taxid again
+            return organismIndexValues;
+        } else {
+            return null;
+        }
     }
 
 }
