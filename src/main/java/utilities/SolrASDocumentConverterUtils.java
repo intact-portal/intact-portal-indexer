@@ -1,6 +1,7 @@
 package utilities;
 
 import psidev.psi.mi.jami.model.Alias;
+import psidev.psi.mi.jami.model.CvTerm;
 import psidev.psi.mi.jami.model.Organism;
 import psidev.psi.mi.jami.model.Xref;
 import uk.ac.ebi.intact.search.interactions.utils.as.converters.TextFieldConverter;
@@ -59,6 +60,30 @@ public class SolrASDocumentConverterUtils {
         } else {
             return null;
         }
+    }
+
+    public static Set<String> cvToASSolrDocument(CvTerm cv) {
+
+        if (cv != null) {
+            Set<String> cvIdentifier = new HashSet<>();
+            if (cv.getMIIdentifier() != null) {
+                cvIdentifier.addAll((TextFieldConverter.indexFieldValues(CvTerm.PSI_MI, cv.getMIIdentifier(), cv.getShortName())));
+            } else if (cv.getMODIdentifier() != null) {
+                cvIdentifier.addAll((TextFieldConverter.indexFieldValues(CvTerm.PSI_MOD, cv.getMODIdentifier(), cv.getShortName())));
+            } else if (cv.getPARIdentifier() != null) {
+                cvIdentifier.addAll((TextFieldConverter.indexFieldValues(CvTerm.PSI_PAR, cv.getPARIdentifier(), cv.getShortName())));
+            } else if (cv.getIdentifiers() != null && !cv.getIdentifiers().isEmpty()) {
+                Xref idXref = cv.getIdentifiers().iterator().next();
+                cvIdentifier.addAll((TextFieldConverter.indexFieldValues(idXref.getDatabase().getShortName(), idXref.getId(), cv.getShortName())));
+            } else {
+                cvIdentifier.addAll((TextFieldConverter.indexFieldValues("unknown", null, cv.getShortName())));
+            }
+            return cvIdentifier;
+        } else {
+            return null;
+        }
+
+
     }
 
 }

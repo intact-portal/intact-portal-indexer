@@ -238,6 +238,7 @@ public class InteractionIndexerTasklet implements Tasklet {
 
             final String shortName = graphBinaryInteractionEvidence.getInteractionType().getShortName();
             searchInteraction.setType(graphBinaryInteractionEvidence.getInteractionType() != null ? shortName : null);
+            searchInteraction.setAsType(cvToASSolrDocument(graphBinaryInteractionEvidence.getInteractionType()));
 
             if (searchInteraction.getType() != null) {
                 final String miIdentifier = graphBinaryInteractionEvidence.getInteractionType().getMIIdentifier();
