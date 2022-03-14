@@ -216,6 +216,7 @@ public class InteractionIndexerTasklet implements Tasklet {
             graphAnnotations.addAll(experiment.getAnnotations());
             searchInteraction.setDetectionMethod((graphBinaryInteractionEvidence.getExperiment() != null && graphBinaryInteractionEvidence.getExperiment().getInteractionDetectionMethod() != null) ? graphBinaryInteractionEvidence.getExperiment().getInteractionDetectionMethod().getShortName() : null);
             searchInteraction.setDetectionMethodMIIdentifier((graphBinaryInteractionEvidence.getExperiment() != null && graphBinaryInteractionEvidence.getExperiment().getInteractionDetectionMethod() != null) ? graphBinaryInteractionEvidence.getExperiment().getInteractionDetectionMethod().getMIIdentifier() : null);
+            searchInteraction.setAsIDetectionMethod(graphBinaryInteractionEvidence.getExperiment() != null ? cvToASSolrDocument(graphBinaryInteractionEvidence.getExperiment().getInteractionDetectionMethod()) : null);
 
             final Organism hostOrganism = experiment.getHostOrganism();
             searchInteraction.setHostOrganism(hostOrganism != null ? hostOrganism.getScientificName() : null);
@@ -223,7 +224,7 @@ public class InteractionIndexerTasklet implements Tasklet {
             searchInteraction.setHostOrganismTaxIdStyled(hostOrganism != null ? hostOrganism.getTaxId() + "__"
                     + hostOrganism.getScientificName() + "__"
                     + "#" + Integer.toHexString(styleService.getInteractorColor(String.valueOf(hostOrganism.getTaxId())).getRGB()).substring(2) : null);
-
+            searchInteraction.setAsHostOrganism(organismToASSolrDocument(hostOrganism));
             //interaction details
             searchInteraction.setBinaryInteractionId(graphBinaryInteractionEvidence.getGraphId());// use binary counter while generating test interactions.xml
             searchInteraction.setDocumentType(DocumentType.INTERACTION);
