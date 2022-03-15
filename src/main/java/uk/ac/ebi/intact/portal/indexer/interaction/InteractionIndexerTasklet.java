@@ -100,6 +100,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setAsTaxIdA(organismToASSolrDocument(organismA));
                 final String typeAShortName = graphInteractorA.getInteractorType().getShortName();
                 searchInteraction.setTypeA(typeAShortName);
+                searchInteraction.setAsTypeA(cvToASSolrDocument(graphInteractorA.getInteractorType()));
 
                 final String typeMIA = graphInteractorA.getInteractorType().getMIIdentifier();
                 searchInteraction.setTypeMIA(typeMIA);
@@ -136,6 +137,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setAsTaxIdB(organismToASSolrDocument(organismB));
                 final String typeBShortName = graphInteractorB.getInteractorType().getShortName();
                 searchInteraction.setTypeB(typeBShortName);
+                searchInteraction.setAsTypeB(cvToASSolrDocument(graphInteractorB.getInteractorType()));
 
                 final String typeMIB = graphInteractorB.getInteractorType().getMIIdentifier();
                 searchInteraction.setTypeMIB(typeMIB);
@@ -162,6 +164,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 GraphParticipantEvidence graphParticipantEvidenceA = (GraphParticipantEvidence) graphBinaryInteractionEvidence.getParticipantA();
 
                 searchInteraction.setBiologicalRoleA(graphParticipantEvidenceA.getBiologicalRole().getShortName());
+                searchInteraction.setAsBioRoleA(cvToASSolrDocument(graphParticipantEvidenceA.getBiologicalRole()));
                 searchInteraction.setExperimentalRoleA(graphParticipantEvidenceA.getExperimentalRole().getShortName());
                 searchInteraction.setBiologicalRoleMIIdentifierA(graphParticipantEvidenceA.getBiologicalRole().getMIIdentifier());
                 searchInteraction.setExperimentalRoleMIIdentifierA(graphParticipantEvidenceA.getExperimentalRole().getMIIdentifier());
@@ -185,6 +188,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 GraphParticipantEvidence graphParticipantEvidenceB = (GraphParticipantEvidence) graphBinaryInteractionEvidence.getParticipantB();
 
                 searchInteraction.setBiologicalRoleB(graphParticipantEvidenceB.getBiologicalRole().getShortName());
+                searchInteraction.setAsBioRoleB(cvToASSolrDocument(graphParticipantEvidenceB.getBiologicalRole()));
                 searchInteraction.setExperimentalRoleB(graphParticipantEvidenceB.getExperimentalRole().getShortName());
                 searchInteraction.setBiologicalRoleMIIdentifierB(graphParticipantEvidenceB.getBiologicalRole().getMIIdentifier());
                 searchInteraction.setExperimentalRoleMIIdentifierB(graphParticipantEvidenceB.getExperimentalRole().getMIIdentifier());
