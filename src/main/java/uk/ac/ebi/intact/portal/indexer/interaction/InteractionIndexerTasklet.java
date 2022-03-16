@@ -171,6 +171,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setExperimentalPreparationsA((graphParticipantEvidenceA.getExperimentalPreparations() != null && !graphParticipantEvidenceA.getExperimentalPreparations().isEmpty()) ? cvTermsToSolrDocument(graphParticipantEvidenceA.getExperimentalPreparations()) : null);
                 searchInteraction.setStoichiometryA(graphParticipantEvidenceA.getStoichiometry() != null ? graphParticipantEvidenceA.getStoichiometry().getMinValue() + "-" + graphParticipantEvidenceA.getStoichiometry().getMaxValue() : null);
                 searchInteraction.setIdentificationMethodsA((graphParticipantEvidenceA.getIdentificationMethods() != null && !graphParticipantEvidenceA.getIdentificationMethods().isEmpty()) ? cvTermsToSolrDocument(graphParticipantEvidenceA.getIdentificationMethods()) : null);
+                searchInteraction.setAsIdentificationMethodsA((graphParticipantEvidenceA.getIdentificationMethods() != null && !graphParticipantEvidenceA.getIdentificationMethods().isEmpty()) ? cvTermsToASSolrDocument(graphParticipantEvidenceA.getIdentificationMethods()) : null);
                 searchInteraction.setIdentificationMethodMIIdentifiersA((graphParticipantEvidenceA.getIdentificationMethods() != null && !graphParticipantEvidenceA.getIdentificationMethods().isEmpty()) ? cvTermsMIToSolrDocument(graphParticipantEvidenceA.getIdentificationMethods()) : null);
                 graphAliasesA.addAll(graphParticipantEvidenceA.getAliases());
 
@@ -180,6 +181,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setFeaturesA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? featuresToSolrDocument(ographFeaturesA) : null);
                 searchInteraction.setFeatureShortLabelsA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? featuresShortlabelToSolrDocument(ographFeaturesA) : null);
                 searchInteraction.setFeatureTypesA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? featuresTypeToSolrDocument(ographFeaturesA) : null);
+                searchInteraction.setAsFeatureTypesA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? featuresTypeToASSolrDocument(ographFeaturesA) : null);
                 searchInteraction.setFeatureRangesA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? featuresRangesToSolrDocument(ographFeaturesA) : null);
                 searchInteraction.setMutationA(affectedByMutationToSolrDocument(styleService, searchInteraction, ographFeaturesA));
             }
@@ -195,6 +197,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setExperimentalPreparationsB((graphParticipantEvidenceB.getExperimentalPreparations() != null && !graphParticipantEvidenceB.getExperimentalPreparations().isEmpty()) ? cvTermsToSolrDocument(graphParticipantEvidenceB.getExperimentalPreparations()) : null);
                 searchInteraction.setStoichiometryB(graphParticipantEvidenceB.getStoichiometry() != null ? graphParticipantEvidenceB.getStoichiometry().getMinValue() + "-" + graphParticipantEvidenceB.getStoichiometry().getMaxValue() : null);
                 searchInteraction.setIdentificationMethodsB((graphParticipantEvidenceB.getIdentificationMethods() != null && !graphParticipantEvidenceB.getIdentificationMethods().isEmpty()) ? cvTermsToSolrDocument(graphParticipantEvidenceB.getIdentificationMethods()) : null);
+                searchInteraction.setAsIdentificationMethodsB((graphParticipantEvidenceB.getIdentificationMethods() != null && !graphParticipantEvidenceB.getIdentificationMethods().isEmpty()) ? cvTermsToASSolrDocument(graphParticipantEvidenceB.getIdentificationMethods()) : null);
                 searchInteraction.setIdentificationMethodMIIdentifiersB((graphParticipantEvidenceB.getIdentificationMethods() != null && !graphParticipantEvidenceB.getIdentificationMethods().isEmpty()) ? cvTermsMIToSolrDocument(graphParticipantEvidenceB.getIdentificationMethods()) : null);
                 graphAliasesB.addAll(graphParticipantEvidenceB.getAliases());
 
@@ -204,6 +207,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setFeaturesB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? featuresToSolrDocument(ographFeaturesB) : null);
                 searchInteraction.setFeatureShortLabelsB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? featuresShortlabelToSolrDocument(ographFeaturesB) : null);
                 searchInteraction.setFeatureTypesB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? featuresTypeToSolrDocument(ographFeaturesB) : null);
+                searchInteraction.setAsFeatureTypesB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? featuresTypeToASSolrDocument(ographFeaturesB) : null);
                 searchInteraction.setFeatureRangesB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? featuresRangesToSolrDocument(ographFeaturesB) : null);
                 searchInteraction.setMutationB(affectedByMutationToSolrDocument(styleService, searchInteraction, ographFeaturesB));
             }

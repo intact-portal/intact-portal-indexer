@@ -1,9 +1,7 @@
 package utilities;
 
-import psidev.psi.mi.jami.model.Alias;
-import psidev.psi.mi.jami.model.CvTerm;
-import psidev.psi.mi.jami.model.Organism;
-import psidev.psi.mi.jami.model.Xref;
+import psidev.psi.mi.jami.model.*;
+import uk.ac.ebi.intact.graphdb.model.nodes.GraphFeature;
 import uk.ac.ebi.intact.search.interactions.utils.as.converters.TextFieldConverter;
 import uk.ac.ebi.intact.search.interactions.utils.as.converters.XrefFieldConverter;
 
@@ -78,11 +76,32 @@ public class SolrASDocumentConverterUtils {
             } else {
                 cvIdentifier.addAll((TextFieldConverter.indexFieldValues("unknown", null, cv.getShortName())));
             }
+            if (cv.getFullName() != null) {
+                cvIdentifier.addAll((TextFieldConverter.indexFieldValues(null, null, cv.getFullName())));
+            }
             return cvIdentifier;
         } else {
             return null;
         }
 
+
+    }
+
+    public static Set<String> cvTermsToASSolrDocument(Collection<? extends CvTerm> cvTerms) {
+        Set<String> terms = new HashSet<>();
+        for (CvTerm cvTerm : cvTerms) {
+            terms.addAll(cvToASSolrDocument(cvTerm));
+        }
+        return terms;
+
+    }
+
+    public static Set<String> featuresTypeToASSolrDocument(Collection<? extends GraphFeature> featureEvidences) {
+        Set<String> featureTypes = new HashSet<>();
+        for (Feature featureEvidence : featureEvidences) {
+            featureTypes.addAll(cvToASSolrDocument(featureEvidence.getType()));
+        }
+        return featureTypes;
 
     }
 
