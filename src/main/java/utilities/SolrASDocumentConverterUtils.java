@@ -1,6 +1,7 @@
 package utilities;
 
 import psidev.psi.mi.jami.model.*;
+import psidev.psi.mi.jami.utils.XrefUtils;
 import uk.ac.ebi.intact.graphdb.model.nodes.GraphFeature;
 import uk.ac.ebi.intact.search.interactions.utils.as.converters.TextFieldConverter;
 import uk.ac.ebi.intact.search.interactions.utils.as.converters.XrefFieldConverter;
@@ -11,12 +12,20 @@ import java.util.Set;
 
 public class SolrASDocumentConverterUtils {
 
-    public static Set<String> xrefsToASSolrDocument(Collection<? extends Xref> xrefs) {
-        Set<String> searchInteractorXrefs = new HashSet<>();
-        for (Xref xref : xrefs) {
-            searchInteractorXrefs.addAll(xrefToASSolrDocument(xref));
+    public static Set<String> xrefDBAndIdToASSolrDocument(String db, String id) {
+        String shortName = "unknown";
+        if (db != null) {
+            shortName = db;
         }
-        return searchInteractorXrefs;
+        return XrefFieldConverter.indexFieldValues(shortName, id);
+    }
+
+    public static Set<String> xrefsToASSolrDocument(Collection<? extends Xref> xrefs) {
+        Set<String> searchXrefs = new HashSet<>();
+        for (Xref xref : xrefs) {
+            searchXrefs.addAll(xrefToASSolrDocument(xref));
+        }
+        return searchXrefs;
     }
 
     public static Set<String> xrefToASSolrDocument(Xref xref) {
@@ -27,12 +36,20 @@ public class SolrASDocumentConverterUtils {
         return XrefFieldConverter.indexFieldValues(shortName, xref.getId());
     }
 
-    public static Set<String> aliasesWithTypesToASSolrDocument(Collection<? extends Alias> aliases) {
-        Set<String> searchInteractorAliases = new HashSet<>();
-        for (Alias alias : aliases) {
-            searchInteractorAliases.addAll((XrefFieldConverter.indexFieldValues(null, alias.getName())));
+    public static Set<String> primaryXrefsToASSolrDocument(Collection<? extends Xref> xrefs) {
+        Set<String> primaryXrefs = new HashSet<>();
+        if (xrefs != null) {
+            primaryXrefs.addAll(xrefsToASSolrDocument(XrefUtils.collectAllXrefsHavingQualifier(xrefs, Xref.PRIMARY_MI, Xref.PRIMARY)));
         }
-        return searchInteractorAliases;
+        return primaryXrefs;
+    }
+
+    public static Set<String> aliasesWithTypesToASSolrDocument(Collection<? extends Alias> aliases) {
+        Set<String> searchAliases = new HashSet<>();
+        for (Alias alias : aliases) {
+            searchAliases.addAll((XrefFieldConverter.indexFieldValues(null, alias.getName())));
+        }
+        return searchAliases;
     }
 
     public static Set<String> organismToASSolrDocument(Organism organism) {
