@@ -14,13 +14,17 @@ public class SolrASDocumentConverterUtils {
     public static Set<String> xrefsToASSolrDocument(Collection<? extends Xref> xrefs) {
         Set<String> searchInteractorXrefs = new HashSet<>();
         for (Xref xref : xrefs) {
-            searchInteractorXrefs.addAll((XrefFieldConverter.indexFieldValues(xref.getDatabase().getShortName(), xref.getId())));
+            searchInteractorXrefs.addAll(xrefToASSolrDocument(xref));
         }
         return searchInteractorXrefs;
     }
 
     public static Set<String> xrefToASSolrDocument(Xref xref) {
-        return XrefFieldConverter.indexFieldValues(xref.getDatabase().getShortName(), xref.getId());
+        String shortName = "unknown";
+        if (xref.getDatabase() != null) {
+            shortName = xref.getDatabase().getShortName();
+        }
+        return XrefFieldConverter.indexFieldValues(shortName, xref.getId());
     }
 
     public static Set<String> aliasesWithTypesToASSolrDocument(Collection<? extends Alias> aliases) {

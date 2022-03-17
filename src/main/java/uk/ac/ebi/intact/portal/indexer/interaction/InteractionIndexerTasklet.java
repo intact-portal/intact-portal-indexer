@@ -76,6 +76,9 @@ public class InteractionIndexerTasklet implements Tasklet {
         List<GraphAnnotation> graphAnnotations = new ArrayList<GraphAnnotation>();
         List<GraphAlias> graphAliasesA = new ArrayList<GraphAlias>();
         List<GraphAlias> graphAliasesB = new ArrayList<GraphAlias>();
+        List<GraphXref> graphXrefsA = new ArrayList<GraphXref>();
+        List<GraphXref> graphXrefsB = new ArrayList<GraphXref>();
+
         Integer featureCount = 0;
 
         if (interactionEvidence instanceof GraphBinaryInteractionEvidence) {
@@ -107,6 +110,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setTypeMIAStyled(typeMIA + "__" + typeAShortName + "__" + styleService.getInteractorShape(typeMIA));
 
                 searchInteraction.setXrefsA((graphInteractorA.getXrefs() != null && graphInteractorA.getXrefs().size() > 0) ? xrefsToSolrDocument(graphInteractorA.getXrefs()) : null);
+                graphXrefsA.addAll(graphInteractorA.getXrefs());
                 searchInteraction.setAcA(graphInteractorA.getAc());
                 searchInteraction.setUniqueIdA((graphInteractorA.getInteractorType() != null
                         && typeAShortName != null
@@ -144,6 +148,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setTypeMIBStyled(typeMIB + "__" + typeBShortName + "__" + styleService.getInteractorShape(typeMIB));
 
                 searchInteraction.setXrefsB((graphInteractorB.getXrefs() != null && graphInteractorB.getXrefs().size() > 0) ? xrefsToSolrDocument(graphInteractorB.getXrefs()) : null);
+                graphXrefsB.addAll(graphInteractorB.getXrefs());
                 searchInteraction.setAcB(graphInteractorB.getAc());
                 searchInteraction.setUniqueIdB((graphInteractorB.getInteractorType() != null
                         && graphInteractorB.getInteractorType().getShortName() != null
@@ -174,7 +179,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setAsIdentificationMethodsA((graphParticipantEvidenceA.getIdentificationMethods() != null && !graphParticipantEvidenceA.getIdentificationMethods().isEmpty()) ? cvTermsToASSolrDocument(graphParticipantEvidenceA.getIdentificationMethods()) : null);
                 searchInteraction.setIdentificationMethodMIIdentifiersA((graphParticipantEvidenceA.getIdentificationMethods() != null && !graphParticipantEvidenceA.getIdentificationMethods().isEmpty()) ? cvTermsMIToSolrDocument(graphParticipantEvidenceA.getIdentificationMethods()) : null);
                 graphAliasesA.addAll(graphParticipantEvidenceA.getAliases());
-
+                graphXrefsA.addAll(graphParticipantEvidenceA.getXrefs());
                 // featureDetails
                 List<GraphFeature> ographFeaturesA = (List<GraphFeature>) graphParticipantEvidenceA.getFeatures();
                 featureCount += (ographFeaturesA != null ? ographFeaturesA.size() : 0);
@@ -200,7 +205,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setAsIdentificationMethodsB((graphParticipantEvidenceB.getIdentificationMethods() != null && !graphParticipantEvidenceB.getIdentificationMethods().isEmpty()) ? cvTermsToASSolrDocument(graphParticipantEvidenceB.getIdentificationMethods()) : null);
                 searchInteraction.setIdentificationMethodMIIdentifiersB((graphParticipantEvidenceB.getIdentificationMethods() != null && !graphParticipantEvidenceB.getIdentificationMethods().isEmpty()) ? cvTermsMIToSolrDocument(graphParticipantEvidenceB.getIdentificationMethods()) : null);
                 graphAliasesB.addAll(graphParticipantEvidenceB.getAliases());
-
+                graphXrefsB.addAll(graphParticipantEvidenceB.getXrefs());
                 // featureDetails
                 List<GraphFeature> ographFeaturesB = (List<GraphFeature>) graphParticipantEvidenceB.getFeatures();
                 featureCount += (ographFeaturesB != null ? ographFeaturesB.size() : 0);
@@ -217,6 +222,8 @@ public class InteractionIndexerTasklet implements Tasklet {
             searchInteraction.setAliasesB(!graphAliasesB.isEmpty() ? aliasesWithTypesToSolrDocument(graphAliasesB) : null);
             searchInteraction.setAsAliasA(!graphAliasesA.isEmpty() ? aliasesWithTypesToASSolrDocument(graphAliasesA) : null);
             searchInteraction.setAsAliasB(!graphAliasesB.isEmpty() ? aliasesWithTypesToASSolrDocument(graphAliasesB) : null);
+            searchInteraction.setAsXrefsA(!graphXrefsA.isEmpty() ? xrefsToASSolrDocument(graphXrefsA) : null);
+            searchInteraction.setAsXrefsB(!graphXrefsB.isEmpty() ? xrefsToASSolrDocument(graphXrefsB) : null);
             //experiment details
             GraphExperiment experiment = (GraphExperiment) graphBinaryInteractionEvidence.getExperiment();
 
