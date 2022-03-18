@@ -293,6 +293,7 @@ public class InteractionIndexerTasklet implements Tasklet {
             graphAnnotations.addAll(graphBinaryInteractionEvidence.getAnnotations());
             searchInteraction.setAnnotations(!graphBinaryInteractionEvidence.getAnnotations().isEmpty() ? annotationsToSolrDocument(graphBinaryInteractionEvidence.getAnnotations()) : null);
             searchInteraction.setExpansionMethod((graphBinaryInteractionEvidence.getComplexExpansion() != null) ? graphBinaryInteractionEvidence.getComplexExpansion().getShortName() : null);
+            searchInteraction.setAsExpansionMethod(cvToASSolrDocument(graphBinaryInteractionEvidence.getComplexExpansion()));
             searchInteraction.setXrefs((graphBinaryInteractionEvidence.getXrefs() != null && !graphBinaryInteractionEvidence.getXrefs().isEmpty()) ? xrefsToSolrDocument(graphBinaryInteractionEvidence.getXrefs()) : null);
             searchInteraction.setAsInteractionXrefs((graphBinaryInteractionEvidence.getXrefs() != null && !graphBinaryInteractionEvidence.getXrefs().isEmpty()) ? xrefsToASSolrDocument(graphBinaryInteractionEvidence.getXrefs()) : null);
             searchInteraction.setParameters((graphBinaryInteractionEvidence.getParameters() != null && !graphBinaryInteractionEvidence.getParameters().isEmpty()) ? parametersToSolrDocument(graphBinaryInteractionEvidence.getParameters()) : null);
@@ -334,6 +335,7 @@ public class InteractionIndexerTasklet implements Tasklet {
 
 //                    searchInteraction.setPublicationId((publication.getAuthors() != null) ? publication.getPubmedId() : "");
                     searchInteraction.setSourceDatabase((publication.getSource() != null) ? publication.getSource().getShortName() : "");
+                    searchInteraction.setAsSource(cvToASSolrDocument(publication.getSource()));
                     searchInteraction.setReleaseDate((publication.getReleasedDate() != null) ? publication.getReleasedDate() : null);
                     searchInteraction.setPublicationIdentifiers((publication.getIdentifiers() != null && !publication.getIdentifiers().isEmpty()) ? xrefsToSolrDocument(publication.getIdentifiers()) : null);
                     HashSet<String> publicationIds = new HashSet<>();
