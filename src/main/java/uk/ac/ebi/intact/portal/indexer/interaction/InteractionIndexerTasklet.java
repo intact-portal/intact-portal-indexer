@@ -22,6 +22,7 @@ import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
 import uk.ac.ebi.intact.search.interactions.service.InteractionIndexService;
 import uk.ac.ebi.intact.search.interactions.utils.DocumentType;
+import uk.ac.ebi.intact.search.interactions.utils.as.converters.DateFieldConverter;
 import uk.ac.ebi.intact.style.service.StyleService;
 import utilities.CommonUtility;
 import utilities.Constants;
@@ -257,6 +258,7 @@ public class InteractionIndexerTasklet implements Tasklet {
             if (graphClusteredInteraction != null) {
                 intactConfidence.add("intact-miscore:" + graphClusteredInteraction.getMiscore());
                 searchInteraction.setIntactMiscore(graphClusteredInteraction.getMiscore());
+                searchInteraction.setAsIntactMiscore(graphClusteredInteraction.getMiscore());
             }
             searchInteraction.setIdentifiers((graphBinaryInteractionEvidence.getIdentifiers() != null && !graphBinaryInteractionEvidence.getIdentifiers().isEmpty()) ? xrefsToSolrDocument(graphBinaryInteractionEvidence.getIdentifiers()) : null);
             Set<String> interactionIds = new HashSet<>();
@@ -300,6 +302,7 @@ public class InteractionIndexerTasklet implements Tasklet {
             searchInteraction.setParameterTypes((graphBinaryInteractionEvidence.getParameters() != null && !graphBinaryInteractionEvidence.getParameters().isEmpty()) ? parameterTypeToSolrDocument(graphBinaryInteractionEvidence.getParameters()) : null);
             searchInteraction.setCreationDate(graphBinaryInteractionEvidence.getCreatedDate());
             searchInteraction.setUpdationDate(graphBinaryInteractionEvidence.getUpdatedDate());
+            searchInteraction.setAsUpdationDate(DateFieldConverter.indexFieldValues(graphBinaryInteractionEvidence.getUpdatedDate()));
             searchInteraction.setChecksums((graphBinaryInteractionEvidence.getChecksums() != null && !graphBinaryInteractionEvidence.getChecksums().isEmpty()) ? checksumsToSolrDocument(graphBinaryInteractionEvidence.getChecksums()) : null);
             searchInteraction.setNegative(graphBinaryInteractionEvidence.isNegative());
 
@@ -337,6 +340,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                     searchInteraction.setSourceDatabase((publication.getSource() != null) ? publication.getSource().getShortName() : "");
                     searchInteraction.setAsSource(cvToASSolrDocument(publication.getSource()));
                     searchInteraction.setReleaseDate((publication.getReleasedDate() != null) ? publication.getReleasedDate() : null);
+                    searchInteraction.setAsReleaseDate(DateFieldConverter.indexFieldValues(publication.getReleasedDate()));
                     searchInteraction.setPublicationIdentifiers((publication.getIdentifiers() != null && !publication.getIdentifiers().isEmpty()) ? xrefsToSolrDocument(publication.getIdentifiers()) : null);
                     HashSet<String> publicationIds = new HashSet<>();
                     if (publication.getIdentifiers() != null && !publication.getIdentifiers().isEmpty()) {
