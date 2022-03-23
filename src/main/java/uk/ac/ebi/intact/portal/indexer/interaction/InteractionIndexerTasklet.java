@@ -375,9 +375,8 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setPublicationAnnotations(!publication.getAnnotations().isEmpty() ? annotationValuesOnlyToSolrDocument(publication.getAnnotations()) : null);
             }
             searchInteraction.setAllAnnotations(!graphAnnotations.isEmpty() ? annotationsToSolrDocument(graphAnnotations) : null);
-
+            searchInteraction.setAsAnnotations(!graphAnnotations.isEmpty() ? annotationsToASSolrDocument(graphAnnotations) : null);
         }
-
 
         return searchInteraction;
     }

@@ -126,4 +126,14 @@ public class SolrASDocumentConverterUtils {
 
     }
 
+    public static Set<String> annotationsToASSolrDocument(Collection<? extends Annotation> annotations) {
+
+        Set<String> annotationSet = new HashSet<>();
+        for (Annotation annotation : annotations) {
+            annotationSet.addAll(XrefFieldConverter.indexFieldValues(annotation.getTopic().getShortName(), annotation.getValue()));
+        }
+        return annotationSet;
+
+    }
+
 }
