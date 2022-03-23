@@ -123,6 +123,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setMoleculeA(graphInteractorA.getPreferredName());
                 searchInteraction.setIntactNameA(graphInteractorA.getShortName());
                 searchInteraction.setDescriptionA(graphInteractorA.getFullName());
+                searchInteraction.setAsGeneNameA(graphInteractorA instanceof GraphProtein ? ((GraphProtein) graphInteractorA).getGeneName() : null);
 
                 // Indexing nested interactor documents
                 interactorToSolrDocument(searchChildInteractors, graphInteractorA, organismA, styleService);
@@ -162,7 +163,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setMoleculeB(graphInteractorB.getPreferredName());
                 searchInteraction.setIntactNameB(graphInteractorB.getShortName());
                 searchInteraction.setDescriptionB(graphInteractorB.getFullName());
-
+                searchInteraction.setAsGeneNameB(graphInteractorB instanceof GraphProtein ? ((GraphProtein) graphInteractorB).getGeneName() : null);
                 // Indexing nested interactor documents
                 interactorToSolrDocument(searchChildInteractors, graphInteractorB, organismB, styleService);
             }
