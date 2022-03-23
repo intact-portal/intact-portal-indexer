@@ -82,6 +82,7 @@ public class InteractionIndexerTasklet implements Tasklet {
         List<GraphXref> graphXrefsB = new ArrayList<GraphXref>();
         List<GraphCvTerm> graphIdentificationMethodsA = new ArrayList<GraphCvTerm>();
         List<GraphCvTerm> graphIdentificationMethodsB = new ArrayList<GraphCvTerm>();
+        boolean stoichiometry = false;
 
         Integer featureCount = 0;
 
@@ -179,6 +180,9 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setExperimentalRoleMIIdentifierA(graphParticipantEvidenceA.getExperimentalRole().getMIIdentifier());
                 searchInteraction.setExperimentalPreparationsA((graphParticipantEvidenceA.getExperimentalPreparations() != null && !graphParticipantEvidenceA.getExperimentalPreparations().isEmpty()) ? cvTermsToSolrDocument(graphParticipantEvidenceA.getExperimentalPreparations()) : null);
                 searchInteraction.setStoichiometryA(graphParticipantEvidenceA.getStoichiometry() != null ? graphParticipantEvidenceA.getStoichiometry().getMinValue() + "-" + graphParticipantEvidenceA.getStoichiometry().getMaxValue() : null);
+                if (graphParticipantEvidenceA.getStoichiometry() != null && (graphParticipantEvidenceA.getStoichiometry().getMinValue() > 0 || graphParticipantEvidenceA.getStoichiometry().getMaxValue() > 0)) {
+                    stoichiometry = true;
+                }
                 searchInteraction.setIdentificationMethodsA((graphParticipantEvidenceA.getIdentificationMethods() != null && !graphParticipantEvidenceA.getIdentificationMethods().isEmpty()) ? cvTermsToSolrDocument(graphParticipantEvidenceA.getIdentificationMethods()) : null);
                 graphIdentificationMethodsA.addAll(graphParticipantEvidenceA.getIdentificationMethods());
                 searchInteraction.setIdentificationMethodMIIdentifiersA((graphParticipantEvidenceA.getIdentificationMethods() != null && !graphParticipantEvidenceA.getIdentificationMethods().isEmpty()) ? cvTermsMIToSolrDocument(graphParticipantEvidenceA.getIdentificationMethods()) : null);
@@ -193,6 +197,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setAsFeatureTypesA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? featuresTypeToASSolrDocument(ographFeaturesA) : null);
                 searchInteraction.setFeatureRangesA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? featuresRangesToSolrDocument(ographFeaturesA) : null);
                 searchInteraction.setMutationA(affectedByMutationToSolrDocument(styleService, searchInteraction, ographFeaturesA));
+                searchInteraction.setAsMutationA(searchInteraction.isMutationA());
             }
 
             if (graphBinaryInteractionEvidence.getParticipantB() != null) {
@@ -205,6 +210,9 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setExperimentalRoleMIIdentifierB(graphParticipantEvidenceB.getExperimentalRole().getMIIdentifier());
                 searchInteraction.setExperimentalPreparationsB((graphParticipantEvidenceB.getExperimentalPreparations() != null && !graphParticipantEvidenceB.getExperimentalPreparations().isEmpty()) ? cvTermsToSolrDocument(graphParticipantEvidenceB.getExperimentalPreparations()) : null);
                 searchInteraction.setStoichiometryB(graphParticipantEvidenceB.getStoichiometry() != null ? graphParticipantEvidenceB.getStoichiometry().getMinValue() + "-" + graphParticipantEvidenceB.getStoichiometry().getMaxValue() : null);
+                if (graphParticipantEvidenceB.getStoichiometry() != null && (graphParticipantEvidenceB.getStoichiometry().getMinValue() > 0 || graphParticipantEvidenceB.getStoichiometry().getMaxValue() > 0)) {
+                    stoichiometry = true;
+                }
                 searchInteraction.setIdentificationMethodsB((graphParticipantEvidenceB.getIdentificationMethods() != null && !graphParticipantEvidenceB.getIdentificationMethods().isEmpty()) ? cvTermsToSolrDocument(graphParticipantEvidenceB.getIdentificationMethods()) : null);
                 graphIdentificationMethodsB.addAll(graphParticipantEvidenceB.getIdentificationMethods());
                 searchInteraction.setIdentificationMethodMIIdentifiersB((graphParticipantEvidenceB.getIdentificationMethods() != null && !graphParticipantEvidenceB.getIdentificationMethods().isEmpty()) ? cvTermsMIToSolrDocument(graphParticipantEvidenceB.getIdentificationMethods()) : null);
@@ -219,7 +227,9 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setAsFeatureTypesB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? featuresTypeToASSolrDocument(ographFeaturesB) : null);
                 searchInteraction.setFeatureRangesB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? featuresRangesToSolrDocument(ographFeaturesB) : null);
                 searchInteraction.setMutationB(affectedByMutationToSolrDocument(styleService, searchInteraction, ographFeaturesB));
+                searchInteraction.setAsMutationB(searchInteraction.isMutationB());
             }
+
 
             searchInteraction.setFeatureCount(featureCount);
             searchInteraction.setAliasesA(!graphAliasesA.isEmpty() ? aliasesWithTypesToSolrDocument(graphAliasesA) : null);
@@ -228,6 +238,7 @@ public class InteractionIndexerTasklet implements Tasklet {
             searchInteraction.setAsAliasB(!graphAliasesB.isEmpty() ? aliasesWithTypesToASSolrDocument(graphAliasesB) : null);
             searchInteraction.setAsXrefsA(!graphXrefsA.isEmpty() ? xrefsToASSolrDocument(graphXrefsA) : null);
             searchInteraction.setAsXrefsB(!graphXrefsB.isEmpty() ? xrefsToASSolrDocument(graphXrefsB) : null);
+            searchInteraction.setAsStoichiometry(stoichiometry);
             //experiment details
             GraphExperiment experiment = (GraphExperiment) graphBinaryInteractionEvidence.getExperiment();
 
@@ -299,12 +310,14 @@ public class InteractionIndexerTasklet implements Tasklet {
             searchInteraction.setXrefs((graphBinaryInteractionEvidence.getXrefs() != null && !graphBinaryInteractionEvidence.getXrefs().isEmpty()) ? xrefsToSolrDocument(graphBinaryInteractionEvidence.getXrefs()) : null);
             searchInteraction.setAsInteractionXrefs((graphBinaryInteractionEvidence.getXrefs() != null && !graphBinaryInteractionEvidence.getXrefs().isEmpty()) ? xrefsToASSolrDocument(graphBinaryInteractionEvidence.getXrefs()) : null);
             searchInteraction.setParameters((graphBinaryInteractionEvidence.getParameters() != null && !graphBinaryInteractionEvidence.getParameters().isEmpty()) ? parametersToSolrDocument(graphBinaryInteractionEvidence.getParameters()) : null);
+            searchInteraction.setAsParam((graphBinaryInteractionEvidence.getParameters() != null && !graphBinaryInteractionEvidence.getParameters().isEmpty()) ? true : false);
             searchInteraction.setParameterTypes((graphBinaryInteractionEvidence.getParameters() != null && !graphBinaryInteractionEvidence.getParameters().isEmpty()) ? parameterTypeToSolrDocument(graphBinaryInteractionEvidence.getParameters()) : null);
             searchInteraction.setCreationDate(graphBinaryInteractionEvidence.getCreatedDate());
             searchInteraction.setUpdationDate(graphBinaryInteractionEvidence.getUpdatedDate());
             searchInteraction.setAsUpdationDate(DateFieldConverter.indexFieldValues(graphBinaryInteractionEvidence.getUpdatedDate()));
             searchInteraction.setChecksums((graphBinaryInteractionEvidence.getChecksums() != null && !graphBinaryInteractionEvidence.getChecksums().isEmpty()) ? checksumsToSolrDocument(graphBinaryInteractionEvidence.getChecksums()) : null);
             searchInteraction.setNegative(graphBinaryInteractionEvidence.isNegative());
+            searchInteraction.setAsNegative(graphBinaryInteractionEvidence.isNegative());
 
             if (searchInteraction.getTaxIdA() != null && searchInteraction.getTaxIdA().equals(searchInteraction.getTaxIdB())) {
                 searchInteraction.setIntraTaxId(searchInteraction.getTaxIdA());
@@ -373,6 +386,7 @@ public class InteractionIndexerTasklet implements Tasklet {
         boolean affectedByMutation = (ographFeatures != null && !ographFeatures.isEmpty()) && doesAnyFeatureHaveMutation(ographFeatures);
         if (!searchInteraction.isAffectedByMutation()) {
             searchInteraction.setAffectedByMutation(affectedByMutation);
+            searchInteraction.setAsAffectedByMutation(affectedByMutation);
             searchInteraction.setAffectedByMutationStyled("none__" + affectedByMutation + "__" + "#" + Integer.toHexString(styleService.getMutationInteractionColor(affectedByMutation).getRGB()).substring(2));
         }
         return affectedByMutation;
