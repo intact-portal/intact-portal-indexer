@@ -38,7 +38,7 @@ public class InteractorIndexerTasklet implements Tasklet {
     private static final int PAGE_SIZE = 500;
     private static final int MAX_PING_TIME = 1000;
     private static final int MAX_ATTEMPTS = 5;
-    private static final int DEPTH = 1;
+    private static final int DEPTH = 0;
     private int attempts = 0;
     private boolean simulation = false;
 
