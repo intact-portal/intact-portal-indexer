@@ -193,19 +193,19 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setExperimentalRoleMIIdentifierA(graphParticipantEvidenceA.getExperimentalRole().getMIIdentifier());
                 searchInteraction.setExperimentalPreparationsA((graphParticipantEvidenceA.getExperimentalPreparations() != null && !graphParticipantEvidenceA.getExperimentalPreparations().isEmpty()) ? SolrDocumentConverterUtils.cvTermsToSolrDocument(graphParticipantEvidenceA.getExperimentalPreparations()) : null);
                 searchInteraction.setStoichiometryA(graphParticipantEvidenceA.getStoichiometry() != null ? graphParticipantEvidenceA.getStoichiometry().getMinValue() + "-" + graphParticipantEvidenceA.getStoichiometry().getMaxValue() : null);
-                searchInteraction.setIdentificationMethodA((graphParticipantEvidenceA.getIdentificationMethods() != null && !graphParticipantEvidenceA.getIdentificationMethods().isEmpty()) ? SolrDocumentConverterUtils.cvTermsToSolrDocument(graphParticipantEvidenceA.getIdentificationMethods()) : null);
-                searchInteraction.setIdentificationMethodMIIdentifierA((graphParticipantEvidenceA.getIdentificationMethods() != null && !graphParticipantEvidenceA.getIdentificationMethods().isEmpty()) ? SolrDocumentConverterUtils.cvTermsMIToSolrDocument(graphParticipantEvidenceA.getIdentificationMethods()) : null);
+                searchInteraction.setIdentificationMethodsA((graphParticipantEvidenceA.getIdentificationMethods() != null && !graphParticipantEvidenceA.getIdentificationMethods().isEmpty()) ? SolrDocumentConverterUtils.cvTermsToSolrDocument(graphParticipantEvidenceA.getIdentificationMethods()) : null);
+                searchInteraction.setIdentificationMethodMIIdentifiersA((graphParticipantEvidenceA.getIdentificationMethods() != null && !graphParticipantEvidenceA.getIdentificationMethods().isEmpty()) ? SolrDocumentConverterUtils.cvTermsMIToSolrDocument(graphParticipantEvidenceA.getIdentificationMethods()) : null);
                 graphAliasesA.addAll(graphParticipantEvidenceA.getAliases());
 
                 // featureDetails
                 List<GraphFeature> ographFeaturesA = (List<GraphFeature>) graphParticipantEvidenceA.getFeatures();
                 featureCount += (ographFeaturesA != null ? ographFeaturesA.size() : 0);
-                searchInteraction.setFeatureA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? SolrDocumentConverterUtils.featuresToSolrDocument(ographFeaturesA) : null);
-                searchInteraction.setFeatureShortLabelA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? SolrDocumentConverterUtils.featuresShortlabelToSolrDocument(ographFeaturesA) : null);
+                searchInteraction.setFeaturesA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? SolrDocumentConverterUtils.featuresToSolrDocument(ographFeaturesA) : null);
+                searchInteraction.setFeatureShortLabelsA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? SolrDocumentConverterUtils.featuresShortlabelToSolrDocument(ographFeaturesA) : null);
                 searchInteraction.setFeatureTypesA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? SolrDocumentConverterUtils.featuresTypeToSolrDocument(ographFeaturesA) : null);
                 searchInteraction.setFeatureRangesA((ographFeaturesA != null && !ographFeaturesA.isEmpty()) ? SolrDocumentConverterUtils.featuresRangesToSolrDocument(ographFeaturesA) : null);
                 boolean mutation = (ographFeaturesA != null && !ographFeaturesA.isEmpty()) && SolrDocumentConverterUtils.doesAnyFeatureHaveMutation(ographFeaturesA);
-                searchInteraction.setDisruptedByMutation(mutation);
+                searchInteraction.setAffectedByMutation(mutation);
                 searchInteraction.setMutationA(mutation);
             }
 
@@ -218,20 +218,20 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setExperimentalRoleMIIdentifierB(graphParticipantEvidenceB.getExperimentalRole().getMIIdentifier());
                 searchInteraction.setExperimentalPreparationsB((graphParticipantEvidenceB.getExperimentalPreparations() != null && !graphParticipantEvidenceB.getExperimentalPreparations().isEmpty()) ? SolrDocumentConverterUtils.cvTermsToSolrDocument(graphParticipantEvidenceB.getExperimentalPreparations()) : null);
                 searchInteraction.setStoichiometryB(graphParticipantEvidenceB.getStoichiometry() != null ? graphParticipantEvidenceB.getStoichiometry().getMinValue() + "-" + graphParticipantEvidenceB.getStoichiometry().getMaxValue() : null);
-                searchInteraction.setIdentificationMethodB((graphParticipantEvidenceB.getIdentificationMethods() != null && !graphParticipantEvidenceB.getIdentificationMethods().isEmpty()) ? SolrDocumentConverterUtils.cvTermsToSolrDocument(graphParticipantEvidenceB.getIdentificationMethods()) : null);
-                searchInteraction.setIdentificationMethodMIIdentifierB((graphParticipantEvidenceB.getIdentificationMethods() != null && !graphParticipantEvidenceB.getIdentificationMethods().isEmpty()) ? SolrDocumentConverterUtils.cvTermsMIToSolrDocument(graphParticipantEvidenceB.getIdentificationMethods()) : null);
+                searchInteraction.setIdentificationMethodsB((graphParticipantEvidenceB.getIdentificationMethods() != null && !graphParticipantEvidenceB.getIdentificationMethods().isEmpty()) ? SolrDocumentConverterUtils.cvTermsToSolrDocument(graphParticipantEvidenceB.getIdentificationMethods()) : null);
+                searchInteraction.setIdentificationMethodMIIdentifiersB((graphParticipantEvidenceB.getIdentificationMethods() != null && !graphParticipantEvidenceB.getIdentificationMethods().isEmpty()) ? SolrDocumentConverterUtils.cvTermsMIToSolrDocument(graphParticipantEvidenceB.getIdentificationMethods()) : null);
                 graphAliasesB.addAll(graphParticipantEvidenceB.getAliases());
 
                 // featureDetails
                 List<GraphFeature> ographFeaturesB = (List<GraphFeature>) graphParticipantEvidenceB.getFeatures();
                 featureCount += (ographFeaturesB != null ? ographFeaturesB.size() : 0);
-                searchInteraction.setFeatureB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? SolrDocumentConverterUtils.featuresToSolrDocument(ographFeaturesB) : null);
-                searchInteraction.setFeatureShortLabelB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? SolrDocumentConverterUtils.featuresShortlabelToSolrDocument(ographFeaturesB) : null);
+                searchInteraction.setFeaturesB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? SolrDocumentConverterUtils.featuresToSolrDocument(ographFeaturesB) : null);
+                searchInteraction.setFeatureShortLabelsB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? SolrDocumentConverterUtils.featuresShortlabelToSolrDocument(ographFeaturesB) : null);
                 searchInteraction.setFeatureTypesB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? SolrDocumentConverterUtils.featuresTypeToSolrDocument(ographFeaturesB) : null);
                 searchInteraction.setFeatureRangesB((ographFeaturesB != null && !ographFeaturesB.isEmpty()) ? SolrDocumentConverterUtils.featuresRangesToSolrDocument(ographFeaturesB) : null);
                 boolean mutation = (ographFeaturesB != null && !ographFeaturesB.isEmpty()) && SolrDocumentConverterUtils.doesAnyFeatureHaveMutation(ographFeaturesB);
-                if (!searchInteraction.isDisruptedByMutation()) {
-                    searchInteraction.setDisruptedByMutation(mutation);
+                if (!searchInteraction.isAffectedByMutation()) {
+                    searchInteraction.setAffectedByMutation(mutation);
                 }
                 searchInteraction.setMutationB(mutation);
 
