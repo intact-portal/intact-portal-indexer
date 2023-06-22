@@ -25,6 +25,7 @@ import uk.ac.ebi.intact.style.service.StyleService;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.*;
 
 import static utilities.SolrDocumentConverterUtils.*;
@@ -173,8 +174,7 @@ public class InteractorIndexerTasklet implements Tasklet {
 //                    solrServerCheck();
 
                 log.info("Saving " + searchInteractors.size() + " interactors");
-                interactorIndexService.saveAll(searchInteractors);
-                solrClient.commit();
+                interactorIndexService.saveAll(searchInteractors, Duration.ofSeconds(3));
                 log.info("Index save took [ms] : " + (System.currentTimeMillis() - indexStart));
             }
 
