@@ -30,7 +30,6 @@ import utilities.SolrDocumentConverterUtils;
 
 import javax.annotation.Resource;
 import java.io.IOException;
-import java.time.Duration;
 import java.util.*;
 
 import static utilities.SolrASDocumentConverterUtils.*;
@@ -485,7 +484,7 @@ public class InteractionIndexerTasklet implements Tasklet {
 //                    solrServerCheck();
 
                 log.info("Saving " + interactions.size() + " interactions");
-                interactionIndexService.save(interactions, Duration.ofSeconds(3));
+                interactionIndexService.save(interactions);
                 log.info("Index save took [ms] : " + (System.currentTimeMillis() - indexStart));
             }
 
