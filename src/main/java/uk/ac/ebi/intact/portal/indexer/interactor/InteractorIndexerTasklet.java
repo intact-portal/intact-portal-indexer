@@ -25,7 +25,6 @@ import uk.ac.ebi.intact.style.service.StyleService;
 
 import javax.annotation.Resource;
 import java.io.IOException;
-import java.time.Duration;
 import java.util.*;
 
 import static utilities.SolrDocumentConverterUtils.*;
@@ -35,7 +34,7 @@ public class InteractorIndexerTasklet implements Tasklet {
 
     private static final Log log = LogFactory.getLog(InteractorIndexerTasklet.class);
 
-    private static final int PAGE_SIZE = 200;
+    private static final int PAGE_SIZE = 500;
     private static final int MAX_PING_TIME = 1000;
     private static final int MAX_ATTEMPTS = 5;
     private static final int DEPTH = 0;
@@ -174,7 +173,7 @@ public class InteractorIndexerTasklet implements Tasklet {
 //                    solrServerCheck();
 
                 log.info("Saving " + searchInteractors.size() + " interactors");
-                interactorIndexService.saveAll(searchInteractors, Duration.ofSeconds(5));
+                interactorIndexService.saveAll(searchInteractors);
                 log.info("Index save took [ms] : " + (System.currentTimeMillis() - indexStart));
             }
 
