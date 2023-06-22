@@ -41,7 +41,7 @@ public class InteractionIndexerTasklet implements Tasklet {
 
     private static final Log log = LogFactory.getLog(InteractionIndexerTasklet.class);
 
-    private static final int PAGE_SIZE = 500;
+    private static final int PAGE_SIZE = 100;
     private static final int MAX_PING_TIME = 1000;
     private static final int MAX_ATTEMPTS = 5;
     private static final int DEPTH = 0;
@@ -485,6 +485,7 @@ public class InteractionIndexerTasklet implements Tasklet {
 
                 log.info("Saving " + interactions.size() + " interactions");
                 interactionIndexService.save(interactions);
+                solrClient.commit();
                 log.info("Index save took [ms] : " + (System.currentTimeMillis() - indexStart));
             }
 
