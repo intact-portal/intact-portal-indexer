@@ -178,6 +178,8 @@ public class InteractorIndexerTasklet implements Tasklet {
                 log.info("Index save took [ms] : " + (System.currentTimeMillis() - indexStart));
             }
 
+            log.info("Processed page " + pageNumber + " out of " + graphInteractorPage.getTotalPages());
+
             // increase the page number
             pageNumber++;
         } while (graphInteractorPage.hasNext());
