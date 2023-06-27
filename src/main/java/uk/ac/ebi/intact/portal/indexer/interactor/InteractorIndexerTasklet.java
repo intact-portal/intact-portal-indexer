@@ -174,7 +174,7 @@ public class InteractorIndexerTasklet implements Tasklet {
 //                    solrServerCheck();
 
                 log.info("Saving " + searchInteractors.size() + " interactors");
-                interactorIndexService.saveAll(searchInteractors);
+                interactorIndexService.saveAll(searchInteractors, Duration.ofMinutes(5));
                 log.info("Index save took [ms] : " + (System.currentTimeMillis() - indexStart));
             }
 
