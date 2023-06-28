@@ -38,7 +38,6 @@ public class InteractorIndexerTasklet implements Tasklet {
     private static final int PAGE_SIZE = 500;
     private static final int MAX_PING_TIME = 1000;
     private static final int MAX_ATTEMPTS = 5;
-    private static final int DEPTH = 0;
     private int attempts = 0;
     private boolean simulation = false;
 
@@ -151,7 +150,7 @@ public class InteractorIndexerTasklet implements Tasklet {
         do {
             log.info("Retrieving page : " + pageNumber);
             long dbStart = System.currentTimeMillis();
-            graphInteractorPage = graphInteractorService.findAll(PageRequest.of(pageNumber, PAGE_SIZE), DEPTH);
+            graphInteractorPage = graphInteractorService.findAll(PageRequest.of(pageNumber, PAGE_SIZE));
             log.info("Main DB query took [ms] : " + (System.currentTimeMillis() - dbStart));
 
             List<GraphInteractor> interactorList = graphInteractorPage.getContent();
