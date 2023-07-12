@@ -21,9 +21,11 @@ import uk.ac.ebi.intact.graphdb.model.nodes.GraphParticipantEvidence;
 import uk.ac.ebi.intact.graphdb.service.GraphInteractorService;
 import uk.ac.ebi.intact.search.interactors.model.SearchInteractor;
 import uk.ac.ebi.intact.search.interactors.service.InteractorIndexService;
+import uk.ac.ebi.intact.style.service.StyleService;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.*;
 
 import static utilities.SolrDocumentConverterUtils.*;
@@ -33,7 +35,7 @@ public class InteractorIndexerTasklet implements Tasklet {
 
     private static final Log log = LogFactory.getLog(InteractorIndexerTasklet.class);
 
-    private static final int PAGE_SIZE = 1000;
+    private static final int PAGE_SIZE = 500;
     private static final int MAX_PING_TIME = 1000;
     private static final int MAX_ATTEMPTS = 5;
     private static final int DEPTH = 0;
@@ -47,11 +49,15 @@ public class InteractorIndexerTasklet implements Tasklet {
     private InteractorIndexService interactorIndexService;
 
     @Resource
+    private StyleService styleService;
+
+    @Resource
     private SolrClient solrClient;
 
 
     private static SearchInteractor toSolrDocument(GraphInteractor graphInteractor,
-                                                   Collection<GraphBinaryInteractionEvidence> interactionEvidences) {
+                                                   Collection<GraphBinaryInteractionEvidence> interactionEvidences,
+                                                   StyleService styleService) {
 
         SearchInteractor searchInteractor = new SearchInteractor();
 
@@ -95,11 +101,24 @@ public class InteractorIndexerTasklet implements Tasklet {
         searchInteractor.setInteractorAliasNames(aliasesToSolrDocument(graphInteractor.getAliases()));
         searchInteractor.setInteractorAltIds(xrefsToSolrDocument(graphInteractor.getIdentifiers()));
 
-        searchInteractor.setInteractorType(graphInteractor.getInteractorType().getShortName());
-        searchInteractor.setInteractorTypeMIIdentifier(graphInteractor.getInteractorType().getMIIdentifier());
-        Organism organism = graphInteractor.getOrganism();
-        searchInteractor.setInteractorSpecies(organism != null ? graphInteractor.getOrganism().getScientificName() : null);
-        searchInteractor.setInteractorTaxId(organism != null ? graphInteractor.getOrganism().getTaxId() : null);
+        //TODO Refactor to avoid accessing several times to the same fields
+        final String shortName = graphInteractor.getInteractorType().getShortName();
+        searchInteractor.setInteractorType(shortName);
+
+        final String miIdentifier = graphInteractor.getInteractorType().getMIIdentifier();
+        searchInteractor.setInteractorTypeMIIdentifier(miIdentifier);
+
+        // We add the interactor shape and the display name in indexing time to avoid remapping the results
+        searchInteractor.setInteractorTypeMIIdentifierStyled(miIdentifier + "__" + shortName + "__" + styleService.getInteractorShape(miIdentifier));
+
+        final Organism organism = graphInteractor.getOrganism();
+        searchInteractor.setInteractorSpecies(organism != null ? organism.getScientificName() : null);
+        searchInteractor.setInteractorTaxId(organism != null ? organism.getTaxId() : null);
+
+        searchInteractor.setInteractorTaxIdStyled(organism != null ?
+                organism.getTaxId() + "__" + organism.getScientificName() + "__"
+                        + "#" + Integer.toHexString(styleService.getInteractorColor(String.valueOf(organism.getTaxId())).getRGB()).substring(2) : null);
+
         searchInteractor.setInteractorXrefs(xrefsToSolrDocument(graphInteractor.getXrefs()));
         searchInteractor.setInteractionCount(interactionCount);
         searchInteractor.setInteractionIds(interactionsIds);
@@ -141,7 +160,7 @@ public class InteractorIndexerTasklet implements Tasklet {
             long convStart = System.currentTimeMillis();
             for (GraphInteractor graphInteractor : interactorList) {
                 try {
-                    searchInteractors.add(toSolrDocument(graphInteractor, graphInteractor.getInteractions()));
+                    searchInteractors.add(toSolrDocument(graphInteractor, graphInteractor.getInteractions(), styleService));
                 } catch (Exception e) {
                     log.error("Interactor with ac: " + graphInteractor.getAc() + " could not be indexed because of exception  :- ");
                     e.printStackTrace();
@@ -154,9 +173,12 @@ public class InteractorIndexerTasklet implements Tasklet {
             if (!simulation) {
 //                    solrServerCheck();
 
-                interactorIndexService.saveAll(searchInteractors);
+                log.info("Saving " + searchInteractors.size() + " interactors");
+                interactorIndexService.saveAll(searchInteractors, Duration.ofMinutes(5));
                 log.info("Index save took [ms] : " + (System.currentTimeMillis() - indexStart));
             }
+
+            log.info("Processed page " + pageNumber + " out of " + graphInteractorPage.getTotalPages());
 
             // increase the page number
             pageNumber++;

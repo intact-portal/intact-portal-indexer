@@ -17,6 +17,7 @@ import static org.springframework.boot.SpringApplication.run;
 @SpringBootApplication(scanBasePackages = {
         "uk.ac.ebi.intact.graphdb",
         "uk.ac.ebi.intact.search",
+        "uk.ac.ebi.intact.style",
         "uk.ac.ebi.intact.portal"})
 public class IntactPortalIndexerApplication {
 
