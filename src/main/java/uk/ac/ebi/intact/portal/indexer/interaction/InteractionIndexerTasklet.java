@@ -231,7 +231,6 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setAsMutationB(searchInteraction.isMutationB());
             }
 
-
             searchInteraction.setFeatureCount(featureCount);
             searchInteraction.setAliasesA(!graphAliasesA.isEmpty() ? aliasesWithTypesToSolrDocument(graphAliasesA) : null);
             searchInteraction.setAliasesB(!graphAliasesB.isEmpty() ? aliasesWithTypesToSolrDocument(graphAliasesB) : null);
@@ -242,7 +241,6 @@ public class InteractionIndexerTasklet implements Tasklet {
             searchInteraction.setAsStoichiometry(stoichiometry);
             //experiment details
             GraphExperiment experiment = (GraphExperiment) graphBinaryInteractionEvidence.getExperiment();
-
 
             graphAnnotations.addAll(experiment.getAnnotations());
             searchInteraction.setDetectionMethod((graphBinaryInteractionEvidence.getExperiment() != null && graphBinaryInteractionEvidence.getExperiment().getInteractionDetectionMethod() != null) ? graphBinaryInteractionEvidence.getExperiment().getInteractionDetectionMethod().getShortName() : null);
@@ -377,6 +375,10 @@ public class InteractionIndexerTasklet implements Tasklet {
             }
             searchInteraction.setAllAnnotations(!graphAnnotations.isEmpty() ? annotationsToSolrDocument(graphAnnotations) : null);
             searchInteraction.setAsAnnotations(!graphAnnotations.isEmpty() ? annotationsToASSolrDocument(graphAnnotations) : null);
+
+            if (graphBinaryInteractionEvidence.getSerialisedInteraction() != null) {
+                searchInteraction.setSerialisedInteraction(graphBinaryInteractionEvidence.getSerialisedInteraction().getSerialisedInteraction());
+            }
         }
 
         return searchInteraction;
