@@ -14,7 +14,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.0.RELEASE</version>
+        <version>2.3.12.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -28,6 +28,7 @@
         <intact.search.interactions.version>1.1.1-SNAPSHOT</intact.search.interactions.version>
         <intact.search.terms.version>0.0.1-SNAPSHOT</intact.search.terms.version>
         <intact.style.version>1.0.2-SNAPSHOT</intact.style.version>
+        <spring.version>2.3.12.RELEASE</spring.version>
 
         <style.full.index>true</style.full.index>
     </properties>
