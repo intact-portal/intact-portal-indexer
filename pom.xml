@@ -230,6 +230,10 @@
 
     <repositories>
         <repository>
+            <id>central</id>
+            <url>https://repo1.maven.org/maven2/</url>
+        </repository>
+        <repository>
             <id>nexus</id>
             <url>https://www.ebi.ac.uk/intact/maven/nexus/content/groups/public/</url>
         </repository>
