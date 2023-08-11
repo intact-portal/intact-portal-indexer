@@ -28,18 +28,15 @@
         <intact.search.interactions.version>1.1.1-SNAPSHOT</intact.search.interactions.version>
         <intact.search.terms.version>0.0.1-SNAPSHOT</intact.search.terms.version>
         <intact.style.version>1.0.2-SNAPSHOT</intact.style.version>
-        <spring.version>2.1.0.RELEASE</spring.version>
 
-        <intact.style.mi.full-index>true</intact.style.mi.full-index>
-        <intact.style.taxonomy.full-index>true</intact.style.taxonomy.full-index>
+        <style-full-index>true</style-full-index>
     </properties>
 
     <profiles>
         <profile>
             <id>debug</id>
             <properties>
-                <intact.style.mi.full-index>false</intact.style.mi.full-index>
-                <intact.style.taxonomy.full-index>false</intact.style.taxonomy.full-index>
+                <style-full-index>false</style-full-index>
             </properties>
         </profile>
     </profiles>
@@ -65,12 +62,6 @@
             <groupId>uk.ac.ebi.intact.graphdb</groupId>
             <artifactId>intact-graphdb-service</artifactId>
             <version>${intact.graphdb.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
         </dependency>
 
         <!-- Intact Search -->
@@ -176,27 +167,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>org.springframework.boot</groupId>
-                            <artifactId>spring-boot-configuration-processor</artifactId>
-                            <version>${spring.version}</version>
-                        </path>
-                        <path>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                            <version>${lombok.version}</version>
-                        </path>
-                    </annotationProcessorPaths>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>external.atlassian.jgitflow</groupId>
