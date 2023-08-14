@@ -9,8 +9,8 @@ import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import psidev.psi.mi.jami.binary.BinaryInteractionEvidence;
@@ -454,7 +454,7 @@ public class InteractionIndexerTasklet implements Tasklet {
         log.info("Start indexing Interaction data");
 
         int pageNumber = 0;
-        Slice<GraphBinaryInteractionEvidence> graphInteractionSlice;
+        Page<GraphBinaryInteractionEvidence> graphInteractionPage;
 
         log.debug("Starting to retrieve data");
         // loop over the data in pages until we are done with all
@@ -463,10 +463,10 @@ public class InteractionIndexerTasklet implements Tasklet {
         do {
             log.info("Retrieving page : " + pageNumber);
             long dbStart = System.currentTimeMillis();
-            graphInteractionSlice = graphInteractionService.getAllGraphBinaryInteractionEvidences(PageRequest.of(pageNumber, PAGE_SIZE));
+            graphInteractionPage = graphInteractionService.findAll(PageRequest.of(pageNumber, PAGE_SIZE), 0);
             log.info("Main DB query took [ms] : " + (System.currentTimeMillis() - dbStart));
 
-            List<GraphBinaryInteractionEvidence> interactionList = graphInteractionSlice.getContent();
+            List<GraphBinaryInteractionEvidence> interactionList = graphInteractionPage.getContent();
             List<SearchInteraction> interactions = new ArrayList<>();
 
             long convStart = System.currentTimeMillis();
@@ -491,9 +491,11 @@ public class InteractionIndexerTasklet implements Tasklet {
                 log.info("Index save took [ms] : " + (System.currentTimeMillis() - indexStart));
             }
 
+            log.info("Processed page " + pageNumber + " out of " + graphInteractionPage.getTotalPages());
+
             // increase the page number
             pageNumber++;
-        } while (graphInteractionSlice.hasNext());
+        } while (graphInteractionPage.hasNext());
 
         log.info("Indexing complete.");
         log.info("Total indexing took [ms] : " + (System.currentTimeMillis() - totalTime));
