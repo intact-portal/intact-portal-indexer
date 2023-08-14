@@ -6,7 +6,7 @@
 #SBATCH -p production   # partition(s)
 #SBATCH --mem=64G   # memory per node
 #SBATCH -J "PORTAL_INDEXING"   # job name
-#SBATCH -o "portal-index-%j.out"   # job output file
+#SBATCH -o "/nfs/production/hhe/intact/data/solr-indexing-logs/portal-index-%j.out"   # job output file
 #SBATCH --mail-user=intact-dev@ebi.ac.uk   # email address
 #SBATCH --mail-type=ALL
 
