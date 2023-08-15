@@ -9,8 +9,8 @@ import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import psidev.psi.mi.jami.binary.BinaryInteractionEvidence;
@@ -70,7 +70,7 @@ public class InteractionIndexerTasklet implements Tasklet {
      * @return
      */
     // TODO try to split this method into methods for specific(eg. Interactor/publication/participant etc.) details
-    public static SearchInteraction toSolrDocument(BinaryInteractionEvidence interactionEvidence, int binaryCounter, StyleService styleService) {
+    public static SearchInteraction toSolrDocument(BinaryInteractionEvidence interactionEvidence, StyleService styleService) {
 
         SearchInteraction searchInteraction = new SearchInteraction();
         List<SearchChildInteractor> searchChildInteractors = new ArrayList<>();
@@ -454,7 +454,7 @@ public class InteractionIndexerTasklet implements Tasklet {
         log.info("Start indexing Interaction data");
 
         int pageNumber = 0;
-        Page<GraphBinaryInteractionEvidence> graphInteractionPage;
+        Slice<GraphBinaryInteractionEvidence> graphInteractionSlice;
 
         log.debug("Starting to retrieve data");
         // loop over the data in pages until we are done with all
@@ -463,17 +463,17 @@ public class InteractionIndexerTasklet implements Tasklet {
         do {
             log.info("Retrieving page : " + pageNumber);
             long dbStart = System.currentTimeMillis();
-            graphInteractionPage = graphInteractionService.findAll(PageRequest.of(pageNumber, PAGE_SIZE), 0);
+            graphInteractionSlice = graphInteractionService.getAllGraphBinaryInteractionEvidences(PageRequest.of(pageNumber, PAGE_SIZE));
             log.info("Main DB query took [ms] : " + (System.currentTimeMillis() - dbStart));
 
-            List<GraphBinaryInteractionEvidence> interactionList = graphInteractionPage.getContent();
+            List<GraphBinaryInteractionEvidence> interactionList = graphInteractionSlice.getContent();
             List<SearchInteraction> interactions = new ArrayList<>();
 
             long convStart = System.currentTimeMillis();
             for (GraphBinaryInteractionEvidence graphInteraction : interactionList) {
 
                 try {
-                    interactions.add(toSolrDocument(graphInteraction, binaryCounter, styleService));
+                    interactions.add(toSolrDocument(graphInteraction, styleService));
                     this.binaryCounter++;
                 } catch (Exception e) {
                     log.error("Interaction with ac: " + graphInteraction.getAc() + " could not be indexed because of exception  :- ");
@@ -491,11 +491,9 @@ public class InteractionIndexerTasklet implements Tasklet {
                 log.info("Index save took [ms] : " + (System.currentTimeMillis() - indexStart));
             }
 
-            log.info("Processed page " + pageNumber + " out of " + graphInteractionPage.getTotalPages());
-
             // increase the page number
             pageNumber++;
-        } while (graphInteractionPage.hasNext());
+        } while (graphInteractionSlice.hasNext());
 
         log.info("Indexing complete.");
         log.info("Total indexing took [ms] : " + (System.currentTimeMillis() - totalTime));
