@@ -42,14 +42,13 @@ public class InteractionIndexerTasklet implements Tasklet {
 
     private static final Log log = LogFactory.getLog(InteractionIndexerTasklet.class);
 
-    private static final int PAGE_SIZE = 500;
+    private static final int PAGE_SIZE = 250;
     private static final int MAX_PING_TIME = 1000;
     private static final int MAX_ATTEMPTS = 5;
     private static final int DEPTH = 0;
 
     private int attempts = 0;
     private boolean simulation = false;
-    private int binaryCounter = 1;//TODO... we need this for generating test interactions.xml, separate the logic later
 
     @Resource
     private GraphInteractionService graphInteractionService;
@@ -474,7 +473,6 @@ public class InteractionIndexerTasklet implements Tasklet {
 
                 try {
                     interactions.add(toSolrDocument(graphInteraction, styleService));
-                    this.binaryCounter++;
                 } catch (Exception e) {
                     log.error("Interaction with ac: " + graphInteraction.getAc() + " could not be indexed because of exception  :- ");
                     e.printStackTrace();
