@@ -1,5 +1,7 @@
 package uk.ac.ebi.intact.portal.indexer.interaction;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.solr.client.solrj.SolrClient;
@@ -45,7 +47,6 @@ public class InteractionIndexerTasklet implements Tasklet {
     private static final int PAGE_SIZE = 250;
     private static final int MAX_PING_TIME = 1000;
     private static final int MAX_ATTEMPTS = 5;
-    private static final int DEPTH = 0;
 
     private int attempts = 0;
     private boolean simulation = false;
@@ -69,7 +70,7 @@ public class InteractionIndexerTasklet implements Tasklet {
      * @return
      */
     // TODO try to split this method into methods for specific(eg. Interactor/publication/participant etc.) details
-    public static SearchInteraction toSolrDocument(BinaryInteractionEvidence interactionEvidence, StyleService styleService) {
+    public static SearchInteraction toSolrDocument(BinaryInteractionEvidence interactionEvidence, StyleService styleService) throws JsonProcessingException {
 
         SearchInteraction searchInteraction = new SearchInteraction();
         List<SearchChildInteractor> searchChildInteractors = new ArrayList<>();
@@ -375,9 +376,9 @@ public class InteractionIndexerTasklet implements Tasklet {
             searchInteraction.setAllAnnotations(!graphAnnotations.isEmpty() ? annotationsToSolrDocument(graphAnnotations) : null);
             searchInteraction.setAsAnnotations(!graphAnnotations.isEmpty() ? annotationsToASSolrDocument(graphAnnotations) : null);
 
-            if (graphBinaryInteractionEvidence.getSerialisedInteraction() != null) {
-                searchInteraction.setSerialisedInteraction(graphBinaryInteractionEvidence.getSerialisedInteraction().getSerialisedInteraction());
-            }
+            ObjectMapper objectMapper = new ObjectMapper();
+            String serialisedInteraction = objectMapper.writeValueAsString(graphBinaryInteractionEvidence);
+            searchInteraction.setSerialisedInteraction(serialisedInteraction);
         }
 
         return searchInteraction;

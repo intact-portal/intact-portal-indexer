@@ -29,14 +29,14 @@
         <intact.search.terms.version>0.0.1-SNAPSHOT</intact.search.terms.version>
         <intact.style.version>1.0.2-SNAPSHOT</intact.style.version>
 
-        <style-full-index>true</style-full-index>
+        <style.full.index>true</style.full.index>
     </properties>
 
     <profiles>
         <profile>
             <id>debug</id>
             <properties>
-                <style-full-index>false</style-full-index>
+                <style.full.index>false</style.full.index>
             </properties>
         </profile>
     </profiles>
