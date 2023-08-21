@@ -44,7 +44,7 @@ public class InteractionIndexerTasklet implements Tasklet {
 
     private static final Log log = LogFactory.getLog(InteractionIndexerTasklet.class);
 
-    private static final int PAGE_SIZE = 250;
+    private static final int PAGE_SIZE = 500;
     private static final int MAX_PING_TIME = 1000;
     private static final int MAX_ATTEMPTS = 5;
 
@@ -474,6 +474,7 @@ public class InteractionIndexerTasklet implements Tasklet {
 
                 try {
                     interactions.add(toSolrDocument(graphInteraction, styleService));
+                    log.info("SUCCESS - Interaction with ac: " + graphInteraction.getAc());
                 } catch (Exception e) {
                     log.error("Interaction with ac: " + graphInteraction.getAc() + " could not be indexed because of exception  :- ");
                     e.printStackTrace();
