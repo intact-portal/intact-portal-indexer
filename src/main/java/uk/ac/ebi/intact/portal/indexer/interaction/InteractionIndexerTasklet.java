@@ -502,9 +502,13 @@ public class InteractionIndexerTasklet implements Tasklet {
             if (!simulation) {
 //                    solrServerCheck();
 
-                log.info("Saving " + interactions.size() + " interactions");
-                interactionIndexService.save(interactions, Duration.ofMinutes(5));
-                log.info("Index save took [ms] : " + (System.currentTimeMillis() - indexStart));
+                if (!interactions.isEmpty()) {
+                    log.info("Saving " + interactions.size() + " interactions");
+                    interactionIndexService.save(interactions, Duration.ofMinutes(5));
+                    log.info("Index save took [ms] : " + (System.currentTimeMillis() - indexStart));
+                } else {
+                    log.info("No interactions to save");
+                }
             }
 
             // increase the page number
