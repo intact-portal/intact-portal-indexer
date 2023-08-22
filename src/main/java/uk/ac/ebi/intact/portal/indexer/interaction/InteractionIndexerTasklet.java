@@ -46,7 +46,7 @@ import static utilities.SolrDocumentConverterUtils.*;
 @Transactional
 public class InteractionIndexerTasklet implements Tasklet {
 
-    private static final String filePath = "/nfs/production/hhe/intact/scripts/intact-portal-indexer/saved_interactions";
+//    private static final String filePath = "/nfs/production/hhe/intact/scripts/intact-portal-indexer/saved_interactions";
 
     private static final Log log = LogFactory.getLog(InteractionIndexerTasklet.class);
 
@@ -459,11 +459,11 @@ public class InteractionIndexerTasklet implements Tasklet {
 //        try {
         log.info("Start indexing Interaction data");
 
-        Set<String> acs;
-        try (Stream<String> lines = Files.lines(Paths.get(filePath))) {
-            acs = lines.collect(Collectors.toSet());
-        }
-        log.info("Read file with " + acs.size() + " saved interactions");
+//        Set<String> acs;
+//        try (Stream<String> lines = Files.lines(Paths.get(filePath))) {
+//            acs = lines.collect(Collectors.toSet());
+//        }
+//        log.info("Read file with " + acs.size() + " saved interactions");
 
         int pageNumber = 0;
         Slice<GraphBinaryInteractionEvidence> graphInteractionSlice;
@@ -484,9 +484,9 @@ public class InteractionIndexerTasklet implements Tasklet {
             long convStart = System.currentTimeMillis();
             for (GraphBinaryInteractionEvidence graphInteraction : interactionList) {
 
-                if (acs.contains(graphInteraction.getAc())) {
-                    log.info("SKIP - Interaction with ac: " + graphInteraction.getAc());
-                } else {
+//                if (acs.contains(graphInteraction.getAc())) {
+//                    log.info("SKIP - Interaction with ac: " + graphInteraction.getAc());
+//                } else {
                     try {
                         interactions.add(toSolrDocument(graphInteraction, styleService));
                         log.info("SUCCESS - Interaction with ac: " + graphInteraction.getAc());
@@ -494,7 +494,7 @@ public class InteractionIndexerTasklet implements Tasklet {
                         log.error("Interaction with ac: " + graphInteraction.getAc() + " could not be indexed because of exception  :- ");
                         e.printStackTrace();
                     }
-                }
+//                }
             }
             log.info("Conversion of " + interactions.size() + " records took [ms] : " + (System.currentTimeMillis() - convStart));
 
