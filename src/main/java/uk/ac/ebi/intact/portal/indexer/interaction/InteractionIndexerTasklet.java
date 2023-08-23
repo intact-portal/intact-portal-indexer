@@ -32,12 +32,8 @@ import utilities.SolrDocumentConverterUtils;
 
 import javax.annotation.Resource;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static utilities.SolrASDocumentConverterUtils.*;
 import static utilities.SolrDocumentConverterUtils.*;
@@ -45,8 +41,6 @@ import static utilities.SolrDocumentConverterUtils.*;
 @Component
 @Transactional
 public class InteractionIndexerTasklet implements Tasklet {
-
-//    private static final String filePath = "/nfs/production/hhe/intact/scripts/intact-portal-indexer/saved_interactions";
 
     private static final Log log = LogFactory.getLog(InteractionIndexerTasklet.class);
 
@@ -459,12 +453,6 @@ public class InteractionIndexerTasklet implements Tasklet {
 //        try {
         log.info("Start indexing Interaction data");
 
-//        Set<String> acs;
-//        try (Stream<String> lines = Files.lines(Paths.get(filePath))) {
-//            acs = lines.collect(Collectors.toSet());
-//        }
-//        log.info("Read file with " + acs.size() + " saved interactions");
-
         int pageNumber = 0;
         Slice<GraphBinaryInteractionEvidence> graphInteractionSlice;
 
@@ -483,18 +471,13 @@ public class InteractionIndexerTasklet implements Tasklet {
 
             long convStart = System.currentTimeMillis();
             for (GraphBinaryInteractionEvidence graphInteraction : interactionList) {
-
-//                if (acs.contains(graphInteraction.getAc())) {
-//                    log.info("SKIP - Interaction with ac: " + graphInteraction.getAc());
-//                } else {
-                    try {
-                        interactions.add(toSolrDocument(graphInteraction, styleService));
-                        log.info("SUCCESS - Interaction with ac: " + graphInteraction.getAc());
-                    } catch (Exception e) {
-                        log.error("Interaction with ac: " + graphInteraction.getAc() + " could not be indexed because of exception  :- ");
-                        e.printStackTrace();
-                    }
-//                }
+                try {
+                    interactions.add(toSolrDocument(graphInteraction, styleService));
+                    log.info("SUCCESS - Interaction with ac: " + graphInteraction.getAc());
+                } catch (Exception e) {
+                    log.error("Interaction with ac: " + graphInteraction.getAc() + " could not be indexed because of exception  :- ");
+                    e.printStackTrace();
+                }
             }
             log.info("Conversion of " + interactions.size() + " records took [ms] : " + (System.currentTimeMillis() - convStart));
 
@@ -502,13 +485,9 @@ public class InteractionIndexerTasklet implements Tasklet {
             if (!simulation) {
 //                    solrServerCheck();
 
-                if (!interactions.isEmpty()) {
-                    log.info("Saving " + interactions.size() + " interactions");
-                    interactionIndexService.save(interactions, Duration.ofMinutes(5));
-                    log.info("Index save took [ms] : " + (System.currentTimeMillis() - indexStart));
-                } else {
-                    log.info("No interactions to save");
-                }
+                log.info("Saving " + interactions.size() + " interactions");
+                interactionIndexService.save(interactions, Duration.ofMinutes(5));
+                log.info("Index save took [ms] : " + (System.currentTimeMillis() - indexStart));
             }
 
             // increase the page number
