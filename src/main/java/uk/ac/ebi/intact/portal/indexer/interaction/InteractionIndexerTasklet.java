@@ -16,8 +16,15 @@ import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import psidev.psi.mi.jami.binary.BinaryInteractionEvidence;
+import psidev.psi.mi.jami.commons.MIWriterOptionFactory;
+import psidev.psi.mi.jami.commons.PsiJami;
+import psidev.psi.mi.jami.datasource.InteractionWriter;
+import psidev.psi.mi.jami.factory.InteractionWriterFactory;
+import psidev.psi.mi.jami.model.ComplexType;
+import psidev.psi.mi.jami.model.InteractionCategory;
 import psidev.psi.mi.jami.model.Organism;
 import psidev.psi.mi.jami.utils.CvTermUtils;
+import psidev.psi.mi.jami.xml.PsiXmlVersion;
 import uk.ac.ebi.intact.graphdb.model.nodes.*;
 import uk.ac.ebi.intact.graphdb.service.GraphInteractionService;
 import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
@@ -31,6 +38,7 @@ import utilities.Constants;
 import utilities.SolrDocumentConverterUtils;
 
 import javax.annotation.Resource;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.*;
@@ -376,9 +384,17 @@ public class InteractionIndexerTasklet implements Tasklet {
             searchInteraction.setAllAnnotations(!graphAnnotations.isEmpty() ? annotationsToSolrDocument(graphAnnotations) : null);
             searchInteraction.setAsAnnotations(!graphAnnotations.isEmpty() ? annotationsToASSolrDocument(graphAnnotations) : null);
 
+            // Write serialised JSON
             ObjectMapper objectMapper = new ObjectMapper();
             String serialisedInteraction = objectMapper.writeValueAsString(graphBinaryInteractionEvidence);
             searchInteraction.setSerialisedInteraction(serialisedInteraction);
+
+            // Write serialised XML
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            InteractionWriter xmlWriter = createInteractionEvidenceWriterFor(outputStream);
+            xmlWriter.write(interactionEvidence);
+            String serialisedXml = outputStream.toString();
+            searchInteraction.setSerialisedXml(serialisedXml);
         }
 
         return searchInteraction;
@@ -473,7 +489,7 @@ public class InteractionIndexerTasklet implements Tasklet {
             for (GraphBinaryInteractionEvidence graphInteraction : interactionList) {
                 try {
                     interactions.add(toSolrDocument(graphInteraction, styleService));
-                    log.info("SUCCESS - Interaction with ac: " + graphInteraction.getAc());
+//                    log.info("SUCCESS - Interaction with ac: " + graphInteraction.getAc());
                 } catch (Exception e) {
                     log.error("Interaction with ac: " + graphInteraction.getAc() + " could not be indexed because of exception  :- ");
                     e.printStackTrace();
@@ -530,5 +546,15 @@ public class InteractionIndexerTasklet implements Tasklet {
         } else {
             throw new IllegalStateException("Solr server not responding in time. Aborting.");
         }
+    }
+
+
+    private static InteractionWriter createInteractionEvidenceWriterFor(Object output) {
+        PsiJami.initialiseAllInteractionWriters();
+        PsiJami.initialiseAllMIDataSources();
+        InteractionWriterFactory writerFactory = InteractionWriterFactory.getInstance();
+        MIWriterOptionFactory optionFactory = MIWriterOptionFactory.getInstance();
+        return writerFactory.getInteractionWriterWith(optionFactory.getDefaultExpandedXmlOptions(
+                output, InteractionCategory.evidence, ComplexType.n_ary, PsiXmlVersion.v3_0_0));
     }
 }
