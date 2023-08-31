@@ -393,7 +393,15 @@ public class InteractionIndexerTasklet implements Tasklet {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             InteractionWriter xmlWriter = createInteractionEvidenceWriterFor(outputStream);
             xmlWriter.write(interactionEvidence);
+            xmlWriter.flush();
             String serialisedXml = outputStream.toString();
+            if (!serialisedXml.stripTrailing().endsWith("</entry>")) {
+                log.error("\nSerialised XML for interaction " +
+                        ((GraphBinaryInteractionEvidence) interactionEvidence).getAc() +
+                        " is not fully written\n\n" +
+                        serialisedXml +
+                        "\n");
+            }
             searchInteraction.setSerialisedXml(serialisedXml);
         }
 
