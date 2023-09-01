@@ -28,6 +28,7 @@
         <intact.search.interactions.version>1.1.1-SNAPSHOT</intact.search.interactions.version>
         <intact.search.terms.version>0.0.1-SNAPSHOT</intact.search.terms.version>
         <intact.style.version>1.0.2-SNAPSHOT</intact.style.version>
+        <psi.jami.version>3.2.10</psi.jami.version>
 
         <style.full.index>true</style.full.index>
     </properties>
@@ -81,6 +82,24 @@
             <groupId>uk.ac.ebi.intact.style</groupId>
             <artifactId>intact-style-service</artifactId>
             <version>${intact.style.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>psidev.psi.mi.jami</groupId>
+            <artifactId>jami-interactionviewer-json</artifactId>
+            <version>${psi.jami.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>psidev.psi.mi.jami.bridges</groupId>
+            <artifactId>jami-ols</artifactId>
+            <version>${psi.jami.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>uk.ac.ebi.pride.architectural</groupId>
+                    <artifactId>pride-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!--<dependency>-->

@@ -16,13 +16,20 @@ import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import psidev.psi.mi.jami.binary.BinaryInteractionEvidence;
+import psidev.psi.mi.jami.binary.expansion.InteractionEvidenceSpokeExpansion;
+import psidev.psi.mi.jami.bridges.exception.BridgeFailedException;
+import psidev.psi.mi.jami.bridges.ols.CachedOlsOntologyTermFetcher;
 import psidev.psi.mi.jami.commons.MIWriterOptionFactory;
 import psidev.psi.mi.jami.commons.PsiJami;
 import psidev.psi.mi.jami.datasource.InteractionWriter;
 import psidev.psi.mi.jami.factory.InteractionWriterFactory;
+import psidev.psi.mi.jami.json.InteractionViewerJson;
+import psidev.psi.mi.jami.json.MIJsonOptionFactory;
+import psidev.psi.mi.jami.json.MIJsonType;
 import psidev.psi.mi.jami.model.ComplexType;
 import psidev.psi.mi.jami.model.InteractionCategory;
 import psidev.psi.mi.jami.model.Organism;
+import psidev.psi.mi.jami.tab.MitabVersion;
 import psidev.psi.mi.jami.utils.CvTermUtils;
 import psidev.psi.mi.jami.xml.PsiXmlVersion;
 import uk.ac.ebi.intact.graphdb.model.nodes.*;
@@ -389,23 +396,24 @@ public class InteractionIndexerTasklet implements Tasklet {
             String serialisedInteraction = objectMapper.writeValueAsString(graphBinaryInteractionEvidence);
             searchInteraction.setSerialisedInteraction(serialisedInteraction);
 
-            // Write serialised XML
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            InteractionWriter xmlWriter = createInteractionEvidenceWriterFor(outputStream);
-            xmlWriter.write(interactionEvidence);
-            xmlWriter.flush();
-            String serialisedXml = outputStream.toString();
-            if (!serialisedXml.stripTrailing().endsWith("</entry>")) {
-                log.error("\nSerialised XML for interaction " +
-                        ((GraphBinaryInteractionEvidence) interactionEvidence).getAc() +
-                        " is not fully written\n\n" +
-                        serialisedXml +
-                        "\n");
-            }
-            searchInteraction.setSerialisedXml(serialisedXml);
+            // Write different formats
+            searchInteraction.setJsonFormat(getInteractionAsFormat(interactionEvidence, "jsonFormat"));
+            searchInteraction.setXml25Format(getInteractionAsFormat(interactionEvidence, "xml25Format"));
+            searchInteraction.setXml30Format(getInteractionAsFormat(interactionEvidence, "xml30Format"));
+            searchInteraction.setTab25Format(getInteractionAsFormat(interactionEvidence, "tab25Format"));
+            searchInteraction.setTab26Format(getInteractionAsFormat(interactionEvidence, "tab26Format"));
+            searchInteraction.setTab27Format(getInteractionAsFormat(interactionEvidence, "tab27Format"));
         }
 
         return searchInteraction;
+    }
+
+    private static String getInteractionAsFormat(BinaryInteractionEvidence interactionEvidence, String format) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        InteractionWriter xmlWriter = createInteractionEvidenceWriterFor(outputStream, format);
+        xmlWriter.write(interactionEvidence);
+        xmlWriter.flush();
+        return outputStream.toString();
     }
 
     private static boolean affectedByMutationToSolrDocument(StyleService styleService, SearchInteraction searchInteraction, List<GraphFeature> ographFeatures) {
@@ -557,12 +565,50 @@ public class InteractionIndexerTasklet implements Tasklet {
     }
 
 
-    private static InteractionWriter createInteractionEvidenceWriterFor(Object output) {
+    private static InteractionWriter createInteractionEvidenceWriterFor(Object output, String format) {
         PsiJami.initialiseAllInteractionWriters();
         PsiJami.initialiseAllMIDataSources();
+        InteractionViewerJson.initialiseAllMIJsonWriters();
+
         InteractionWriterFactory writerFactory = InteractionWriterFactory.getInstance();
         MIWriterOptionFactory optionFactory = MIWriterOptionFactory.getInstance();
-        return writerFactory.getInteractionWriterWith(optionFactory.getDefaultExpandedXmlOptions(
-                output, InteractionCategory.evidence, ComplexType.n_ary, PsiXmlVersion.v3_0_0));
+        MIJsonOptionFactory miJsonOptionFactory = MIJsonOptionFactory.getInstance();
+
+        InteractionWriter writer = null;
+
+        switch (format) {
+            /* For the XML formats we are going to write in expanded format (not compact) to ease the streaming */
+            case "xml25Format":
+                writer = writerFactory.getInteractionWriterWith(optionFactory.getDefaultExpandedXmlOptions(output, InteractionCategory.evidence,
+                        ComplexType.n_ary, PsiXmlVersion.v2_5_4));
+                break;
+            case "xml30Format":
+                writer = writerFactory.getInteractionWriterWith(optionFactory.getDefaultExpandedXmlOptions(output, InteractionCategory.evidence,
+                        ComplexType.n_ary, PsiXmlVersion.v3_0_0));
+                break;
+            case "tab25Format":
+                writer = writerFactory.getInteractionWriterWith(optionFactory.getMitabOptions(output, InteractionCategory.evidence,
+                        ComplexType.n_ary, new InteractionEvidenceSpokeExpansion(), true, MitabVersion.v2_5, false));
+                break;
+            case "tab26Format":
+                writer = writerFactory.getInteractionWriterWith(optionFactory.getMitabOptions(output, InteractionCategory.evidence,
+                        ComplexType.n_ary, new InteractionEvidenceSpokeExpansion(), true, MitabVersion.v2_6, false));
+                break;
+            case "tab27Format":
+                writer = writerFactory.getInteractionWriterWith(optionFactory.getMitabOptions(output, InteractionCategory.evidence, ComplexType.n_ary,
+                        new InteractionEvidenceSpokeExpansion(), true, MitabVersion.v2_7, false));
+                break;
+            case "jsonFormat":
+            default:
+                try {
+                    writer = writerFactory.getInteractionWriterWith(miJsonOptionFactory.getJsonOptions(output, InteractionCategory.evidence, null,
+                            MIJsonType.n_ary_only, new CachedOlsOntologyTermFetcher(), null));
+                } catch (BridgeFailedException e) {
+                    writer = writerFactory.getInteractionWriterWith(miJsonOptionFactory.getJsonOptions(output, InteractionCategory.evidence, null,
+                            MIJsonType.n_ary_only, null, null));
+                }
+                break;
+        }
+        return writer;
     }
 }
