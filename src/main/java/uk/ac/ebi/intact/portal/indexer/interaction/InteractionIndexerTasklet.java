@@ -588,15 +588,15 @@ public class InteractionIndexerTasklet implements Tasklet {
                 break;
             case "tab25Format":
                 writer = writerFactory.getInteractionWriterWith(optionFactory.getMitabOptions(output, InteractionCategory.evidence,
-                        ComplexType.n_ary, new InteractionEvidenceSpokeExpansion(), true, MitabVersion.v2_5, false));
+                        ComplexType.n_ary, new InteractionEvidenceSpokeExpansion(), false, MitabVersion.v2_5, false));
                 break;
             case "tab26Format":
                 writer = writerFactory.getInteractionWriterWith(optionFactory.getMitabOptions(output, InteractionCategory.evidence,
-                        ComplexType.n_ary, new InteractionEvidenceSpokeExpansion(), true, MitabVersion.v2_6, false));
+                        ComplexType.n_ary, new InteractionEvidenceSpokeExpansion(), false, MitabVersion.v2_6, false));
                 break;
             case "tab27Format":
                 writer = writerFactory.getInteractionWriterWith(optionFactory.getMitabOptions(output, InteractionCategory.evidence, ComplexType.n_ary,
-                        new InteractionEvidenceSpokeExpansion(), true, MitabVersion.v2_7, false));
+                        new InteractionEvidenceSpokeExpansion(), false, MitabVersion.v2_7, false));
                 break;
             case "jsonFormat":
             default:
