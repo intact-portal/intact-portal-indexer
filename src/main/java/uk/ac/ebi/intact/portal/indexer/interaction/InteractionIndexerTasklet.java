@@ -24,9 +24,14 @@ import psidev.psi.mi.jami.factory.InteractionWriterFactory;
 import psidev.psi.mi.jami.json.InteractionViewerJson;
 import psidev.psi.mi.jami.json.MIJsonOptionFactory;
 import psidev.psi.mi.jami.json.MIJsonType;
+import psidev.psi.mi.jami.model.Annotation;
 import psidev.psi.mi.jami.model.ComplexType;
 import psidev.psi.mi.jami.model.InteractionCategory;
+import psidev.psi.mi.jami.model.InteractionEvidence;
+import psidev.psi.mi.jami.model.Interactor;
 import psidev.psi.mi.jami.model.Organism;
+import psidev.psi.mi.jami.model.Participant;
+import psidev.psi.mi.jami.model.Publication;
 import psidev.psi.mi.jami.tab.MitabVersion;
 import psidev.psi.mi.jami.utils.CvTermUtils;
 import psidev.psi.mi.jami.xml.PsiXmlVersion;
@@ -554,6 +559,7 @@ public class InteractionIndexerTasklet implements Tasklet {
     private static String getInteractionAsFormat(BinaryInteractionEvidence interactionEvidence, String format) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         InteractionWriter xmlWriter = createInteractionEvidenceWriterFor(outputStream, format);
+        cleanBinariesForExport(interactionEvidence);
         xmlWriter.write(interactionEvidence);
         xmlWriter.flush();
         return outputStream.toString();
@@ -604,5 +610,95 @@ public class InteractionIndexerTasklet implements Tasklet {
                 break;
         }
         return writer;
+    }
+
+    private static void cleanBinariesForExport(InteractionEvidence interactionEvidence) {
+        // interaction annotation cleaning
+        try {
+            cleanAnnotations(interactionEvidence.getAnnotations());
+        } catch (Exception e) {
+        }
+
+        //interactor annotation cleaning
+        try {
+            List<Interactor> interactorList = new ArrayList<>();
+            if (interactionEvidence instanceof GraphBinaryInteractionEvidence) {
+                GraphBinaryInteractionEvidence graphBinaryInteractionEvidence = (GraphBinaryInteractionEvidence) interactionEvidence;
+                if (graphBinaryInteractionEvidence.getInteractorA() != null) {
+                    interactorList.add(graphBinaryInteractionEvidence.getInteractorA());
+                }
+                if (graphBinaryInteractionEvidence.getInteractorB() != null) {
+                    interactorList.add(graphBinaryInteractionEvidence.getInteractorB());
+                }
+            } else {
+                for (Participant participant : interactionEvidence.getParticipants()) {
+                    interactorList.add(participant.getInteractor());
+                }
+            }
+            for (Interactor interactor : interactorList) {
+                try {
+                    cleanAnnotations(interactor.getAnnotations());
+                } catch (Exception e) {
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // publication authors cleaning
+        try {
+            Publication publication = interactionEvidence.getExperiment().getPublication();
+            List<String> cleanedAuthors = new ArrayList<>();
+            boolean areAuthorsClean = true;
+            for (String author : publication.getAuthors()) {
+                String cleanedAuthor = author;
+                if (author.contains("\r\n")) { //windows text
+                    cleanedAuthor = author.replaceAll("\r\n", "");
+                    areAuthorsClean = false;
+                } else if (author.contains("\n")) {
+                    cleanedAuthor = author.replaceAll("\n", "");
+                    areAuthorsClean = false;
+                } else if (author.contains("\r")) { //mac text
+                    cleanedAuthor = author.replaceAll("\r", "");
+                    areAuthorsClean = false;
+                }
+                if (cleanedAuthor.contains(",")) {
+                    areAuthorsClean = false;
+                    cleanedAuthors.addAll(Arrays.asList(cleanedAuthor.split(",")));
+                } else if (cleanedAuthor.contains(";")) {
+                    areAuthorsClean = false;
+                    cleanedAuthors.addAll(Arrays.asList(cleanedAuthor.split(";")));
+                } else {
+                    cleanedAuthors.add(cleanedAuthor);
+                }
+            }
+            if (!areAuthorsClean) {
+                publication.getAuthors().clear();
+                publication.getAuthors().addAll(cleanedAuthors);
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    private static void cleanAnnotations(Collection<Annotation> annotations) {
+        Iterator<Annotation> iterator = annotations.iterator();
+        while (iterator.hasNext()) {
+            try {
+                Annotation annotation = iterator.next();
+                if (annotation.getValue().contains("\r\n")) { //windows text
+                    String annotValue = annotation.getValue().replaceAll("\r\n", " ");
+                    annotation.setValue(annotValue);
+                }
+                if (annotation.getValue().contains("\n")) {
+                    String annotValue = annotation.getValue().replaceAll("\n", " ");
+                    annotation.setValue(annotValue);
+                }
+                if (annotation.getValue().contains("\r")) { //mac text
+                    String annotValue = annotation.getValue().replaceAll("\r", " ");
+                    annotation.setValue(annotValue);
+                }
+            } catch (Exception e) {
+            }
+        }
     }
 }
