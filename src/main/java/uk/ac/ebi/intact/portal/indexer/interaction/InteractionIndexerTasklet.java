@@ -39,6 +39,7 @@ import uk.ac.ebi.intact.graphdb.model.nodes.*;
 import uk.ac.ebi.intact.graphdb.service.GraphInteractionService;
 import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
+import uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields;
 import uk.ac.ebi.intact.search.interactions.service.InteractionIndexService;
 import uk.ac.ebi.intact.search.interactions.utils.DocumentType;
 import uk.ac.ebi.intact.search.interactions.utils.as.converters.DateFieldConverter;
@@ -368,7 +369,6 @@ public class InteractionIndexerTasklet implements Tasklet {
                     }
                     searchInteraction.setFirstAuthor(firstAuthor);
 
-//                    searchInteraction.setPublicationId((publication.getAuthors() != null) ? publication.getPubmedId() : "");
                     searchInteraction.setSourceDatabase((publication.getSource() != null) ? publication.getSource().getShortName() : "");
                     searchInteraction.setAsSource(cvToASSolrDocument(publication.getSource()));
                     searchInteraction.setReleaseDate((publication.getReleasedDate() != null) ? publication.getReleasedDate() : null);
@@ -397,12 +397,7 @@ public class InteractionIndexerTasklet implements Tasklet {
             searchInteraction.setAsAnnotations(!graphAnnotations.isEmpty() ? annotationsToASSolrDocument(graphAnnotations) : null);
 
             // Write different formats
-            searchInteraction.setJsonFormat(getInteractionAsFormat(interactionEvidence, "json"));
-            searchInteraction.setXml25Format(getInteractionAsFormat(interactionEvidence, "xml25"));
-            searchInteraction.setXml30Format(getInteractionAsFormat(interactionEvidence, "xml30"));
-            searchInteraction.setTab25Format(getInteractionAsFormat(interactionEvidence, "tab25"));
-            searchInteraction.setTab26Format(getInteractionAsFormat(interactionEvidence, "tab26"));
-            searchInteraction.setTab27Format(getInteractionAsFormat(interactionEvidence, "tab27"));
+            setFormatFields(searchInteraction, interactionEvidence);
         }
 
         return searchInteraction;
@@ -556,10 +551,19 @@ public class InteractionIndexerTasklet implements Tasklet {
         }
     }
 
+    private static void setFormatFields(SearchInteraction searchInteraction, BinaryInteractionEvidence interactionEvidence) {
+        cleanBinariesForExport(interactionEvidence);
+        searchInteraction.setJsonFormat(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.JSON_FORMAT));
+        searchInteraction.setXml25Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.XML_25_FORMAT));
+        searchInteraction.setXml30Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.XML_30_FORMAT));
+        searchInteraction.setTab25Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.TAB_25_FORMAT));
+        searchInteraction.setTab26Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.TAB_26_FORMAT));
+        searchInteraction.setTab27Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.TAB_27_FORMAT));
+    }
+
     private static String getInteractionAsFormat(BinaryInteractionEvidence interactionEvidence, String format) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         InteractionWriter xmlWriter = createInteractionEvidenceWriterFor(outputStream, format);
-        cleanBinariesForExport(interactionEvidence);
         xmlWriter.write(interactionEvidence);
         xmlWriter.flush();
         return outputStream.toString();
@@ -578,28 +582,27 @@ public class InteractionIndexerTasklet implements Tasklet {
 
         switch (format) {
             /* For the XML formats we are going to write in expanded format (not compact) to ease the streaming */
-            case "xml25":
+            case SearchInteractionFields.XML_25_FORMAT:
                 writer = writerFactory.getInteractionWriterWith(optionFactory.getDefaultExpandedXmlOptions(output, InteractionCategory.evidence,
                         ComplexType.n_ary, PsiXmlVersion.v2_5_4));
                 break;
-            case "xml30":
+            case SearchInteractionFields.XML_30_FORMAT:
                 writer = writerFactory.getInteractionWriterWith(optionFactory.getDefaultExpandedXmlOptions(output, InteractionCategory.evidence,
                         ComplexType.n_ary, PsiXmlVersion.v3_0_0));
                 break;
-            case "tab25":
+            case SearchInteractionFields.TAB_25_FORMAT:
                 writer = writerFactory.getInteractionWriterWith(optionFactory.getMitabOptions(output, InteractionCategory.evidence,
                         ComplexType.n_ary, new InteractionEvidenceSpokeExpansion(), false, MitabVersion.v2_5, false));
                 break;
-            case "tab26":
+            case SearchInteractionFields.TAB_26_FORMAT:
                 writer = writerFactory.getInteractionWriterWith(optionFactory.getMitabOptions(output, InteractionCategory.evidence,
                         ComplexType.n_ary, new InteractionEvidenceSpokeExpansion(), false, MitabVersion.v2_6, false));
                 break;
-            case "tab27":
+            case SearchInteractionFields.TAB_27_FORMAT:
                 writer = writerFactory.getInteractionWriterWith(optionFactory.getMitabOptions(output, InteractionCategory.evidence, ComplexType.n_ary,
                         new InteractionEvidenceSpokeExpansion(), false, MitabVersion.v2_7, false));
                 break;
-            case "json":
-            default:
+            case SearchInteractionFields.JSON_FORMAT:
                 try {
                     writer = writerFactory.getInteractionWriterWith(miJsonOptionFactory.getJsonOptions(output, InteractionCategory.evidence, null,
                             MIJsonType.n_ary_only, new CachedOlsOntologyTermFetcher(), null));
