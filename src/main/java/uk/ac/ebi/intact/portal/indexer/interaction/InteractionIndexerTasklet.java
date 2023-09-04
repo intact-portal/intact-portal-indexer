@@ -14,8 +14,22 @@ import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import psidev.psi.mi.jami.binary.BinaryInteractionEvidence;
+import psidev.psi.mi.jami.binary.expansion.InteractionEvidenceSpokeExpansion;
+import psidev.psi.mi.jami.bridges.exception.BridgeFailedException;
+import psidev.psi.mi.jami.bridges.ols.CachedOlsOntologyTermFetcher;
+import psidev.psi.mi.jami.commons.MIWriterOptionFactory;
+import psidev.psi.mi.jami.commons.PsiJami;
+import psidev.psi.mi.jami.datasource.InteractionWriter;
+import psidev.psi.mi.jami.factory.InteractionWriterFactory;
+import psidev.psi.mi.jami.json.InteractionViewerJson;
+import psidev.psi.mi.jami.json.MIJsonOptionFactory;
+import psidev.psi.mi.jami.json.MIJsonType;
+import psidev.psi.mi.jami.model.ComplexType;
+import psidev.psi.mi.jami.model.InteractionCategory;
 import psidev.psi.mi.jami.model.Organism;
+import psidev.psi.mi.jami.tab.MitabVersion;
 import psidev.psi.mi.jami.utils.CvTermUtils;
+import psidev.psi.mi.jami.xml.PsiXmlVersion;
 import uk.ac.ebi.intact.graphdb.model.nodes.*;
 import uk.ac.ebi.intact.graphdb.service.GraphInteractionService;
 import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
@@ -29,6 +43,7 @@ import utilities.Constants;
 import utilities.SolrDocumentConverterUtils;
 
 import javax.annotation.Resource;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.*;
@@ -45,11 +60,9 @@ public class InteractionIndexerTasklet implements Tasklet {
     private static final int PAGE_SIZE = 500;
     private static final int MAX_PING_TIME = 1000;
     private static final int MAX_ATTEMPTS = 5;
-    private static final int DEPTH = 0;
 
     private int attempts = 0;
     private boolean simulation = false;
-    private int binaryCounter = 1;//TODO... we need this for generating test interactions.xml, separate the logic later
 
     @Resource
     private GraphInteractionService graphInteractionService;
@@ -70,7 +83,7 @@ public class InteractionIndexerTasklet implements Tasklet {
      * @return
      */
     // TODO try to split this method into methods for specific(eg. Interactor/publication/participant etc.) details
-    public static SearchInteraction toSolrDocument(BinaryInteractionEvidence interactionEvidence, int binaryCounter, StyleService styleService) {
+    public static SearchInteraction toSolrDocument(BinaryInteractionEvidence interactionEvidence, StyleService styleService) {
 
         SearchInteraction searchInteraction = new SearchInteraction();
         List<SearchChildInteractor> searchChildInteractors = new ArrayList<>();
@@ -377,6 +390,14 @@ public class InteractionIndexerTasklet implements Tasklet {
             }
             searchInteraction.setAllAnnotations(!graphAnnotations.isEmpty() ? annotationsToSolrDocument(graphAnnotations) : null);
             searchInteraction.setAsAnnotations(!graphAnnotations.isEmpty() ? annotationsToASSolrDocument(graphAnnotations) : null);
+
+            // Write different formats
+            searchInteraction.setJsonFormat(getInteractionAsFormat(interactionEvidence, "json"));
+            searchInteraction.setXml25Format(getInteractionAsFormat(interactionEvidence, "xml25"));
+            searchInteraction.setXml30Format(getInteractionAsFormat(interactionEvidence, "xml30"));
+            searchInteraction.setTab25Format(getInteractionAsFormat(interactionEvidence, "tab25"));
+            searchInteraction.setTab26Format(getInteractionAsFormat(interactionEvidence, "tab26"));
+            searchInteraction.setTab27Format(getInteractionAsFormat(interactionEvidence, "tab27"));
         }
 
         return searchInteraction;
@@ -471,8 +492,7 @@ public class InteractionIndexerTasklet implements Tasklet {
             for (GraphBinaryInteractionEvidence graphInteraction : interactionList) {
 
                 try {
-                    interactions.add(toSolrDocument(graphInteraction, binaryCounter, styleService));
-                    this.binaryCounter++;
+                    interactions.add(toSolrDocument(graphInteraction, styleService));
                 } catch (Exception e) {
                     log.error("Interaction with ac: " + graphInteraction.getAc() + " could not be indexed because of exception  :- ");
                     e.printStackTrace();
@@ -529,5 +549,60 @@ public class InteractionIndexerTasklet implements Tasklet {
         } else {
             throw new IllegalStateException("Solr server not responding in time. Aborting.");
         }
+    }
+
+    private static String getInteractionAsFormat(BinaryInteractionEvidence interactionEvidence, String format) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        InteractionWriter xmlWriter = createInteractionEvidenceWriterFor(outputStream, format);
+        xmlWriter.write(interactionEvidence);
+        xmlWriter.flush();
+        return outputStream.toString();
+    }
+
+    private static InteractionWriter createInteractionEvidenceWriterFor(Object output, String format) {
+        PsiJami.initialiseAllInteractionWriters();
+        PsiJami.initialiseAllMIDataSources();
+        InteractionViewerJson.initialiseAllMIJsonWriters();
+
+        InteractionWriterFactory writerFactory = InteractionWriterFactory.getInstance();
+        MIWriterOptionFactory optionFactory = MIWriterOptionFactory.getInstance();
+        MIJsonOptionFactory miJsonOptionFactory = MIJsonOptionFactory.getInstance();
+
+        InteractionWriter writer = null;
+
+        switch (format) {
+            /* For the XML formats we are going to write in expanded format (not compact) to ease the streaming */
+            case "xml25":
+                writer = writerFactory.getInteractionWriterWith(optionFactory.getDefaultExpandedXmlOptions(output, InteractionCategory.evidence,
+                        ComplexType.n_ary, PsiXmlVersion.v2_5_4));
+                break;
+            case "xml30":
+                writer = writerFactory.getInteractionWriterWith(optionFactory.getDefaultExpandedXmlOptions(output, InteractionCategory.evidence,
+                        ComplexType.n_ary, PsiXmlVersion.v3_0_0));
+                break;
+            case "tab25":
+                writer = writerFactory.getInteractionWriterWith(optionFactory.getMitabOptions(output, InteractionCategory.evidence,
+                        ComplexType.n_ary, new InteractionEvidenceSpokeExpansion(), false, MitabVersion.v2_5, false));
+                break;
+            case "tab26":
+                writer = writerFactory.getInteractionWriterWith(optionFactory.getMitabOptions(output, InteractionCategory.evidence,
+                        ComplexType.n_ary, new InteractionEvidenceSpokeExpansion(), false, MitabVersion.v2_6, false));
+                break;
+            case "tab27":
+                writer = writerFactory.getInteractionWriterWith(optionFactory.getMitabOptions(output, InteractionCategory.evidence, ComplexType.n_ary,
+                        new InteractionEvidenceSpokeExpansion(), false, MitabVersion.v2_7, false));
+                break;
+            case "json":
+            default:
+                try {
+                    writer = writerFactory.getInteractionWriterWith(miJsonOptionFactory.getJsonOptions(output, InteractionCategory.evidence, null,
+                            MIJsonType.n_ary_only, new CachedOlsOntologyTermFetcher(), null));
+                } catch (BridgeFailedException e) {
+                    writer = writerFactory.getInteractionWriterWith(miJsonOptionFactory.getJsonOptions(output, InteractionCategory.evidence, null,
+                            MIJsonType.n_ary_only, null, null));
+                }
+                break;
+        }
+        return writer;
     }
 }
