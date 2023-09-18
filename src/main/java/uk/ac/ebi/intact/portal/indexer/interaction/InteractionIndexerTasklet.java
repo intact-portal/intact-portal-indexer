@@ -32,6 +32,8 @@ import psidev.psi.mi.jami.model.Interactor;
 import psidev.psi.mi.jami.model.Organism;
 import psidev.psi.mi.jami.model.Participant;
 import psidev.psi.mi.jami.model.Publication;
+import psidev.psi.mi.jami.model.impl.DefaultConfidence;
+import psidev.psi.mi.jami.model.impl.DefaultCvTerm;
 import psidev.psi.mi.jami.tab.MitabVersion;
 import psidev.psi.mi.jami.utils.CvTermUtils;
 import psidev.psi.mi.jami.xml.PsiXmlVersion;
@@ -285,9 +287,15 @@ public class InteractionIndexerTasklet implements Tasklet {
             searchInteraction.setBinaryInteractionId(graphBinaryInteractionEvidence.getGraphId());// use binary counter while generating test interactions.xml
             searchInteraction.setDocumentType(DocumentType.INTERACTION);
             GraphClusteredInteraction graphClusteredInteraction = graphBinaryInteractionEvidence.getClusteredInteraction();
-            Set<String> intactConfidence = new HashSet<String>();
+//            Set<String> intactConfidence = new HashSet<String>();
             if (graphClusteredInteraction != null) {
-                intactConfidence.add("intact-miscore:" + graphClusteredInteraction.getMiscore());
+                GraphConfidence miScoreConfidence = createMiScoreConfidence(graphClusteredInteraction.getMiscore());
+                if (graphBinaryInteractionEvidence.getConfidences() != null) {
+                    graphBinaryInteractionEvidence.getConfidences().add(miScoreConfidence);
+                } else {
+                    graphBinaryInteractionEvidence.setConfidences(Collections.singletonList(miScoreConfidence));
+                }
+//                intactConfidence.add("intact-miscore:" + graphClusteredInteraction.getMiscore());
                 searchInteraction.setIntactMiscore(graphClusteredInteraction.getMiscore());
                 searchInteraction.setAsIntactMiscore(graphClusteredInteraction.getMiscore());
             }
@@ -299,7 +307,7 @@ public class InteractionIndexerTasklet implements Tasklet {
             interactionIds.addAll(xrefsToASSolrDocument(graphBinaryInteractionEvidence.getIdentifiers()));
             searchInteraction.setAsInteractionIds(!interactionIds.isEmpty() ? interactionIds : null);
 
-            searchInteraction.setConfidenceValues(!intactConfidence.isEmpty() ? intactConfidence : null);
+//            searchInteraction.setConfidenceValues(!intactConfidence.isEmpty() ? intactConfidence : null);
 
             final String shortName = graphBinaryInteractionEvidence.getInteractionType().getShortName();
             searchInteraction.setType(graphBinaryInteractionEvidence.getInteractionType() != null ? shortName : null);
@@ -551,7 +559,7 @@ public class InteractionIndexerTasklet implements Tasklet {
         }
     }
 
-    private static void setFormatFields(SearchInteraction searchInteraction, BinaryInteractionEvidence interactionEvidence) {
+    private static void setFormatFields(SearchInteraction searchInteraction, BinaryInteractionEvidence interactionEvidence) {//, GraphClusteredInteraction graphClusteredInteraction) {
         cleanBinariesForExport(interactionEvidence);
         searchInteraction.setJsonFormat(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.JSON_FORMAT));
         searchInteraction.setXml25Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.XML_25_FORMAT));
@@ -703,5 +711,12 @@ public class InteractionIndexerTasklet implements Tasklet {
             } catch (Exception e) {
             }
         }
+    }
+
+    private static GraphConfidence createMiScoreConfidence(double score) {
+        return new GraphConfidence(new DefaultConfidence(
+                new GraphCvTerm(new DefaultCvTerm("intact-miscore"), false), Double.toString(score)),
+                false);
+
     }
 }
