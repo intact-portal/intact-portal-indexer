@@ -561,12 +561,42 @@ public class InteractionIndexerTasklet implements Tasklet {
 
     private static void setFormatFields(SearchInteraction searchInteraction, BinaryInteractionEvidence interactionEvidence) {//, GraphClusteredInteraction graphClusteredInteraction) {
         cleanBinariesForExport(interactionEvidence);
-        searchInteraction.setJsonFormat(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.JSON_FORMAT));
-        searchInteraction.setXml25Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.XML_25_FORMAT));
-        searchInteraction.setXml30Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.XML_30_FORMAT));
-        searchInteraction.setTab25Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.TAB_25_FORMAT));
-        searchInteraction.setTab26Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.TAB_26_FORMAT));
-        searchInteraction.setTab27Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.TAB_27_FORMAT));
+        try {
+            searchInteraction.setJsonFormat(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.JSON_FORMAT));
+        } catch (Exception e) {
+            log.error("JSON_FORMAT error");
+            e.printStackTrace();
+        }
+        try {
+            searchInteraction.setXml25Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.XML_25_FORMAT));
+        } catch (Exception e) {
+            log.error("XML_25_FORMAT error");
+            e.printStackTrace();
+        }
+        try {
+            searchInteraction.setXml30Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.XML_30_FORMAT));
+        } catch (Exception e) {
+            log.error("XML_30_FORMAT error");
+            e.printStackTrace();
+        }
+        try {
+            searchInteraction.setTab25Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.TAB_25_FORMAT));
+        } catch (Exception e) {
+            log.error("TAB_25_FORMAT error");
+            e.printStackTrace();
+        }
+        try {
+            searchInteraction.setTab26Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.TAB_26_FORMAT));
+        } catch (Exception e) {
+            log.error("TAB_26_FORMAT error");
+            e.printStackTrace();
+        }
+        try {
+            searchInteraction.setTab27Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.TAB_27_FORMAT));
+        } catch (Exception e) {
+            log.error("TAB_27_FORMAT error");
+            e.printStackTrace();
+        }
     }
 
     private static String getInteractionAsFormat(BinaryInteractionEvidence interactionEvidence, String format) {
