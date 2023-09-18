@@ -32,8 +32,6 @@ import psidev.psi.mi.jami.model.Interactor;
 import psidev.psi.mi.jami.model.Organism;
 import psidev.psi.mi.jami.model.Participant;
 import psidev.psi.mi.jami.model.Publication;
-import psidev.psi.mi.jami.model.impl.DefaultConfidence;
-import psidev.psi.mi.jami.model.impl.DefaultCvTerm;
 import psidev.psi.mi.jami.tab.MitabVersion;
 import psidev.psi.mi.jami.utils.CvTermUtils;
 import psidev.psi.mi.jami.xml.PsiXmlVersion;
@@ -252,7 +250,6 @@ public class InteractionIndexerTasklet implements Tasklet {
                 searchInteraction.setAsMutationB(searchInteraction.isMutationB());
             }
 
-
             searchInteraction.setFeatureCount(featureCount);
             searchInteraction.setAliasesA(!graphAliasesA.isEmpty() ? aliasesWithTypesToSolrDocument(graphAliasesA) : null);
             searchInteraction.setAliasesB(!graphAliasesB.isEmpty() ? aliasesWithTypesToSolrDocument(graphAliasesB) : null);
@@ -263,7 +260,6 @@ public class InteractionIndexerTasklet implements Tasklet {
             searchInteraction.setAsStoichiometry(stoichiometry);
             //experiment details
             GraphExperiment experiment = (GraphExperiment) graphBinaryInteractionEvidence.getExperiment();
-
 
             graphAnnotations.addAll(experiment.getAnnotations());
             searchInteraction.setDetectionMethod((graphBinaryInteractionEvidence.getExperiment() != null && graphBinaryInteractionEvidence.getExperiment().getInteractionDetectionMethod() != null) ? graphBinaryInteractionEvidence.getExperiment().getInteractionDetectionMethod().getShortName() : null);
@@ -287,20 +283,9 @@ public class InteractionIndexerTasklet implements Tasklet {
             searchInteraction.setBinaryInteractionId(graphBinaryInteractionEvidence.getGraphId());// use binary counter while generating test interactions.xml
             searchInteraction.setDocumentType(DocumentType.INTERACTION);
             GraphClusteredInteraction graphClusteredInteraction = graphBinaryInteractionEvidence.getClusteredInteraction();
-//            Set<String> intactConfidence = new HashSet<String>();
+            Set<String> intactConfidence = new HashSet<String>();
             if (graphClusteredInteraction != null) {
-                try {
-                    GraphConfidence miScoreConfidence = createMiScoreConfidence(graphClusteredInteraction.getMiscore());
-                    if (graphBinaryInteractionEvidence.getConfidences() != null && !graphBinaryInteractionEvidence.getConfidences().isEmpty()) {
-                        graphBinaryInteractionEvidence.getConfidences().add(miScoreConfidence);
-                    } else {
-                        graphBinaryInteractionEvidence.setConfidences(Collections.singletonList(miScoreConfidence));
-                    }
-                } catch (Exception e) {
-                    log.error("New confidence error");
-                    e.printStackTrace();
-                }
-//                intactConfidence.add("intact-miscore:" + graphClusteredInteraction.getMiscore());
+                intactConfidence.add("intact-miscore:" + graphClusteredInteraction.getMiscore());
                 searchInteraction.setIntactMiscore(graphClusteredInteraction.getMiscore());
                 searchInteraction.setAsIntactMiscore(graphClusteredInteraction.getMiscore());
             }
@@ -312,7 +297,7 @@ public class InteractionIndexerTasklet implements Tasklet {
             interactionIds.addAll(xrefsToASSolrDocument(graphBinaryInteractionEvidence.getIdentifiers()));
             searchInteraction.setAsInteractionIds(!interactionIds.isEmpty() ? interactionIds : null);
 
-//            searchInteraction.setConfidenceValues(!intactConfidence.isEmpty() ? intactConfidence : null);
+            searchInteraction.setConfidenceValues(!intactConfidence.isEmpty() ? intactConfidence : null);
 
             final String shortName = graphBinaryInteractionEvidence.getInteractionType().getShortName();
             searchInteraction.setType(graphBinaryInteractionEvidence.getInteractionType() != null ? shortName : null);
@@ -503,7 +488,6 @@ public class InteractionIndexerTasklet implements Tasklet {
 
             long convStart = System.currentTimeMillis();
             for (GraphBinaryInteractionEvidence graphInteraction : interactionList) {
-
                 try {
                     interactions.add(toSolrDocument(graphInteraction, styleService));
                 } catch (Exception e) {
@@ -564,44 +548,14 @@ public class InteractionIndexerTasklet implements Tasklet {
         }
     }
 
-    private static void setFormatFields(SearchInteraction searchInteraction, BinaryInteractionEvidence interactionEvidence) {//, GraphClusteredInteraction graphClusteredInteraction) {
+    private static void setFormatFields(SearchInteraction searchInteraction, BinaryInteractionEvidence interactionEvidence) {
         cleanBinariesForExport(interactionEvidence);
-        try {
-            searchInteraction.setJsonFormat(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.JSON_FORMAT));
-        } catch (Exception e) {
-            log.error("JSON_FORMAT error");
-            e.printStackTrace();
-        }
-        try {
-            searchInteraction.setXml25Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.XML_25_FORMAT));
-        } catch (Exception e) {
-            log.error("XML_25_FORMAT error");
-            e.printStackTrace();
-        }
-        try {
-            searchInteraction.setXml30Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.XML_30_FORMAT));
-        } catch (Exception e) {
-            log.error("XML_30_FORMAT error");
-            e.printStackTrace();
-        }
-        try {
-            searchInteraction.setTab25Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.TAB_25_FORMAT));
-        } catch (Exception e) {
-            log.error("TAB_25_FORMAT error");
-            e.printStackTrace();
-        }
-        try {
-            searchInteraction.setTab26Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.TAB_26_FORMAT));
-        } catch (Exception e) {
-            log.error("TAB_26_FORMAT error");
-            e.printStackTrace();
-        }
-        try {
-            searchInteraction.setTab27Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.TAB_27_FORMAT));
-        } catch (Exception e) {
-            log.error("TAB_27_FORMAT error");
-            e.printStackTrace();
-        }
+        searchInteraction.setJsonFormat(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.JSON_FORMAT));
+        searchInteraction.setXml25Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.XML_25_FORMAT));
+        searchInteraction.setXml30Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.XML_30_FORMAT));
+        searchInteraction.setTab25Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.TAB_25_FORMAT));
+        searchInteraction.setTab26Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.TAB_26_FORMAT));
+        searchInteraction.setTab27Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.TAB_27_FORMAT));
     }
 
     private static String getInteractionAsFormat(BinaryInteractionEvidence interactionEvidence, String format) {
@@ -746,12 +700,5 @@ public class InteractionIndexerTasklet implements Tasklet {
             } catch (Exception e) {
             }
         }
-    }
-
-    private static GraphConfidence createMiScoreConfidence(double score) {
-        return new GraphConfidence(new DefaultConfidence(
-                new GraphCvTerm(new DefaultCvTerm("intact-miscore"), true), Double.toString(score)),
-                true);
-
     }
 }
