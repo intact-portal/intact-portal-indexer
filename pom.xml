@@ -102,6 +102,13 @@
             </exclusions>
         </dependency>
 
+        <dependency>
+            <groupId>psidev.psi.mi.jami</groupId>
+            <artifactId>jami-commons</artifactId>
+            <version>${psi.jami.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
         <!--<dependency>-->
         <!--<groupId>uk.ac.ebi.intact.search</groupId>-->
         <!--<artifactId>intact-search-terms</artifactId>-->
