@@ -290,7 +290,7 @@ public class InteractionIndexerTasklet implements Tasklet {
 //            Set<String> intactConfidence = new HashSet<String>();
             if (graphClusteredInteraction != null) {
                 GraphConfidence miScoreConfidence = createMiScoreConfidence(graphClusteredInteraction.getMiscore());
-                if (graphBinaryInteractionEvidence.getConfidences() != null) {
+                if (graphBinaryInteractionEvidence.getConfidences() != null && !graphBinaryInteractionEvidence.getConfidences().isEmpty()) {
                     graphBinaryInteractionEvidence.getConfidences().add(miScoreConfidence);
                 } else {
                     graphBinaryInteractionEvidence.setConfidences(Collections.singletonList(miScoreConfidence));
