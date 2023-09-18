@@ -289,11 +289,16 @@ public class InteractionIndexerTasklet implements Tasklet {
             GraphClusteredInteraction graphClusteredInteraction = graphBinaryInteractionEvidence.getClusteredInteraction();
 //            Set<String> intactConfidence = new HashSet<String>();
             if (graphClusteredInteraction != null) {
-                GraphConfidence miScoreConfidence = createMiScoreConfidence(graphClusteredInteraction.getMiscore());
-                if (graphBinaryInteractionEvidence.getConfidences() != null && !graphBinaryInteractionEvidence.getConfidences().isEmpty()) {
-                    graphBinaryInteractionEvidence.getConfidences().add(miScoreConfidence);
-                } else {
-                    graphBinaryInteractionEvidence.setConfidences(Collections.singletonList(miScoreConfidence));
+                try {
+                    GraphConfidence miScoreConfidence = createMiScoreConfidence(graphClusteredInteraction.getMiscore());
+                    if (graphBinaryInteractionEvidence.getConfidences() != null && !graphBinaryInteractionEvidence.getConfidences().isEmpty()) {
+                        graphBinaryInteractionEvidence.getConfidences().add(miScoreConfidence);
+                    } else {
+                        graphBinaryInteractionEvidence.setConfidences(Collections.singletonList(miScoreConfidence));
+                    }
+                } catch (Exception e) {
+                    log.error("New confidence error");
+                    e.printStackTrace();
                 }
 //                intactConfidence.add("intact-miscore:" + graphClusteredInteraction.getMiscore());
                 searchInteraction.setIntactMiscore(graphClusteredInteraction.getMiscore());
@@ -745,8 +750,8 @@ public class InteractionIndexerTasklet implements Tasklet {
 
     private static GraphConfidence createMiScoreConfidence(double score) {
         return new GraphConfidence(new DefaultConfidence(
-                new GraphCvTerm(new DefaultCvTerm("intact-miscore"), false), Double.toString(score)),
-                false);
+                new GraphCvTerm(new DefaultCvTerm("intact-miscore"), true), Double.toString(score)),
+                true);
 
     }
 }
