@@ -26,6 +26,7 @@ import psidev.psi.mi.jami.json.MIJsonOptionFactory;
 import psidev.psi.mi.jami.json.MIJsonType;
 import psidev.psi.mi.jami.model.Annotation;
 import psidev.psi.mi.jami.model.ComplexType;
+import psidev.psi.mi.jami.model.Confidence;
 import psidev.psi.mi.jami.model.InteractionCategory;
 import psidev.psi.mi.jami.model.InteractionEvidence;
 import psidev.psi.mi.jami.model.Interactor;
@@ -285,15 +286,9 @@ public class InteractionIndexerTasklet implements Tasklet {
             searchInteraction.setBinaryInteractionId(graphBinaryInteractionEvidence.getGraphId());// use binary counter while generating test interactions.xml
             searchInteraction.setDocumentType(DocumentType.INTERACTION);
             GraphClusteredInteraction graphClusteredInteraction = graphBinaryInteractionEvidence.getClusteredInteraction();
-//            Set<String> intactConfidence = new HashSet<String>();
+            Set<String> intactConfidence = new HashSet<String>();
             if (graphClusteredInteraction != null) {
-                GraphConfidence miScoreConfidence = createMiScoreConfidence(graphClusteredInteraction.getMiscore());
-                if (graphBinaryInteractionEvidence.getConfidences() != null && !graphBinaryInteractionEvidence.getConfidences().isEmpty()) {
-                    graphBinaryInteractionEvidence.getConfidences().add(miScoreConfidence);
-                } else {
-                    graphBinaryInteractionEvidence.setConfidences(Collections.singletonList(miScoreConfidence));
-                }
-//                intactConfidence.add("intact-miscore:" + graphClusteredInteraction.getMiscore());
+                intactConfidence.add("intact-miscore:" + graphClusteredInteraction.getMiscore());
                 searchInteraction.setIntactMiscore(graphClusteredInteraction.getMiscore());
                 searchInteraction.setAsIntactMiscore(graphClusteredInteraction.getMiscore());
             }
@@ -305,7 +300,7 @@ public class InteractionIndexerTasklet implements Tasklet {
             interactionIds.addAll(xrefsToASSolrDocument(graphBinaryInteractionEvidence.getIdentifiers()));
             searchInteraction.setAsInteractionIds(!interactionIds.isEmpty() ? interactionIds : null);
 
-//            searchInteraction.setConfidenceValues(!intactConfidence.isEmpty() ? intactConfidence : null);
+            searchInteraction.setConfidenceValues(!intactConfidence.isEmpty() ? intactConfidence : null);
 
             final String shortName = graphBinaryInteractionEvidence.getInteractionType().getShortName();
             searchInteraction.setType(graphBinaryInteractionEvidence.getInteractionType() != null ? shortName : null);
@@ -403,7 +398,7 @@ public class InteractionIndexerTasklet implements Tasklet {
             searchInteraction.setAsAnnotations(!graphAnnotations.isEmpty() ? annotationsToASSolrDocument(graphAnnotations) : null);
 
             // Write different formats
-            setFormatFields(searchInteraction, interactionEvidence);
+            setFormatFields(searchInteraction, interactionEvidence, graphClusteredInteraction);
         }
 
         return searchInteraction;
@@ -556,21 +551,33 @@ public class InteractionIndexerTasklet implements Tasklet {
         }
     }
 
-    private static void setFormatFields(SearchInteraction searchInteraction, BinaryInteractionEvidence interactionEvidence) {
+    private static void setFormatFields(
+            SearchInteraction searchInteraction,
+            BinaryInteractionEvidence interactionEvidence,
+            GraphClusteredInteraction graphClusteredInteraction) {
+
         cleanBinariesForExport(interactionEvidence);
-        searchInteraction.setJsonFormat(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.JSON_FORMAT));
-        searchInteraction.setXml25Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.XML_25_FORMAT));
-        searchInteraction.setXml30Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.XML_30_FORMAT));
-        searchInteraction.setTab25Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.TAB_25_FORMAT));
-        searchInteraction.setTab26Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.TAB_26_FORMAT));
-        searchInteraction.setTab27Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.TAB_27_FORMAT));
+
+        Confidence miScoreConfidence = null;
+        if (graphClusteredInteraction != null) {
+            miScoreConfidence = new DefaultConfidence(
+                    new DefaultCvTerm("intact-miscore"),
+                    Double.toString(graphClusteredInteraction.getMiscore()));
+        }
+
+        searchInteraction.setJsonFormat(getInteractionAsFormat(interactionEvidence, miScoreConfidence, SearchInteractionFields.JSON_FORMAT));
+        searchInteraction.setXml25Format(getInteractionAsFormat(interactionEvidence, miScoreConfidence, SearchInteractionFields.XML_25_FORMAT));
+        searchInteraction.setXml30Format(getInteractionAsFormat(interactionEvidence, miScoreConfidence, SearchInteractionFields.XML_30_FORMAT));
+        searchInteraction.setTab25Format(getInteractionAsFormat(interactionEvidence, miScoreConfidence, SearchInteractionFields.TAB_25_FORMAT));
+        searchInteraction.setTab26Format(getInteractionAsFormat(interactionEvidence, miScoreConfidence, SearchInteractionFields.TAB_26_FORMAT));
+        searchInteraction.setTab27Format(getInteractionAsFormat(interactionEvidence, miScoreConfidence, SearchInteractionFields.TAB_27_FORMAT));
     }
 
-    private static String getInteractionAsFormat(BinaryInteractionEvidence interactionEvidence, String format) {
+    private static String getInteractionAsFormat(BinaryInteractionEvidence interactionEvidence, Confidence miScoreConfidence, String format) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        InteractionWriter xmlWriter = createInteractionEvidenceWriterFor(outputStream, format);
-        xmlWriter.write(interactionEvidence);
-        xmlWriter.flush();
+        InteractionWriter writer = createInteractionEvidenceWriterFor(outputStream, format);
+        writer.write(interactionEvidence, miScoreConfidence);
+        writer.flush();
         return outputStream.toString();
     }
 
@@ -708,12 +715,5 @@ public class InteractionIndexerTasklet implements Tasklet {
             } catch (Exception e) {
             }
         }
-    }
-
-    private static GraphConfidence createMiScoreConfidence(double score) {
-        return new GraphConfidence(new DefaultConfidence(
-                new GraphCvTerm(new DefaultCvTerm("intact-miscore"), true), Double.toString(score)),
-                true);
-
     }
 }
