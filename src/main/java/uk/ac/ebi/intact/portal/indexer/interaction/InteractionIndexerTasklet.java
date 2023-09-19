@@ -33,8 +33,6 @@ import psidev.psi.mi.jami.model.Interactor;
 import psidev.psi.mi.jami.model.Organism;
 import psidev.psi.mi.jami.model.Participant;
 import psidev.psi.mi.jami.model.Publication;
-import psidev.psi.mi.jami.model.impl.DefaultConfidence;
-import psidev.psi.mi.jami.model.impl.DefaultCvTerm;
 import psidev.psi.mi.jami.tab.MitabVersion;
 import psidev.psi.mi.jami.utils.CvTermUtils;
 import psidev.psi.mi.jami.xml.PsiXmlVersion;
@@ -558,25 +556,23 @@ public class InteractionIndexerTasklet implements Tasklet {
 
         cleanBinariesForExport(interactionEvidence);
 
-        Confidence miScoreConfidence = null;
+        Double miScore = null;
         if (graphClusteredInteraction != null) {
-            miScoreConfidence = new DefaultConfidence(
-                    new DefaultCvTerm("intact-miscore"),
-                    Double.toString(graphClusteredInteraction.getMiscore()));
+            miScore = graphClusteredInteraction.getMiscore();
         }
 
-        searchInteraction.setJsonFormat(getInteractionAsFormat(interactionEvidence, miScoreConfidence, SearchInteractionFields.JSON_FORMAT));
-        searchInteraction.setXml25Format(getInteractionAsFormat(interactionEvidence, miScoreConfidence, SearchInteractionFields.XML_25_FORMAT));
-        searchInteraction.setXml30Format(getInteractionAsFormat(interactionEvidence, miScoreConfidence, SearchInteractionFields.XML_30_FORMAT));
-        searchInteraction.setTab25Format(getInteractionAsFormat(interactionEvidence, miScoreConfidence, SearchInteractionFields.TAB_25_FORMAT));
-        searchInteraction.setTab26Format(getInteractionAsFormat(interactionEvidence, miScoreConfidence, SearchInteractionFields.TAB_26_FORMAT));
-        searchInteraction.setTab27Format(getInteractionAsFormat(interactionEvidence, miScoreConfidence, SearchInteractionFields.TAB_27_FORMAT));
+        searchInteraction.setJsonFormat(getInteractionAsFormat(interactionEvidence, miScore, SearchInteractionFields.JSON_FORMAT));
+        searchInteraction.setXml25Format(getInteractionAsFormat(interactionEvidence, miScore, SearchInteractionFields.XML_25_FORMAT));
+        searchInteraction.setXml30Format(getInteractionAsFormat(interactionEvidence, miScore, SearchInteractionFields.XML_30_FORMAT));
+        searchInteraction.setTab25Format(getInteractionAsFormat(interactionEvidence, miScore, SearchInteractionFields.TAB_25_FORMAT));
+        searchInteraction.setTab26Format(getInteractionAsFormat(interactionEvidence, miScore, SearchInteractionFields.TAB_26_FORMAT));
+        searchInteraction.setTab27Format(getInteractionAsFormat(interactionEvidence, miScore, SearchInteractionFields.TAB_27_FORMAT));
     }
 
-    private static String getInteractionAsFormat(BinaryInteractionEvidence interactionEvidence, Confidence miScoreConfidence, String format) {
+    private static String getInteractionAsFormat(BinaryInteractionEvidence interactionEvidence, Double miScore, String format) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         InteractionWriter writer = createInteractionEvidenceWriterFor(outputStream, format);
-        writer.write(interactionEvidence, miScoreConfidence);
+        writer.write(interactionEvidence, miScore);
         writer.flush();
         return outputStream.toString();
     }
