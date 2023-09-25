@@ -14,7 +14,6 @@ import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import psidev.psi.mi.jami.binary.BinaryInteractionEvidence;
-import psidev.psi.mi.jami.binary.expansion.InteractionEvidenceSpokeExpansion;
 import psidev.psi.mi.jami.bridges.exception.BridgeFailedException;
 import psidev.psi.mi.jami.bridges.ols.CachedOlsOntologyTermFetcher;
 import psidev.psi.mi.jami.commons.MIWriterOptionFactory;
@@ -26,7 +25,6 @@ import psidev.psi.mi.jami.json.MIJsonOptionFactory;
 import psidev.psi.mi.jami.json.MIJsonType;
 import psidev.psi.mi.jami.model.Annotation;
 import psidev.psi.mi.jami.model.ComplexType;
-import psidev.psi.mi.jami.model.Confidence;
 import psidev.psi.mi.jami.model.InteractionCategory;
 import psidev.psi.mi.jami.model.InteractionEvidence;
 import psidev.psi.mi.jami.model.Interactor;
@@ -396,7 +394,7 @@ public class InteractionIndexerTasklet implements Tasklet {
             searchInteraction.setAsAnnotations(!graphAnnotations.isEmpty() ? annotationsToASSolrDocument(graphAnnotations) : null);
 
             // Write different formats
-            setFormatFields(searchInteraction, interactionEvidence, graphClusteredInteraction);
+            setFormatFields(searchInteraction, interactionEvidence);
         }
 
         return searchInteraction;
@@ -549,30 +547,20 @@ public class InteractionIndexerTasklet implements Tasklet {
         }
     }
 
-    private static void setFormatFields(
-            SearchInteraction searchInteraction,
-            BinaryInteractionEvidence interactionEvidence,
-            GraphClusteredInteraction graphClusteredInteraction) {
-
+    private static void setFormatFields(SearchInteraction searchInteraction, BinaryInteractionEvidence interactionEvidence) {
         cleanBinariesForExport(interactionEvidence);
-
-        Double miScore = null;
-        if (graphClusteredInteraction != null) {
-            miScore = graphClusteredInteraction.getMiscore();
-        }
-
-        searchInteraction.setJsonFormat(getInteractionAsFormat(interactionEvidence, miScore, SearchInteractionFields.JSON_FORMAT));
-        searchInteraction.setXml25Format(getInteractionAsFormat(interactionEvidence, miScore, SearchInteractionFields.XML_25_FORMAT));
-        searchInteraction.setXml30Format(getInteractionAsFormat(interactionEvidence, miScore, SearchInteractionFields.XML_30_FORMAT));
-        searchInteraction.setTab25Format(getInteractionAsFormat(interactionEvidence, miScore, SearchInteractionFields.TAB_25_FORMAT));
-        searchInteraction.setTab26Format(getInteractionAsFormat(interactionEvidence, miScore, SearchInteractionFields.TAB_26_FORMAT));
-        searchInteraction.setTab27Format(getInteractionAsFormat(interactionEvidence, miScore, SearchInteractionFields.TAB_27_FORMAT));
+        searchInteraction.setJsonFormat(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.JSON_FORMAT));
+        searchInteraction.setXml25Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.XML_25_FORMAT));
+        searchInteraction.setXml30Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.XML_30_FORMAT));
+        searchInteraction.setTab25Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.TAB_25_FORMAT));
+        searchInteraction.setTab26Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.TAB_26_FORMAT));
+        searchInteraction.setTab27Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.TAB_27_FORMAT));
     }
 
-    private static String getInteractionAsFormat(BinaryInteractionEvidence interactionEvidence, Double miScore, String format) {
+    private static String getInteractionAsFormat(BinaryInteractionEvidence interactionEvidence, String format) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         InteractionWriter writer = createInteractionEvidenceWriterFor(outputStream, format);
-        writer.write(interactionEvidence, miScore);
+        writer.write(interactionEvidence);
         writer.flush();
         return outputStream.toString();
     }
@@ -598,17 +586,18 @@ public class InteractionIndexerTasklet implements Tasklet {
                 writer = writerFactory.getInteractionWriterWith(optionFactory.getDefaultExpandedXmlOptions(output, InteractionCategory.evidence,
                         ComplexType.n_ary, PsiXmlVersion.v3_0_0));
                 break;
+            // For the MiTab formats we are going to write in binary format to make sure confidences are written
             case SearchInteractionFields.TAB_25_FORMAT:
                 writer = writerFactory.getInteractionWriterWith(optionFactory.getMitabOptions(output, InteractionCategory.evidence,
-                        ComplexType.n_ary, new InteractionEvidenceSpokeExpansion(), false, MitabVersion.v2_5, false));
+                        ComplexType.binary, null, false, MitabVersion.v2_5, false));
                 break;
             case SearchInteractionFields.TAB_26_FORMAT:
                 writer = writerFactory.getInteractionWriterWith(optionFactory.getMitabOptions(output, InteractionCategory.evidence,
-                        ComplexType.n_ary, new InteractionEvidenceSpokeExpansion(), false, MitabVersion.v2_6, false));
+                        ComplexType.binary, null, false, MitabVersion.v2_6, false));
                 break;
             case SearchInteractionFields.TAB_27_FORMAT:
-                writer = writerFactory.getInteractionWriterWith(optionFactory.getMitabOptions(output, InteractionCategory.evidence, ComplexType.n_ary,
-                        new InteractionEvidenceSpokeExpansion(), false, MitabVersion.v2_7, false));
+                writer = writerFactory.getInteractionWriterWith(optionFactory.getMitabOptions(output, InteractionCategory.evidence,
+                        ComplexType.binary, null, false, MitabVersion.v2_7, false));
                 break;
             case SearchInteractionFields.JSON_FORMAT:
                 try {
