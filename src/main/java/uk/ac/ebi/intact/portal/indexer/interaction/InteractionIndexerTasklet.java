@@ -1,7 +1,5 @@
 package uk.ac.ebi.intact.portal.indexer.interaction;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.solr.client.solrj.SolrClient;
@@ -16,7 +14,6 @@ import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import psidev.psi.mi.jami.binary.BinaryInteractionEvidence;
-import psidev.psi.mi.jami.binary.expansion.InteractionEvidenceSpokeExpansion;
 import psidev.psi.mi.jami.bridges.exception.BridgeFailedException;
 import psidev.psi.mi.jami.bridges.ols.CachedOlsOntologyTermFetcher;
 import psidev.psi.mi.jami.commons.MIWriterOptionFactory;
@@ -26,9 +23,14 @@ import psidev.psi.mi.jami.factory.InteractionWriterFactory;
 import psidev.psi.mi.jami.json.InteractionViewerJson;
 import psidev.psi.mi.jami.json.MIJsonOptionFactory;
 import psidev.psi.mi.jami.json.MIJsonType;
+import psidev.psi.mi.jami.model.Annotation;
 import psidev.psi.mi.jami.model.ComplexType;
 import psidev.psi.mi.jami.model.InteractionCategory;
+import psidev.psi.mi.jami.model.InteractionEvidence;
+import psidev.psi.mi.jami.model.Interactor;
 import psidev.psi.mi.jami.model.Organism;
+import psidev.psi.mi.jami.model.Participant;
+import psidev.psi.mi.jami.model.Publication;
 import psidev.psi.mi.jami.tab.MitabVersion;
 import psidev.psi.mi.jami.utils.CvTermUtils;
 import psidev.psi.mi.jami.xml.PsiXmlVersion;
@@ -36,6 +38,7 @@ import uk.ac.ebi.intact.graphdb.model.nodes.*;
 import uk.ac.ebi.intact.graphdb.service.GraphInteractionService;
 import uk.ac.ebi.intact.search.interactions.model.SearchChildInteractor;
 import uk.ac.ebi.intact.search.interactions.model.SearchInteraction;
+import uk.ac.ebi.intact.search.interactions.model.SearchInteractionFields;
 import uk.ac.ebi.intact.search.interactions.service.InteractionIndexService;
 import uk.ac.ebi.intact.search.interactions.utils.DocumentType;
 import uk.ac.ebi.intact.search.interactions.utils.as.converters.DateFieldConverter;
@@ -85,7 +88,7 @@ public class InteractionIndexerTasklet implements Tasklet {
      * @return
      */
     // TODO try to split this method into methods for specific(eg. Interactor/publication/participant etc.) details
-    public static SearchInteraction toSolrDocument(BinaryInteractionEvidence interactionEvidence, StyleService styleService) throws JsonProcessingException {
+    public static SearchInteraction toSolrDocument(BinaryInteractionEvidence interactionEvidence, StyleService styleService) {
 
         SearchInteraction searchInteraction = new SearchInteraction();
         List<SearchChildInteractor> searchChildInteractors = new ArrayList<>();
@@ -363,7 +366,6 @@ public class InteractionIndexerTasklet implements Tasklet {
                     }
                     searchInteraction.setFirstAuthor(firstAuthor);
 
-//                    searchInteraction.setPublicationId((publication.getAuthors() != null) ? publication.getPubmedId() : "");
                     searchInteraction.setSourceDatabase((publication.getSource() != null) ? publication.getSource().getShortName() : "");
                     searchInteraction.setAsSource(cvToASSolrDocument(publication.getSource()));
                     searchInteraction.setReleaseDate((publication.getReleasedDate() != null) ? publication.getReleasedDate() : null);
@@ -391,29 +393,11 @@ public class InteractionIndexerTasklet implements Tasklet {
             searchInteraction.setAllAnnotations(!graphAnnotations.isEmpty() ? annotationsToSolrDocument(graphAnnotations) : null);
             searchInteraction.setAsAnnotations(!graphAnnotations.isEmpty() ? annotationsToASSolrDocument(graphAnnotations) : null);
 
-            // Write serialised JSON
-            ObjectMapper objectMapper = new ObjectMapper();
-            String serialisedInteraction = objectMapper.writeValueAsString(graphBinaryInteractionEvidence);
-            searchInteraction.setSerialisedInteraction(serialisedInteraction);
-
             // Write different formats
-            searchInteraction.setJsonFormat(getInteractionAsFormat(interactionEvidence, "jsonFormat"));
-            searchInteraction.setXml25Format(getInteractionAsFormat(interactionEvidence, "xml25Format"));
-            searchInteraction.setXml30Format(getInteractionAsFormat(interactionEvidence, "xml30Format"));
-            searchInteraction.setTab25Format(getInteractionAsFormat(interactionEvidence, "tab25Format"));
-            searchInteraction.setTab26Format(getInteractionAsFormat(interactionEvidence, "tab26Format"));
-            searchInteraction.setTab27Format(getInteractionAsFormat(interactionEvidence, "tab27Format"));
+            setFormatFields(searchInteraction, interactionEvidence);
         }
 
         return searchInteraction;
-    }
-
-    private static String getInteractionAsFormat(BinaryInteractionEvidence interactionEvidence, String format) {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        InteractionWriter xmlWriter = createInteractionEvidenceWriterFor(outputStream, format);
-        xmlWriter.write(interactionEvidence);
-        xmlWriter.flush();
-        return outputStream.toString();
     }
 
     private static boolean affectedByMutationToSolrDocument(StyleService styleService, SearchInteraction searchInteraction, List<GraphFeature> ographFeatures) {
@@ -505,7 +489,6 @@ public class InteractionIndexerTasklet implements Tasklet {
             for (GraphBinaryInteractionEvidence graphInteraction : interactionList) {
                 try {
                     interactions.add(toSolrDocument(graphInteraction, styleService));
-//                    log.info("SUCCESS - Interaction with ac: " + graphInteraction.getAc());
                 } catch (Exception e) {
                     log.error("Interaction with ac: " + graphInteraction.getAc() + " could not be indexed because of exception  :- ");
                     e.printStackTrace();
@@ -564,6 +547,23 @@ public class InteractionIndexerTasklet implements Tasklet {
         }
     }
 
+    private static void setFormatFields(SearchInteraction searchInteraction, BinaryInteractionEvidence interactionEvidence) {
+        cleanBinariesForExport(interactionEvidence);
+        searchInteraction.setJsonFormat(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.JSON_FORMAT));
+        searchInteraction.setXml25Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.XML_25_FORMAT));
+        searchInteraction.setXml30Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.XML_30_FORMAT));
+        searchInteraction.setTab25Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.TAB_25_FORMAT));
+        searchInteraction.setTab26Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.TAB_26_FORMAT));
+        searchInteraction.setTab27Format(getInteractionAsFormat(interactionEvidence, SearchInteractionFields.TAB_27_FORMAT));
+    }
+
+    private static String getInteractionAsFormat(BinaryInteractionEvidence interactionEvidence, String format) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        InteractionWriter writer = createInteractionEvidenceWriterFor(outputStream, format);
+        writer.write(interactionEvidence);
+        writer.flush();
+        return outputStream.toString();
+    }
 
     private static InteractionWriter createInteractionEvidenceWriterFor(Object output, String format) {
         PsiJami.initialiseAllInteractionWriters();
@@ -578,28 +578,28 @@ public class InteractionIndexerTasklet implements Tasklet {
 
         switch (format) {
             /* For the XML formats we are going to write in expanded format (not compact) to ease the streaming */
-            case "xml25Format":
+            case SearchInteractionFields.XML_25_FORMAT:
                 writer = writerFactory.getInteractionWriterWith(optionFactory.getDefaultExpandedXmlOptions(output, InteractionCategory.evidence,
                         ComplexType.n_ary, PsiXmlVersion.v2_5_4));
                 break;
-            case "xml30Format":
+            case SearchInteractionFields.XML_30_FORMAT:
                 writer = writerFactory.getInteractionWriterWith(optionFactory.getDefaultExpandedXmlOptions(output, InteractionCategory.evidence,
                         ComplexType.n_ary, PsiXmlVersion.v3_0_0));
                 break;
-            case "tab25Format":
+            // For the MiTab formats we are going to write in binary format to make sure confidences are written
+            case SearchInteractionFields.TAB_25_FORMAT:
                 writer = writerFactory.getInteractionWriterWith(optionFactory.getMitabOptions(output, InteractionCategory.evidence,
-                        ComplexType.n_ary, new InteractionEvidenceSpokeExpansion(), false, MitabVersion.v2_5, false));
+                        ComplexType.binary, null, false, MitabVersion.v2_5, false));
                 break;
-            case "tab26Format":
+            case SearchInteractionFields.TAB_26_FORMAT:
                 writer = writerFactory.getInteractionWriterWith(optionFactory.getMitabOptions(output, InteractionCategory.evidence,
-                        ComplexType.n_ary, new InteractionEvidenceSpokeExpansion(), false, MitabVersion.v2_6, false));
+                        ComplexType.binary, null, false, MitabVersion.v2_6, false));
                 break;
-            case "tab27Format":
-                writer = writerFactory.getInteractionWriterWith(optionFactory.getMitabOptions(output, InteractionCategory.evidence, ComplexType.n_ary,
-                        new InteractionEvidenceSpokeExpansion(), false, MitabVersion.v2_7, false));
+            case SearchInteractionFields.TAB_27_FORMAT:
+                writer = writerFactory.getInteractionWriterWith(optionFactory.getMitabOptions(output, InteractionCategory.evidence,
+                        ComplexType.binary, null, false, MitabVersion.v2_7, false));
                 break;
-            case "jsonFormat":
-            default:
+            case SearchInteractionFields.JSON_FORMAT:
                 try {
                     writer = writerFactory.getInteractionWriterWith(miJsonOptionFactory.getJsonOptions(output, InteractionCategory.evidence, null,
                             MIJsonType.n_ary_only, new CachedOlsOntologyTermFetcher(), null));
@@ -610,5 +610,95 @@ public class InteractionIndexerTasklet implements Tasklet {
                 break;
         }
         return writer;
+    }
+
+    private static void cleanBinariesForExport(InteractionEvidence interactionEvidence) {
+        // interaction annotation cleaning
+        try {
+            cleanAnnotations(interactionEvidence.getAnnotations());
+        } catch (Exception e) {
+        }
+
+        //interactor annotation cleaning
+        try {
+            List<Interactor> interactorList = new ArrayList<>();
+            if (interactionEvidence instanceof GraphBinaryInteractionEvidence) {
+                GraphBinaryInteractionEvidence graphBinaryInteractionEvidence = (GraphBinaryInteractionEvidence) interactionEvidence;
+                if (graphBinaryInteractionEvidence.getInteractorA() != null) {
+                    interactorList.add(graphBinaryInteractionEvidence.getInteractorA());
+                }
+                if (graphBinaryInteractionEvidence.getInteractorB() != null) {
+                    interactorList.add(graphBinaryInteractionEvidence.getInteractorB());
+                }
+            } else {
+                for (Participant participant : interactionEvidence.getParticipants()) {
+                    interactorList.add(participant.getInteractor());
+                }
+            }
+            for (Interactor interactor : interactorList) {
+                try {
+                    cleanAnnotations(interactor.getAnnotations());
+                } catch (Exception e) {
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // publication authors cleaning
+        try {
+            Publication publication = interactionEvidence.getExperiment().getPublication();
+            List<String> cleanedAuthors = new ArrayList<>();
+            boolean areAuthorsClean = true;
+            for (String author : publication.getAuthors()) {
+                String cleanedAuthor = author;
+                if (author.contains("\r\n")) { //windows text
+                    cleanedAuthor = author.replaceAll("\r\n", "");
+                    areAuthorsClean = false;
+                } else if (author.contains("\n")) {
+                    cleanedAuthor = author.replaceAll("\n", "");
+                    areAuthorsClean = false;
+                } else if (author.contains("\r")) { //mac text
+                    cleanedAuthor = author.replaceAll("\r", "");
+                    areAuthorsClean = false;
+                }
+                if (cleanedAuthor.contains(",")) {
+                    areAuthorsClean = false;
+                    cleanedAuthors.addAll(Arrays.asList(cleanedAuthor.split(",")));
+                } else if (cleanedAuthor.contains(";")) {
+                    areAuthorsClean = false;
+                    cleanedAuthors.addAll(Arrays.asList(cleanedAuthor.split(";")));
+                } else {
+                    cleanedAuthors.add(cleanedAuthor);
+                }
+            }
+            if (!areAuthorsClean) {
+                publication.getAuthors().clear();
+                publication.getAuthors().addAll(cleanedAuthors);
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    private static void cleanAnnotations(Collection<Annotation> annotations) {
+        Iterator<Annotation> iterator = annotations.iterator();
+        while (iterator.hasNext()) {
+            try {
+                Annotation annotation = iterator.next();
+                if (annotation.getValue().contains("\r\n")) { //windows text
+                    String annotValue = annotation.getValue().replaceAll("\r\n", " ");
+                    annotation.setValue(annotValue);
+                }
+                if (annotation.getValue().contains("\n")) {
+                    String annotValue = annotation.getValue().replaceAll("\n", " ");
+                    annotation.setValue(annotValue);
+                }
+                if (annotation.getValue().contains("\r")) { //mac text
+                    String annotValue = annotation.getValue().replaceAll("\r", " ");
+                    annotation.setValue(annotValue);
+                }
+            } catch (Exception e) {
+            }
+        }
     }
 }
