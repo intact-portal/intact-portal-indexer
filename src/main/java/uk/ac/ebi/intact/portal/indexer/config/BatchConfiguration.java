@@ -10,9 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import uk.ac.ebi.intact.portal.indexer.IndexCleanerTasklet;
-import uk.ac.ebi.intact.portal.indexer.listeners.JobCompletionNotificationListener;
+import uk.ac.ebi.intact.portal.indexer.cv.CVCleanerTasklet;
+import uk.ac.ebi.intact.portal.indexer.cv.CVIndexerTasklet;
+import uk.ac.ebi.intact.portal.indexer.interaction.InteractionCleanerTasklet;
+import uk.ac.ebi.intact.portal.indexer.interaction.InteractionIndexerTasklet;
+import uk.ac.ebi.intact.portal.indexer.interaction.clusteredInteraction.ClusteredInteractionCleanerTasklet;
+import uk.ac.ebi.intact.portal.indexer.interaction.clusteredInteraction.ClusteredInteractionIndexerTasklet;
+import uk.ac.ebi.intact.portal.indexer.interactor.InteractorCleanerTasklet;
 import uk.ac.ebi.intact.portal.indexer.interactor.InteractorIndexerTasklet;
+import uk.ac.ebi.intact.portal.indexer.listeners.JobCompletionNotificationListener;
 
 @Configuration
 @EnableBatchProcessing
@@ -25,51 +31,84 @@ public class BatchConfiguration {
     @Autowired
     public StepBuilderFactory stepBuilderFactory;
 
-//    // tag::readerwriterprocessor[]
-//    @Bean
-//    public FlatFileItemReader<Person> reader() {
-//        return new FlatFileItemReaderBuilder<Person>()
-//                .name("personItemReader")
-//                .resource(new ClassPathResource("sample-data.csv"))
-//                .delimited()
-//                .names(new String[]{"firstName", "lastName"})
-//                .fieldSetMapper(new BeanWrapperFieldSetMapper<Person>() {{
-//                    setTargetType(Person.class);
-//                }})
-//                .build();
-//    }
-//
-//    @Bean
-//    public PersonItemProcessor processor() {
-//        return new PersonItemProcessor();
-//    }
-//
-//    @Bean
-//    public JdbcBatchItemWriter<Person> writer(DataSource dataSource) {
-//        return new JdbcBatchItemWriterBuilder<Person>()
-//                .itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
-//                .sql("INSERT INTO people (first_name, last_name) VALUES (:firstName, :lastName)")
-//                .dataSource(dataSource)
-//                .build();
-//    }
-//    // end::readerwriterprocessor[]
+    /*Job will all the indexing  steps*/
 
-    // tag::jobstep[]
     @Bean
     public Job intactPortalIndexerJob(JobCompletionNotificationListener listener,
-                                      Step indexCleanerStep,
-                                      Step interactorIndexingStep) {
+                                      Step interactorCleanerStep,
+                                      Step interactorIndexingStep,
+                                      Step interactionIndexCleanerStep,
+                                      Step interactionIndexingStep,
+                                      Step cvIndexCleanerStep,
+                                      Step cvIndexingStep,
+                                      Step clusteredInteractionIndexCleanerStep,
+                                      Step clusteredInteractionIndexingStep) {
         return jobBuilderFactory.get("intactPortalIndexerJob")
                 .incrementer(new RunIdIncrementer())
                 .listener(listener)
-                .start(indexCleanerStep)
+                .start(interactorCleanerStep)
+                .next(interactorIndexingStep)
+                .next(interactionIndexCleanerStep)
+                .next(interactionIndexingStep)
+                .next(cvIndexCleanerStep)
+                .next(cvIndexingStep)
+                .next(clusteredInteractionIndexCleanerStep)
+                .next(clusteredInteractionIndexingStep)
+                .build();
+    }
+
+    @Bean
+    public Job interactorIndexerJob(JobCompletionNotificationListener listener,
+                                    Step interactorCleanerStep,
+                                    Step interactorIndexingStep) {
+        return jobBuilderFactory.get("interactorIndexerJob")
+                .incrementer(new RunIdIncrementer())
+                .listener(listener)
+                .start(interactorCleanerStep)
                 .next(interactorIndexingStep)
                 .build();
     }
 
     @Bean
-    public Step indexCleanerStep(IndexCleanerTasklet tasklet) {
-        return stepBuilderFactory.get("indexCleanerStep")
+    public Job interactionIndexerJob(JobCompletionNotificationListener listener,
+                                     Step interactionIndexCleanerStep,
+                                     Step interactionIndexingStep) {
+        return jobBuilderFactory.get("interactionIndexerJob")
+                .incrementer(new RunIdIncrementer())
+                .listener(listener)
+                .start(interactionIndexCleanerStep)
+                .next(interactionIndexingStep)
+                .build();
+    }
+
+    @Bean
+    public Job cvIndexerJob(JobCompletionNotificationListener listener,
+                            Step cvIndexCleanerStep, Step cvIndexingStep) {
+        return jobBuilderFactory.get("cvIndexerJob")
+                .incrementer(new RunIdIncrementer())
+                .listener(listener)
+                .start(cvIndexCleanerStep)
+                .next(cvIndexingStep)
+                .build();
+    }
+
+    @Bean
+    public Job clusteredInteractionIndexerJob(JobCompletionNotificationListener listener,
+                                              Step clusteredInteractionIndexCleanerStep,
+                                              Step clusteredInteractionIndexingStep) {
+        return jobBuilderFactory.get("clusteredInteractionIndexerJob")
+                .incrementer(new RunIdIncrementer())
+                .listener(listener)
+                .start(clusteredInteractionIndexCleanerStep)
+                .next(clusteredInteractionIndexingStep)
+                .build();
+    }
+
+    /*Interactor Indexing*/
+
+    @Bean
+    public Step interactorCleanerStep(InteractorCleanerTasklet tasklet) {
+        return stepBuilderFactory.get("interactorCleanerStep")
                 .tasklet(tasklet)
                 .build();
     }
@@ -80,5 +119,53 @@ public class BatchConfiguration {
                 .tasklet(tasklet)
                 .build();
     }
+
+    /*Interaction Indexing*/
+
+    @Bean
+    public Step interactionIndexCleanerStep(InteractionCleanerTasklet tasklet) {
+        return stepBuilderFactory.get("interactionIndexCleanerStep")
+                .tasklet(tasklet)
+                .build();
+    }
+
+    @Bean
+    public Step interactionIndexingStep(InteractionIndexerTasklet tasklet) {
+        return stepBuilderFactory.get("interactionIndexingStep")
+                .tasklet(tasklet)
+                .build();
+    }
+
+    /*CV Term Indexing*/
+    @Bean
+    public Step cvIndexCleanerStep(CVCleanerTasklet tasklet) {
+        return stepBuilderFactory.get("cvIndexCleanerStep")
+                .tasklet(tasklet)
+                .build();
+    }
+
+    @Bean
+    public Step cvIndexingStep(CVIndexerTasklet tasklet) {
+        return stepBuilderFactory.get("cvIndexingStep")
+                .tasklet(tasklet)
+                .build();
+    }
+
+    /*Clustered Interaction Indexing*/
+
+    @Bean
+    public Step clusteredInteractionIndexCleanerStep(ClusteredInteractionCleanerTasklet tasklet) {
+        return stepBuilderFactory.get("clusteredInteractionIndexCleanerStep")
+                .tasklet(tasklet)
+                .build();
+    }
+
+    @Bean
+    public Step clusteredInteractionIndexingStep(ClusteredInteractionIndexerTasklet tasklet) {
+        return stepBuilderFactory.get("clusteredInteractionIndexingStep")
+                .tasklet(tasklet)
+                .build();
+    }
+
     // end::jobstep[]
 }
