@@ -28,7 +28,7 @@
         <intact.search.interactions.version>1.1.1</intact.search.interactions.version>
         <intact.search.terms.version>1.0.0</intact.search.terms.version>
         <intact.style.version>1.0.2</intact.style.version>
-        <psi.jami.version>3.5.2-SNAPSHOT</psi.jami.version>
+        <psi.jami.version>3.6.0-SNAPSHOT</psi.jami.version>
 
         <style.full.index>true</style.full.index>
     </properties>
